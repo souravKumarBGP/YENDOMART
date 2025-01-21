@@ -1,0 +1,129 @@
+/*******************************************************************************************************
+* Common styling
+***************************************************************************************************** */
+/* dad8d8 */
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+@font-face {
+    font-family: OpenSans;
+    src: url("../../fonts/OpenSans-Regular.ttf");
+}
+
+body{
+    font-family: OpenSans, sans-serif;
+    font-weight: 400;
+    background: var(--ternory-color);
+    color: var(--secondary-color);
+}
+
+:root{
+    --primary-color: #fed700;
+    --secondary-color: #333e48;
+    --ternory-color: #f4f8fd;
+    --forth-color: #fefcfb;
+    --size-10px: 0.625rem;
+    --size-14px: 0.875rem;
+    --size-15px: 0.9375rem;
+    --size-16px: 1rem;
+    --size-18px: 1.125rem;
+    --size-20px: 1.25rem;
+    --size-22px: 1.375rem;
+    --size-25px: 1.563rem;
+    --size-36px: 2.25rem;
+    --gap-20px: 1.25rem;
+    --font-weight-500: 500;
+    --font-weight-600: 600;
+    --font-weight-700: 700;
+    --font-weight-800: 800;
+}
+
+.btn{
+    border: none;
+    outline: none;
+    background: transparent;
+    display: inline-block;
+    cursor: pointer;
+}
+
+a{
+    text-decoration: none;
+    color: inherit;
+    display: inline-block;
+    font-size: var(--secondary-color);
+}
+
+ul{
+    list-style: none;
+}
+
+span{
+    display: inline-block;
+    font-size: inherit;
+    color: var(--secondary-color);
+}
+
+input, select, textarea{
+    border: none;
+    outline: none;
+}
+
+img{
+    display: inline-block;
+    width: 100%;
+}
+
+.gap-15px{
+    gap: 1.125rem;
+}
+
+svg{
+    transition: all ease 0.5s !important;
+    color: var(--secondary-color);
+}
+
+p, h1, h2, h3, h4, h5, h6{
+    color: var(--secondary-color);
+}
+/*******************************************************************************************************
+* Start media query
+***************************************************************************************************** */
+@media all and (min-width: 576px){ /**Responsive for mini tableets**/
+    .container{
+        max-width: 100% !important;
+        padding: 0 40px;
+    }
+}
+
+@media all and (min-width: 768px){ /**Responsive for large tablets**/
+    .container{
+        padding: 0 50px;
+    }
+}
+
+@media all and (min-width: 992px){ /**Responsive for mini laptops**/
+    .container{
+        padding: 0 65px;
+    }
+}
+
+@media all and (min-width: 1200px){ /**Responsive for medium laptopes**/
+    .container{
+        padding: 0 50px;
+    }
+}
+
+@media all and (min-width: 1400px){ /**Responsive for normal laptopes (14`inch)**/
+    
+}
+
+@media all and (min-width: 1600px){ /**Responsive for desktop and tv**/
+    .container{
+        max-width: 1536px !important;
+        padding: 0 60px;
+    }
+}
