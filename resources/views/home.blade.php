@@ -15,7 +15,7 @@
         <!--================================== Internal file link's ===============================-->
         <link rel="stylesheet" href="{{ asset("assets/css/frontend/common.css") }}" />
         <link rel="stylesheet" href="{{ asset("assets/css/frontend/navbar.css") }}" />
-        <link rel="stylesheet" href="{{ asset("assets/css/frontend/top_category_and_binner.css") }}" />
+        <link rel="stylesheet" href="{{ asset("assets/css/frontend/home.css") }}" />
     </head>
     <body>
         
@@ -494,13 +494,7 @@
         <!--================================== Start Main section =================================-->
         <main>
             <!--================= Start Top_selling_product section ================-->
-            <section class="product_box top_selling_product">
-                <div class="container">
-                    <div class="product_box">
-                        
-                    </div>
-                </div>
-            </section><!--./Top_selling_product-->
+            
 
         </main><!--./main-->
         

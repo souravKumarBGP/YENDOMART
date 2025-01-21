@@ -1,8 +1,6 @@
 /*******************************************************************************************************
 * Common styling
 ***************************************************************************************************** */
-/* dad8d8 */
-
 *{
     margin: 0;
     padding: 0;
@@ -26,6 +24,7 @@ body{
     --secondary-color: #333e48;
     --ternory-color: #f4f8fd;
     --forth-color: #fefcfb;
+    --shadow-color: #dad8d8;
     --size-10px: 0.625rem;
     --size-14px: 0.875rem;
     --size-15px: 0.9375rem;
@@ -77,10 +76,6 @@ img{
     width: 100%;
 }
 
-.gap-15px{
-    gap: 1.125rem;
-}
-
 svg{
     transition: all ease 0.5s !important;
     color: var(--secondary-color);
@@ -89,6 +84,20 @@ svg{
 p, h1, h2, h3, h4, h5, h6{
     color: var(--secondary-color);
 }
+
+.gap-15px{
+    gap: 1.125rem;
+}
+
+.products_box{
+    width: 100%;
+
+    .heading{
+        font-size: var(--size-18px);
+        font-weight: 900;
+    }
+}
+
 /*******************************************************************************************************
 * Start media query
 ***************************************************************************************************** */

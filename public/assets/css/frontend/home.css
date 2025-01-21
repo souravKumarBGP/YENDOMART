@@ -1,3 +1,9 @@
+/*******************************************************************************************************
+* Start heder section styling
+***************************************************************************************************** */
+header{
+    width: 100%;
+}
 /****************** Start category_box styling  ******************/
 section.category_box{
     width: 100%;
@@ -44,7 +50,6 @@ section.category_box{
         }
     }
 }
-
 /********************* Start binner styling  *********************/
 section.crousel_section .binner{
     margin-top: 10px;
@@ -85,4 +90,18 @@ section.crousel_section .binner{
         }
     }
 
+}
+
+/*******************************************************************************************************
+* Start main section styling
+***************************************************************************************************** */
+main{
+    margin-top: 2.5rem;
+
+    /********* Start Top_selling_product_box styling **********/
+    .top_selling_product_box{
+        width: 100%;
+        
+    }
+    
 }
