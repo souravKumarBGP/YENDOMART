@@ -91,11 +91,128 @@ p, h1, h2, h3, h4, h5, h6{
 
 .products_box{
     width: 100%;
+    margin-top: 40px;
+    .box{
+        width: 100%;
+        padding: .9375rem;
+        padding-bottom: 1.875rem;
+        background: var(--forth-color);
+        box-shadow: 0px 0px .3125rem #ebe9e9cf inset;
+        border-radius: .625rem;
 
-    .heading{
-        font-size: var(--size-18px);
-        font-weight: 900;
+        .heading{
+            font-size: var(--size-18px);
+            font-weight: 900;
+            color: var(--secondary-color);
+            padding: .9375rem;
+    
+            .view_all_btn{
+                background: var(--primary-color);
+                color: var(--secondary-color);
+                padding: .4375rem .625rem;
+                border-radius: .3125rem;
+                font-size: var(--size-14px);
+                font-weight: 600;
+                &:hover svg{
+                    margin-right: .1875rem;
+                }
+                & svg{
+                    transition: all ease 0.5s;
+                }
+            }
+        }
+
+        .item{
+            width: 95%;
+            margin: auto;
+            padding: .9375rem;
+            padding-bottom: 1.25rem;
+            box-shadow: 0px 0px 15px #ebe9e9f0;
+            border-radius: .625rem;
+
+            &:hover img{
+                scale: 1.04;
+            }
+
+            .category_name{
+                color: gray;
+                font-size: var(--size-15px);
+                margin-bottom: 5px;
+            }
+            
+            .product_name{
+                margin-bottom: 1.4375rem;
+                & a{
+                    color: #3e6bf5;
+                    font-size: var(--size-15px);
+                    display: inline-block;
+                    font-weight: 600;
+                    transition: all ease 0.4s;
+                    text-overflow: ellipsis;
+                    &:hover{
+                        text-underline-offset: 2px;
+                        color: #3565f7;
+                        text-decoration: underline;
+                    }
+                }
+            }
+            
+            .img_box{
+                text-align: center;
+                overflow: hidden;
+                & img{
+                    height: 250px;
+                    aspect-ratio: 1/1;
+                    text-align: center;
+                    object-fit: contain;
+                    transition: all ease 0.5s;
+                }
+            }
+
+            .price_box{
+                margin-top: 1.0625rem;
+
+                .price{
+                    font-weight: 900;
+                    font-size: var(--size-16px);
+
+                    & del{
+                        color: lightcoral;
+                        margin-right: 2px;
+                    }
+                }
+                & svg{
+                    width: 20px;
+                }
+
+                .right{
+                    gap: var(--gap-20px);
+                    & button{
+                        width: 2.1875rem;
+                        aspect-ratio: 1/1;
+                        border-radius: 100%;
+                        background: var(--primary-color);
+                        & svg{
+                            width: 30px;
+                        }
+                    }
+                }
+            }
+
+            .order_link{
+                background: var(--primary-color);
+                color: var(--secondary-color);
+                padding: 10px 0;
+                width: 100%;
+                border: 0.5px solid #8080806b;
+                border-radius: .3125rem;
+                font-size: var(--size-15px);
+                font-weight: 600;
+            }
+
+        }
     }
+
 }
 
 /*******************************************************************************************************
@@ -136,3 +253,7 @@ p, h1, h2, h3, h4, h5, h6{
         padding: 0 60px;
     }
 }
+
+/*******************************************************************************************************
+* Start animation define
+***************************************************************************************************** */

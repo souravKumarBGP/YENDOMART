@@ -98,10 +98,105 @@ section.crousel_section .binner{
 main{
     margin-top: 2.5rem;
 
-    /********* Start Top_selling_product_box styling **********/
-    .top_selling_product_box{
+    /********* Start Top_selling_product_section styling ***********/
+    .top_selling_product_section{
         width: 100%;
-        
     }
+
+    /************ Start get_update_section styling ****************/
+    .get_update_section{
+        background: linear-gradient(to left,#fed700, #fa9625);
+        margin: 1.875rem 0;
+        padding: 1.25rem 0;
+        box-shadow: 0px 0px 10px #fa9625 inset;
+        font-size: 2.1875rem;
+        font-weight: 900;
+        & p svg{
+            width: 2.1875rem !important;
+            height: 2.1875rem !important;
+            margin-left: .625rem;
+            margin-bottom: -0.375rem;
+        }
+
+        & form{
+            & input{
+                width: 70%;
+                padding: .9375rem;
+                border-radius: .4375rem 0 0 .4375rem;
+                &::placeholder{
+                    transition: all ease 0.5s;
+                }
+                &:focus::placeholder{
+                    padding-left: .625rem;
+                }
+            }
+            & button{
+                padding: .7188rem .9375rem;
+                font-size: var(--size-18px);
+                font-weight: 700;
+                border-radius: 0 .4375rem .4375rem 0;
+                background: var(--secondary-color);
+                color: var(--forth-color);
+                border: 1px solid var(--secondary-color);
+                & svg{
+                    color: var(--forth-color);
+                    margin-left: .4375rem;
+                }
+            }
+        }
+    }
+}
+
+
+/***************************************************************************************************************************************************
+* Start media query
+************************************************************************************************************************************************* */
+@media all and (max-width: 1600px){ /** Responsive for desktops and TVs **/
     
 }
+
+@media all and (max-width: 1400px){ /** Responsive for normal laptops (14-inch) **/
+    .top_selling_product_section .box .item{
+        width: 100%;
+    }
+}
+
+@media all and (max-width: 1200px){ /** Responsive for medium laptops **/
+    
+}
+
+@media all and (max-width: 1140px){ /** Responsive for mini laptopes**/
+    
+}
+
+@media all and (max-width: 992px){ /** Responsive for large tablets **/
+    .get_update_section{
+        font-size: 25px !important;
+        text-align: center;
+        & svg{
+            width: 20px !important;
+            height: 20px !important;
+        }
+
+        & form button{
+            font-size: .75rem !important;
+        }
+
+    }
+}
+
+@media all and (max-width: 768px){ /** Responsive for mini tablets **/
+    
+}
+
+@media all and (max-width: 576px){ /** Responsive for mobile device **/
+    .top_selling_product_section .box .items{
+        width: 97%;
+    }
+    .get_update_section form button{
+        font-size: 10px !important;
+    }
+}
+
+
+
