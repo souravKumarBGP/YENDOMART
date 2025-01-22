@@ -1,0 +1,66 @@
+/***************************************************************************************************************************************************
+* Start media query
+************************************************************************************************************************************************* */
+footer{
+    background: #212121;
+    color: #eeeeeee7;
+    padding: 1.875rem 0;
+    padding-bottom: 0;
+    margin-top: 11.25rem;
+    font-size: var(--size-14px);
+    
+    .item{
+        overflow: hidden;
+    }
+    .row{
+        row-gap: 1.25rem;
+    }
+    .socal_links_box a{
+        padding: .4375rem;
+    }
+    
+    & svg{
+        color: #eeeeeee7;
+        width: 1.25rem;
+        margin-right: .25rem;
+    }
+
+    & p{
+        margin-bottom: .9375rem;
+        color: dimgray;
+        font-weight: 600;
+    }
+
+    & a{
+        margin-bottom: 3px;
+        padding: 3px 0;
+        display: block;
+
+        &:hover{
+            text-decoration: underline;
+            text-underline-offset: 2px;
+        }
+    }
+
+    & img{
+        height: 130px;
+        max-width: 270px;
+        object-fit: cover;
+        border-radius: .4375rem;
+    }
+
+    .footer_bottom_section{
+        background: #010;
+        font-size: 12px;
+        & svg{
+            width: 15px;
+            color: var(--primary-color);
+        }
+    }
+}
+
+@media all and (max-width: 768px){
+    footer p{
+        margin-bottom: 5px !important;
+    }
+}
