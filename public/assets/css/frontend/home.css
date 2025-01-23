@@ -11,8 +11,8 @@ section.category_box{
     padding: 1.25rem 0;
     
     .items{
-        width: 8.125rem;
-        height: 8.125rem;
+        width: 8.75rem;
+        aspect-ratio: 1/1;
         border-radius: .4375rem;
         background: var(--forth-color);
         padding: 10px;
@@ -22,6 +22,8 @@ section.category_box{
         color: var(--secondary-color);
         box-shadow: 0 0 15px #dee2e63b;
         overflow: hidden;
+
+        
         & img{
             width: 60%;
             height: 60%;
@@ -49,6 +51,9 @@ section.category_box{
             }
         }
     }
+}
+#category_box{
+    margin-top: 140px;
 }
 /********************* Start binner styling  *********************/
 section.crousel_section .binner{
@@ -109,11 +114,11 @@ main{
         margin: 1.875rem 0;
         padding: 1.25rem 0;
         box-shadow: 0px 0px 10px #fa9625 inset;
-        font-size: 2.1875rem;
+        font-size: 2.0625rem;
         font-weight: 900;
         & p svg{
-            width: 2.1875rem !important;
-            height: 2.1875rem !important;
+            width: 2.5rem !important;
+            height: 2.5rem !important;
             margin-left: .625rem;
             margin-bottom: -0.375rem;
         }
@@ -170,6 +175,9 @@ main{
 }
 
 @media all and (max-width: 992px){ /** Responsive for large tablets **/
+    #category_box{
+        margin-top: 200px;
+    }
     .get_update_section{
         font-size: 25px !important;
         text-align: center;
@@ -190,6 +198,12 @@ main{
 }
 
 @media all and (max-width: 576px){ /** Responsive for mobile device **/
+
+    section.category_box .items{
+        width: 105px;
+    
+    }
+    
     .top_selling_product_section .box .items{
         width: 97%;
     }
