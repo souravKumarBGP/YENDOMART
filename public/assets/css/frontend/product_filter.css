@@ -1,0 +1,147 @@
+.border1{
+    border: 1px solid green;
+}
+.border2{
+    border: 1px solid red;
+}
+
+/*******************************************************************************************************
+* Start main section styling
+***************************************************************************************************** */
+main{
+    margin-top: 150px;
+    min-height: 600px;
+
+    .filter_box{
+        width: 100%;
+        min-height: 500px;
+        color: var(--secondary-color);
+        padding: 10px;
+        background: var(--primary-color);
+        border-radius: .4375rem;
+
+        .heading{
+            font-size:  var(--size-16px);
+            color: var(--secondary-color);
+            font-weight: 700;
+            padding: 10px 0;
+            border-bottom: 0.2px solid var(--forth-color);
+            margin-bottom: .625rem;
+            & svg{
+                width: var(--size-15px);
+            }
+
+            .clr_filter_btn{
+                color: red;
+                padding: .125rem;
+                & svg{
+                    color: red;
+                    width: .8125rem;
+                }
+            }
+        }
+
+        .option_box .box{
+            border-bottom: 0.2px solid var(--forth-color);
+            padding-bottom: 10px;
+            & p{
+                font-size: var(--size-15px);
+                margin-bottom: 10px;
+            }
+            & label{
+                font-size: var(--size-14px);
+            }
+            & li{
+                margin-bottom: .3125rem;
+            }
+        }
+        
+    }
+
+    .products_box{
+        min-height: 500px;
+        margin-top: 0;
+        background: var(--forth-color);
+        border-radius: .9375rem;
+
+        .heading{
+            padding: 1.25rem;
+            font-weight: 700;
+        }
+    }
+}
+
+header nav .nav_bottom{
+    
+    .saller_link{
+        display: none !important;
+    }
+}
+
+/*******************************************************************************************************
+* Start media query
+***************************************************************************************************** */
+@media all and (max-width: 992px){
+    
+    header nav .nav_bottom{
+    
+        .filter_btn{
+            display: flex !important;
+            align-items: center;
+            font-size: 1rem;
+            padding-right: 10px;
+            position: relative;
+
+            #filter_btn_checkbox{
+                position: absolute;
+                width: 100%;
+                appearance: none;
+                height: 100%;
+                opacity: 0;
+                z-index: 5;
+            } 
+
+            & svg{
+                width: 1.25rem;
+                margin-top: -1px;
+            }
+        }
+    }
+    
+    main{
+        margin-top: 225px;
+        .filter_box{
+            background: #f3cf0384;
+            backdrop-filter: blur(7px);
+        }
+        section:has(.filter_box){
+            display: block !important;
+            min-width: 250px;
+            height: 100vh;
+            overflow-y: scroll;
+            position: fixed;
+            top: 165px;
+            right: -100%;
+            z-index: 30;
+            padding-bottom: 220px;
+            transition: all ease 0.5s;
+        }
+    }
+    
+}
+
+@media all and (min-width: 840px){
+    header nav .nav_bottom{
+        .saller_link{
+            display: block;  
+        }
+
+    }
+}
+
+
+
+
+
+
+

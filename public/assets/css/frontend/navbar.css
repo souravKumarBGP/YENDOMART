@@ -48,7 +48,7 @@ header{
                         width: 73%;
                         border-radius: .4375rem;
                         overflow: hidden;
-                        border: 1px solid var(--primary-color);
+                        border: 0.5px solid var(--primary-color);
                         
                         & form .input_box :is(input, select){
                             padding: .625rem;
@@ -74,6 +74,7 @@ header{
                             padding: .3125rem;
                             padding-bottom: .2188rem;
                             width: 2.8125rem;
+                            border: 2px solid var(--primary-color);
     
                             & svg{
                                 width: 1.25rem;

@@ -108,48 +108,6 @@ main{
         width: 100%;
     }
 
-    /************ Start get_update_section styling ****************/
-    .get_update_section{
-        background: linear-gradient(to left,#fed700, #fa9625);
-        margin: 1.875rem 0;
-        padding: 1.25rem 0;
-        box-shadow: 0px 0px 10px #fa9625 inset;
-        font-size: 2.0625rem;
-        font-weight: 900;
-        & p svg{
-            width: 2.5rem !important;
-            height: 2.5rem !important;
-            margin-left: .625rem;
-            margin-bottom: -0.375rem;
-        }
-
-        & form{
-            & input{
-                width: 70%;
-                padding: .9375rem;
-                border-radius: .4375rem 0 0 .4375rem;
-                &::placeholder{
-                    transition: all ease 0.5s;
-                }
-                &:focus::placeholder{
-                    padding-left: .625rem;
-                }
-            }
-            & button{
-                padding: .7188rem .9375rem;
-                font-size: var(--size-18px);
-                font-weight: 700;
-                border-radius: 0 .4375rem .4375rem 0;
-                background: var(--secondary-color);
-                color: var(--forth-color);
-                border: 1px solid var(--secondary-color);
-                & svg{
-                    color: var(--forth-color);
-                    margin-left: .4375rem;
-                }
-            }
-        }
-    }
 }
 
 
@@ -178,19 +136,7 @@ main{
     #category_box{
         margin-top: 200px;
     }
-    .get_update_section{
-        font-size: 25px !important;
-        text-align: center;
-        & svg{
-            width: 20px !important;
-            height: 20px !important;
-        }
-
-        & form button{
-            font-size: .75rem !important;
-        }
-
-    }
+    
 }
 
 @media all and (max-width: 768px){ /** Responsive for mini tablets **/
@@ -206,9 +152,6 @@ main{
     
     .top_selling_product_section .box .items{
         width: 97%;
-    }
-    .get_update_section form button{
-        font-size: 10px !important;
     }
 }
 
