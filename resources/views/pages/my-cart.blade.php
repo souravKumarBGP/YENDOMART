@@ -10,8 +10,6 @@
         <meta name="robots" content="index, following" />
         <!--================================== External file link's ===============================-->
         <link href="{{ asset("assets/css/frontend/bootstrap-grid.min.css") }}" rel="stylesheet" />
-        <link rel="stylesheet" href="{{ asset("assets/css/frontend/owl.carousel.min.css") }}" />
-        <link rel="stylesheet" href="{{ asset("assets/css/frontend/owl.theme.default.min.css") }}" />
         <!--================================== Internal file link's ===============================-->
         <link rel="stylesheet" href="{{ asset("assets/css/frontend/common.css") }}" />
         <link rel="stylesheet" href="{{ asset("assets/css/frontend/navbar.css") }}" />
