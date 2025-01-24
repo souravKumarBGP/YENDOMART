@@ -15,4 +15,14 @@ class PagesController extends Controller
     public function product_details_page(){
         return view("pages.product_details");
     }
+
+    // Logic to create a methods to show my cart page
+    public function my_cart(){
+        return view("pages.my-cart");
+    }
+
+    // Logic to create a methods to show my cart page
+    public function my_wishlist(){
+        return view("pages.my-wishlist");
+    }
 }
