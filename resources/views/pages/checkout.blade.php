@@ -33,7 +33,8 @@
                     <div class="col-12 col-lg-9 mx-auto">
 
                         <div class="heading" style="text-align: center">
-                            <big><b>Checkout</b></big>
+                            <big><b>Checkout</b></big><br/>
+                            <small>Your payment is compleated in 4 stepes.</small>
                         </div><br/>
                         
                         <!--==================== Start login_link_section ===================-->
