@@ -25,4 +25,9 @@ class PagesController extends Controller
     public function my_wishlist(){
         return view("pages.my-wishlist");
     }
+
+    // Logic to create a methods to show my cart page
+    public function checkout_page(){
+        return view("pages.checkout");
+    }
 }

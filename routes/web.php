@@ -12,4 +12,5 @@ Route::prefix("/pages")->controller(PagesController::class)->group(function(){
     Route::get("/product-details", "product_details_page")->name("pages.product_details_page");
     ROute::get("/my-cart", "my_cart")->name("pages.my-cart");
     ROute::get("/my-wishlist", "my_wishlist")->name("pages.my-wishlist");
+    ROute::get("/checkout", "checkout_page")->name("pages.checkout-page");
 });

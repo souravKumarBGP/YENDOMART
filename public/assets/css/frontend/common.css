@@ -215,6 +215,13 @@ p, h1, h2, h3, h4, h5, h6{
 
 }
 
+input::placeholder{
+    transition: all ease 0.5s;
+}
+input:focus::placeholder{
+    padding-left: 7px;
+}
+
 /************ Start get_update_section styling ****************/
 .get_update_section{
     background: linear-gradient(to left,#fed700, #fa9625);

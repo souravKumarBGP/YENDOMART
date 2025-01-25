@@ -1,0 +1,239 @@
+.nav_bottom{
+    display: none !important;
+}
+/*******************************************************************************************************
+* Start main section styling
+***************************************************************************************************** */
+main{
+    margin-top: 120px;
+    
+    .login_link_section, .signup_link_section, .bill_details, .payment_option{
+        position: relative;
+        .link{
+            background: var(--primary-color);
+            padding: .8125rem;
+            border-left: 10px solid goldenrod;
+            font-size: .75rem;
+            color: var(--secondary-color);
+            &::selection{
+                color: var(--forth-color);
+            }
+            & b{
+                position: relative;
+                #checkbox1, #checkbox2, #checkbox4, #checkbox5{
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    cursor: pointer;
+                    appearance: none;
+                    opacity: 0;
+                }
+            }
+        }
+
+        .link:has(#checkbox1:checked) + .form_box{
+            height: 360px;
+            border-top: none;
+            padding: 15px 25px;
+        }
+        
+        .form_box{
+            width: 100%;
+            height: 0px;
+            border: 0.2px solid #bdbcbc7e;
+            transition: all ease-out 0.5s;
+            overflow: hidden;
+            background: var(--forth-color);
+            & small{
+                &::selection{
+                    background: var(--primary-color);
+                    color: var(--forth-color);
+                }
+                font-size: 12px;
+                color: #6b6b6b;
+            }
+
+            .input_box{
+                width: 100%;
+                .item{
+                    width: 50%;
+                    & label{
+                        font-size: .8125rem;
+                        font-weight: 600;
+                        color: black;
+                        cursor: pointer;
+                    }
+                    & input{
+                        padding: .75rem .9375rem;
+                        border-radius: 1.875rem;
+                        margin-top: .4375rem;
+                    }
+                }
+                #remember_btn{
+                    appearance: none;
+                    width: 13px;
+                    border-radius: 2px;
+                    border: 1px solid #a4a3a3;
+                    aspect-ratio: 1/1;
+                    position: relative;
+
+                    &:checked::before{
+                        display: block;
+                    }
+
+                    &::before{
+                        content: "";
+                        display: block;
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                        display: none;
+                        width: 75%;
+                        height: 75%;
+                        border-radius: 2px;
+                        border-right: 1px solid var(--forth-color);
+                        border-bottom: 1px solid var(--forth-color);
+                        background: var(--primary-color);
+                    }
+                    
+                }
+            }
+            
+            .login_btn{
+                background: var(--primary-color);
+                color: var(--secondary-color);
+                padding: .625rem 1.25rem;
+                margin-top: 1.25rem;
+                border-radius: 1.875rem;
+                font-weight: 700;
+            }
+
+            #forget_pass_link{
+                color: royalblue;
+                padding: 10px;
+                font-size: .8125rem;
+                margin-top: .625rem;
+            }
+
+            & input{
+                border: 0.5px solid #bdbcbc7e;
+            }
+        }
+
+        .link:has(#checkbox2:checked) + .coupne_code{
+            height: 130px !important;
+            border-top: none;
+            padding: 15px 25px;
+        }
+
+        .link:has(#checkbox4:checked) + .form_box{
+            height: 400px !important;
+            border-top: none;
+            padding: 15px 25px;
+        }
+        .link:has(#checkbox5:checked) + .form_box{
+            height: 400px !important;
+            border-top: none;
+            padding: 15px 25px;
+        }
+
+        .coupne_code .item{
+            overflow: hidden;
+            border-radius: 30px;
+            border: 1px solid var(--secondary-color);
+            width: 50%;
+            
+            & input{
+                width: 70%;
+                padding: .8125rem;
+            }
+            & button{
+                width: 30%;
+                padding: .8125rem;
+                background: var(--secondary-color);
+                color: var(--forth-color);
+                border: 1px solid var(--secondary-color);
+            }
+        }
+        
+
+    }
+
+    .payment_option{
+        .left{
+            height: 100%;
+            padding-bottom: 20px;
+            overflow-y: auto;
+
+            li{
+                padding: 15px;
+                font-size: .75rem;
+                & img{
+                    width: 50px !important;
+                    object-fit: contain;
+                }
+            }
+        }
+
+        .right{
+            background: #f5f5f5;
+            border-radius: .4375rem;
+            padding: .9375rem;
+
+            & li{
+                padding: 10px;
+                font-size: .8125rem;
+                color: #6b6b6b;
+                display: flex;
+                margin-bottom: 5px;
+                font-weight: normal;
+                border-radius: 5px;
+                & span{
+                    width: 80%;
+                }
+                & input{
+                    padding: .625rem;
+                    width: 100%;
+                    border-radius: 5px 0 0 5px;
+                }
+                .apply_btn{
+                    border-radius: 0 5px 5px 0;
+                    background: var(--secondary-color);
+                    color: var(--forth-color);
+                    padding: 5px 15px;
+                    border: 1px solid var(--secondary-color);
+                }
+            }
+            .payment_mode_box label{
+                font-size: .875rem;
+                cursor: pointer;
+                color: #6b6b6b;
+            }
+            .place_oder_btn{
+                padding: 10px;
+                text-align: center;
+                background: green;
+                color: var(--forth-color);
+                width: 100%;
+                margin-top: 2.1875rem;
+            }
+        }
+    }
+    
+}
+
+@media all and (max-width: 992px){
+    main .payment_option{
+        
+        .link:has(#checkbox5:checked) + .form_box{
+            height: 600px !important;
+        }
+        
+        .left{
+            height: auto;
+        }
+    }
+}

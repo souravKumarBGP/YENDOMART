@@ -14,8 +14,8 @@
                 <div class="search_box">
                     <form action="#">
                         <div class="input_box d-flex align-items-center">
-                            <input type="search" name="#" id="#" placeholder="Search by brand name ex:- Samsung, Bajaj....">
-                            <select name="#" id="#">
+                            <input type="search" name="#" id="search_val" placeholder="Search by brand name ex:- Samsung, Bajaj....">
+                            <select name="#" id="cat_val">
                                 <option value="#">All Categories</option>
                                 <option value="#">Mobiles</option>
                                 <option value="#">Leptops And Coputers</option>
