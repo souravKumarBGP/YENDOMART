@@ -1,8 +1,18 @@
+/* ********************************* Start main section styling ************************** */
 main{
     margin-top: 10rem;
+    
+    /* ************** Start location section styling *************** */
+    .location{
+        width: 100%;
+        height: 50vh;
+        & iframe{
+            width: 100%;
+            height: 100%;
+        }
+    }
 
-    .form_box{
-        
+    .send_message_box{
         .heading{
             text-align: center;
             font-size: var(--size-1.5625rem);
@@ -41,19 +51,20 @@ main{
                 font-weight: 600;
                 margin-bottom: .3125rem;
             }
-            & input{
+            & input, & select, & textarea{
                 width: 100%;
                 padding: .9375rem;
                 border: .0313rem solid var(--shadow-color);
-                border-radius: 2.5rem;
+                border-radius: .4375rem;
             }
+
         }
 
         .submit_btn{
             background: var(--primary-color);
             padding: .6875rem 1.875rem;
             font-weight: 900;
-            border-radius: 1.875rem;
+            border-radius: .4375rem;
             color: #424343;
             margin: .9375rem 0;
             transition: all ease 0.5s;
@@ -73,7 +84,7 @@ main{
             & p{
                 margin-bottom: .625rem;
                 font-weight: 600;
-                font-size: 14px;
+                font-size: .875rem;
             }
             & svg{
                 color: #03c503;
@@ -86,47 +97,25 @@ main{
             }
         }
 
-        .middle{
-            position: relative;
-            .line2{
-                width: .1062rem;
-                height: 100%;
-                background: #e9e8e8e8;
-                border-radius: 100%;
-            }
-            .or_box{
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
-                background: var(--ternory-color);
-                width: 2.5rem;
-                height: 2.5rem;
-                border-radius: 100%;
-                display: flex;
-                justify-content: center;
-                align-items: center;
+        .socal_media li{
+            font-size: .875rem;
+            & svg{
+                width: 20px;
+                margin-right: 15px;
             }
         }
     }
-    
 }
 
 
-@media all and (max-width: 75rem){
-    main .form_box .row{
-        padding: 0 .625rem;
-    }
-}
-
-@media all and (max-width: 62rem){
+@media all and (max-width: 992px){
     main{
-        margin-top: 15rem;
-    }
-}
-
-@media all and (max-width: 48rem){
-    main .form_box .row{
-        padding: 0 1.25rem;
+        margin-top: 210px;
+        .send_message_box .input_label .second{
+            margin-top: -50px !important;
+        }
+        .send_message_box .first_row{
+            padding: 0 7px !important;
+        }
     }
 }

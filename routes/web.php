@@ -15,6 +15,7 @@ Route::prefix("/pages")->controller(PagesController::class)->group(function(){
     Route::get("/my-wishlist", "my_wishlist")->name("pages.my_wishlist");
     Route::get("/checkout", "checkout_page")->name("pages.checkout-page");
     Route::get("/signup-login", "signup_login_page")->name("pages.signup_login_page");
+    Route::get("/contact-us", "contact_us_page")->name("pages.contact_us");
 });
 
 //====================== Logic to create some following routes for handle backends logic

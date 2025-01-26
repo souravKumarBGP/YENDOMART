@@ -35,4 +35,9 @@ class PagesController extends Controller
     public function signup_login_page(){
         return view("pages.signup_login");
     }
+
+    // Logic to create a methods to show contact us page
+    public function contact_us_page(){
+        return view("pages.contact_us");
+    }
 }
