@@ -27,7 +27,7 @@
                     <div class="container h-100 d-flex align-items-center justify-content-between">
     
                         <div class="left">
-                            <a href="#" class="logo d-flex align-items-center">
+                            <a href="{{ route("home") }}" class="logo d-flex align-items-center">
                                 <div class="circle d-flex align-items-center justify-content-center">
                                     <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7H7.312"/>
@@ -117,7 +117,7 @@
                             <ul class="bottom_mune d-lg-flex align-items-center col-gap-10px">
     
                                 <li>
-                                    <a href="#" class="d-flex align-items-center ps-0">
+                                    <a href="{{ route("admin.dashbord") }}" class="d-flex align-items-center ps-0">
                                         <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m4 12 8-8 8 8M6 10.5V19a1 1 0 0 0 1 1h3v-3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3h3a1 1 0 0 0 1-1v-8.5"/>
                                         </svg>                                      
@@ -228,7 +228,7 @@
         
         <!--================================== Include dynamicaly header section =================-->
         <footer>
-            <p>&copy; 2009-2015 <a href="#">yendomart.com</a> All right receved.</p>
+            <p>&copy; 2009-2015 <a href="{{ route("home") }}">yendomart.com</a> All right receved.</p>
         </footer><!--./footer-->
                 
         <!--================================== internal file link's ===============================-->
