@@ -59,7 +59,7 @@
             <div class="right d-flex align-items-center justify-content-end">
 
                 <button class="btn favorite">
-                    <a href="{{ route("pages.my-wishlist") }}" class="d-flex align-items-center">
+                    <a href="{{ route("pages.my_wishlist") }}" class="d-flex align-items-center">
                         <div class="icon_box">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 27 24" fill="currentColor"><path d="M12.001 4.52853C14.35 2.42 17.98 2.49 20.2426 4.75736C22.5053 7.02472 22.583 10.637 20.4786 12.993L11.9999 21.485L3.52138 12.993C1.41705 10.637 1.49571 7.01901 3.75736 4.75736C6.02157 2.49315 9.64519 2.41687 12.001 4.52853ZM18.827 6.1701C17.3279 4.66794 14.9076 4.60701 13.337 6.01687L12.0019 7.21524L10.6661 6.01781C9.09098 4.60597 6.67506 4.66808 5.17157 6.17157C3.68183 7.66131 3.60704 10.0473 4.97993 11.6232L11.9999 18.6543L19.0201 11.6232C20.3935 10.0467 20.319 7.66525 18.827 6.1701Z"></path></svg>
                             <div class="badges d-flex align-items-center justify-content-center">2</div>
@@ -185,7 +185,7 @@
                             3,000
                         </b>
 
-                        <a href="{{ route("pages.my-cart") }}" class="btn_see_cart">See your cart</a>
+                        <a href="{{ route("pages.my_cart") }}" class="btn_see_cart">See your cart</a>
                     </div>
                 </button><!--./btn-->
 
@@ -211,7 +211,7 @@
 
                         <ul>
                             <li>
-                                <a href="{{ route("pages.my-wishlist") }}" class="d-flex align-items-center">
+                                <a href="{{ route("pages.my_wishlist") }}" class="d-flex align-items-center">
                                     <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z"/>
                                     </svg>
@@ -220,7 +220,7 @@
                             </li><!--./links-->
 
                             <li>
-                                <a href="{{ route("pages.my-cart") }}" class="d-flex align-items-center">
+                                <a href="{{ route("pages.my_cart") }}" class="d-flex align-items-center">
                                     <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7h-1M8 7h-.688M13 5v4m-2-2h4"/>
                                     </svg>

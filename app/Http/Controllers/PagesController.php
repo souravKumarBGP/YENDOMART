@@ -30,4 +30,9 @@ class PagesController extends Controller
     public function checkout_page(){
         return view("pages.checkout");
     }
+
+    // Logic to create a methods to show signup_login page
+    public function signup_login_page(){
+        return view("pages.signup_login");
+    }
 }
