@@ -82,7 +82,7 @@
     
                                 <li class="profile">
                                     <a href="#" class="d-flex">
-                                        <img src="./img/ab.jpg" alt="" />                                                                              
+                                        <img src="{{ asset("assets/img/myimg2.jpg") }}" alt="" />                                                                              
                                         <span class="d-flex flex-column">
                                             <small>Sourav Rupani</small>
                                             <small class="d-flex align-items-center">
