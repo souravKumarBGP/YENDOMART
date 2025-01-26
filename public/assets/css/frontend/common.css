@@ -56,14 +56,22 @@ a{
     font-size: var(--secondary-color);
 }
 
-ul{
+ul li{
     list-style: none;
+    &::selection{
+        background: var(--primary-color);
+        color: var(--forth-color);
+    }
 }
 
 span{
     display: inline-block;
     font-size: inherit;
     color: var(--secondary-color);
+    &::selection{
+        background: var(--primary-color);
+        color: var(--forth-color);
+    }
 }
 
 input, select, textarea{
@@ -83,6 +91,10 @@ svg{
 
 p, h1, h2, h3, h4, h5, h6{
     color: var(--secondary-color);
+    &::selection{
+        background: var(--primary-color);
+        color: var(--forth-color);
+    }
 }
 
 .gap-15px{

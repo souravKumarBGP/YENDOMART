@@ -1,9 +1,8 @@
 main{
     margin-top: 160px;
-    margin-bottom: 200px;
 
     .form_box{
-
+        
         .heading{
             text-align: center;
             font-size: var(--size-25px);
@@ -110,6 +109,7 @@ main{
             }
         }
     }
+    
 }
 
 
