@@ -39,7 +39,8 @@
                     <div class="row first_row justify-content-between">
 
                         <div class="left order-2 order-md-1 col-12 col-md-7">
-                            <form action="#" class="login_form" method="POST">
+
+                            <form action="#" id="contactus_form" method="POST" autocomplete="on">
 
                                 <div class="form_heading">
                                     <p>Send me messages</p>
@@ -49,35 +50,55 @@
                                 <p class="slogon">If you have any questions or face any issues with our website or store, feel free to reach out to us. We are here to help!</p>
 
                                 <div class="input_label m-0">
-                                    <div class="row p-0 m-0 m-md-2 px-0">
-                                        <div class="col-12 col-lg-6 ps-0">
+                                    <div class="row p-0 m-0 mb-md-2 px-0">
+                                        <div class="col-12 col-lg-6 ps-0 mx-0">
                                             <div class="input_box m-0">
-                                                <label for="#first_name">First name <span style="color: #ff022c;">*</span></label>
-                                                <input type="text" name="first_name" id="first_name" placeholder="First name" />
+                                                <label for="first_name">First name <span style="color: #ff022c;">*</span></label>
+                                                <input type="text" name="first_name" value="Sourav" id="first_name" placeholder="First name" />
+                                                
+                                                <small class="error">
+                                                    Please enter your first name !
+                                                </small><!--./error-->
+                                                
                                             </div><!--./input_box-->
                                         </div>
     
                                         <div class="col-12 col-lg-6 ps-0 ps-lg-2 pe-0 second">
                                             <div class="input_box m-0">
-                                                <label for="#last_name">Last name <span style="color: #ff022c;">*</span></label>
-                                                <input type="text" name="last_name" id="last_name" placeholder="Last name" />
+                                                <label for="last_name">Last name <span style="color: #ff022c;">*</span></label>
+                                                <input type="text" name="last_name" value="Rupani" id="last_name" placeholder="Last name" />
+                                                
+                                                <small class="error">
+                                                    Please enter your last name !
+                                                </small><!--./error-->
+
                                             </div><!--./input_box-->
                                         </div>
                                     </div>
                                 </div><!--input_label-->
 
                                 <div class="input_box">
-                                    <label for="#email">Email <span style="color: #ff022c;">*</span></label>
-                                    <input type="email" name="email" id="email" placeholder="Email" />
+                                    <label for="email">Email <span style="color: #ff022c;">*</span></label>
+                                    <input type="text" name="email" value="s@gmail.com" id="email" placeholder="Email" />
+                                    
+                                    <small class="error">
+                                        Please enter your email id !
+                                    </small><!--./error-->
+
                                 </div><!--./input_box-->
 
                                 <div class="input_box">
-                                    <label for="#phone">Phone <small>(optional)</small></label>
-                                    <input type="text" name="phone" id="phone" placeholder="Phone" />
+                                    <label for="phone">Phone <small>(optional)</small></label>
+                                    <input type="text" name="phone" value="9065608408" id="phone" placeholder="Phone" />
+                                    
+                                    <small class="error">
+                                        Please enter your phone number !
+                                    </small><!--./error-->
+
                                 </div><!--./input_box-->
 
                                 <div class="input_box">
-                                    <label for="#subject">Subject<span style="color: #ff022c;">*</span></label>
+                                    <label for="subject">Subject<span style="color: #ff022c;">*</span></label>
                                     <select name="subject" id="subject">
                                         <option value="product details" selected>Product Details</option>
                                         <option value="store information">Store Information</option>
@@ -85,18 +106,30 @@
                                         <option value="franchise inquiry">Franchise Inquiry</option>
                                         <option value="others">Others</option>
                                     </select>                                    
+                                    
+                                    <small class="error">
+                                        Please enter your subject !
+                                    </small><!--./error-->
+
                                 </div><!--./input_box-->
 
                                 <div class="input_box">
-                                    <label for="#Message">Message<span style="color: #ff022c;">*</span></label>
-                                    <textarea name="message" id="message" rows="7" placeholder="Write your message here"></textarea>
+                                    <label for="Message">Message<span style="color: #ff022c;">*</span></label>
+                                    <textarea name="message" id="message" rows="7" placeholder="Write your message here">Message to view product details.</textarea>
+                                    
+                                    <small class="error">
+                                        Please write your message here !
+                                    </small><!--./error-->
+
                                 </div><!--./input_box-->
 
-                                <button type="submit" class="submit_btn login_submit_btn btn">
+                                <button type="submit" class="submit_btn login_submit_btn btn d-flex align-items-center justify-content-center">
                                     Send
+                                    <div class="spinner"></div>
                                 </button><!--./submit_btn--><br/>
 
                             </form>
+
                         </div><!--./left-->
 
                         <div class="right order-1 order-md-2 col-12 col-md-4">
@@ -246,7 +279,154 @@
         <!--./footer-->
 
         <!--================================== internal file link's ===============================-->
-        {{-- <script src="{{ asset("assets/js/jquery.min.js") }}"></script> --}}
+        <script src="{{ asset("assets/js/jquery.min.js") }}"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <!--================================== internal script writing ============================-->
+        <script>
+
+            $(document).ready(function () {
+
+                // Logic to make a ajax request to save form data into excel sheet 
+                $("#contactus_form").on("submit", function (event) {
+                    event.preventDefault();
+
+                    //============================Logic to apply clintside validation
+                    // Apply validation for first name input feild
+                    if($("#first_name").val().trim() == ""){
+                        const first_name = event.target.first_name;
+                        first_name.style.borderColor = "#f2001c"
+                        first_name.nextElementSibling.style.display = "block"; 
+                        first_name.nextElementSibling.innerText = "First name is required. Please enter your first name.";
+                        return false;
+                    }else if($("#first_name").val().trim().length > 30){
+                        const first_name = event.target.first_name;
+                        first_name.style.borderColor = "#f2001c"
+                        first_name.nextElementSibling.style.display = "block";
+                        first_name.nextElementSibling.innerText = "First name cannot exceed 30 characters. Please shorten it.";
+                        return false;
+                    }else{
+                        const first_name = event.target.first_name;
+                        first_name.style.borderColor = "var(--shadow-color)"
+                        first_name.nextElementSibling.style.display = "none"; 
+                    }
+
+                    // Apply validation for last name input feild
+                    if($("#last_name").val().trim() == ""){
+                        const last_name = event.target.last_name;
+                        last_name.style.borderColor = "#f2001c"
+                        last_name.nextElementSibling.style.display = "block"; 
+                        last_name.nextElementSibling.innerText = "Last name is required. Please enter your last name.";
+                        return false;
+                    }else if($("#last_name").val().trim().length > 30){
+                        const last_name = event.target.last_name;
+                        last_name.style.borderColor = "#f2001c"
+                        last_name.nextElementSibling.style.display = "block";
+                        last_name.nextElementSibling.innerText = "Last name cannot exceed 30 characters. Please shorten it.";
+                        return false;
+                    }else{
+                        const last_name = event.target.last_name;
+                        last_name.style.borderColor = "var(--shadow-color)"
+                        last_name.nextElementSibling.style.display = "none"; 
+                    }
+
+                    // Apply validation for last email input feild
+                    if($("#email").val().trim() == ""){
+                        const email = event.target.email;
+                        email.style.borderColor = "#f2001c";
+                        email.nextElementSibling.style.display = "block"; 
+                        email.nextElementSibling.innerText = "Email is required. Please enter your email id.";
+                        return false;
+                    }else if($("#email").val().trim().length > 100){
+                        const email = event.target.email;
+                        email.style.borderColor = "#f2001c"
+                        email.nextElementSibling.style.display = "block";
+                        email.nextElementSibling.innerText = "Email cannot exceed 100 characters. Please shorten it.";
+                        return false;
+                    }else if(!($("#email").val().trim().includes("@") && $("#email").val().trim().includes("."))){
+                        const email = event.target.email;
+                        email.style.borderColor = "#f2001c"
+                        email.nextElementSibling.style.display = "block";
+                        email.nextElementSibling.innerText = "Please enter a valid email address.";
+                        return false;
+                    }else{
+                        const email = event.target.email;
+                        email.style.borderColor = "var(--shadow-color)"
+                        email.nextElementSibling.style.display = "none"; 
+                    }
+
+                    // Apply validation for subject feild
+                    if($("#subject").val().trim() == ""){
+                        const subject = event.target.subject;
+                        subject.style.borderColor = "#f2001c";
+                        subject.nextElementSibling.style.display = "block";
+                        subject.nextElementSibling.innerText = "Please select your subjec.";
+                        return false;
+                    }else{
+                        const subject = event.target.subject;
+                        subject.style.borderColor = "var(--shadow-color)";
+                        subject.nextElementSibling.style.display = "none";
+                    }
+
+                    // Apply validation for subject feild
+                    if($("#message").val().trim() == ""){
+                        const message = event.target.message;
+                        message.style.borderColor = "#f2001c";
+                        message.nextElementSibling.style.display = "block";
+                        message.nextElementSibling.innerText = "Write your message.";
+                        return false;
+                    }else{
+                        const message = event.target.message;
+                        message.style.borderColor = "var(--shadow-color)";
+                        message.nextElementSibling.style.display = "none";
+                    }
+
+                    $(".spinner").show(); // Show spinner loading
+
+                    // Make a ajax request to save data
+                    const form_data = new FormData(this);
+                    $.ajax({
+                        url: "https://script.google.com/macros/s/AKfycbyCXxOg5BRFPe46jjgCIRX9cGrFCNc3mQxy6cUV7vUizRe6Y75koUVQjvFXVJzZ6xUYXQ/exec",
+                        type: "POST",
+                        data: form_data,
+                        processData: false, 
+                        contentType: false, 
+                        dataType: "json",
+                        success: function (resp) {
+                            $(".spinner").hide(); // Hide spinner
+                            if (resp.status == "success") {
+                                Swal.fire({
+                                    title: "Success!",
+                                    text: "Message sent successfully.",
+                                    icon: "success",
+                                });
+                            } else {
+                                Swal.fire({
+                                    icon: "error",
+                                    title: "ERROR!",
+                                    text: "Something went wrong. Please try again later.",
+                                });
+                            }
+                        },
+                        error: function () {
+                            $(".spinner").hide(); // Hide spinner
+                            Swal.fire({
+                                icon: "error",
+                                title: "ERROR!",
+                                text: "Something went wrong. Please try again later.",
+                            });
+                        },
+                    });
+                });
+
+                // Logic to hide error message when user focus on input feild
+                $("#contactus_form :is(input, select, textarea)").each((ind, item)=>{
+                    item.addEventListener("focus", (event)=>{
+                        event.target.nextElementSibling.style.display = "none";
+                        event.target.style.borderColor = "var(--shadow-color)";
+                    });
+                });
+            });
+            
+        </script>
     </body>
 </html>
