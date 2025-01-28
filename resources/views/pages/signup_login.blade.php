@@ -84,7 +84,7 @@
 
                                 <div class="input_box">
                                     <label for="#signup_name">Full name<span style="color: #ff022c;">*</span></label>
-                                    <input type="text" name="name" autofocus value="Sourav Rupani" id="signup_name" placeholder="Full name" />
+                                    <input type="text" name="name" id="signup_name" placeholder="Full name" />
 
                                     <small class="error">
                                         Please enter your full name.
@@ -94,7 +94,7 @@
 
                                 <div class="input_box">
                                     <label for="#signup_email">Email Address<span style="color: #ff022c;">*</span></label>
-                                    <input type="email" name="email" value="s@gmail.com" id="signup_email" placeholder="Email address" />
+                                    <input type="email" name="email" id="signup_email" placeholder="Email address" />
 
                                     <small class="error">
                                         Please enter your email id.
@@ -104,7 +104,7 @@
 
                                 <div class="input_box">
                                     <label for="#signup_password">Create Password <span style="color: #ff022c;">*</span></label>
-                                    <input type="password" name="password" value="SouravRupani" id="signup_password" placeholder="Password" />
+                                    <input type="password" name="password" id="signup_password" placeholder="Password" />
 
                                     <small class="error">
                                         Please create your new password.
@@ -114,7 +114,7 @@
 
                                 <div class="input_box">
                                     <label for="#confirm_pass">Confirm Password <span style="color: #ff022c;">*</span></label>
-                                    <input type="password" name="conf_password" value="SouravRupani" id="conf_password" placeholder="Same Password" />
+                                    <input type="password" name="conf_password" id="conf_password" placeholder="Same Password" />
 
                                     <small class="error">
                                         Please enter same password.
