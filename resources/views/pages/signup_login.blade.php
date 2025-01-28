@@ -71,7 +71,9 @@
                         </div><!--./middle-->
 
                         <div class="right col-12 col-md-5">
-                            <form action="#" class="signup_form" method="POST">
+                            <form action="{{ route("user.store") }}" class="signup_form" method="POST">
+                                @csrf
+                                @method("POST")
                                 
                                 <div class="form_heading">
                                     <p>Sign Up</p>
@@ -81,22 +83,58 @@
                                 <p class="slogon">Create new account today to reap the benefits of a personalized shopping experience.</p>
 
                                 <div class="input_box">
+                                    <label for="#signup_name">Full name<span style="color: #ff022c;">*</span></label>
+                                    <input type="text" name="name" autofocus value="Sourav Rupani" id="signup_name" placeholder="Full name" />
+
+                                    <small class="error">
+                                        Please enter your full name.
+                                    </small><!--./error-->
+
+                                </div><!--./input_box-->
+
+                                <div class="input_box">
                                     <label for="#signup_email">Email Address<span style="color: #ff022c;">*</span></label>
-                                    <input type="email" name="email" id="signup_email" placeholder="Email address" />
+                                    <input type="email" name="email" value="s@gmail.com" id="signup_email" placeholder="Email address" />
+
+                                    <small class="error">
+                                        Please enter your email id.
+                                    </small><!--./error-->
+                                    
                                 </div><!--./input_box-->
 
                                 <div class="input_box">
                                     <label for="#signup_password">Create Password <span style="color: #ff022c;">*</span></label>
-                                    <input type="password" name="password" id="signup_password" placeholder="Password" />
+                                    <input type="password" name="password" value="SouravRupani" id="signup_password" placeholder="Password" />
+
+                                    <small class="error">
+                                        Please create your new password.
+                                    </small><!--./error-->
+                                    
                                 </div><!--./input_box-->
 
                                 <div class="input_box">
                                     <label for="#confirm_pass">Confirm Password <span style="color: #ff022c;">*</span></label>
-                                    <input type="password" name="conf_password" id="conf_password" placeholder="Same Password" />
+                                    <input type="password" name="conf_password" value="SouravRupani" id="conf_password" placeholder="Same Password" />
+
+                                    <small class="error">
+                                        Please enter same password.
+                                    </small><!--./error-->
+                                    
                                 </div><!--./input_box-->
 
-                                <button type="submit" class="submit_btn signup_submit_btn btn">
+                                <div class="input_box">
+                                    <label for="#confirm_pass">Profile Image (PNG, JPG) <span style="color: #ff022c;">*</span></label>
+                                    <input type="file" name="profile_img" id="profile_img" />
+
+                                    <small class="error">
+                                        Please uploade your profile image.
+                                    </small><!--./error-->
+                                    
+                                </div><!--./input_box-->
+
+                                <button type="submit" class="submit_btn signup_submit_btn btn d-flex align-items-center">
                                     Submit
+                                    <div class="spinner"></div>
                                 </button><!--./submit_btn--><br/>
 
                             </form>
@@ -170,7 +208,190 @@
         <!--./footer-->
 
         <!--================================== internal file link's ===============================-->
-        {{-- <script src="{{ asset("assets/js/jquery.min.js") }}"></script> --}}
+        <script src="{{ asset("assets/js/jquery.min.js") }}"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <!--================================== internal script writing ============================-->
+        <script>
+
+            $(document).ready(function(){
+
+                // Logic to make a ajax request to stored new user
+                $(".signup_form").on("submit", function(event){
+                    event.preventDefault();
+
+                    // =======================Logic to apply clint side validation
+                    // validation for full name
+                    if($("#signup_name").val().trim() == ""){
+                        signup_name.style.borderColor = "#ff022c";
+                        signup_name.focus();
+                        signup_name.nextElementSibling.innerText = "Full name is required. Please provide your full name.";
+                        signup_name.nextElementSibling.style.display = "block";
+                        return false;
+                    }else if($("#signup_name").val().trim().length > 100){
+                        signup_name.style.borderColor = "#ff022c";
+                        signup_name.focus();
+                        signup_name.nextElementSibling.innerText = "Your full name cannot exceed 100 characters. Please use a shorter name.";
+                        signup_name.nextElementSibling.style.display = "block";
+                        return false;
+                    }else{
+                        signup_name.style.borderColor = "var(--shadow-color)";
+                        signup_name.nextElementSibling.style.display = "none"; 
+                    }
+
+                    // Validation for email id
+                    if($("#signup_email").val().trim() == ""){
+                        signup_email.style.borderColor = "#ff022c";
+                        signup_email.focus(),
+                        signup_email.nextElementSibling.innerText = "Email address is required. Please enter a valid email address.";
+                        signup_email.nextElementSibling.style.display = "block";
+                        return false;
+                    }else if($("#signup_email").val().trim().length > 100){
+                        signup_email.style.borderColor = "#ff022c";
+                        signup_email.focus();
+                        signup_email.nextElementSibling.innerText = "Email address cannot exceed 100 characters. Please use a shorter email address.";
+                        signup_email.nextElementSibling.style.display = "block";
+                        return false;
+                    }else if(!($("#signup_email").val().includes("@") && $("#signup_email").val().trim().includes("."))){
+                        signup_email.style.borderColor = "#ff022c";
+                        signup_email.focus();
+                        signup_email.nextElementSibling.innerText = " Please enter your valid email id.";
+                        signup_email.nextElementSibling.style.display = "block";
+                        return false;
+                    }else{
+                        signup_email.style.borderColor = "var(--shadow-color)";
+                        signup_email.nextElementSibling.style.display = "none";
+                    }
+
+                    // validation for create password
+                    if($("#signup_password").val().trim() == ""){
+                        signup_password.style.borderColor = "#ff022c";
+                        signup_password.focus();
+                        signup_password.nextElementSibling.innerText = "A password is required. Please create a new password.";
+                        signup_password.nextElementSibling.style.display = "block";
+                        return false;
+                    }else if($("#signup_password").val().trim().length > 100){
+                        signup_password.style.borderColor = "#ff022c";
+                        signup_password.focus();
+                        signup_password.nextElementSibling.innerText = "Your password cannot exceed 100 characters. Please use a shorter password.";
+                        signup_password.nextElementSibling.style.display = "block";
+                        return false;
+                    }else{
+                        signup_password.style.borderColor = "var(--shadow-color)";
+                        signup_password.nextElementSibling.style.display = "none";
+                    }
+                    
+                    // validation for create password
+                    if($("#conf_password").val().trim() == ""){
+                        conf_password.style.borderColor = "#ff022c";
+                        conf_password.focus();
+                        conf_password.nextElementSibling.innerText = "Confirm password is required. Please enter the same password.";
+                        conf_password.nextElementSibling.style.display = "block";
+                        return false;
+                    }else if(!($("#conf_password").val() == $("#signup_password").val())){
+                        conf_password.style.borderColor = "#ff022c";
+                        conf_password.focus();
+                        conf_password.nextElementSibling.innerText = "Please enter the same password.";
+                        conf_password.nextElementSibling.style.display = "block";
+                        return false;
+                    }else{
+                        conf_password.style.borderColor = "var(--shadow-color)";
+                        conf_password.nextElementSibling.style.display = "none";
+                    }
+
+                    // validation for profile image
+                    const profile_img = document.querySelector("#profile_img");
+                    const file = profile_img.files[0];
+                    if(!file){
+                        profile_img.style.borderColor = "#ff022c";
+                        profile_img.nextElementSibling.style.display = "block";
+                        profile_img.nextElementSibling.innerText = "A profile image is required. Please upload your profile image."
+                        return false;
+                    }else if(file.size > 1000000){
+                        profile_img.style.borderColor = "#ff022c";
+                        profile_img.nextElementSibling.style.display = "block";
+                        profile_img.nextElementSibling.innerText = "The profile image size cannot exceed 1MB. Please upload a smaller image.";
+                        return false;
+                    }else if(file.type != "image/jpeg" && file.type != "image/png" && file.type != "jpg"){
+                        profile_img.style.borderColor = "#ff022c";
+                        profile_img.nextElementSibling.style.display = "block";
+                        profile_img.nextElementSibling.innerText = "The profile image must be in JPG, JPEG, or PNG format.";
+                        return false;
+                    }else{
+                        profile_img.style.borderColor = "var(--shadow-color)";
+                        profile_img.nextElementSibling.style.display = "none";
+                    }
+
+                    // Show the loader
+                    $(".spinner").show();
+                    
+                    // logic to make request
+                    const form_data = new FormData(this);
+                    $.ajax({
+                        url: "{{ route("user.store") }}",
+                        type: "POST",
+                        dataType: "json",
+                        data: form_data,
+                        contentType: false,
+                        processData: false,
+                        
+                        // handle the success response
+                        success: function(resp){
+
+                            if(resp.status == "success"){
+                                
+                                event.target.reset();
+                                $(".spinner").hide();
+                                Swal.fire({
+                                    title: "User Created",
+                                    text: "The user has been created successfully.",
+                                    icon: "success",
+                                });
+                            }else if(resp.status == "email_exist"){
+                                
+                                signup_email.style.borderColor = "#ff022c";
+                                signup_email.focus();
+                                signup_email.nextElementSibling.innerText = "Email has been already taken. Please enter another email id.";
+                                signup_email.nextElementSibling.style.display = "block";
+                                
+                                $(".spinner").hide();
+                                Swal.fire({
+                                    title: "Email exist",
+                                    text: "This email has been already taken. Please enter another email id.",
+                                    icon: "error",
+                                });
+                            }else{
+                                
+                                $(".spinner").hide();
+                                Swal.fire({
+                                    title: "Error",
+                                    text: "Unable to create user. Please try again.",
+                                    icon: "error",
+                                });
+                            }
+                        },
+
+                        // handle the error response
+                        error: function(resp){
+
+                            $(".spinner").hide();
+                            Swal.fire({
+                                title: "Error",
+                                text: "Something went wrong. Please try again later.",
+                                icon: "error",
+                            });
+                        }
+                    });
+
+                });
+
+                // Logic to hide error message when user focus on input feild
+                $(".signup_form :is(input, select, textarea)").each((ind, item)=>{
+                    item.addEventListener("click", (event)=>{
+                        event.target.nextElementSibling.style.display = "none";
+                        event.target.style.borderColor = "var(--shadow-color)";
+                    });
+                });
+            });
+        </script>
     </body>
 </html>

@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PagesController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 //====================== Logic to create some following routes for handle frontend logic
@@ -16,6 +17,10 @@ Route::prefix("/pages")->controller(PagesController::class)->group(function(){
     Route::get("/checkout", "checkout_page")->name("pages.checkout-page");
     Route::get("/signup-login", "signup_login_page")->name("pages.signup_login_page");
     Route::get("/contact-us", "contact_us_page")->name("pages.contact_us");
+});
+// Route for handle user request 
+Route::prefix("/user")->controller(UserController::class)->group(function(){
+    Route::post("/store", "store")->name("user.store");
 });
 
 //====================== Logic to create some following routes for handle backends logic

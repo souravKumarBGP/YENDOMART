@@ -30,7 +30,7 @@ main{
             margin: 1.25rem 0;
             font-size: .8125rem;
         }
-        
+
         .input_box{
             margin: 1.25rem 0;
             & label{
@@ -46,6 +46,16 @@ main{
                 padding: .9375rem;
                 border: .0313rem solid var(--shadow-color);
                 border-radius: 2.5rem;
+            }
+
+            #profile_img{
+                background: var(--forth-color);
+                &::file-selector-button{
+                    appearance: none;
+                    border: none;
+                    outline: none;
+                    background: var(--forth-color);
+                }
             }
         }
 
