@@ -84,7 +84,7 @@
 
                                 <div class="input_box">
                                     <label for="#signup_name">Full name<span style="color: #ff022c;">*</span></label>
-                                    <input type="text" name="name" id="signup_name" placeholder="Full name" />
+                                    <input type="text" name="full_name" id="signup_name" placeholder="Full name" />
 
                                     <small class="error">
                                         Please enter your full name.
@@ -269,10 +269,10 @@
                         signup_password.nextElementSibling.innerText = "A password is required. Please create a new password.";
                         signup_password.nextElementSibling.style.display = "block";
                         return false;
-                    }else if($("#signup_password").val().trim().length > 100){
+                    }else if($("#signup_password").val().trim().length > 100 ||  $("#signup_password").val().trim().length < 8){
                         signup_password.style.borderColor = "#ff022c";
                         signup_password.focus();
-                        signup_password.nextElementSibling.innerText = "Your password cannot exceed 100 characters. Please use a shorter password.";
+                        signup_password.nextElementSibling.innerText = "Password must be between 8 and 100 characters long.";
                         signup_password.nextElementSibling.style.display = "block";
                         return false;
                     }else{

@@ -12,6 +12,7 @@ Route::get("/", [HomeController::class, "index"])->name("home");
 Route::prefix("/pages")->controller(PagesController::class)->group(function(){
     Route::get("/product-filter", "product_filter_page")->name("pages.product_filter_page");
     Route::get("/product-details", "product_details_page")->name("pages.product_details_page");
+    Route::get("/view-profile", "view_profile")->name("pages.view-profile");
     Route::get("/my-cart", "my_cart")->name("pages.my_cart");
     Route::get("/my-wishlist", "my_wishlist")->name("pages.my_wishlist");
     Route::get("/checkout", "checkout_page")->name("pages.checkout-page");

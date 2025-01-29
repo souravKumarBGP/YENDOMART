@@ -13,8 +13,15 @@ class UserSeeder extends Seeder
     {
         // Seed the default data in users table
         User::create([
-            "name"=> "Sourav Rupani",
+            "full_name"=> "Sourav Rupani",
             "email"=> "s@gmail.com",
+            "phone"=> "9065608408",
+            "countary"=> "india",
+            "state"=> "bihar",
+            "district"=> "bhagalpur",
+            "pincode"=> "813205",
+            "famous_place"=> "Nathnagar karela gramin bank",
+            "delevery_address"=> "Nathnagar karel gramin bank",
             "role"=> "admin",
             "password"=> Hash::make("SouravRupani"),
             "profile_img"=> "YNWfbpdA2WMSnXbPETxPUZ8cPTWDoYjU2g3lVz5q.jpg"

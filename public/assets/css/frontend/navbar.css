@@ -38,7 +38,7 @@ header{
         color: var(--secondary-color);
         padding-top: 1.25rem;
         background: var(--forth-color);
-        box-shadow: 0px 5px 5px var(--shadow-color) inset;
+        box-shadow: 0px 7px 5px #ececec82;
         .nav_top{
             width: 100%;
             .search_bar{

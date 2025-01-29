@@ -207,7 +207,7 @@
                         <img src="{{ asset("assets/img/myimg.png") }}" alt="">
                         <p><b>Hello, Sourav Rupani</b></p>
                         <span style="display: block !important;">souravrupani@gmail.com</span><br/><br/>
-                        <a href="#" class="btn_view_profile">View Profile</a>
+                        <a href="{{ route("pages.view-profile") }}" class="btn_view_profile">View Profile</a>
 
                         <ul>
                             <li>

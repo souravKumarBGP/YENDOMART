@@ -16,6 +16,11 @@ class PagesController extends Controller
         return view("pages.product_details");
     }
 
+    // Logic to make a methods to show view profile page
+    public function view_profile(){
+        return view("pages.view_profile");
+    }
+
     // Logic to create a methods to show my cart page
     public function my_cart(){
         return view("pages.my-cart");
