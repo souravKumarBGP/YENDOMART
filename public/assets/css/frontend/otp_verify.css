@@ -1,0 +1,115 @@
+main{
+    margin-top: 10rem;
+    margin-bottom: 5rem;
+    .otp_verify{
+        text-align: center;
+        background: var(--forth-color);
+        margin: 0 auto;
+        padding: 30px;
+        color: gray;
+        border-radius: 1.25rem;
+
+        .img_box{
+            width: 100%;
+            height: 460px;
+            & img{
+                object-fit: cover;
+                width: 100%;
+                height: 100%;
+            }
+        }
+
+        .otp_box{
+            width: 340px;
+            height: 450px;
+            margin: auto;
+            border-radius: .625rem;
+            padding: .9375rem;
+        }
+        
+        & h4{
+            font-size: 25px;
+            margin-bottom: 1.25rem;
+            font-weight: bolder;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+        & P{
+            color: gray;
+            font-size: .9375rem;
+            margin-bottom: .9375rem;
+        }
+
+        input[type="number"]::-webkit-outer-spin-button,
+        input[type="number"]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        input[type="number"] {
+            -moz-appearance: textfield;
+        }
+
+        .otp-input{
+            display: flex;
+            gap: .9375rem;
+            justify-content: center;
+            align-items: center;
+
+            & input{
+                width: 2.5rem;
+                height: 2.5rem;
+                padding: .625rem;
+                text-align: center;
+                appearance: none;
+                border: 1px solid var(--shadow-color);
+            }
+
+        }
+        .verify_btn{
+            width: 90%;
+            padding: 12px 0;
+            background: goldenrod;
+            color: var(--forth-color);
+            font-weight: 600;
+            font-size: 1rem;
+            margin-top: .9375rem;
+        }
+        #timer {
+            color: #fe0d25;
+        }
+        
+
+        button:disabled {
+            color: royalblue;
+            cursor: not-allowed;
+        }
+        
+    }
+}
+
+@media all and (max-width: 576px){
+    header nav .nav_bottom{
+        display: none !important; 
+    }
+    main{
+        margin-top: 160px;
+        overflow: hidden;
+        .otp_verify{
+            padding: 10px;
+
+            .otp_box{
+                width: 340px !important;
+                box-shadow: none !important;
+                padding: 0 !important;
+                & h4{
+                    font-size: 1.1875rem;
+                }
+                .otp-input{
+                    gap: 5px;
+                }
+                .box{
+                    width: 100%;
+                }
+            }
+        }
+    }
+}

@@ -2902,22 +2902,6 @@
                     }
                 }
             })
-
-            // Logic to perform active and disactive my_cart_list_box and my_account_setting_boxs
-            function unchecked(){
-                // Uncheck all checkboxes
-                $(".activ_disactive_checkbox").each(function(index, item) {
-                    item.checked = false; 
-                });
-            }
-            $(".activ_disactive_checkbox").on("click", (event) => {
-                if(!event.target.checked) {
-                    event.target.checked = false;
-                }else{
-                    unchecked();
-                    event.target.checked = true;
-                }
-            });
             
             // Logic to show product name in ellipsis format
             $(".products_box .product_name a").each((ind, item) => {

@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\OtpVerificationMaler;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class UserController extends Controller
 {
@@ -57,6 +61,115 @@ class UserController extends Controller
             }
         }
         
+    }
+
+    // Logic to make a methods to handle user login operations
+    public function login_request(Request $request){
+        
+        // session()->flush();
+        
+        // Logic to apply server side validation
+        $credentials = $request->validate([
+
+            "email"=> "required|email|exists:users,email|max:100",
+            "password"=> "required|max:100|min:8"
+        ],[
+
+            "email.exists"=> "This email is not registred. Please signup your email.",
+        ]);
+
+        // Loic to apply validation for check account is active or not
+        $is_active = User::where("email", $credentials["email"])->where("status", "active")->get(["status", "full_name", "password"]);
+
+        if(count($is_active) === 1){
+            if(Hash::check($credentials["password"], $is_active[0]->password)){
+
+                // logic to generate the otp and save into session 
+                $otp = rand(100000, 999999);
+                session(["otp"=> base64_encode($otp)]);
+                session(["full_name"=> base64_encode($is_active[0]->full_name), "e"=> base64_encode($credentials["email"]) ,"p"=> base64_encode($credentials["password"])]); // Save email and password into session for authentication
+                session(["otp_dedline"=> now()->addMinutes(5)->timestamp]);
+                
+                // Logic to send a otp for mail verification
+                Mail::to($credentials["email"])->send(new OtpVerificationMaler($is_active[0]->full_name, $credentials["email"], $otp));
+
+                return redirect()->route("pages.otp_verify");
+                
+            }else{
+                return back()->withErrors(["password"=> "Password cannot be matched. Please enter currect password."]);
+
+            }
+        }else{
+            return back()->withErrors(["email"=> "Email not activated. Contact support at 9065608408 to enable login."]);
+            
+        }
+        
+    }
+
+    // Logic to create a methods to handle ajax request for verify otp
+    public function otp_verification_request(Request $request){
+
+        // Logic to perform operations for forget the otp 
+        if(time() > session("otp_dedline")){
+            session()->forget("otp");
+        }
+
+        // Logic to check otp is expire or not
+        if(session()->has("otp")){
+            
+            // Logic to check otp is matched or not
+            $otp = base64_decode(session("otp"));
+            if($otp == $request->otp){
+
+                $email = base64_decode(session("e")); // Get the email from session
+                $password = base64_decode(session("p")); // Get the password for session
+                
+                if(Auth::attempt(["email"=> $email, "password"=> $password])){
+
+                    session()->forget(["otp", "otp_dedline", "e", "p", "full_name"]); // forget the folling session
+                    session()->regenerate();
+
+                    // Logic to check user is login or admin is login
+                    if(Auth::user()->role == "admin"){
+                        return json_encode(["status"=> "veryfied", "user"=> "admin_login"]);
+
+                    }elseif(Auth::user()->role == "customer"){
+                        return json_encode(["status"=> "veryfied", "user"=> "user_login"]);
+                    }
+                    
+                }else{
+
+                    return json_encode(["status"=> "invalid_credentials"]);
+                }
+
+            }else{
+                return json_encode(["status"=> "wrong_otp"]);
+
+            }
+            
+        }else{
+            return json_encode(["status"=> "otp_expire"]);
+
+        }
+
+    }
+
+    // Logic to create a methods to handle resend otp request
+    function resend_opt_request(Request $request){
+
+        // logic to generate the otp and save into session 
+        $otp = rand(100000, 999999);
+        session(["otp"=> base64_encode($otp)]);
+        session(["otp_dedline"=> now()->addMinutes(5)->timestamp]);
+
+        
+        $full_name = base64_decode(session("full_name")); // Get the password for session
+        $email = base64_decode(session("e")); // Get the email from session
+        
+        // Logic to send a otp for mail verification
+        Mail::to($email)->send(new OtpVerificationMaler($full_name, $email, $otp));
+
+        return json_encode(["status"=> "success"]);
 
     }
 }

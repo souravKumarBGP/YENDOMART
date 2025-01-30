@@ -3,12 +3,13 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Hash;
 
-class User extends Model
+class User extends Authenticatable
 {
     // Attribute casting
-    protected $hidden = ["password", "role", "delevery_address", "pincode", "district", "state", "phone", "profile_img"];
+    protected $hidden = ["password", "role", "delevery_address", "pincode", "district", "state", "phone", "profile_img", "status", "famous_place", "created_at", "updated_at"];
     protected $fillable = ["full_name", "email","phone", "countary", "state", "district", "pincode", "famous_place", "delevery_address", "password", "profile_img"];
     protected $guarded = ["id", "countary"];
 
@@ -41,7 +42,7 @@ class User extends Model
         $this->attributes["delevery_address"] = strtolower(trim(strip_tags($value)));
     }
     function setPasswordAttribute($value){
-        $this->attributes["password"] = Hash::make($value);
+        $this->attributes["password"] = bcrypt($value);
     }
 
     function getNameAttribute($value){

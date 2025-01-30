@@ -5,7 +5,6 @@ namespace Database\Seeders;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Hash;
 
 class UserSeeder extends Seeder
 {
@@ -14,7 +13,7 @@ class UserSeeder extends Seeder
         // Seed the default data in users table
         User::create([
             "full_name"=> "Sourav Rupani",
-            "email"=> "s@gmail.com",
+            "email"=> "souravrupani@gmail.com",
             "phone"=> "9065608408",
             "countary"=> "india",
             "state"=> "bihar",
@@ -23,8 +22,8 @@ class UserSeeder extends Seeder
             "famous_place"=> "Nathnagar karela gramin bank",
             "delevery_address"=> "Nathnagar karel gramin bank",
             "role"=> "admin",
-            "password"=> Hash::make("SouravRupani"),
-            "profile_img"=> "YNWfbpdA2WMSnXbPETxPUZ8cPTWDoYjU2g3lVz5q.jpg"
+            "password"=> "souravrupani@gmail.com",
+            "profile_img"=> "image/profile_img/YNWfbpdA2WMSnXbPETxPUZ8cPTWDoYjU2g3lVz5q.jpg"
         ]);
     }
 }

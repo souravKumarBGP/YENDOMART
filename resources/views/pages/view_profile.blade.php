@@ -88,9 +88,9 @@
                                         
                                         <div class="row p-0 m-0 mb-md-2 px-0">
                                             <div class="col-12 col-lg-6 ps-0 mx-0">
-                                                <div class="input_box m-0">
+                                                <div class="input_box mx-0">
                                                     <label for="full_name">Full name </label>
-                                                    <input type="text" name="full_name" value="Sourav Rupani" id="full_name" placeholder="Full name" />
+                                                    <input type="text" name="full_name" value="" id="full_name" placeholder="Full name" />
                                                     
                                                     <small class="error">
                                                         Please enter your full name !

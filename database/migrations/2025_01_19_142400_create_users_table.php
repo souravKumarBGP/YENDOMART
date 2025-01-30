@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string("pincode", 10)->nullable();
             $table->string("famous_place", 255)->nullable();
             $table->text("delevery_address")->nullable();
+            $table->enum("status", ["active", "disactive"])->default("active");
             $table->string("password", 100);
             $table->string("profile_img");
             $table->enum("role", ["admin", "customer"])->default("customer");

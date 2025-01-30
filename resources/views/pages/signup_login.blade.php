@@ -38,23 +38,39 @@
                     <div class="row">
 
                         <div class="left col-12 col-md-5">
-                            <form action="#" class="login_form" method="POST">
+
+                            <form action="{{ route("user.login_request") }}" class="login_form" method="POST">
+                                @csrf
+                                @method("POST")
+
+                                {{-- {{ Auth::user() }} --}}
+                                {{-- {{ session("otp") }} --}}
 
                                 <div class="form_heading">
                                     <p>Login</p>
                                     <div class="line"></div>
                                 </div><!--./form_heading-->
 
-                                <p class="slogon">Welcome back! Sign in to your account.</p>
+                                <p class="slogon">Welcome back! Login in to your account.</p>
 
                                 <div class="input_box">
-                                    <label for="#login_email">Email Address <span style="color: #ff022c;">*</span></label>
-                                    <input type="email" name="email" id="login_email" placeholder="Email address" />
+                                    <label for="login_email">Email Address <span style="color: #ff022c;">*</span></label>
+                                    <input type="email" name="email" value="{{ old("email", "souravrupani@gmail.com") }}" id="login_email" autocomplete="on" placeholder="Email address" />
+
+                                    @error("email")
+                                        <small class="error d-block">
+                                            {{ $message }}
+                                        </small>
+                                    @enderror
                                 </div><!--./input_box-->
 
                                 <div class="input_box">
-                                    <label for="#login_email">Password <span style="color: #ff022c;">*</span></label>
-                                    <input type="password" name="password" id="login_password" placeholder="Password" />
+                                    <label for="login_password">Password <span style="color: #ff022c;">*</span></label>
+                                    <input type="password" value="souravrupani@gmail.com" name="password" autocomplete="off" id="login_password" placeholder="Password" />
+
+                                    @error("password")
+                                        <small class="error d-block">{{ $message }}</small>
+                                    @enderror
                                 </div><!--./input_box-->
 
                                 <button type="submit" class="submit_btn login_submit_btn btn">

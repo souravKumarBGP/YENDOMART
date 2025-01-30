@@ -193,7 +193,7 @@
                     <input type="checkbox" class="activ_disactive_checkbox activ_disactive_account" />
                     <div class="d-flex align-items-center">
                         <div class="img_box me-1 d-flex justify-content-center align-items-center">
-                            <img src="{{ asset("assets/img/myimg.png") }}" alt="My Image" width="26px" />
+                            <img src="{{ asset("storage/".Auth::user()->profile_img) }}" alt="My Image" width="26px" />
                         </div>
                         <span class="d-flex align-items-center">
                             My Account
@@ -204,9 +204,9 @@
                     </div>
 
                     <div class="active_box my_account_setting_box">
-                        <img src="{{ asset("assets/img/myimg.png") }}" alt="">
-                        <p><b>Hello, Sourav Rupani</b></p>
-                        <span style="display: block !important;">souravrupani@gmail.com</span><br/><br/>
+                        <img src="{{ asset("storage/".Auth::user()->profile_img) }}" alt="">
+                        <p><b>Hello, {{ Auth::user()->full_name }}</b></p>
+                        <span style="display: block !important;">{{ Auth::user()->email }}</span><br/><br/>
                         <a href="{{ route("pages.view-profile") }}" class="btn_view_profile">View Profile</a>
 
                         <ul>
@@ -247,24 +247,39 @@
                                 </a>
                             </li><!--./links-->
 
-                            <li>
-                                <a href="{{ route("pages.signup_login_page") }}" class="d-flex align-items-center">
-                                    <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12h4m-2 2v-4M4 18v-1a3 3 0 0 1 3-3h4a3 3 0 0 1 3 3v1a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1Zm8-10a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
-                                    </svg>
-                                      
-                                    Sign Up
-                                </a>
-                            </li><!--./links-->
+                            {{-- Logic to check user is login or logout --}}
+                            @guest
+                                <li>
+                                    <a href="{{ route("pages.signup_login_page") }}" class="d-flex align-items-center">
+                                        <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12h4m-2 2v-4M4 18v-1a3 3 0 0 1 3-3h4a3 3 0 0 1 3 3v1a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1Zm8-10a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
+                                        </svg>
+                                        
+                                        Sign Up
+                                    </a>
+                                </li><!--./links-->
 
-                            <li>
-                                <a href="{{ route("pages.signup_login_page") }}" class="d-flex align-items-center">
-                                    <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 14v4.833A1.166 1.166 0 0 1 16.833 20H5.167A1.167 1.167 0 0 1 4 18.833V7.167A1.166 1.166 0 0 1 5.167 6h4.618m4.447-2H20v5.768m-7.889 2.121 7.778-7.778"/>
-                                    </svg>
-                                    Login
-                                </a>
-                            </li><!--./links-->
+                                <li>
+                                    <a href="{{ route("pages.signup_login_page") }}" class="d-flex align-items-center">
+                                        <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 14v4.833A1.166 1.166 0 0 1 16.833 20H5.167A1.167 1.167 0 0 1 4 18.833V7.167A1.166 1.166 0 0 1 5.167 6h4.618m4.447-2H20v5.768m-7.889 2.121 7.778-7.778"/>
+                                        </svg>
+                                        Login
+                                    </a>
+                                </li><!--./links-->
+                                @else
+
+                                <li>
+                                    <a href="{{ route("logout") }}" class="d-flex align-items-center">
+                                        <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 14v4.833A1.166 1.166 0 0 1 16.833 20H5.167A1.167 1.167 0 0 1 4 18.833V7.167A1.166 1.166 0 0 1 5.167 6h4.618m4.447-2H20v5.768m-7.889 2.121 7.778-7.778"/>
+                                        </svg>
+                                        Logout
+                                    </a>
+                                </li><!--./links-->
+
+                            @endguest
+                            
                         </ul>
                     </div>
                     
@@ -321,3 +336,26 @@
     </section><!--./nav_bottom-->
         
 </nav><!--./navbar-->
+
+<script>
+    
+    // Logic to perform active and disactive my_cart_list_box and my_account_setting_boxs
+    function unchecked() {  // Function to uncheck all checkboxes
+        document.querySelectorAll(".activ_disactive_checkbox").forEach(item => {
+            item.checked = false;
+        });
+    }
+
+    // Add click event listener to all checkboxes
+    document.querySelectorAll(".activ_disactive_checkbox").forEach(item => {
+        item.addEventListener("click", (event) => {
+            if (!event.target.checked) {
+                event.target.checked = false;
+            } else {
+                unchecked();
+                event.target.checked = true;
+            }
+        });
+    });
+
+</script>
