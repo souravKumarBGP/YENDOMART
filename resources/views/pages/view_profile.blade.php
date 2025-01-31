@@ -42,32 +42,51 @@
                             <div class="left">
 
                                 <div class="img_box">
-                                    <img src="{{ asset("assets/img/myimg2.jpg") }}" alt="">
 
+                                    <div class="box">
+                                        <img class="image" src="{{ asset("storage/".Auth::user()->profile_img) }}" alt="">
+                                        <div class="spinner_box">
+                                            <div class="spinner"></div>
+                                        </div>
+                                    </div><!--./box-->
+                                    
                                     <div class="profile_img_box d-flex align-items-center justify-content-center">
                                         <button class="btn">Update Photo</button>
-                                        <form action="#">
+                                        <form action="{{ route("user.update_profile_image_request") }}" class="profile_img_form" enctype="multipart/form-data">
+                                            @csrf
+                                            @method("POST")
                                             <input type="file" name="profile_img" id="profile_img" />
+
+                                            <small class="error">
+                                                Please select your profile image.
+                                            </small>
                                         </form>
                                     </div><!--./profile_img_box-->
 
-                                    <form action="#" class="pssword_form">
+                                    <form action="{{ route("user.update_password_request") }}" method="POST" class="pssword_form">
+
+                                        @csrf
+                                        @method("POST")
 
                                         <div class="input_box">
                                             <label for="old_pass">Old Password</label>
-                                            <input type="Password" disabled id="old_pass" value="s@gmail.com"/>
+                                            <input type="Password" disabled id="old_pass" value="********"/>
                                         </div><!--./input_box-->
 
                                         <div class="input_box">
                                             <label for="new_pass">New Password</label>
-                                            <input type="Password" id="new_pass" placeholder="Enter new password" />
+                                            <input type="Password" name="password" id="new_pass" placeholder="Enter new password" />
+                                            
+                                            <small class="error" style="text-align: left; margin-top: 2px;">
+                                                Please enter the new password.
+                                            </small>
                                         </div><!--./input_box-->
 
                                         <button class="btn change_pass_submit_btn" type="submit">
                                             Change Password
                                         </button>
                                         
-                                    </form>
+                                    </form><!--./password_form-->
                                 </div><!--./img_box-->
 
                             </div>
@@ -76,8 +95,11 @@
                         <div class="col-12 col-md-8">
                             <div class="right pb-0">
     
-                                <form action="#" id="contactus_form" method="POST" autocomplete="on">
+                                <form action="{{ route("user.update_profile_info_request") }}" class="profile_form" id="contactus_form" method="POST" autocomplete="on">
     
+                                    @csrf
+                                    @method("POST")
+                                    
                                     <div class="form_heading">
                                         <p>Profile information</p>
                                         <div class="line"></div>
@@ -88,9 +110,9 @@
                                         
                                         <div class="row p-0 m-0 mb-md-2 px-0">
                                             <div class="col-12 col-lg-6 ps-0 mx-0">
-                                                <div class="input_box mx-0">
+                                                <div class="input_box mx-0 m-md-0">
                                                     <label for="full_name">Full name </label>
-                                                    <input type="text" name="full_name" value="" id="full_name" placeholder="Full name" />
+                                                    <input type="text" name="full_name" value="{{ Auth::user()->full_name }}" id="full_name" placeholder="Full name" />
                                                     
                                                     <small class="error">
                                                         Please enter your full name !
@@ -102,7 +124,7 @@
                                             <div class="col-12 col-lg-6 ps-0 ps-lg-2 second">
                                                 <div class="input_box m-0">
                                                     <label for="email">Email </label>
-                                                    <input type="email" name="email" value="s@gmail.com" id="email" placeholder="Email id" />
+                                                    <input type="email" disabled name="email" value="{{ Auth::user()->email }}" id="email" placeholder="Email id" />
                                                     
                                                     <small class="error">
                                                         Please enter your email id !
@@ -119,7 +141,7 @@
                                             <div class="col-12 col-lg-6 ps-0 mx-0">
                                                 <div class="input_box">
                                                     <label for="phone">Phone number </label>
-                                                    <input type="text" name="phone" value="9065608408" id="phone_number" placeholder="Phone number" />
+                                                    <input type="text" name="phone" value="{{ Auth()->user()->phone }}" id="phone_number" placeholder="Phone number" />
                                                     
                                                     <small class="error">
                                                         Please enter your 10 digits phone number!
@@ -130,7 +152,7 @@
                                             <div class="col-12 col-lg-6 ps-0 ps-lg-2 second">
                                                 <div class="input_box">
                                                     <label for="countary">Countary</label>
-                                                    <input type="text" name="countary" disabled value="India" id="countary" placeholder="Countary" />
+                                                    <input type="text" name="countary" disabled value="{{ Auth()->user()->countary }}" id="countary" placeholder="Countary" />
                                                     
                                                     <small class="error">
                                                         Please enter your countary!
@@ -147,9 +169,10 @@
                                                 <div class="input_box">
                                                     <label for="state">State</label>
                                                     <select name="state" id="state">
-                                                        <option value="jharkhand" selected>Bihar</option>
-                                                        <option value="jharkhand">Jharkhand</option>
-                                                        <option value="bangal">Bangal</option>
+                                                        <option readonly value="">Select your state</option>
+                                                        <option value="bihar" {{ (Auth::user()->state == "bihar") ? "selected" : "" }} >Bihar</option>
+                                                        <option value="jharkhand" {{ (Auth::user()->state == "jharkhand") ? "selected" : "" }} >Jharkhand</option>
+                                                        <option value="bangal" {{ (Auth::user()->state == "bangal") ? "selected" : "" }} >Bangal</option>
                                                     </select>                                    
                                                     
                                                     <small class="error">
@@ -163,9 +186,10 @@
                                                 <div class="input_box">
                                                     <label for="district">District</label>
                                                     <select name="district" id="district">
-                                                        <option value="bhagalpur" selected>Bhagalpur</option>
-                                                        <option value="bankha">Bankha</option>
-                                                        <option value="Mungare">Mungare</option>
+                                                        <option readonly value="">Select your district</option>
+                                                        <option value="bhagalpur" {{ (Auth::user()->district == "bhagalpur") ? "selected" : "" }} > Bhagalpur </option>
+                                                        <option value="bankha" {{ (Auth::user()->district == "bankha") ? "selected" : "" }} >Bankha</option>
+                                                        <option value="mungare" {{ (Auth::user()->district == "mungar") ? "selected" : "" }} >Mungare</option>
                                                     </select>                                    
                                                     
                                                     <small class="error">
@@ -183,7 +207,7 @@
                                             <div class="col-12 col-lg-6 ps-0 mx-0">
                                                 <div class="input_box">
                                                     <label for="pincode">Pin code </label>
-                                                    <input type="text" name="pincode" value="813205" id="pincode" placeholder="Pincode" />
+                                                    <input type="text" name="pincode" value="{{ Auth::user()->pincode }}" id="pincode" placeholder="Pincode" />
                                                     
                                                     <small class="error">
                                                         Please enter your 6 digits pin code number!
@@ -194,7 +218,7 @@
                                             <div class="col-12 col-lg-6 ps-0 ps-lg-2 second">
                                                 <div class="input_box">
                                                     <label for="famous_place">Famous place </label>
-                                                    <input type="text" name="famous_place" value="Nathnagar" id="famous_place" placeholder="Famous place" />
+                                                    <input type="text" name="famous_place" value="{{ Auth::user()->famous_place }}" id="famous_place" placeholder="Famous place" />
                                                     
                                                     <small class="error">
                                                         Please enter famous place around your area!
@@ -205,8 +229,8 @@
                                     </div><!--input_label-->
     
                                     <div class="input_box">
-                                        <label for="delevery_address">Delivery address</label>
-                                        <textarea name="delevery_address" id="delevery_address" rows="8" placeholder="Write your message here">Nathnagar karela chowck.</textarea>
+                                        <label for="delivery_address">Delivery address</label>
+                                        <textarea name="delivery_address" id="delivery_address" rows="8" placeholder="Write your message here">{{ Auth::user()->delivery_address }}</textarea>
                                         
                                         <small class="error">
                                             Enter your delivery address!
@@ -218,7 +242,7 @@
                                         Change information
                                         <div class="spinner"></div>
                                     </button><!--./submit_btn--><br/>
-    
+                                    
                                 </form>
     
                             </div>
@@ -262,6 +286,396 @@
         <!--================================== Start Footer section ===============================-->
         @include("layoutes.footer")
         <!--./footer-->
+        
+        <!--================================== External file link's ===============================-->
+        <script src="{{ asset("assets/js/jquery.min.js") }}"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <!--================================== Internal script writing ============================-->
+        <script>
+            $(document).ready(function(){
+                
+                // Logic to perform a ajax operation when user try to update profile information
+                $(".profile_form").on("submit", function(event){
+                    event.preventDefault();
 
+                    //=============== Logic to perform clint side validation
+                    // Validation for full name
+                    const full_name = event.target.full_name;
+                    if(full_name.value.trim() == ""){
+
+                        full_name.focus();
+                        full_name.style.borderColor = "#f8020f";
+                        full_name.nextElementSibling.style.display = "block";
+                        full_name.nextElementSibling.innerText = "Full name feild is required. Please enter your full name.";
+                        return;
+                    }else if(full_name.value.trim().length > 100){
+
+                        full_name.focus();
+                        full_name.style.borderColor = "#f8020f";
+                        full_name.nextElementSibling.style.display = "block";
+                        full_name.nextElementSibling.innerText = "Your full name cannot be exceed 100 characters. Please enter sort name.";
+                        return;
+                    }else{
+
+                        full_name.style.borderColor = "var(--shadow-color)";
+                        full_name.nextElementSibling.style.display = "none";
+                    }
+
+                    // Validation for email id
+                    const email = event.target.email;
+                    if(email.value.trim() == ""){
+
+                        email.focus();
+                        email.style.borderColor = "#f8020f";
+                        email.nextElementSibling.style.display = "block";
+                        email.nextElementSibling.innerText = "Email feild is required. Please enter your email id.";
+                        return;
+                    }else if(email.value.trim().length > 100){
+
+                        email.focus();
+                        email.style.borderColor = "#f8020f";
+                        email.nextElementSibling.style.display = "block";
+                        email.nextElementSibling.innerText = "Email cannot be exceed 100 characters. Please enter sort email.";
+                        return;
+                    }else if(!(email.value.trim().includes("@") && email.value.trim().includes("."))){
+
+                        email.focus();
+                        email.style.borderColor = "#f8020f";
+                        email.nextElementSibling.style.display = "block";
+                        email.nextElementSibling.innerText = "Please enter your valid email id.";
+                        return;
+                    }else{
+
+                        email.style.borderColor = "var(--shadow-color)";
+                        email.nextElementSibling.style.display = "none";
+                    }
+                    
+                    // Validation for phone number
+                    const phone = event.target.phone;
+                    if(phone.value.trim() == ""){
+
+                        phone.focus();
+                        phone.style.borderColor = "#f8020f";
+                        phone.nextElementSibling.style.display = "block";
+                        phone.nextElementSibling.innerText = "Phone number is required. Please enter your phone number.";
+                        return;
+                    }else if(phone.value.length > 10 || phone.value.length < 10 ){
+
+                        phone.focus();
+                        phone.style.borderColor = "#f8020f";
+                        phone.nextElementSibling.style.display = "block";
+                        phone.nextElementSibling.innerText = "Please enter your valid phone number.";
+                        return;
+                    }else{
+
+                        phone.style.borderColor = "var(--shadow-color)";
+                        phone.nextElementSibling.style.display = "none";
+                    }
+
+                    // Validation for countary
+                    const countary = event.target.countary;
+                    if(countary.value.trim() == "" || countary.value.trim() != "india"){
+
+                        countary.focus();
+                        countary.style.borderColor = "#f8020f";
+                        countary.nextElementSibling.style.display = "block";
+                        countary.nextElementSibling.innerText = "Only for India.";
+                        return;
+                    }else if(countary.value.length > 10 ){
+
+                        countary.focus();
+                        countary.style.borderColor = "#f8020f";
+                        countary.nextElementSibling.style.display = "block";
+                        countary.nextElementSibling.innerText = "Only for India.";
+                        return;
+                    }else{
+
+                        countary.style.borderColor = "var(--shadow-color)";
+                        countary.nextElementSibling.style.display = "none";
+                    }
+
+                    // Validation for state
+                    const state = event.target.state;
+                    if(state.value.trim() == ""){
+
+                        state.focus();
+                        state.style.borderColor = "#f8020f";
+                        state.nextElementSibling.style.display = "block";
+                        state.nextElementSibling.innerText = "State is required. Please select your state.";
+                        return;
+                    }else if(state.value.length > 100 ){
+
+                        state.focus();
+                        state.style.borderColor = "#f8020f";
+                        state.nextElementSibling.style.display = "block";
+                        state.nextElementSibling.innerText = "State name must be less then 100 characters.";
+                        return;
+                    }else{
+
+                        state.style.borderColor = "var(--shadow-color)";
+                        state.nextElementSibling.style.display = "none";
+                    }
+
+                    // Validation for district
+                    const district = event.target.district;
+                    if(district.value.trim() == ""){
+
+                        district.focus();
+                        district.style.borderColor = "#f8020f";
+                        district.nextElementSibling.style.display = "block";
+                        district.nextElementSibling.innerText = "district is required. Please select your district.";
+                        return;
+                    }else if(district.value.length > 100 ){
+
+                        district.focus();
+                        district.style.borderColor = "#f8020f";
+                        district.nextElementSibling.style.display = "block";
+                        district.nextElementSibling.innerText = "district name must be less then 100 characters.";
+                        return;
+                    }else{
+
+                        district.style.borderColor = "var(--shadow-color)";
+                        district.nextElementSibling.style.display = "none";
+                    }
+                    
+                    // Validation for district
+                    const pincode = event.target.pincode;
+                    if(pincode.value.trim() == ""){
+
+                        pincode.focus();
+                        pincode.style.borderColor = "#f8020f";
+                        pincode.nextElementSibling.style.display = "block";
+                        pincode.nextElementSibling.innerText = "pincode is required. Please select your pincode.";
+                        return;
+                    }else if(pincode.value.length > 100 ){
+
+                        pincode.focus();
+                        pincode.style.borderColor = "#f8020f";
+                        pincode.nextElementSibling.style.display = "block";
+                        pincode.nextElementSibling.innerText = "pincode must be less then 100 characters.";
+                        return;
+                    }else{
+
+                        pincode.style.borderColor = "var(--shadow-color)";
+                        pincode.nextElementSibling.style.display = "none";
+                    }
+
+                    // Validation for district
+                    const famous_place = event.target.famous_place;
+                    if(famous_place.value.trim() == ""){
+
+                        famous_place.focus();
+                        famous_place.style.borderColor = "#f8020f";
+                        famous_place.nextElementSibling.style.display = "block";
+                        famous_place.nextElementSibling.innerText = "famous Place is required.";
+                        return;
+                    }else if(famous_place.value.length > 255 ){
+
+                        famous_place.focus();
+                        famous_place.style.borderColor = "#f8020f";
+                        famous_place.nextElementSibling.style.display = "block";
+                        famous_place.nextElementSibling.innerText = "Famous place name must be less then 255 characters.";
+                        return;
+                    }else{
+
+                        famous_place.style.borderColor = "var(--shadow-color)";
+                        famous_place.nextElementSibling.style.display = "none";
+                    }
+                    
+                    // Validation for district
+                    const delivery_address = event.target.delivery_address;
+                    if(delivery_address.value.trim() == ""){
+
+                        delivery_address.focus();
+                        delivery_address.style.borderColor = "#f8020f";
+                        delivery_address.nextElementSibling.style.display = "block";
+                        delivery_address.nextElementSibling.innerText = "Please enter your delivery address.";
+                        return;
+                    }else if(delivery_address.value.length > 500 ){
+
+                        delivery_address.focus();
+                        delivery_address.style.borderColor = "#f8020f";
+                        delivery_address.nextElementSibling.style.display = "block";
+                        delivery_address.nextElementSibling.innerText = "Delivery address must be less then 500 characters.";
+                        return;
+                    }else{
+
+                        delivery_address.style.borderColor = "var(--shadow-color)";
+                        delivery_address.nextElementSibling.style.display = "none";
+                    }
+
+                    // Get the form data
+                    let form_data = new FormData(this);
+                    // Logic to make request
+                    $.ajax({
+                        url: "{{ route("user.update_profile_info_request") }}",
+                        type: "POST",
+                        data: form_data,
+                        dataType: "json",
+                        contentType: false,
+                        processData: false,
+                        success: function(resp){
+
+                            if(resp.status == "success"){
+                                Swal.fire({
+                                    title: "Success",
+                                    text: "Profile updated successfully.",
+                                    icon: "success"
+                                });
+                            }else{
+                                Swal.fire({
+                                    icon: "error",
+                                    title: "Error",
+                                    text: "Unable to update records. Please try again latter!",
+                                }); 
+                            }
+                        },
+                        error: function(resp){
+                            Swal.fire({
+                                icon: "error",
+                                title: "Error",
+                                text: "Something went wrong. Try again latter!",
+                            }); 
+                        }
+                    });
+                    
+                });
+
+                // Logic to make a ajax request to change profile image
+                $(".profile_img_form").on("change", function(event){
+                    event.preventDefault();
+
+                    // Get the profile image
+                    let profile_img = event.target.files[0];
+                    let spinner_box = $(".img_box .spinner_box");
+                    spinner_box.show();
+
+                    // Make a request
+                    const form_data = new FormData(this);
+                    $.ajax({
+                        url: "{{ route("user.update_profile_image_request") }}",
+                        type: "post",
+                        data: form_data,
+                        dataType: "json",
+                        contentType: false,
+                        processData: false,
+
+                        success: function(resp){
+                            
+                            if(resp.status == "success"){
+                                
+                                $(".img_box .box .image")[0].src = resp.path;
+                                $(".my_account .img_box img")[0].src = resp.path;
+
+                                spinner_box.hide();
+                                Swal.fire({
+                                    title: "Image updated",
+                                    text: "Image updated successfully.",
+                                    icon: "success"
+                                });
+                            }else{
+                                spinner_box.hide();
+                                Swal.fire({
+                                    icon: "error",
+                                    title: "Error",
+                                    text: "Unable to update image. Please try again latter!",
+                                }); 
+                            }
+                        },
+
+                        error: function(resp){
+                            spinner_box.hide();
+                            Swal.fire({
+                                icon: "error",
+                                title: "Error",
+                                text: "Something went wrong. Please try again latter!",
+                            }); 
+                        }
+                    });
+
+                });
+
+                // Logic to make a ajax request to change password
+                $(".pssword_form").on("submit", function(event){
+
+                    event.preventDefault();
+                    
+                    // Logic to make a clintside validation
+                    if(new_pass.value.trim() == ""){
+                        
+                        new_pass.focus();
+                        new_pass.style.borderColor = "#f8020f";
+                        new_pass.nextElementSibling.style.display = "block";
+                        new_pass.nextElementSibling.innerText = "Please enter the new password.";
+                        return;
+                    }else if(new_pass.value.trim().length > 100 || new_pass.value.trim().length < 8){
+                        
+                        new_pass.focus();
+                        new_pass.style.borderColor = "#f8020f";
+                        new_pass.nextElementSibling.style.display = "block";
+                        new_pass.nextElementSibling.innerText = "Password must be between 8 and 100 characters long.";
+                        return;
+                    }else{
+                        new_pass.nextElementSibling.style.display = "none";
+                        new_pass.style.borderColor = "var(--shadow-color)";
+                    };
+                    
+                    // Get the form data
+                    const form_data = new FormData(this);
+                    // Make a request
+                    $.ajax({
+                        url: "{{ route("user.update_password_request") }}",
+                        type: "post",
+                        dataType: "json",
+                        data: form_data,
+                        contentType: false,
+                        processData: false,
+
+                        success: function(resp){
+
+                            if(resp.status == "success"){
+
+                                event.target.reset();
+                                Swal.fire({
+                                    title: "Password Updated",
+                                    text: "Password updated successfully.",
+                                    icon: "success"
+                                });
+                            }else{
+
+                                event.target.reset();
+                                Swal.fire({
+                                    icon: "error",
+                                    title: "Error",
+                                    text: "Unable to update password. Please try again latter!",
+                                }); 
+                            }
+                        },
+
+                        error: function(resp){
+
+                            event.target.reset();
+                            Swal.fire({
+                                icon: "error",
+                                title: "Error",
+                                text: "Something went wrong. Please try again latter!",
+                            }); 
+                        }
+
+                    });
+                });
+
+                // Logic to hide error when user click on particular input feild
+                $(".view_profile :is(input, select, textarea)").each((ind, item)=>{
+                    
+                    item.addEventListener("click", (event)=>{
+                        event.target.style.borderColor = "var(--shadow-color)";
+                        event.target.nextElementSibling.style.display = "none";
+                    });
+                    
+                })
+            });
+        </script>
+        
     </body>
 </html>

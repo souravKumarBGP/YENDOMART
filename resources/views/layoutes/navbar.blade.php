@@ -193,7 +193,11 @@
                     <input type="checkbox" class="activ_disactive_checkbox activ_disactive_account" />
                     <div class="d-flex align-items-center">
                         <div class="img_box me-1 d-flex justify-content-center align-items-center">
-                            <img src="{{ asset("storage/".Auth::user()->profile_img) }}" alt="My Image" width="26px" />
+                            @auth
+                                <img src="{{ asset("storage/".Auth::user()->profile_img) }}" alt="My Image" width="26px" />
+                                @else
+                                <img src="{{ asset("assets/img/user_icon.png") }}" alt="">
+                            @endauth
                         </div>
                         <span class="d-flex align-items-center">
                             My Account
@@ -204,10 +208,13 @@
                     </div>
 
                     <div class="active_box my_account_setting_box">
-                        <img src="{{ asset("storage/".Auth::user()->profile_img) }}" alt="">
-                        <p><b>Hello, {{ Auth::user()->full_name }}</b></p>
-                        <span style="display: block !important;">{{ Auth::user()->email }}</span><br/><br/>
-                        <a href="{{ route("pages.view-profile") }}" class="btn_view_profile">View Profile</a>
+                        @auth
+                            <img src="{{ asset("storage/".Auth::user()->profile_img) }}" alt="">
+                            <p><b>Hello, {{ Auth::user()->full_name }}</b></p>
+                            <span style="display: block !important;">{{ Auth::user()->email }}</span><br/><br/>
+                            <a href="{{ route("pages.view-profile", base64_encode(Auth::id())) }}" class="btn_view_profile">View Profile</a>
+
+                        @endauth
 
                         <ul>
                             <li>

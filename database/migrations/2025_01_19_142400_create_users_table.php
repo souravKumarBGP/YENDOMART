@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string("district", 100)->nullable();
             $table->string("pincode", 10)->nullable();
             $table->string("famous_place", 255)->nullable();
-            $table->text("delevery_address")->nullable();
+            $table->text("delivery_address")->nullable();
             $table->enum("status", ["active", "disactive"])->default("active");
             $table->string("password", 100);
             $table->string("profile_img");

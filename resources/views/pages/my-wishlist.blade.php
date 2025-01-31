@@ -163,23 +163,6 @@
         <!--================================== internal script writing ============================-->
         <script>
 
-            // Logic to perform active and disactive my_cart_list_box and my_account_setting_boxs
-            function unchecked() {
-                document.querySelectorAll(".activ_disactive_checkbox").forEach((item) => {
-                    item.checked = false;
-                });
-            }
-            document.querySelectorAll(".activ_disactive_checkbox").forEach((checkbox) => {
-                checkbox.addEventListener("click", (event) => {
-                    if (!event.target.checked) {
-                        event.target.checked = false;
-                    } else {
-                        unchecked();
-                        event.target.checked = true;
-                    }
-                });
-            });
-
             // Logic to show product name in ellipsis format
             document.querySelectorAll(".p_name").forEach((item, ind) => {
                 let text = item.textContent.trim();

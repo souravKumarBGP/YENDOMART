@@ -43,9 +43,6 @@
                                 @csrf
                                 @method("POST")
 
-                                {{-- {{ Auth::user() }} --}}
-                                {{-- {{ session("otp") }} --}}
-
                                 <div class="form_heading">
                                     <p>Login</p>
                                     <div class="line"></div>

@@ -20,7 +20,7 @@ class UserSeeder extends Seeder
             "district"=> "bhagalpur",
             "pincode"=> "813205",
             "famous_place"=> "Nathnagar karela gramin bank",
-            "delevery_address"=> "Nathnagar karel gramin bank",
+            "delivery_address"=> "Nathnagar karel gramin bank",
             "role"=> "admin",
             "password"=> "souravrupani@gmail.com",
             "profile_img"=> "image/profile_img/YNWfbpdA2WMSnXbPETxPUZ8cPTWDoYjU2g3lVz5q.jpg"

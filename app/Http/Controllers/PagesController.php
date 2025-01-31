@@ -19,8 +19,16 @@ class PagesController extends Controller
     }
 
     // Logic to make a methods to show view profile page
-    public function view_profile(){
-        return view("pages.view_profile");
+    public function view_profile(string $id){
+
+        // Logic to perform autherization operations
+        $id = base64_decode($id);
+        if(Auth::id() == $id){
+            return view("pages.view_profile");
+        }else{
+            return abort(404);
+        }
+        
     }
 
     // Logic to create a methods to show my cart page

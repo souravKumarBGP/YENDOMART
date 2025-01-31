@@ -9,8 +9,8 @@ use Illuminate\Support\Facades\Hash;
 class User extends Authenticatable
 {
     // Attribute casting
-    protected $hidden = ["password", "role", "delevery_address", "pincode", "district", "state", "phone", "profile_img", "status", "famous_place", "created_at", "updated_at"];
-    protected $fillable = ["full_name", "email","phone", "countary", "state", "district", "pincode", "famous_place", "delevery_address", "password", "profile_img"];
+    protected $hidden = ["password", "role", "delivery_address", "pincode", "district", "state", "phone", "profile_img", "status", "famous_place", "created_at", "updated_at"];
+    protected $fillable = ["full_name", "email","phone", "countary", "state", "district", "pincode", "famous_place", "delivery_address", "password", "profile_img"];
     protected $guarded = ["id", "countary"];
 
     // Logic to careate some mutators and getters function

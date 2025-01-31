@@ -25,13 +25,13 @@ Route::get("/", [HomeController::class, "index"])->name("home");
 Route::prefix("/pages")->controller(PagesController::class)->group(function(){
     Route::get("/product-filter", "product_filter_page")->name("pages.product_filter_page");
     Route::get("/product-details", "product_details_page")->name("pages.product_details_page");
-    Route::get("/view-profile", "view_profile")->name("pages.view-profile")->middleware(IsUserLoginMiddleware::class);
+    Route::get("/view-profile/{id}", "view_profile")->name("pages.view-profile")->middleware(IsUserLoginMiddleware::class);
     Route::get("/my-cart", "my_cart")->name("pages.my_cart");
     Route::get("/my-wishlist", "my_wishlist")->name("pages.my_wishlist");
     Route::get("/checkout", "checkout_page")->name("pages.checkout-page");
     Route::get("/signup-login", "signup_login_page")->name("pages.signup_login_page")->middleware(IsUserGuestMiddleware::class);
     Route::get("/contact-us", "contact_us_page")->name("pages.contact_us");
-    Route::get("/otp-verify", "otp_verify_page")->name("pages.otp_verify")->middleware(IsUserGuestMiddleware::class);
+    Route::get("/otp-verify", "otp_verify_page")->name("pages.otp_verify")->middleware(IsUserGuestMiddleware::class);;
 });
 // Route for handle user request 
 Route::middleware(IsUserGuestMiddleware::class)->prefix("/user")->controller(UserController::class)->group(function(){
@@ -39,6 +39,9 @@ Route::middleware(IsUserGuestMiddleware::class)->prefix("/user")->controller(Use
     Route::post("/login-request", "login_request")->name("user.login_request");
     Route::post("/otp-verification-request", "otp_verification_request")->name("user.otp_verification_request");
     Route::post("/resend-otp-request", "resend_opt_request")->name("user.resend_opt_request");
+    Route::post("/update-profile-info-request", "update_profile_info_request")->name("user.update_profile_info_request")->withoutMiddleware(IsUserGuestMiddleware::class)->middleware(IsUserLoginMiddleware::class);
+    Route::post("/update-profile-image-request", "update_profile_image_request")->name("user.update_profile_image_request")->withoutMiddleware(IsUserGuestMiddleware::class)->middleware(IsUserLoginMiddleware::class);
+    Route::post("/update-password-request", "update_password_request")->name("user.update_password_request")->withoutMiddleware(IsUserGuestMiddleware::class)->middleware(IsUserLoginMiddleware::class);
 });
 
 //====================== Logic to create some following routes for handle backends logic

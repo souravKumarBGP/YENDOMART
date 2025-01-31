@@ -155,7 +155,7 @@ class UserController extends Controller
     }
 
     // Logic to create a methods to handle resend otp request
-    function resend_opt_request(Request $request){
+    public function resend_opt_request(Request $request){
 
         // logic to generate the otp and save into session 
         $otp = rand(100000, 999999);
@@ -171,5 +171,49 @@ class UserController extends Controller
 
         return json_encode(["status"=> "success"]);
 
+    }
+
+    // Logic to create a methods to handle ajax request for update user profile
+    public function update_profile_info_request(Request $request){
+        
+        // Logic to apply server side validation
+        $credentials = $request->validate([
+            "full_name" => "required|max:100|string",
+            "phone"=> "required|max:10|min:10",
+            "state"=> "required|max:100",
+            "pincode"=> "required|max:100",
+            "district"=> "required|max:100",
+            "famous_place"=> "required|max:255",
+            "delivery_address"=> "required|max:500"
+        ]);
+        
+        // Logic to perform update operations
+        $result = User::findorfail(Auth::id())->update($credentials);
+
+        return json_encode(["status"=> "success"]);
+    }
+
+    // Logic to create a methods to handle ajax request for update profile image
+    public function update_profile_image_request(Request $request){
+
+        // Get old profile image path and unlink it
+        $old_image_path = public_path().'/storage/'.Auth::user()->profile_img;
+        unlink($old_image_path);
+
+        // Update the new path
+        $path = $request->file("profile_img")->store("/image/profile_img", "public");
+        $result = User::findorFail(Auth::id())->update([
+            "profile_img"=> $path
+        ]);
+        return json_encode(["status"=> "success", "path"=> asset("/storage/".$path)]);
+    }
+
+    // Logic to create a methods to handle ajax request for update password
+    public function update_password_request(Request $request){
+
+        $result = User::find(Auth::id())->update([
+            "password"=> $request->password
+        ]);
+        return json_encode(["status"=> "success"]);
     }
 }
