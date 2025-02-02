@@ -48,7 +48,17 @@ Route::middleware(IsUserGuestMiddleware::class)->prefix("/user")->controller(Use
 Route::prefix("/admin")->controller(AdminController::class)->group(function(){
     Route::get("/", "dashbord");
     Route::get("/dashbord", "dashbord")->name("admin.dashbord");
-    Route::get("/unites", "unites_page")->name("admin.unites_page");
-    Route::post("/store-unite", "store_unite")->name("admin.store_unite");
-    Route::get("/destroy-unite/{id}", "destroy_unite")->name("admin.destroy_unite");
+
+    Route::prefix("/unites")->group(function(){
+        Route::get("/", "unites_index");
+        Route::get("/index", "unites_index")->name("admin.unites.index");
+        Route::post("/store", "unites_store")->name("admin.unites.store");
+        Route::get("/destroy/{id}", "unites_destroy")->name("admin.unites.destroy");
+    });
+
+    Route::prefix("/categories")->group(function(){
+        Route::get("/index", "categories_index")->name("admin.categories.index");
+        Route::post("/store", "category_store")->name("admin.category.store");
+        Route::get("/destroy/{id}", "category_destroy")->name("admin.category.destroy");
+    });
 });

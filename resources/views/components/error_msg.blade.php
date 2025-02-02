@@ -2,7 +2,7 @@
     .error_msg{
         border: .0625rem solid var(--color-danger);
         position: fixed;
-        top: 20%;
+        top: 30%;
         left: 50%;
         transform: translateX(-50%);
         z-index: 20;
@@ -30,6 +30,11 @@
             width: 1.25rem;
             color: var(--forth-color);
             margin-right: .625rem;
+        }
+    }
+    @media all and (max-width: 576px){
+        .error_msg{
+            width: 90%;
         }
     }
 </style>

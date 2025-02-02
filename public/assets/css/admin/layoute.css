@@ -132,6 +132,7 @@ input:focus::placeholder{
     color: var(--color-danger) !important;
     margin-top: .1875rem;
     font-size: 13px !important;
+    font-weight: 400;
 }
 
 .is_invalid{
@@ -464,12 +465,6 @@ Start media query
     main .table_box table{
         min-width: 350%;
     }
-
-    .error_msg{
-        width: 90%;
-        
-    }
-
 }
 
 @keyframes up_down{
