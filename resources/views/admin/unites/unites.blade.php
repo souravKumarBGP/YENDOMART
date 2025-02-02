@@ -12,8 +12,27 @@
     <section class="container">
         <main>
             
+            
             <!--================== Start unites_section ===============-->
             <section class="unites_section">
+                
+                
+                @session('success_msg')
+                    <x-success_msg>
+                        <x-slot name="msg">
+                            {{ session("success_msg") }}
+                        </x-slot>
+                    </x-success_msg>
+                @endsession
+
+                @session('error_msg')
+                    <x-error_msg>
+                        <x-slot name="msg">
+                            {{ session("error_msg") }}
+                        </x-slot>
+                    </x-error_msg>
+                @endsession
+                
                 <div class="row">
                     <div class="heading d-flex justify-content-between align-items-center">
                         <div>
@@ -30,7 +49,11 @@
                             
                             <div class="create_form_box d-flex align-items-center justify-content-center">
 
-                                <form action="#" class="create_unites_form"> 
+                                <form action="{{ route("admin.store_unite") }}" method="POST" class="create_unites_form"> 
+
+                                    @method("POST")
+                                    @csrf
+
                                     <div class="form_heading d-flex align-items-center justify-content-between">
                                         <p>Create new unite</p>
                                             
@@ -42,13 +65,18 @@
                                     </div><!--./form_heading--><br/><br/>
 
                                     <div class="input_box">
-                                        <select name="unit" id="unit">
+                                        <select name="name" class="@error("name") is_invalid @enderror" id="unite" required>
                                             <option value="">Select unit</option>
                                             <option value="pices">Pices</option>
                                             <option value="box">Box</option>
                                             <option value="kg">Kg</option>
                                             <option value="gram">Gram</option>
                                         </select>
+                                        @error('name')
+                                            <small class="error d-block">
+                                                {{ $message }}
+                                            </small>
+                                        @enderror
                                     </div><!--./input_box--><br/><br/>
 
                                     <input type="submit" value="Create Now" class="btn submit_btn" />
@@ -71,23 +99,26 @@
                             </thead>
                             <tbody>
 
-                                <tr>
-                                    <td>
-                                        1
-                                    </td>
-                                    <td>
-                                        PCS
-                                    </td>
-                                    <td>
-                                        <button >
-                                            <a href="#" class="delete_btn">
-                                                <svg style="color: #ee0606;" class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z"/>
-                                                </svg>
-                                            </a>                                                  
-                                        </button>
-                                    </td>
-                                </tr><!--./item-->
+                                @foreach ($data as $item)
+                                    <tr>
+                                        <td>
+                                            {{ $loop->iteration }}
+                                        </td>
+                                        <td>
+                                            {{ $item->name }}
+                                        </td>
+                                        <td>
+                                            <button>
+                                                <a href="{{ route("admin.destroy_unite", base64_encode($item->id)) }}" class="delete_btn">
+                                                    <svg style="color: #ee0606;" class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z"/>
+                                                    </svg>
+                                                </a>                                                  
+                                            </button>
+                                        </td>
+                                    </tr><!--./item-->
+                                @endforeach
+                                
 
                             </tbody>
                         </table>
@@ -98,7 +129,6 @@
         </main>
     </section>
 @endsection<!--./main_section-->
-
 
 
 

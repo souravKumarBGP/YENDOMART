@@ -128,6 +128,15 @@ input:focus::placeholder{
     }
 }
 
+.error{
+    color: var(--color-danger) !important;
+    margin-top: .1875rem;
+    font-size: 13px !important;
+}
+
+.is_invalid{
+    border-color: var(--color-danger) !important;
+}
 
 /******************************************************************************************************
 Start header section styling
@@ -455,6 +464,12 @@ Start media query
     main .table_box table{
         min-width: 350%;
     }
+
+    .error_msg{
+        width: 90%;
+        
+    }
+
 }
 
 @keyframes up_down{
