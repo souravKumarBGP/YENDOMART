@@ -10,4 +10,9 @@ class AdminController extends Controller
     public function dashbord(){
         return view("admin.dashbord");
     }
+
+    // Logic to create a methods to show unites page
+    public function unites_page(){
+        return view("admin.unites.unites");
+    }
 }

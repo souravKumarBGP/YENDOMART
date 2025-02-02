@@ -11,7 +11,7 @@
         <!--================================== External file link's ===============================-->
         <link href="{{ asset("assets/css/frontend/bootstrap-grid.min.css") }}" rel="stylesheet" />
         <!--================================== Internal file link's ===============================-->
-        <link rel="stylesheet" href="{{ asset("assets/css/backend/layoute.css") }}" />
+        <link rel="stylesheet" href="{{ asset("assets/css/admin/layoute.css") }}" />
         @stack("style")
     </head>
     <body>
@@ -80,20 +80,22 @@
                                     </a>
                                 </li><!--./link-->
     
-                                <li class="profile">
-                                    <a href="#" class="d-flex">
-                                        <img src="{{ asset("assets/img/myimg2.jpg") }}" alt="" />                                                                              
-                                        <span class="d-flex flex-column">
-                                            <small>Sourav Rupani</small>
-                                            <small class="d-flex align-items-center">
-                                                Admin
-                                                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m8 10 4 4 4-4"/>
-                                                </svg>                                              
-                                            </small>
-                                        </span>
-                                    </a>
-                                </li><!--./link-->
+                                @if(Auth::check() && Auth::user()->role == "admin")
+                                    <li class="profile">
+                                        <a href="#" class="d-flex">
+                                            <img src="{{ asset("storage/".Auth::user()->profile_img) }}" alt="" />                                                                              
+                                            <span class="d-flex flex-column">
+                                                <small>{{ Auth::user()->full_name }}</small>
+                                                <small class="d-flex align-items-center">
+                                                    Admin
+                                                    <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m8 10 4 4 4-4"/>
+                                                    </svg>                                              
+                                                </small>
+                                            </span>
+                                        </a>
+                                    </li><!--./link-->
+                                @endauth
                             </ul>
                         </div><!---End of right-->
                         
@@ -144,7 +146,7 @@
                                 </li><!--./link-->
                                 
                                 <li>
-                                    <a href="#" class="d-flex align-items-center">
+                                    <a style="cursor: pointer;" class="d-flex align-items-center">
                                         <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.143 4H4.857A.857.857 0 0 0 4 4.857v4.286c0 .473.384.857.857.857h4.286A.857.857 0 0 0 10 9.143V4.857A.857.857 0 0 0 9.143 4Zm10 0h-4.286a.857.857 0 0 0-.857.857v4.286c0 .473.384.857.857.857h4.286A.857.857 0 0 0 20 9.143V4.857A.857.857 0 0 0 19.143 4Zm-10 10H4.857a.857.857 0 0 0-.857.857v4.286c0 .473.384.857.857.857h4.286a.857.857 0 0 0 .857-.857v-4.286A.857.857 0 0 0 9.143 14Zm10 0h-4.286a.857.857 0 0 0-.857.857v4.286c0 .473.384.857.857.857h4.286a.857.857 0 0 0 .857-.857v-4.286a.857.857 0 0 0-.857-.857Z"/>
                                         </svg>                                          
@@ -153,7 +155,7 @@
 
                                     <ul class="inner_mune">
                                         <li>
-                                            <a href="#" class="d-flex align-items-center">
+                                            <a href="{{ route("admin.unites_page") }}" class="d-flex align-items-center">
                                                 <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                                                     <path fill-rule="evenodd" d="M12 4a1 1 0 1 0 0 2 1 1 0 0 0 0-2Zm-2.952.462c-.483.19-.868.432-1.19.71-.363.315-.638.677-.831.93l-.106.14c-.21.268-.36.418-.574.527C6.125 6.883 5.74 7 5 7a1 1 0 0 0 0 2c.364 0 .696-.022 1-.067v.41l-1.864 4.2a1.774 1.774 0 0 0 .821 2.255c.255.133.538.202.825.202h2.436a1.786 1.786 0 0 0 1.768-1.558 1.774 1.774 0 0 0-.122-.899L8 9.343V8.028c.2-.188.36-.38.495-.553.062-.079.118-.15.168-.217.185-.24.311-.406.503-.571a1.89 1.89 0 0 1 .24-.177A3.01 3.01 0 0 0 11 7.829V20H5.5a1 1 0 1 0 0 2h13a1 1 0 1 0 0-2H13V7.83a3.01 3.01 0 0 0 1.63-1.387c.206.091.373.19.514.29.31.219.532.465.811.78l.025.027.02.023v1.78l-1.864 4.2a1.774 1.774 0 0 0 .821 2.255c.255.133.538.202.825.202h2.436a1.785 1.785 0 0 0 1.768-1.558 1.773 1.773 0 0 0-.122-.899L18 9.343v-.452c.302.072.633.109 1 .109a1 1 0 1 0 0-2c-.48 0-.731-.098-.899-.2-.2-.12-.363-.293-.651-.617l-.024-.026c-.267-.3-.622-.7-1.127-1.057a5.152 5.152 0 0 0-1.355-.678 3.001 3.001 0 0 0-5.896.04Z" clip-rule="evenodd"/>
                                                 </svg>
@@ -167,7 +169,7 @@
                                                     <path d="M12.013 6.175 7.006 9.369l5.007 3.194-5.007 3.193L2 12.545l5.006-3.193L2 6.175l5.006-3.194 5.007 3.194ZM6.981 17.806l5.006-3.193 5.006 3.193L11.987 21l-5.006-3.194Z"/>
                                                     <path d="m12.013 12.545 5.006-3.194-5.006-3.176 4.98-3.194L22 6.175l-5.007 3.194L22 12.562l-5.007 3.194-4.98-3.211Z"/>
                                                 </svg>                                          
-                                                Parent categories
+                                                Categories
                                             </a>
                                         </li><!--./link-->
         
@@ -177,7 +179,7 @@
                                                     <path d="M12.013 6.175 7.006 9.369l5.007 3.194-5.007 3.193L2 12.545l5.006-3.193L2 6.175l5.006-3.194 5.007 3.194ZM6.981 17.806l5.006-3.193 5.006 3.193L11.987 21l-5.006-3.194Z"/>
                                                     <path d="m12.013 12.545 5.006-3.194-5.006-3.176 4.98-3.194L22 6.175l-5.007 3.194L22 12.562l-5.007 3.194-4.98-3.211Z"/>
                                                 </svg>
-                                                Child categories
+                                                Brands
                                             </a>
                                         </li><!--./link-->
         
@@ -223,8 +225,9 @@
             </nav><!---./nav-->
         </header><!---./header-->
         
-        <!--================================== Include dynamicaly header section =================-->
+        <!--================================== Include dynamicaly main section ==================-->
         @yield("main_section")
+        <!--./main-->
         
         <!--================================== Include dynamicaly header section =================-->
         <footer>

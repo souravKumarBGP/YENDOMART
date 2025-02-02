@@ -3,7 +3,7 @@
 
 {{-- Logic to push dynamicly style link in head section --}}
 @push("style")
-    <link rel="stylesheet" href="{{ asset("assets/css/backend/dashbord.css") }}" />
+    <link rel="stylesheet" href="{{ asset("assets/css/admin/dashbord.css") }}" />
 @endpush
 
 <!--====================================== Start main section =====================================-->
@@ -15,6 +15,7 @@
 
                 <section class="left col-12 col-lg-8 order-2 order-lg-1">
                     
+                    <!--========== Start today orders section =============-->
                     <section class="today_orders">
 
                         <div class="heading d-flex justify-content-between align-items-center">
@@ -111,6 +112,7 @@
 
                     </section><!--./today_orders-->
 
+                    <!--========== Start new user section =============-->
                     <section class="new_users mt-4">
 
                         <div class="heading d-flex justify-content-between align-items-center">
@@ -206,6 +208,7 @@
 
                     </section><!--./new_users-->
 
+                    <!--========== Start stock overview section =============-->
                     <section class="stock_overview mt-4">
 
                         <div class="heading d-flex justify-content-between align-items-center">

@@ -24,6 +24,7 @@ body{
     --ternory-color: #f4f8fd;
     --forth-color: #fefcfb;
     --shadow-color: #eeeded;
+    --color-danger: #ee0606;
     --size-10px: 0.625rem;
     --size-14px: 0.875rem;
     --size-15px: 0.9375rem;
@@ -86,6 +87,47 @@ input::placeholder{
 input:focus::placeholder{
     padding-left: .4375rem;
 }
+
+.heading{
+    color: var(--secondary-color);
+    font-weight: 700;
+    font-size: var(--size-15px);
+    & small{
+        font-size: .5625rem;
+        color: #416ef2;
+    }
+    & button{
+        background: var(--primary-color);
+        color: var(--secondary-color);
+        padding: 10px 15px;
+        border-radius: .1875rem;
+        font-size: .625rem;
+    }
+}
+.table_box{
+    font-size: .8125rem;
+    color: gray;
+    overflow-x: scroll;
+    overflow-y: visible;
+    &::-webkit-scrollbar{
+        height: 0;            
+    }
+    & table{
+        width: 100%;
+    }   
+    & th{
+        padding-bottom: .625rem;
+        border-bottom: .0625rem solid var(--shadow-color);
+        text-align: left;
+        padding-left: .3125rem;
+    }
+    td{
+        border-right: .2px solid var(--shadow-color);
+        padding: .625rem 0;
+        padding-left: 7px;
+    }
+}
+
 
 /******************************************************************************************************
 Start header section styling
@@ -382,6 +424,10 @@ Start media query
             display: none !important;
         }
     }
+
+    main .table_box table{
+        min-width: 200%;
+    }
 }
 
 @media all and (max-width: 576px){
@@ -404,6 +450,10 @@ Start media query
         .nav_bottom .right input{
             width: 180px !important;
         }
+    }
+
+    main .table_box table{
+        min-width: 350%;
     }
 }
 

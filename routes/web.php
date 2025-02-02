@@ -48,4 +48,5 @@ Route::middleware(IsUserGuestMiddleware::class)->prefix("/user")->controller(Use
 Route::prefix("/admin")->controller(AdminController::class)->group(function(){
     Route::get("/", "dashbord");
     Route::get("/dashbord", "dashbord")->name("admin.dashbord");
+    Route::get("/unites", "unites_page")->name("admin.unites_page");
 });
