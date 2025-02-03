@@ -190,5 +190,8 @@ class AdminController extends Controller
         }
     }
 
-    
+    // Logic to create a methods to show product page
+    public function products_index(){
+        return view("admin.products.index");
+    }
 }

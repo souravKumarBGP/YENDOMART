@@ -436,7 +436,7 @@ Start media query
     }
 
     main .table_box table{
-        min-width: 200%;
+        min-width: 240%;
     }
 }
 
@@ -463,7 +463,7 @@ Start media query
     }
 
     main .table_box table{
-        min-width: 350%;
+        min-width: 500%;
     }
 }
 

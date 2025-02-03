@@ -14,7 +14,6 @@
             <!--================== Start unites_section ===============-->
             <section class="unites_section">
                 
-                
                 @session('success_msg')
                     <x-success_msg>
                         <x-slot name="msg">

@@ -1,0 +1,112 @@
+/******************************* Start products section styling *************************************** */
+
+.product_lists{
+    background: var(--forth-color);
+    padding: 2.1875rem;
+    min-height: 80vh;
+
+    .action_btn{
+        padding: 5px;
+        margin-left: 10px;
+        & svg{
+            width: 20px;
+        }
+        &.show_btn{
+            position: relative;
+            #show_input_btn{
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                appearance: none;
+                opacity: 0;
+                z-index: 2;
+
+                &:checked~.product_details_box{
+                    scale: 1;
+                }
+            }
+
+            & svg{
+                color: royalblue !important;
+            }
+            .product_details_box{
+                position: fixed;    
+                top: 100px;
+                left: 0;
+                width: 100%;
+                height: 85vh;
+                overflow-y: auto;
+                overflow-x: hidden;
+                background: var(--primary-color);
+                z-index: 3;
+                padding: 3.125rem 1.25rem;
+                scale: 0;
+                transition: all ease 0.8s;
+                &::-webkit-scrollbar{
+                    width: 0;
+                }
+                .product_details{
+                    width: 50%;
+                    background-color: var(--forth-color);
+                    border-radius: .1875rem;
+                    padding: .9375rem;
+                    text-align: left;
+                    min-height: 2300px;
+                    & p{
+                        font-size: var(--size-16px);
+                        color: gray;
+                        padding-bottom: .3125rem;
+                    }
+
+                    .gallary_img_box{
+                        .img_box{
+                            width: 100%;
+                            height: 132px;
+                            & video, & img{
+                                object-fit: contain;
+                                width: 100%;
+                                height: 100%;
+                            }
+                        }
+                    }
+
+                    .details ul li{
+                        color: gray;
+                        margin-bottom: 10px;
+                        padding: 5px 0;
+                        & b{
+                            width: 20%;
+                            font-size: .875rem;
+                            font-weight: normal;
+                            color: var(--secondary-color);
+                        }
+                    }
+                }
+            }
+        }
+        &.edit_btn{
+            & svg{
+                color: var(--primary-color);
+            }
+        }
+        &.delete_btn{
+            & svg{
+                color: var(--color-danger);
+            }
+        }
+    }
+}
+
+@media all and (max-width: 768px){
+    .product_lists{
+        padding: 2.1875rem .625rem;
+        .action_btn.show_btn .product_details_box .product_details{
+            width: 100%;
+        }
+    }
+    .details b{
+        width: 50% !important;
+    }
+}
