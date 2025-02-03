@@ -194,4 +194,9 @@ class AdminController extends Controller
     public function products_index(){
         return view("admin.products.index");
     }
+
+    // Logic to create a methods to show create new product page
+    public function product_create(){
+        return view("admin.products.create");
+    }
 }

@@ -20,7 +20,7 @@
                         <p class="order-lg-first">Total products- (3)</p>
                     </div>
                     <button>
-                        <a href="#" class="py-1">
+                        <a href="{{ route("admin.product.create") }}" class="py-1">
                             <big>Create New +</big>
                         </a>
                     </button>
