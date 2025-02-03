@@ -87,7 +87,12 @@
                         color: #6c6c6c;
                         border-radius: .4375rem;
                     }
-                    #category_img{
+
+                    & input[type=text]{
+                        padding: 11px;
+                    }
+                    
+                    & input{
                         border-radius: .25rem;
                         width: 100%;
                         border: 1px solid red;

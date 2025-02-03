@@ -10,9 +10,8 @@
 @section("main_section")
     <section class="container">
         <main>
-            <!--================== Start unites_section ===============-->
+            <!--================== Start brand_section ===============-->
             <section class="categories_section">
-                
                 
                 @session('success_msg')
                     <x-success_msg>
@@ -34,7 +33,7 @@
 
                     <div class="heading d-flex justify-content-between align-items-center">
                         <div>
-                            <p class="order-lg-first">Total categories <b>- {{ count($data) }} </b></p>
+                            <p class="order-lg-first">Total brands <b>- {{ count($brand_data) }} </b></p>
                         </div>
 
                         <div class="create_new_btn">
@@ -47,13 +46,13 @@
                             
                             <div class="create_form_box d-flex align-items-center justify-content-center">
 
-                                <form action="{{ route('admin.category.store') }}" enctype="multipart/form-data" method="POST" class="create_category_form"> 
+                                <form action="{{ route('admin.brand.store') }}" enctype="multipart/form-data" method="POST" class="create_category_form"> 
 
                                     @method("POST")
                                     @csrf
 
                                     <div class="form_heading d-flex align-items-center justify-content-between">
-                                        <p>Create new category</p>
+                                        <p>Create new brand</p>
                                             
                                         <a class="close_btn" onclick="document.querySelector('.create_new_checkbox').checked = false;">
                                             <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
@@ -63,19 +62,10 @@
                                     </div><!--./form_heading--><br/><br/>
 
                                     <div class="input_box">
-                                        <label for="category_name">Category name</label>
-                                        <select name="name" class="@error("name") is_invalid @enderror" id="unite" required>
-                                            <option value="">Select category</option>
-                                            <option value="laptopes" selected>Laptopes</option>
-                                            <option value="phones">Phones</option>
-                                            <option value="tablets">Tablets</option>
-                                            <option value="computes">Computers</option>
-                                            <option value="cpu">CPU</option>
-                                            <option value="keybord_mouse">Keybord And Mouse</option>
-                                            <option value="laptopes_chargers">Laptopes Chargers</option>
-                                            <option value="computer_accessories">Computer Accessories</option>
-                                        </select>
-                                        @error('name')
+
+                                        <label for="brand_name">Brand name</label>
+                                        <input type="text" value="Apple" name="brand_name" id="brand_name" class="@error("brand_name") is_invalid @enderror" placeholder="Enter your brand name" />
+                                        @error('brand_name')
                                             <small class="error d-block">
                                                 {{ $message }}
                                             </small>
@@ -83,10 +73,24 @@
                                     </div><!--./input_box--><br/>
 
                                     <div class="input_box">
-                                        <label for="category_img">Category image</label>
-                                        <input type="file" name="category_img"  id="category_img">
+                                        <label for="category_name">Select category</label>
+                                        <select name="category_name" class="@error("category_name") is_invalid @enderror" id="category_name" required>
+                                            @foreach ($category_name as $item)
+                                                <option value="{{ $item->name }}">{{ $item->name }}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('category_name')
+                                            <small class="error d-block">
+                                                {{ $message }}
+                                            </small>
+                                        @enderror
+                                    </div><!--./input_box--><br/>
 
-                                        @error('category_img')
+                                    <div class="input_box">
+                                        <label for="brand_img">Brand image</label>
+                                        <input type="file" name="brand_img" class="@error("brand_img") is_invalid @enderror"  id="brand_img">
+
+                                        @error('brand_img')
                                             <small class="error d-block">
                                                 {{ $message }}
                                             </small>
@@ -107,27 +111,31 @@
                             <thead>
                                 <tr>
                                     <th>Sr</th>
-                                    <th>Name</th>
-                                    <th>Image</th>
-                                    <th>Delete</th>
+                                    <th>Brand name</th>
+                                    <th>Category Name</th>
+                                    <th>Brand Image</th>
+                                    <th>Delete Button</th>
                                 </tr>
                             </thead>
                             <tbody>
 
-                                @foreach ($data as $item)
+                                @foreach ($brand_data as $item)
                                     <tr>
                                         <td>
                                             {{ $loop->iteration }}
                                         </td>
                                         <td>
-                                            {{ $item->name }}
+                                            {{ $item->brand_name }}
                                         </td>
                                         <td>
-                                            <img src="{{ asset("/storage/".$item->category_img) }}" alt="" style="width: 70px; max-width: 100px;">
+                                            {{ $item->category_name }}
+                                        </td>
+                                        <td>
+                                            <img src="{{ asset("/storage/".$item->brand_img) }}" alt="" style="width: 70px; max-width: 100px;">
                                         </td>
                                         <td>
                                             <button>
-                                                <a href="{{ route('admin.category.destroy', base64_encode($item->id)) }}" class="delete_btn">
+                                                <a href="{{ route("admin.brand.destroy", base64_encode($item->id)) }}" class="delete_btn">
                                                     <svg style="color: #ee0606;" class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z"/>
                                                     </svg>
