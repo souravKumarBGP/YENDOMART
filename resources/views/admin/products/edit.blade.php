@@ -15,10 +15,12 @@
                 <div class="row">
                     <dic class="col-12 col-md-8 col-lg-8 col-xl-5 mx-auto">
                         <div class="form_box">
-                            <form action="{{ route("admin.product.store") }}" method="POST" enctype="multipart/form-data" class="new_product_form">
+                            <form action="{{ route("admin.product.store") }}" method="POST" enctype="multipart/form-data" class="product_update_form">
 
                                 @csrf
-                                @method("POST")
+                                @method("PUT")
+
+                                <input type="hidden" name="edit_id" value="{{ base64_encode($product_data->id) }}" />
                                 
                                 <div class="form_heading pb-3 d-flex align-items-center justify-content-between">
                                     <p>Create new product</p>
@@ -34,7 +36,7 @@
                                         <div class="col-12">
                                             <div class="input_box pb-3">
                                                 <label for="product_name">PRODUCT NAME</label>
-                                                <input type="text" autofocus value="Apple hightuch screen large product" name="name" id="product_name" />
+                                                <input type="text" autofocus value="{{ $product_data->name }}" name="name" id="product_name" />
                                                 
                                                 <small class="error">
                                                     <big>Please enter your product name </big>   
@@ -50,7 +52,7 @@
                                         <div class="col-12 col-lg-6">
                                             <div class="input_box pb-3">
                                                 <label for="selling_price">SELLING PRICE</label>
-                                                <input type="number" value="40000" name="selling_price" id="selling_price" />
+                                                <input type="number" value="{{ $product_data->selling_price }}" name="selling_price" id="selling_price" />
                                                 
                                                 <small class="error">
                                                     <big>Please enter your product name </big>   
@@ -61,7 +63,7 @@
                                         <div class="col-12 col-lg-6">
                                             <div class="input_box pb-3">
                                                 <label for="discount_price">DISCOUNT PRICE</label>
-                                                <input type="number" value="300" name="discount_price" id="discount_price" />
+                                                <input type="number" value="{{ $product_data->discount_price }}" name="discount_price" id="discount_price" />
                                                 
                                                 <small class="error">
                                                     <big>Please enter your product name </big>   
@@ -78,7 +80,7 @@
                                         <div class="col-12 col-lg-6">
                                             <div class="input_box pb-3">
                                                 <label for="live_link">Live Prev Link</label>
-                                                <input type="text" value="This is live link" name="live_link" id="live_link" />
+                                                <input type="text" value="{{ $product_data->live_link }}" name="live_link" id="live_link" />
                                                 
                                                 <small class="error">
                                                     <big>Please enter your product name </big>   
@@ -88,8 +90,8 @@
                                         
                                         <div class="col-12 col-lg-6">
                                             <div class="input_box pb-3">
-                                                <label for="total_quentity">Total Quantity</label>
-                                                <input type="number" value="30" name="total_quentity" id="total_quentity" />
+                                                <label for="total_quentity">Total Quanity</label>
+                                                <input type="number" value="{{ $product_data->total_quentity }}" name="total_quentity" id="total_quentity" />
                                                 
                                                 <small class="error">
                                                     <big>Please enter your product name </big>   
@@ -109,7 +111,7 @@
                                                 <select name="unit" id="unit">
                                                     
                                                     @foreach ($unit_data as $item)
-                                                        <option value="{{ $item->name }}" {{ ($item->name == "Pcs") ? "selected" : ""}} >{{ $item->name }}</option>                                                        
+                                                        <option value="{{ $item->name }}" {{ (strtolower($item->name) == strtolower($product_data->unit)) ? "selected" : ""}} >{{ $item->name }}</option>                                                        
                                                     @endforeach
                                                     
                                                 </select>
@@ -125,7 +127,7 @@
                                                 <label for="category_name">Category</label>
                                                 <select name="category_name" id="category_name">
                                                     @foreach ($category_data as $item)
-                                                        <option value="{{ $item->name }}">{{ $item->name }}</option>
+                                                        <option value="{{ $item->name }}" {{ (strtolower($item->name) == strtolower($product_data->category_name)) ? "selected" : ""}} > {{ $item->name }} </option>
                                                     @endforeach
                                                 </select>
                                                 
@@ -145,7 +147,7 @@
                                                 <label for="brand_name">Brand</label>
                                                 <select name="brand_name" id="brand_name">
                                                     @foreach ($brand_data as $item)
-                                                        <option value="{{ $item->name }}">{{ $item->name }}</option>
+                                                        <option value="{{ $item->name }}" {{ strtolower($item->name) == strtolower($product_data->brand_name) ? "selected" : ""}} > {{ $item->name }} </option>
                                                     @endforeach
                                                 </select>
                                                 
@@ -160,9 +162,9 @@
                                                 <label for="product_status">PRODUCT STATUS</label>
                                                 <select name="product_status" id="product_status">
                                                     <option value="">Select status</option>
-                                                    <option value="in stock" selected>In Stock</option>
-                                                    <option value="out of stock">Out of Stock</option>
-                                                    <option value="up comming"> Up comming</option>
+                                                    <option value="in stock"  {{ ("in stock" == $product_data->product_status) ? "selected" : ""}}> In Stock </option>
+                                                    <option value="out of stock"  {{ ("out of stock" == $product_data->product_status) ? "selected" : ""}}>Out of Stock</option>
+                                                    <option value="up comming"  {{ ("up comming" == $product_data->product_status) ? "selected" : ""}}> Up comming</option>
                                                 </select>
                                                 
                                                 <small class="error">
@@ -221,7 +223,7 @@
                                         <div class="col-12">
                                             <div class="input_box pb-3">
                                                 <label for="product_discreption">PRODUCT DISCREPTION</label>
-                                                <textarea name="product_discreption" id="product_discreption" rows="20" style="width: 100%; text-align: left;">{"model": 2017, "ram": "3GB"}</textarea>
+                                                <textarea name="product_discreption" id="product_discreption" rows="20" style="width: 100%; text-align: left;">{{ $product_data->product_discreption }}</textarea>
                                                 
                                                 <small class="error">
                                                     <big>Please enter your product name </big>   
@@ -310,7 +312,7 @@
             
             
             // Logic to make a ajax request for stored new product 
-            $(".new_product_form").on("submit", function(event){
+            $(".product_update_form").on("submit", function(event){
                 
                 event.preventDefault();
 
@@ -399,20 +401,20 @@
                     live_link.nextElementSibling.style.display = "none";   
                 }
 
-                // Validation for total_quentity
+                // Validation for total quantity
                 if(total_quentity.value.trim() == ""){
 
                     total_quentity.focus();
                     total_quentity.style.borderColor="var(--color-danger)";
                     total_quentity.nextElementSibling.style.display = "block";
-                    total_quentity.nextElementSibling.innerText = "Please total quantity."
+                    total_quentity.nextElementSibling.innerText = "Please total quantityss."
                     return false;
                 }else if(total_quentity.value.trim() > 500000){
 
                     total_quentity.focus();
                     total_quentity.style.borderColor="var(--color-danger)";
                     total_quentity.nextElementSibling.style.display = "block";
-                    total_quentity.nextElementSibling.innerText = "Total quantity must be less then Rs 500000."
+                    total_quentity.nextElementSibling.innerText = "total_quentity must be less then Rs 500000."
                     return false;
                 }else{
 
@@ -586,7 +588,7 @@
                 // Logic to make a request
                 let form_data = new FormData(this);
                 $.ajax({
-                    url: "{{ route("admin.product.store") }}",
+                    url: "{{ route('admin.product.update') }}",
                     type: "POST",
                     processData: false,
                     contentType: false,
@@ -599,19 +601,19 @@
                         // return;
                         
                         $(".spinner").css("display", "none");
-                        $(".new_product_form")[0].reset(); 
+                        $(".product_update_form")[0].reset(); 
 
                         if(resp.status == "success"){
                             Swal.fire({
                                 title: "Product created.",
-                                text: "Product created successfully.",
+                                text: "Product Updated Successfully.",
                                 icon: "success"
                             });
                         }else{
                             Swal.fire({
                                 icon: "error",
                                 title: "Error !",
-                                text: "Unable to create product. Please try again latter!",
+                                text: "Unable to update product. Please try again latter!",
                             });
                         }
                     },
@@ -619,7 +621,7 @@
                     error: function(resp){
 
                         $(".spinner").css("display", "none");
-                        $(".new_product_form")[0].reset(); 
+                        $(".product_update_form")[0].reset(); 
                         Swal.fire({
                             icon: "error",
                             title: "Error !",

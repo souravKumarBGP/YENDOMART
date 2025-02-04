@@ -123,6 +123,7 @@ input:focus::placeholder{
     }
     td{
         border-right: .2px solid var(--shadow-color);
+        border-bottom: .2px solid var(--shadow-color);
         padding: .625rem 0;
         padding-left: 7px;
     }

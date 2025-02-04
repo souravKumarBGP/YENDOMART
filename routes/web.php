@@ -72,6 +72,8 @@ Route::prefix("/admin")->controller(AdminController::class)->group(function(){
         Route::get("/index", "products_index")->name("admin.products.index");
         Route::get("/create", "product_create")->name("admin.product.create");
         Route::post("/store", "product_store")->name("admin.product.store");
-        
+        Route::get("/edit/{id}", "product_edit")->name("admin.product.edit");
+        Route::put("/update", "product_update")->name("admin.product.update");
+        Route::delete("/delete/{id}", "product_destroy")->name("admin.product.delete");
     });
 });

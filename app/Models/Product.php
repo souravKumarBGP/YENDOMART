@@ -10,7 +10,11 @@ class Product extends Model
     public $timestamps = false;
     protected $guarded = ["id", "remember_token"];
     protected $fillable = ["name", "slug", "selling_price", "discount_price", "total_quentity", "available_quentity", "live_link", "unit", "category_name", "brand_name", "product_status", "sku", "thumbnail_img", "gallary_img", "product_discreption"];
-    
+    protected $casts = [
+        "gallary_img"=> "json",
+        "product_discreption" => "json"
+    ];
+
     // Logic to create some mutators and getters function
     public function setNameAttribute($value){
         $this->attributes["name"] = strip_tags(strtolower(trim($value)));
@@ -55,8 +59,8 @@ class Product extends Model
         $this->attributes["product_discreption"] = strip_tags(strtolower(trim($value)));
     }
 
-    protected $casts = [
-        "gallary_img"=> "json",
-        "product_discreption" => "json"
-    ];
+    // Logic to create some mutators function
+    public function getNameAttribute($value){
+        return ucwords($value);
+    }
 }
