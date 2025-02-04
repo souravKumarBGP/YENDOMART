@@ -133,10 +133,22 @@ input:focus::placeholder{
     margin-top: .1875rem;
     font-size: 13px !important;
     font-weight: 400;
+    display: none;
 }
 
 .is_invalid{
     border-color: var(--color-danger) !important;
+}
+
+.spinner{
+    width: 20px;
+    aspect-ratio: 1/1;
+    border: 2px solid var(--forth-color);
+    border-radius: 100%;
+    border-left: none;
+    margin-left: .625rem;
+    animation: rotate360 ease-in-out 0.5s infinite;
+    display: none;
 }
 
 /******************************************************************************************************
@@ -474,5 +486,14 @@ Start media query
     100%{
         scale: 1;
         color: goldenrod;
+    }
+}
+
+@keyframes rotate360{
+    0%{
+        transform: rotate(0deg);
+    }
+    100%{
+        transform: rotate(360deg);
     }
 }

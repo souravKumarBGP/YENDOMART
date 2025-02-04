@@ -66,10 +66,10 @@
                                         <label for="category_name">Category name</label>
                                         <select name="name" class="@error("name") is_invalid @enderror" id="unite" required>
                                             <option value="">Select category</option>
-                                            <option value="laptopes" selected>Laptopes</option>
+                                            <option value="laptops" selected>Laptopes</option>
                                             <option value="phones">Phones</option>
                                             <option value="tablets">Tablets</option>
-                                            <option value="computes">Computers</option>
+                                            <option value="computers">Computers</option>
                                             <option value="cpu">CPU</option>
                                             <option value="keybord_mouse">Keybord And Mouse</option>
                                             <option value="laptopes_chargers">Laptopes Chargers</option>

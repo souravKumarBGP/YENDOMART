@@ -3,7 +3,7 @@
 
 {{-- Logic to push dynamicly style link in head section --}}
 @push('style')
-    <link rel="stylesheet" href="{{ asset("assets/css/admin/unites.css") }}" />
+    <link rel="stylesheet" href="{{ asset("assets/css/admin/units.css") }}" />
 @endpush
 
 <!--====================================== Start main section =====================================-->
@@ -12,7 +12,7 @@
     <section class="container">
         <main>
             <!--================== Start unites_section ===============-->
-            <section class="unites_section">
+            <section class="units_section">
                 
                 @session('success_msg')
                     <x-success_msg>
@@ -46,7 +46,7 @@
                             
                             <div class="create_form_box d-flex align-items-center justify-content-center">
 
-                                <form action="{{ route("admin.unites.store") }}" method="POST" class="create_unites_form"> 
+                                <form action="{{ route("admin.units.store") }}" method="POST" class="create_unites_form"> 
 
                                     @method("POST")
                                     @csrf
@@ -64,7 +64,7 @@
                                     <div class="input_box">
                                         <select name="name" class="@error("name") is_invalid @enderror" id="unite" required>
                                             <option value="">Select unit</option>
-                                            <option value="pices">Pices</option>
+                                            <option value="pcs">Pices</option>
                                             <option value="box">Box</option>
                                             <option value="kg">Kg</option>
                                             <option value="gram">Gram</option>
@@ -106,7 +106,7 @@
                                         </td>
                                         <td>
                                             <button>
-                                                <a href="{{ route("admin.unites.destroy", base64_encode($item->id)) }}" class="delete_btn">
+                                                <a href="{{ route("admin.units.destroy", base64_encode($item->id)) }}" class="delete_btn">
                                                     <svg style="color: #ee0606;" class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z"/>
                                                     </svg>

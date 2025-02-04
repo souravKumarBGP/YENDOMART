@@ -1,5 +1,5 @@
 /******************************* Start unites section styling *************************************** */
-.unites_section{
+.units_section{
     background: var(--forth-color);
     min-height: 80vh;
     padding: 40px;
@@ -97,7 +97,7 @@
 @media all and (max-width: 768px){
     
     main{
-        .unites_section{
+        .units_section{
             padding: 15px;
 
             .heading button{

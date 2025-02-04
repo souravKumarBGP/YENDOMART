@@ -8,7 +8,7 @@ class Categories extends Model
 {
     // Attribute casting
     public $timestamps = false;
-    protected $fillable = ["name", "category_img"];
+    protected $fillable = ["name","slug", "category_img"];
     protected $guarded = ["id", "_token"];
 
     // Logic to create some mutators function

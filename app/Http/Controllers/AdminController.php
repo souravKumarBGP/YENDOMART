@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Unit;
 use App\Models\Brand;
-use App\Models\Unite;
+use App\Models\Product;
 use App\Models\Categories;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -17,18 +18,18 @@ class AdminController extends Controller
     }
 
     // Logic to create a methods to show unites page
-    public function unites_index(){
-        $data = Unite::get();
+    public function units_index(){
+        $data = Unit::get();
         session()->regenerate();
-        return view("admin.unites.unites", compact("data"));
+        return view("admin.units.units", compact("data"));
     }
 
     // Logic to create a methods to store new unite
-    public function unites_store(Request $request){
+    public function units_store(Request $request){
         
         // Validate input data with server-side validation
         $credentials = $request->validate([
-            "name" => "required|max:20|unique:unites,name",
+            "name" => "required|max:20|unique:units,name",
         ], [
             "name.required" => "The unit name is required.",
             "name.max" => "The unit name must not exceed 20 characters.",
@@ -36,7 +37,7 @@ class AdminController extends Controller
         ]);
 
         // Store unit into database
-        $result = Unite::create($credentials);
+        $result = Unit::create($credentials);
 
         // Redirect back with success or error message
         if ($result) {
@@ -48,11 +49,11 @@ class AdminController extends Controller
     }
 
     // Logic to create a methods to destroy unite
-    public function unites_destroy(string $id){
+    public function units_destroy(string $id){
         $id = base64_decode(strip_tags($id));
 
         // Logic to perform delete operation
-        $result = Unite::findorFail($id)->delete();
+        $result = Unit::findorFail($id)->delete();
         if($result){
             session()->regenerate();
             return redirect()->back()->with("success_msg", "Unites deleted successfully.");
@@ -128,22 +129,23 @@ class AdminController extends Controller
         // Get category name
         $category_name = Categories::get("name");
         $brand_data = Brand::get();
+        // return $brand_data;
         session()->regenerate();
         return view("admin.brands.brands", compact("category_name", "brand_data"));
     }
 
     // Logic to create a methods to store new brand
     public function brand_store(Request $request){
-        
+
         // Logic to make sever side validation
         $request->validate([
-            "brand_name"=> "required|max:255|unique:brands,brand_name",
+            "name"=> "required|max:255|unique:brands,name",
             "category_name"=> "required|exists:categories,name",
-            "brand_img"=> "required|mimes:png,jpg, jpeg, svg, webp|max:1024"
+            "brand_img"=> "required|mimes:png,jpg,jpeg,svg,webp|max:1024"
         ],[
-            "brand_name.required"=> "Brand name is required. Please enter brand name.",
-            "brand_name.max"=> "Brand name must be less then 255 characters.",
-            "brand_name.unique"=> "This brand name is already exists. Please enter different name.",
+            "name.required"=> "Brand name is required. Please enter brand name.",
+            "name.max"=> "Brand name must be less then 255 characters.",
+            "name.unique"=> "This brand name is already exists. Please enter different name.",
             "catetory_name.required"=> "Category name is required. Please enter category name.",
             "catetory_name.max"=> "Category name must be less then 255 characters.",
             "catetory_name.exists"=> "invalid category name. Please select currect category name.",
@@ -151,12 +153,13 @@ class AdminController extends Controller
             "brand_img.max"=> "File size must be less then 1MB."
         ]);
 
+
         $path = $request->file("brand_img")->store("/image/brands_img", "public");
-        $slug = Str::slug($request->brand_name);
+        $slug = Str::slug($request->name);
 
         // Logic to uplode data into database
         $result = Brand::create([
-            "brand_name"=> $request->brand_name,
+            "name"=> $request->name,
             "category_name"=> $request->category_name,
             "slug" => $slug,
             "brand_img"=> $path
@@ -197,6 +200,74 @@ class AdminController extends Controller
 
     // Logic to create a methods to show create new product page
     public function product_create(){
-        return view("admin.products.create");
+
+        // Get the following data
+        $unit_data = Unit::get("name");
+        $category_data = Categories::get("name");
+        $brand_data = Brand::get("name");
+        
+        return view("admin.products.create", compact("unit_data", "category_data", "brand_data"));
+    }
+
+    // Logic to create a methods to handle ajax request for stored new products
+    public function product_store(Request $request){
+        
+        // Logic to apply server side validation
+        $request->validate([
+            "name"   => "required|max:255",
+            "selling_price"  => "required|numeric|min:1|max:500000",
+            "discount_price" => "required|numeric|min:0|max:500000",
+            "live_link"      => "required|string|max:500",
+            "quantity"       => "required|integer|min:1|max:500000",
+            "unit"           => "required|string|max:15|exists:units,name",
+            "category_name"  => "required|string|max:255|exists:categories,name",
+            "brand_name"     => "required|string|max:255|exists:brands,name",
+            "product_status" => "required|string|max:255",
+            "thumbnail_img"  => "required|mimes:jpg,png,jpeg,svg,webp|max:2048",
+            "gallary_img"    => "required|array|size:5",
+            "gallary_img.*"  => "mimes:jpg,png,jpeg,svg,webp|max:2048",
+            "product_discreption"=> "required",
+        ]);
+        
+        
+        // Logic store thumbnail image 
+        $thumb_path = $request->file("thumbnail_img")->store("/image/products_img/thumbnail_img", "public");
+        
+        // Logic store gallary image 
+        $gallary_img_arr = [];
+        $iteration = 1;
+        foreach($request->file("gallary_img") as $key=> $item){
+            $gallary_img_arr["img".$iteration] = $item->store("/image/products_img/gallary_img", "public");
+            $iteration = $iteration+1;
+        }
+
+        // Generate the slug
+        $slug = Str::slug($request->name);
+        // Generate sku
+        $sku = substr($slug, 0, 5)."_".rand(111, 999);
+
+        // Logic to store data into database
+        $result = Product::create([
+            "name"            => $request->name,
+            "slug"            => $slug,
+            "selling_price"   => $request->selling_price,
+            "discount_price"  => $request->discount_price,
+            "live_link"       => $request->live_link,
+            "total_quentity"  => $request->quantity,
+            "available_quentity" => $request->quantity,
+            "unit"            => $request->unit,
+            "category_name"   => $request->category_name,
+            "brand_name"      => $request->brand_name,
+            "product_status"  => $request->product_status,
+            "thumbnail_img"   => $thumb_path,
+            "gallary_img"     => json_encode($gallary_img_arr),
+            "sku"             => $sku, 
+            "product_discreption"=> json_encode($request->product_discreption)
+        ]);
+
+        if($result){
+            return json_encode(["status"=> "success"]);
+        }
+                
     }
 }

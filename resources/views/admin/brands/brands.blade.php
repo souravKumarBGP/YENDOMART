@@ -64,7 +64,7 @@
                                     <div class="input_box">
 
                                         <label for="brand_name">Brand name</label>
-                                        <input type="text" value="Apple" name="brand_name" id="brand_name" class="@error("brand_name") is_invalid @enderror" placeholder="Enter your brand name" />
+                                        <input type="text" value="Apple" name="name" id="brand_name" class="@error("brand_name") is_invalid @enderror" placeholder="Enter your brand name" />
                                         @error('brand_name')
                                             <small class="error d-block">
                                                 {{ $message }}
@@ -125,7 +125,7 @@
                                             {{ $loop->iteration }}
                                         </td>
                                         <td>
-                                            {{ $item->brand_name }}
+                                            {{ $item->name }}
                                         </td>
                                         <td>
                                             {{ $item->category_name }}

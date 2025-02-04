@@ -49,11 +49,11 @@ Route::prefix("/admin")->controller(AdminController::class)->group(function(){
     Route::get("/", "dashbord");
     Route::get("/dashbord", "dashbord")->name("admin.dashbord");
 
-    Route::prefix("/unites")->group(function(){
-        Route::get("/", "unites_index");
-        Route::get("/index", "unites_index")->name("admin.unites.index");
-        Route::post("/store", "unites_store")->name("admin.unites.store");
-        Route::get("/destroy/{id}", "unites_destroy")->name("admin.unites.destroy");
+    Route::prefix("/units")->group(function(){
+        Route::get("/", "units_index");
+        Route::get("/index", "units_index")->name("admin.units.index");
+        Route::post("/store", "units_store")->name("admin.units.store");
+        Route::get("/destroy/{id}", "units_destroy")->name("admin.units.destroy");
     });
 
     Route::prefix("/categories")->group(function(){
@@ -71,5 +71,7 @@ Route::prefix("/admin")->controller(AdminController::class)->group(function(){
     Route::prefix("/products")->group(function(){
         Route::get("/index", "products_index")->name("admin.products.index");
         Route::get("/create", "product_create")->name("admin.product.create");
+        Route::post("/store", "product_store")->name("admin.product.store");
+        
     });
 });

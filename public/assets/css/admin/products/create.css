@@ -48,7 +48,7 @@
                 color: var(--secondary-color);
             }
 
-            .thumbnail_img{
+            .thumbnail_img, .gallary_img{
                 position: absolute;
                 top: 0;
                 left: 0;
@@ -70,7 +70,7 @@
                 color: hsl(0, 0%, 81%);
             }
             
-            #thumbnail_img{
+            #thumbnail_img, #gallary_img{
                 border: none;
                 height: 200px;
                 position: relative;
