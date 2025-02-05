@@ -34,7 +34,7 @@
                                         <div class="col-12">
                                             <div class="input_box pb-3">
                                                 <label for="product_name">PRODUCT NAME</label>
-                                                <input type="text" autofocus value="Apple hightuch screen large product" name="name" id="product_name" />
+                                                <input type="text" autofocus name="name" id="product_name" />
                                                 
                                                 <small class="error">
                                                     <big>Please enter your product name </big>   
@@ -50,7 +50,7 @@
                                         <div class="col-12 col-lg-6">
                                             <div class="input_box pb-3">
                                                 <label for="selling_price">SELLING PRICE</label>
-                                                <input type="number" value="40000" name="selling_price" id="selling_price" />
+                                                <input type="number" name="selling_price" id="selling_price" />
                                                 
                                                 <small class="error">
                                                     <big>Please enter your product name </big>   
@@ -61,7 +61,7 @@
                                         <div class="col-12 col-lg-6">
                                             <div class="input_box pb-3">
                                                 <label for="discount_price">DISCOUNT PRICE</label>
-                                                <input type="number" value="300" name="discount_price" id="discount_price" />
+                                                <input type="number" name="discount_price" id="discount_price" />
                                                 
                                                 <small class="error">
                                                     <big>Please enter your product name </big>   
@@ -78,7 +78,7 @@
                                         <div class="col-12 col-lg-6">
                                             <div class="input_box pb-3">
                                                 <label for="live_link">Live Prev Link</label>
-                                                <input type="text" value="This is live link" name="live_link" id="live_link" />
+                                                <input type="text" value="https://youtube.com/shorts/rtVbdyMbjRI?si=K7rZefMH4QvIh9Bg" name="live_link" id="live_link" />
                                                 
                                                 <small class="error">
                                                     <big>Please enter your product name </big>   
@@ -221,7 +221,7 @@
                                         <div class="col-12">
                                             <div class="input_box pb-3">
                                                 <label for="product_discreption">PRODUCT DISCREPTION</label>
-                                                <textarea name="product_discreption" id="product_discreption" rows="20" style="width: 100%; text-align: left;">{"model": 2017, "ram": "3GB"}</textarea>
+                                                <textarea name="product_discreption" id="product_discreption" rows="20" style="width: 100%; text-align: left;">{"model": "apple macbook pro a1466", "year": 2017, "processor": "intel i5 processor", "ram": "8gb ram", "storage": "128gb ssd , 256gb ssd", "ssd supported": "256gb not upgradable", "os supported": "macos monterey", "display": "13.3' hd antiglare", "graphics": "intel hd graphics", "optical drive": "false", "usb ports": 2, "vga ports": "no", "camera": "true", "mini display port": "thunderbolt", "number keys": "false", "audio": "speakers: high quality speakers and headphone jack: stereo headphone jack", "adapter": "true", "battery backup": "backup time 3hrs to 5hrs approx", "body": "metal", "note": "best for study purpus"  }</textarea>
                                                 
                                                 <small class="error">
                                                     <big>Please enter your product name </big>   
@@ -277,7 +277,7 @@
 
                     for(let item of gallary_img_file){
                         if(["image/jpg", "image/jpeg", "image/png", "image/svg", "image/webp", "image/svg+xml"].includes(item.type)){
-                            if(item.size > 1000000){
+                            if(item.size > 10000000){
                                 
                                 this.style.borderColor="red";
                                 $(".gallary_img").css({"border-color":"red"})
@@ -525,7 +525,7 @@
                     thumbnail_img.parentElement.parentElement.lastElementChild.style.display = "block";
                     thumbnail_img.parentElement.parentElement.lastElementChild.innerText = "Invalid image formate. Please upload a JPG, JPEG, PNG, SVG, or WEBP formate.";
                     return false;
-                }else if(thumb_img_file.size > 1000000){
+                }else if(thumb_img_file.size > 10000000){
 
                     $(".thumbnail_img")[0].borderColor = "var(--color-danger)";
                     thumbnail_img.parentElement.parentElement.lastElementChild.style.display = "block";
@@ -543,7 +543,7 @@
 
                     for(let item of gallary_img_file){
                         if(["image/jpg", "image/jpeg", "image/png", "image/svg", "image/webp", "image/svg+xml"].includes(item.type)){
-                            if(item.size > 1000000){
+                            if(item.size > 10000000){
                                 
                                 $(".gallary_img")[0].style.borderColor="var(--color-danger)";
                                 gallary_img.parentElement.parentElement.lastElementChild.style.display = "block";

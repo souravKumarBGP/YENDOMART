@@ -173,7 +173,6 @@
     
                                                         <div class="details my-5">
                                                             <p>Products Details</p>
-                                                                
                                                             <ul class="mt-3">
                                                                 <li class="d-flex align-items-center">
                                                                     <b>
@@ -258,9 +257,9 @@
                                                                 @foreach (json_decode($product_data[$loop->index]->product_discreption) as $key=> $val)
                                                                     <li class="d-flex align-items-center">
                                                                         <b>
-                                                                            {{ ucwords($key) }}
+                                                                            {{ strtoupper(strval($key)) }}
                                                                         </b>
-                                                                        :- &nbsp; {{ strtoupper($val) }}
+                                                                        :- &nbsp; {{ ucwords($val) }}
                                                                     </li>
                                                                 @endforeach
                                                                 

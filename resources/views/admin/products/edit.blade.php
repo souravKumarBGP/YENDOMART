@@ -179,6 +179,22 @@
                                 <div class="input_lavel">
                                     <div class="row">
                                         <div class="col-12">
+                                            <div class="input_box pb-3">
+                                                <label for="top_selling_position">Top Selling Position</label>
+                                                <input type="number" value="{{ $product_data->top_selling_position }}" name="top_selling_position" id="top_selling_position" />
+                                                
+                                                <small class="error">
+                                                    <big>Please enter top selling position </big>   
+                                                </small>
+                                            </div><!--./input_box-->
+                                        </div>
+                                    </div>
+                                </div><!--./input_lavel-->
+
+                                
+                                <div class="input_lavel">
+                                    <div class="row">
+                                        <div class="col-12">
                                             <div class="input_box pb-3" style="position: relative;">
                                                 <label for="thumbnail_img" class="thumbnail_img d-flex flex-column align-items-center justify-content-center">
                                                     <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
@@ -234,7 +250,7 @@
                                 </div><!--./input_lavel-->
 
                                 <button class="btn submit_btn mt-4 d-flex align-items-center justify-content-center" type="submit">
-                                    Create Now
+                                    Update Now
                                     <div class="spinner"></div>
                                 </button>
                             </form>
@@ -279,7 +295,7 @@
 
                     for(let item of gallary_img_file){
                         if(["image/jpg", "image/jpeg", "image/png", "image/svg", "image/webp", "image/svg+xml"].includes(item.type)){
-                            if(item.size > 1000000){
+                            if(item.size > 10000000){
                                 
                                 this.style.borderColor="red";
                                 $(".gallary_img").css({"border-color":"red"})
@@ -336,6 +352,28 @@
 
                     product_name.style.borderColor="var(--shadow-color)";
                     product_name.nextElementSibling.style.display = "none";   
+                }
+
+
+                // validation for top_selling_position
+                if(top_selling_position.value.trim() == ""){
+
+                    top_selling_position.focus();
+                    top_selling_position.style.borderColor="var(--color-danger)";
+                    top_selling_position.nextElementSibling.style.display = "block";
+                    top_selling_position.nextElementSibling.innerText = "Please enter top selling position."
+                    return false;
+                }else if(top_selling_position.value > 500){
+                    
+                    top_selling_position.focus();
+                    top_selling_position.style.borderColor="var(--color-danger)";
+                    top_selling_position.nextElementSibling.style.display = "block";
+                    top_selling_position.nextElementSibling.innerText = "Top selling position must be less then 500."
+                    return false;
+                }else{
+
+                    top_selling_position.style.borderColor="var(--shadow-color)";
+                    top_selling_position.nextElementSibling.style.display = "none";   
                 }
 
                 // Validation for selling price
@@ -527,7 +565,7 @@
                     thumbnail_img.parentElement.parentElement.lastElementChild.style.display = "block";
                     thumbnail_img.parentElement.parentElement.lastElementChild.innerText = "Invalid image formate. Please upload a JPG, JPEG, PNG, SVG, or WEBP formate.";
                     return false;
-                }else if(thumb_img_file.size > 1000000){
+                }else if(thumb_img_file.size > 10000000){
 
                     $(".thumbnail_img")[0].borderColor = "var(--color-danger)";
                     thumbnail_img.parentElement.parentElement.lastElementChild.style.display = "block";
@@ -545,7 +583,7 @@
 
                     for(let item of gallary_img_file){
                         if(["image/jpg", "image/jpeg", "image/png", "image/svg", "image/webp", "image/svg+xml"].includes(item.type)){
-                            if(item.size > 1000000){
+                            if(item.size > 10000000){
                                 
                                 $(".gallary_img")[0].style.borderColor="var(--color-danger)";
                                 gallary_img.parentElement.parentElement.lastElementChild.style.display = "block";

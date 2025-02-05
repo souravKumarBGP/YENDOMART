@@ -197,9 +197,15 @@ class AdminController extends Controller
     // Logic to create a methods to show product page
     public function products_index(){
 
-        // Fetch the product details
-        $product_data = Product::paginate(5);
-        return view("admin.products.index", compact("product_data"));
+        try{
+        
+            // Fetch the product details
+            $product_data = Product::paginate(5);
+            return view("admin.products.index", compact("product_data"));
+        } catch(\Exception $e){
+            Log::error("Unable to fetch product list.". $e->getMessage());
+            return redirect()->back()->with("error_msg", "Unable to fetch product list. Please try again latter.");
+        }
     }
 
     // Logic to create a methods to show create new product page
@@ -229,9 +235,9 @@ class AdminController extends Controller
                 "category_name"  => "required|string|max:255|exists:categories,name",
                 "brand_name"     => "required|string|max:255|exists:brands,name",
                 "product_status" => "required|string|max:255",
-                "thumbnail_img"  => "required|mimes:jpg,png,jpeg,svg,webp|max:2048",
+                "thumbnail_img"  => "required|mimes:jpg,png,jpeg,svg,webp|max:10240",
                 "gallary_img"    => "required|array|size:5",
-                "gallary_img.*"  => "mimes:jpg,png,jpeg,svg,webp|max:2048",
+                "gallary_img.*"  => "mimes:jpg,png,jpeg,svg,webp|max:10240",
                 "product_discreption"=> "required",
             ]);
             
@@ -294,7 +300,7 @@ class AdminController extends Controller
             $unit_data = Unit::get("name");
             $category_data = Categories::get("name");
             $brand_data = Brand::get("name");
-            $product_data = Product::select(["id", "name", "slug", "selling_price", "discount_price", "total_quentity", "available_quentity", "live_link", "unit", "category_name", "brand_name", "product_status", "sku", "product_discreption"])->findorfail($id);
+            $product_data = Product::select(["id", "name", "slug", "selling_price", "discount_price", "total_quentity", "available_quentity", "live_link", "unit", "category_name", "brand_name", "product_status", "sku", "top_selling_position", "product_discreption"])->findorfail($id);
             // return $product_data;
             
             return view("admin.products.edit", compact("product_data", "category_data", "brand_data", "unit_data"));
@@ -318,14 +324,15 @@ class AdminController extends Controller
                 "selling_price"  => "required|numeric|min:1|max:500000",
                 "discount_price" => "required|numeric|min:0|max:500000",
                 "live_link"      => "required|string|max:500",
-                "total_quentity"       => "required|integer|min:1|max:500000",
+                "total_quentity" => "required|integer|min:1|max:500000",
                 "unit"           => "required|string|max:15|exists:units,name",
                 "category_name"  => "required|string|max:255|exists:categories,name",
                 "brand_name"     => "required|string|max:255|exists:brands,name",
                 "product_status" => "required|string|max:255",
-                "thumbnail_img"  => "required|mimes:jpg,png,jpeg,svg,webp|max:2048",
+                "top_selling_position"=> "required|numeric|max:500",
+                "thumbnail_img"  => "required|mimes:jpg,png,jpeg,svg,webp|max:10240",
                 "gallary_img"    => "required|array|size:5",
-                "gallary_img.*"  => "mimes:jpg,png,jpeg,svg,webp|max:2048",
+                "gallary_img.*"  => "mimes:jpg,png,jpeg,svg,webp|max:10240",
                 "product_discreption"=> "required",
             ]);
 
@@ -380,6 +387,7 @@ class AdminController extends Controller
                 "thumbnail_img"   => $thumb_path,
                 "gallary_img"     => json_encode($gallary_img_arr),
                 "sku"             => $sku, 
+                "top_selling_position"=> $request->top_selling_position,
                 "product_discreption"=> json_encode($request->product_discreption)
             ]);
 

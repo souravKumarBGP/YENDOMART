@@ -63,9 +63,9 @@
 
                                     <div class="input_box">
 
-                                        <label for="brand_name">Brand name</label>
-                                        <input type="text" value="Apple" name="name" id="brand_name" class="@error("brand_name") is_invalid @enderror" placeholder="Enter your brand name" />
-                                        @error('brand_name')
+                                        <label for="name">Brand name</label>
+                                        <input type="text" value="Apple" name="name" id="name" class="@error("name") is_invalid @enderror" placeholder="Enter your brand name" />
+                                        @error('name')
                                             <small class="error d-block">
                                                 {{ $message }}
                                             </small>

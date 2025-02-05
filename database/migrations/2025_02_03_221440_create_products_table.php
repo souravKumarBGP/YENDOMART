@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string("category_name", 255);
             $table->string("brand_name", 255);
             $table->enum("product_status",["in stock", "out of stock", "up comming"]);
+            $table->smallInteger("top_selling_position")->default(0);
             $table->string("sku", 10);
             $table->string("thumbnail_img");
             $table->json("gallary_img");
