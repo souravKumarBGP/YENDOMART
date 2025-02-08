@@ -19,13 +19,15 @@
                                 <div class="row">
                                     <div class="col-3">
                                         <div class="img_box">
-                                            <img src="{{ asset("storage/".$item->thumbnail_img) }}" alt="">
+                                            <a href="{{ route('pages.product_details_page', $item->slug) }}">
+                                                <img src="{{ asset("storage/".$item->thumbnail_img) }}" alt="{{ $item->name }}">
+                                            </a>
                                         </div>
                                     </div>
                                     <div class="col-9">
                                         <div class="text_box d-flex flex-column align-content-between justify-content-between">
                                             
-                                            <a href="{{ $item->slug }}" class="name">
+                                            <a href="{{ route('pages.product_details_page', $item->slug) }}" class="name">
                                                 {{ $item->name }}
                                             </a>
 
@@ -82,13 +84,15 @@
                                 <div class="row">
                                     <div class="col-3">
                                         <div class="img_box">
-                                            <img src="{{ asset("storage/".$item->thumbnail_img) }}" alt="">
+                                            <a href="{{ route('pages.product_details_page', $item->slug) }}">
+                                                <img src="{{ asset("storage/".$item->thumbnail_img) }}" alt="{{ $item->name }}">
+                                            </a>
                                         </div>
                                     </div>
                                     <div class="col-9">
                                         <div class="text_box d-flex flex-column align-content-between justify-content-between">
                                             
-                                            <a href="{{ $item->slug }}" class="name">
+                                            <a href="{{ route('pages.product_details_page', $item->slug) }}" class="name">
                                                 {{ $item->name }}
                                             </a>
 
@@ -145,13 +149,15 @@
                                 <div class="row">
                                     <div class="col-3">
                                         <div class="img_box">
-                                            <img src="{{ asset("storage/".$item->thumbnail_img) }}" alt="">
+                                            <a href="{{ route('pages.product_details_page', $item->slug) }}">
+                                                <img src="{{ asset("storage/".$item->thumbnail_img) }}" alt="{{ $item->name }}">
+                                            </a>
                                         </div>
                                     </div>
                                     <div class="col-9">
                                         <div class="text_box d-flex flex-column align-content-between justify-content-between">
                                             
-                                            <a href="{{ $item->slug }}" class="name">
+                                            <a href="{{ route('pages.product_details_page', $item->slug) }}" class="name">
                                                 {{ $item->name }}
                                             </a>
 
@@ -323,7 +329,7 @@
                                 <ul>
                                     @foreach ($brands_data as $item)
                                         <li>
-                                            <a href="{{ $item->slug }}" target="_blank">
+                                            <a href="{{ route("pages.product_filter_page", $item->slug) }}" target="_blank">
                                                 {{ ($item->name) }}
                                             </a>
                                         </li>
@@ -340,7 +346,7 @@
                                 <ul>
                                     @foreach ($categories_data as $item)
                                         <li>
-                                            <a href="{{ $item->slug }}" target="_blank">
+                                            <a href="{{ route("pages.product_filter_page", $item->slug) }}" target="_blank">
                                                 {{ ($item->name == "Cpu") ? "CPU" : (($item->name == "Led Monitors") ? "LED Monitors" : $item->name) }}
                                             </a>
                                         </li>
@@ -390,4 +396,13 @@
 
     </section><!--./footer_links-->
     
+    <script>
+        // Logic to show product name in ellipsis format
+        document.querySelectorAll(".name").forEach(item => {
+            let text = item.textContent.trim();
+            if (text.length > 40) {
+                item.textContent = text.slice(0, 40) + "...";
+            }
+        });
+    </script>
 </footer>

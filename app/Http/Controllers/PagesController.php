@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Brand;
 use App\Models\User;
 use App\Models\Product;
 use Illuminate\Support\Str;
@@ -28,8 +29,24 @@ class PagesController extends Controller
     }
 
     // Logic to make a method to show product details page
-    public function product_details_page(){
-        return view("pages.product_details");
+    public function product_details_page(string $slug){
+        
+        // Logic to get the slug 
+        $slug = strip_tags($slug);
+        // Logic to get product releted the slug 
+        $product_data = Product::where("slug", "like", "%$slug%")->first();
+        if($product_data){
+            
+            // Logic to search brand image
+            $brands_img = Brand::where("name", "like", "%$product_data->brand_name%")->first("brand_img");
+            // Logic to search similar products
+            $similar_products_data = Product::where("brand_name", "like", "%$product_data->brand_name%")->limit(20)->inRandomOrder()->get(["name", "slug", "product_status", "selling_price", "brand_name", "thumbnail_img"]);
+
+            return view("pages.product_details", compact("product_data", "brands_img", "similar_products_data"));
+        }else{
+            return abort("404");
+        }
+        
     }
 
     // Logic to make a methods to show view profile page

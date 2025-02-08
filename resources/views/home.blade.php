@@ -132,19 +132,19 @@
                                         </div>
 
                                         <p class="product_name mt-2">
-                                            <a href="#" target="_blank">{{ $item->name }}</a>
+                                            <a href="{{ route('pages.product_details_page', $item->slug) }}" >{{ $item->name }}</a>
                                         </p>
         
                                         <div class="img_box">
-                                            <a href="#" target="_blank">
-                                                <img src="{{ asset("storage/".$item->thumbnail_img) }}" alt="" />
+                                            <a href="{{ route('pages.product_details_page', $item->slug) }}">
+                                                <img src="{{ asset("storage/".$item->thumbnail_img) }}" alt="{{ $item->name }}" />
                                             </a>
                                         </div>
         
                                         <div class="price_box d-flex align-items-center justify-content-between">
                                             
                                             <div class="left">
-                                                <a href="#" class="price d-flex align-items-center">
+                                                <a href="{{ route('pages.product_details_page', $item->slug) }}" class="price d-flex align-items-center">
                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-currency-rupee" viewBox="0 0 16 16">
                                                         <path d="M4 3.06h2.726c1.22 0 2.12.575 2.325 1.724H4v1.051h5.051C8.855 7.001 8 7.558 6.788 7.558H4v1.317L8.437 14h2.11L6.095 8.884h.855c2.316-.018 3.465-1.476 3.688-3.049H12V4.784h-1.345c-.08-.778-.357-1.335-.793-1.732H12V2H4z"/>
                                                     </svg>
@@ -191,7 +191,7 @@
                         <div class="heading d-flex align-items-center justify-content-between">
                             <span>Laptops</span>
                             <button class="btn view_all_btn">
-                                <a href="#" class="d-flex align-items-center" target="_blank">  
+                                <a href="{{ route("pages.product_filter_page", $laptop_products_data[0]->category_name) }}" class="d-flex align-items-center" >  
                                     View All
                                     <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 12H5m14 0-4 4m4-4-4-4"/>
@@ -221,11 +221,11 @@
                                     </div>
 
                                     <p class="product_name mt-1">
-                                        <a href="{{ $item->slug }}" target="_blank">{{ $item->name }}</a>
+                                        <a href="{{ route('pages.product_details_page', $item->slug) }}" >{{ $item->name }}</a>
                                     </p>
 
                                     <div class="img_box">
-                                        <a href="#" target="_blank">
+                                        <a href="{{ route('pages.product_details_page', $item->slug) }}" >
                                             <img src="{{ asset("storage/".$item->thumbnail_img) }}" alt="{{ $item->name }}" />
                                         </a>
                                     </div>
@@ -233,7 +233,7 @@
                                     <div class="price_box d-flex align-items-center justify-content-between">
                                         
                                         <div class="left">
-                                            <a href="#" class="price d-flex align-items-center">
+                                            <a href="{{ route('pages.product_details_page', $item->slug) }}" class="price d-flex align-items-center">
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-currency-rupee" viewBox="0 0 16 16">
                                                     <path d="M4 3.06h2.726c1.22 0 2.12.575 2.325 1.724H4v1.051h5.051C8.855 7.001 8 7.558 6.788 7.558H4v1.317L8.437 14h2.11L6.095 8.884h.855c2.316-.018 3.465-1.476 3.688-3.049H12V4.784h-1.345c-.08-.778-.357-1.335-.793-1.732H12V2H4z"/>
                                                 </svg>
@@ -280,7 +280,7 @@
                         <div class="heading d-flex align-items-center justify-content-between">
                             <span>LED Monitor And CPU</span>
                             <button class="btn view_all_btn">
-                                <a href="#" class="d-flex align-items-center" target="_blank">  
+                                <a href="{{ route("pages.product_filter_page", $led_monitors_CPU[0]->category_name) }}" class="d-flex align-items-center">  
                                     View All
                                     <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 12H5m14 0-4 4m4-4-4-4"/>
@@ -310,11 +310,11 @@
                                     </div>
 
                                     <p class="product_name mt-1">
-                                        <a href="{{ $item->slug }}" target="_blank">{{ $item->name }}</a>
+                                        <a href="{{ route('pages.product_details_page', $item->slug) }}" >{{ $item->name }}</a>
                                     </p>
 
                                     <div class="img_box">
-                                        <a href="#" target="_blank">
+                                        <a href="{{ route('pages.product_details_page', $item->slug) }}" >
                                             <img src="{{ asset("storage/".$item->thumbnail_img) }}" alt="{{ $item->name }}" />
                                         </a>
                                     </div>
@@ -322,7 +322,7 @@
                                     <div class="price_box d-flex align-items-center justify-content-between">
                                         
                                         <div class="left">
-                                            <a href="#" class="price d-flex align-items-center">
+                                            <a href="{{ route('pages.product_details_page', $item->slug) }}" class="price d-flex align-items-center">
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-currency-rupee" viewBox="0 0 16 16">
                                                     <path d="M4 3.06h2.726c1.22 0 2.12.575 2.325 1.724H4v1.051h5.051C8.855 7.001 8 7.558 6.788 7.558H4v1.317L8.437 14h2.11L6.095 8.884h.855c2.316-.018 3.465-1.476 3.688-3.049H12V4.784h-1.345c-.08-.778-.357-1.335-.793-1.732H12V2H4z"/>
                                                 </svg>
@@ -370,7 +370,7 @@
                         <div class="heading d-flex align-items-center justify-content-between">
                             <span>Phone And Tablet</span>
                             <button class="btn view_all_btn">
-                                <a href="#" class="d-flex align-items-center" target="_blank">  
+                                <a href="{{ route("pages.product_filter_page", $phones_tablets[0]->category_name) }}" class="d-flex align-items-center">  
                                     View All
                                     <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 12H5m14 0-4 4m4-4-4-4"/>
@@ -400,11 +400,11 @@
                                     </div>
 
                                     <p class="product_name mt-1">
-                                        <a href="{{ $item->slug }}" target="_blank">{{ $item->name }}</a>
+                                        <a href="{{ route('pages.product_details_page', $item->slug) }}" >{{ $item->name }}</a>
                                     </p>
 
                                     <div class="img_box">
-                                        <a href="#" target="_blank">
+                                        <a href="{{ route('pages.product_details_page', $item->slug) }}" >
                                             <img src="{{ asset("storage/".$item->thumbnail_img) }}" alt="{{ $item->name }}" />
                                         </a>
                                     </div>
@@ -412,7 +412,7 @@
                                     <div class="price_box d-flex align-items-center justify-content-between">
                                         
                                         <div class="left">
-                                            <a href="#" class="price d-flex align-items-center">
+                                            <a href="{{ route('pages.product_details_page', $item->slug) }}" class="price d-flex align-items-center">
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-currency-rupee" viewBox="0 0 16 16">
                                                     <path d="M4 3.06h2.726c1.22 0 2.12.575 2.325 1.724H4v1.051h5.051C8.855 7.001 8 7.558 6.788 7.558H4v1.317L8.437 14h2.11L6.095 8.884h.855c2.316-.018 3.465-1.476 3.688-3.049H12V4.784h-1.345c-.08-.778-.357-1.335-.793-1.732H12V2H4z"/>
                                                 </svg>
@@ -459,7 +459,7 @@
                         <div class="heading d-flex align-items-center justify-content-between">
                             <span>Accessories</span>
                             <button class="btn view_all_btn">
-                                <a href="#" class="d-flex align-items-center" target="_blank">  
+                                <a href="{{ route("pages.product_filter_page", $accessories[0]->category_name) }}" class="d-flex align-items-center">  
                                     View All
                                     <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 12H5m14 0-4 4m4-4-4-4"/>
@@ -489,11 +489,11 @@
                                     </div>
 
                                     <p class="product_name mt-1">
-                                        <a href="{{ $item->slug }}" target="_blank">{{ $item->name }}</a>
+                                        <a href="{{ route('pages.product_details_page', $item->slug) }}" >{{ $item->name }}</a>
                                     </p>
 
                                     <div class="img_box">
-                                        <a href="#" target="_blank">
+                                        <a href="{{ route('pages.product_details_page', $item->slug) }}" >
                                             <img src="{{ asset("storage/".$item->thumbnail_img) }}" alt="{{ $item->name }}" />
                                         </a>
                                     </div>
@@ -501,7 +501,7 @@
                                     <div class="price_box d-flex align-items-center justify-content-between">
                                         
                                         <div class="left">
-                                            <a href="#" class="price d-flex align-items-center">
+                                            <a href="{{ route('pages.product_details_page', $item->slug) }}" class="price d-flex align-items-center">
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-currency-rupee" viewBox="0 0 16 16">
                                                     <path d="M4 3.06h2.726c1.22 0 2.12.575 2.325 1.724H4v1.051h5.051C8.855 7.001 8 7.558 6.788 7.558H4v1.317L8.437 14h2.11L6.095 8.884h.855c2.316-.018 3.465-1.476 3.688-3.049H12V4.784h-1.345c-.08-.778-.357-1.335-.793-1.732H12V2H4z"/>
                                                 </svg>
@@ -694,8 +694,8 @@
             // Logic to show product name in ellipsis format
             $(".products_box .product_name a").each((ind, item) => {
                 let text = $(item).text().trim();
-                if (text.length > 50) {
-                    let truncatedText = text.slice(0, 50) + "...";
+                if (text.length > 30) {
+                    let truncatedText = text.slice(0, 30) + "...";
                     $(item).text(truncatedText);
                 }
             });

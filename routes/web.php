@@ -24,7 +24,7 @@ Route::get("/", [HomeController::class, "index"])->name("home");
 // Route for handle frontend pages
 Route::prefix("/pages")->controller(PagesController::class)->group(function(){
     Route::get("/product-filter/{search?}", "product_filter_page")->name("pages.product_filter_page");
-    Route::get("/product-details", "product_details_page")->name("pages.product_details_page");
+    Route::get("/product-details/search={slug}", "product_details_page")->name("pages.product_details_page");
     Route::get("/view-profile/{id}", "view_profile")->name("pages.view-profile")->middleware(IsUserLoginMiddleware::class);
     Route::get("/my-cart", "my_cart")->name("pages.my_cart");
     Route::get("/my-wishlist", "my_wishlist")->name("pages.my_wishlist");
