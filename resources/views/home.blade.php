@@ -31,65 +31,22 @@
                 <div class="container">
                     <ul class="d-flex flex-wrap justify-content-center justify-content-md-between" style="gap: 10px;">
 
-                        <li>
-                            <a href="#" class="items d-flex align-items-center justify-content-center flex-column">
-                                <img src="{{ asset("assets/img/phoone.png") }}" alt="computer.png" />
-                                <span class="text d-flex align-content-end">
-                                    Phones
-                                </span>
-                            </a>
-                        </li><!--./items-->
-
-                        <li>
-                            <a href="#" class="items d-flex align-items-center justify-content-center flex-column">
-                                <img src="{{ asset("assets/img/computer.png") }}" alt="computer.png" />
-                                <span class="text d-flex align-content-end">
-                                    Laptops and Computers
-                                </span>
-                            </a>
-                        </li><!--./items-->
-
-                        <li>
-                            <a href="#" class="items d-flex align-items-center justify-content-center flex-column">
-                                <img src="{{ asset("assets/img/printer.png") }}" alt="computer.png" />
-                                <span class="text d-flex align-content-end">
-                                    Printers
-                                </span>
-                            </a>
-                        </li><!--./items-->
-
-                        <li>
-                            <a href="#" class="items d-flex align-items-center justify-content-center flex-column">
-                                <img src="{{ asset("assets/img/keybord_and_mouse.png") }}" alt="computer.png" />
-                                <span class="text d-flex align-content-end">
-                                    Keybords and Mouse
-                                </span>
-                            </a>
-                        </li><!--./items--> 
-
-                        <li>
-                            <a href="#" class="items d-flex align-items-center justify-content-center flex-column">
-                                <img src="{{ asset("assets/img/speakers.png") }}" alt="computer.png" />
-                                <span class="text d-flex align-content-end">
-                                    Speakers
-                                </span>
-                            </a>
-                        </li><!--./items-->
-
-                        <li>
-                            <a href="#" class="items d-flex align-items-center justify-content-center flex-column">
-                                <img src="{{ asset("assets/img/parts.png") }}" alt="computer.png" />
-                                <span class="text d-flex align-content-end">
-                                    Computer Parts
-                                </span>
-                            </a>
-                        </li><!--./items-->
+                        @foreach ($categories_data as $item)
+                            <li>
+                                <a href="{{ route("pages.product_filter_page", $item->slug) }}" class="items d-flex align-items-center justify-content-center flex-column">
+                                    <img src="{{ asset("storage/".$item->category_img) }}" alt="{{ $item->name }}" />
+                                    <span class="text d-flex align-content-end">
+                                        {{ ($item->name == "Cpu") ? "CPU" : (($item->name == "Led Monitors") ? "LED Monitors" : $item->name) }}
+                                    </span>
+                                </a>
+                            </li><!--./items-->
+                        @endforeach
 
                     </ul>
                 </div>
             </section><!--./category_box-->
 
-            <!--================ Start category_box section ===============-->
+            <!--================ Start owl crousel section ===============-->
             <section class="crousel_section d-none d-md-block">
                 <div class="container">
                     <div class="owl-carousel binner">
@@ -119,60 +76,17 @@
                 <div class="container">
                     <ul class="d-flex flex-wrap justify-content-center justify-content-md-between" style="gap: 10px;">
 
-                        <li>
-                            <a href="#" class="items d-flex align-items-center justify-content-center flex-column">
-                                <img src="{{ asset("assets/img/apple.png") }}" alt="computer.png" />
-                                <span class="text d-flex align-content-end">
-                                    Apple
-                                </span>
-                            </a>
-                        </li><!--./items-->
+                        @foreach ($brands_data as $item)
+                            <li>
+                                <a href="{{ route("pages.product_filter_page", $item->slug) }}" class="items d-flex align-items-center justify-content-center flex-column">
+                                    <img src="{{ asset("storage/".$item->brand_img) }}" alt="{{ $item->name }}" />
+                                    <span class="text d-flex align-content-end">
+                                        {{ $item->name }}
+                                    </span>
+                                </a>
+                            </li><!--./items-->
+                        @endforeach
                         
-                        <li>
-                            <a href="#" class="items d-flex align-items-center justify-content-center flex-column">
-                                <img src="{{ asset("assets/img/hp.png") }}" alt="computer.png" />
-                                <span class="text d-flex align-content-end">
-                                    Hp
-                                </span>
-                            </a>
-                        </li><!--./items-->
-
-                        <li>
-                            <a href="#" class="items d-flex align-items-center justify-content-center flex-column">
-                                <img src="{{ asset("assets/img/dell.png") }}" alt="computer.png" />
-                                <span class="text d-flex align-content-end">
-                                    Dell
-                                </span>
-                            </a>
-                        </li><!--./items-->
-
-                        <li>
-                            <a href="#" class="items d-flex align-items-center justify-content-center flex-column">
-                                <img src="{{ asset("assets/img/lenvo.png") }}" alt="computer.png" />
-                                <span class="text d-flex align-content-end">
-                                    Lenvo
-                                </span>
-                            </a>
-                        </li><!--./items--> 
-
-                        <li>
-                            <a href="#" class="items d-flex align-items-center justify-content-center flex-column">
-                                <img src="{{ asset("assets/img/asus.png") }}" alt="computer.png" />
-                                <span class="text d-flex align-content-end">
-                                    ASUS
-                                </span>
-                            </a>
-                        </li><!--./items-->
-
-                        <li>
-                            <a href="#" class="items d-flex align-items-center justify-content-center flex-column">
-                                <img src="{{ asset("assets/img/acer.png") }}" alt="computer.png" />
-                                <span class="text d-flex align-content-end">
-                                    acer
-                                </span>
-                            </a>
-                        </li><!--./items-->
-
                     </ul>
                 </div>
             </section><!--./brand_filter_box-->
@@ -200,669 +114,82 @@
 
                         <div class="row mt-3 px-0" style="row-gap: 40px;">
 
-                            <div class="col-12 col-sm-6 col-lg-4 col-xl-3">
-                                <div class="item">
+                            @foreach ($top_selling_products as $item)
+                                <div class="col-12 col-sm-6 col-lg-4 col-xl-3">
+                                    <div class="item">
 
-                                    <div class="d-flex align-items-center justify-content-between">
-                                        <p class="category_name">Speaker</p>
-                                        <small style="color: #07dd07;">In Stock</small>
-                                        {{-- <small style="color: #f66f6f;">Out Of Stock</small> --}}
-                                        {{-- <small style="color: goldenrod;">Up Comming</small> --}}
-                                    </div>
+                                        <div class="d-flex align-items-center justify-content-between">
+                                            <p class="category_name">{{ ucwords($item->brand_name) }}</p>
 
-                                    <p class="product_name mt-1">
-                                        <a href="#" target="_blank">Wireless Audio System Multiroom 360 degree Full full sound speaker</a>
-                                    </p>
-    
-                                    <div class="img_box">
-                                        <a href="#" target="_blank">
-                                            <img src="{{ asset("assets/img/laptop.png") }}" alt="" />
-                                        </a>
-                                    </div>
-    
-                                    <div class="price_box d-flex align-items-center justify-content-between">
-                                        
-                                        <div class="left">
-                                            <a href="#" class="price d-flex align-items-center">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-currency-rupee" viewBox="0 0 16 16">
-                                                    <path d="M4 3.06h2.726c1.22 0 2.12.575 2.325 1.724H4v1.051h5.051C8.855 7.001 8 7.558 6.788 7.558H4v1.317L8.437 14h2.11L6.095 8.884h.855c2.316-.018 3.465-1.476 3.688-3.049H12V4.784h-1.345c-.08-.778-.357-1.335-.793-1.732H12V2H4z"/>
-                                                </svg>
-                                                <del>30,000</del>
-                                                15,000
+                                            @if ($item->product_status == "in stock")
+                                                <small style="color: #07dd07;">In Stock</small>
+                                                
+                                            @elseif($item->product_status == "up comming")
+                                                <small style="color: #e7aa10;">Up Comming</small>
+                                            @else
+                                                <small style="color: #f66f6f;">Out Of Stock</small>
+                                            @endif
+                                        </div>
+
+                                        <p class="product_name mt-2">
+                                            <a href="#" target="_blank">{{ $item->name }}</a>
+                                        </p>
+        
+                                        <div class="img_box">
+                                            <a href="#" target="_blank">
+                                                <img src="{{ asset("storage/".$item->thumbnail_img) }}" alt="" />
                                             </a>
-                                        </div><!--./left-->
-    
-                                        <div class="right d-flex align-items-center">
-                                            <button class="btn like_btn d-flex align-items-center justify-content-center pb-0">
-                                                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z"/>
-                                                </svg>
-                                            </button>
-                                            <button class="btn add_cart_btn d-flex align-items-center justify-content-center">
-                                                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7h-1M8 7h-.688M13 5v4m-2-2h4"/>
-                                                </svg>                                              
-                                            </button>
-                                        </div><!--./right-->
-                                    </div>
+                                        </div>
+        
+                                        <div class="price_box d-flex align-items-center justify-content-between">
+                                            
+                                            <div class="left">
+                                                <a href="#" class="price d-flex align-items-center">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-currency-rupee" viewBox="0 0 16 16">
+                                                        <path d="M4 3.06h2.726c1.22 0 2.12.575 2.325 1.724H4v1.051h5.051C8.855 7.001 8 7.558 6.788 7.558H4v1.317L8.437 14h2.11L6.095 8.884h.855c2.316-.018 3.465-1.476 3.688-3.049H12V4.784h-1.345c-.08-.778-.357-1.335-.793-1.732H12V2H4z"/>
+                                                    </svg>
+                                                    <del>30,000</del>
+                                                    {{ $item->selling_price }}
+                                                </a>
+                                            </div><!--./left-->
+        
+                                            <div class="right d-flex align-items-center">
+                                                <button class="btn like_btn d-flex align-items-center justify-content-center pb-0">
+                                                    <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z"/>
+                                                    </svg>
+                                                </button>
+                                                <button class="btn add_cart_btn d-flex align-items-center justify-content-center">
+                                                    <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7h-1M8 7h-.688M13 5v4m-2-2h4"/>
+                                                    </svg>                                              
+                                                </button>
+                                            </div><!--./right-->
+                                        </div>
 
-                                    <button class="btn mt-4" style="width: 100%;">
-                                        <a href="#" class="btn order_link d-flex align-items-center justify-content-center">
-                                            Order Now
-                                        </a>
-                                    </button>
-
-
-                                </div>
-                            </div><!--./items-->
-
-                            <div class="col-12 col-sm-6 col-lg-4 col-xl-3">
-                                <div class="item">
-                                    <div class="d-flex align-items-center justify-content-between">
-                                        <p class="category_name">Speaker</p>
-                                        <small style="color: #07dd07;">In Stock</small>
-                                        {{-- <small style="color: #f66f6f;">Out Of Stock</small> --}}
-                                        {{-- <small style="color: goldenrod;">Up Comming</small> --}}
-                                    </div>
-                                    <p class="product_name mt-1">
-                                        <a href="#" target="_blank">Wireless Audio System Multiroom 360 degree Full full sound speaker</a>
-                                    </p>
-    
-                                    <div class="img_box">
-                                        <a href="#" target="_blank">
-                                            <img src="{{ asset("assets/img/phoone.png") }}" alt="" />
-                                        </a>
-                                    </div>
-    
-                                    <div class="price_box d-flex align-items-center justify-content-between">
-                                        
-                                        <div class="left">
-                                            <a href="#" class="price d-flex align-items-center">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-currency-rupee" viewBox="0 0 16 16">
-                                                    <path d="M4 3.06h2.726c1.22 0 2.12.575 2.325 1.724H4v1.051h5.051C8.855 7.001 8 7.558 6.788 7.558H4v1.317L8.437 14h2.11L6.095 8.884h.855c2.316-.018 3.465-1.476 3.688-3.049H12V4.784h-1.345c-.08-.778-.357-1.335-.793-1.732H12V2H4z"/>
-                                                </svg>
-                                                <del>30,000</del>
-                                                15,000
+                                        <button class="btn mt-4" style="width: 100%;">
+                                            <a href="#" class="btn order_link d-flex align-items-center justify-content-center">
+                                                Order Now
                                             </a>
-                                        </div><!--./left-->
-    
-                                        <div class="right d-flex align-items-center">
-                                            <button class="btn like_btn d-flex align-items-center justify-content-center pb-0">
-                                                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z"/>
-                                                </svg>
-                                            </button>
-                                            <button class="btn add_cart_btn d-flex align-items-center justify-content-center">
-                                                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7h-1M8 7h-.688M13 5v4m-2-2h4"/>
-                                                </svg>                                              
-                                            </button>
-                                        </div><!--./right-->
+                                        </button>
+
                                     </div>
+                                </div><!--./items-->
+                            @endforeach
 
-                                    <button class="btn mt-4" style="width: 100%;">
-                                        <a href="#" class="btn order_link d-flex align-items-center justify-content-center">
-                                            Order Now
-                                        </a>
-                                    </button>
-
-
-                                </div>
-                            </div><!--./items-->
-
-                            <div class="col-12 col-sm-6 col-lg-4 col-xl-3">
-                                <div class="item">
-                                    <div class="d-flex align-items-center justify-content-between">
-                                        <p class="category_name">Speaker</p>
-                                        <small style="color: #07dd07;">In Stock</small>
-                                        {{-- <small style="color: #f66f6f;">Out Of Stock</small> --}}
-                                        {{-- <small style="color: goldenrod;">Up Comming</small> --}}
-                                    </div>
-                                    <p class="product_name mt-1">
-                                        <a href="#" target="_blank">Wireless Audio System Multiroom 360 degree Full full sound speaker</a>
-                                    </p>
-    
-                                    <div class="img_box">
-                                        <a href="#" target="_blank">
-                                            <img src="{{ asset("assets/img/wireless_hedphon.png") }}" alt="" />
-                                        </a>
-                                    </div>
-    
-                                    <div class="price_box d-flex align-items-center justify-content-between">
-                                        
-                                        <div class="left">
-                                            <a href="#" class="price d-flex align-items-center">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-currency-rupee" viewBox="0 0 16 16">
-                                                    <path d="M4 3.06h2.726c1.22 0 2.12.575 2.325 1.724H4v1.051h5.051C8.855 7.001 8 7.558 6.788 7.558H4v1.317L8.437 14h2.11L6.095 8.884h.855c2.316-.018 3.465-1.476 3.688-3.049H12V4.784h-1.345c-.08-.778-.357-1.335-.793-1.732H12V2H4z"/>
-                                                </svg>
-                                                <del>30,000</del>
-                                                <span>15,000</span>
-                                            </a>
-                                        </div><!--./left-->
-    
-                                        <div class="right d-flex align-items-center">
-                                            <button class="btn like_btn d-flex align-items-center justify-content-center pb-0">
-                                                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z"/>
-                                                </svg>
-                                            </button>
-                                            <button class="btn add_cart_btn d-flex align-items-center justify-content-center">
-                                                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7h-1M8 7h-.688M13 5v4m-2-2h4"/>
-                                                </svg>                                              
-                                            </button>
-                                        </div><!--./right-->
-                                    </div>
-
-                                    <button class="btn mt-4" style="width: 100%;">
-                                        <a href="#" class="btn order_link d-flex align-items-center justify-content-center">
-                                            Order Now
-                                        </a>
-                                    </button>
-
-
-                                </div>
-                            </div><!--./items-->
-
-                            <div class="col-12 col-sm-6 col-lg-4 col-xl-3">
-                                <div class="item">
-                                    <div class="d-flex align-items-center justify-content-between">
-                                        <p class="category_name">Speaker</p>
-                                        <small style="color: #07dd07;">In Stock</small>
-                                        {{-- <small style="color: #f66f6f;">Out Of Stock</small> --}}
-                                        {{-- <small style="color: goldenrod;">Up Comming</small> --}}
-                                    </div>
-                                    <p class="product_name mt-1">
-                                        <a href="#" target="_blank">Wireless Audio System Multiroom 360 degree Full full sound speaker</a>
-                                    </p>
-    
-                                    <div class="img_box">
-                                        <a href="#" target="_blank">
-                                            <img src="{{ asset("assets/img/speaker.png") }}" alt="" />
-                                        </a>
-                                    </div>
-    
-                                    <div class="price_box d-flex align-items-center justify-content-between">
-                                        
-                                        <div class="left">
-                                            <a href="#" class="price d-flex align-items-center">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-currency-rupee" viewBox="0 0 16 16">
-                                                    <path d="M4 3.06h2.726c1.22 0 2.12.575 2.325 1.724H4v1.051h5.051C8.855 7.001 8 7.558 6.788 7.558H4v1.317L8.437 14h2.11L6.095 8.884h.855c2.316-.018 3.465-1.476 3.688-3.049H12V4.784h-1.345c-.08-.778-.357-1.335-.793-1.732H12V2H4z"/>
-                                                </svg>
-                                                <del>30,000</del>
-                                                15,000
-                                            </a>
-                                        </div><!--./left-->
-    
-                                        <div class="right d-flex align-items-center">
-                                            <button class="btn like_btn d-flex align-items-center justify-content-center pb-0">
-                                                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z"/>
-                                                </svg>
-                                            </button>
-                                            <button class="btn add_cart_btn d-flex align-items-center justify-content-center">
-                                                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7h-1M8 7h-.688M13 5v4m-2-2h4"/>
-                                                </svg>                                              
-                                            </button>
-                                        </div><!--./right-->
-                                    </div>
-
-                                    <button class="btn mt-4" style="width: 100%;">
-                                        <a href="#" class="btn order_link d-flex align-items-center justify-content-center">
-                                            Order Now
-                                        </a>
-                                    </button>
-
-
-                                </div>
-                            </div><!--./items-->
-
-                            <div class="col-12 col-sm-6 col-lg-4 col-xl-3">
-                                <div class="item">
-                                    <div class="d-flex align-items-center justify-content-between">
-                                        <p class="category_name">Speaker</p>
-                                        <small style="color: #07dd07;">In Stock</small>
-                                        {{-- <small style="color: #f66f6f;">Out Of Stock</small> --}}
-                                        {{-- <small style="color: goldenrod;">Up Comming</small> --}}
-                                    </div>
-                                    <p class="product_name mt-1">
-                                        <a href="#" target="_blank">Wireless Audio System Multiroom 360 degree Full full sound speaker</a>
-                                    </p>
-    
-                                    <div class="img_box">
-                                        <a href="#" target="_blank">
-                                            <img src="{{ asset("assets/img/speaker.png") }}" alt="" />
-                                        </a>
-                                    </div>
-    
-                                    <div class="price_box d-flex align-items-center justify-content-between">
-                                        
-                                        <div class="left">
-                                            <a href="#" class="price d-flex align-items-center">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-currency-rupee" viewBox="0 0 16 16">
-                                                    <path d="M4 3.06h2.726c1.22 0 2.12.575 2.325 1.724H4v1.051h5.051C8.855 7.001 8 7.558 6.788 7.558H4v1.317L8.437 14h2.11L6.095 8.884h.855c2.316-.018 3.465-1.476 3.688-3.049H12V4.784h-1.345c-.08-.778-.357-1.335-.793-1.732H12V2H4z"/>
-                                                </svg>
-                                                <del>30,000</del>
-                                                15,000
-                                            </a>
-                                        </div><!--./left-->
-    
-                                        <div class="right d-flex align-items-center">
-                                            <button class="btn like_btn d-flex align-items-center justify-content-center pb-0">
-                                                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z"/>
-                                                </svg>
-                                            </button>
-                                            <button class="btn add_cart_btn d-flex align-items-center justify-content-center">
-                                                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7h-1M8 7h-.688M13 5v4m-2-2h4"/>
-                                                </svg>                                              
-                                            </button>
-                                        </div><!--./right-->
-                                    </div>
-
-                                    <button class="btn mt-4" style="width: 100%;">
-                                        <a href="#" class="btn order_link d-flex align-items-center justify-content-center">
-                                            Order Now
-                                        </a>
-                                    </button>
-
-
-                                </div>
-                            </div><!--./items-->
-
-                            <div class="col-12 col-sm-6 col-lg-4 col-xl-3">
-                                <div class="item">
-                                    <div class="d-flex align-items-center justify-content-between">
-                                        <p class="category_name">Speaker</p>
-                                        <small style="color: #07dd07;">In Stock</small>
-                                        {{-- <small style="color: #f66f6f;">Out Of Stock</small> --}}
-                                        {{-- <small style="color: goldenrod;">Up Comming</small> --}}
-                                    </div>
-                                    <p class="product_name mt-1">
-                                        <a href="#" target="_blank">Wireless Audio System Multiroom 360 degree Full full sound speaker</a>
-                                    </p>
-    
-                                    <div class="img_box">
-                                        <a href="#" target="_blank">
-                                            <img src="{{ asset("assets/img/speaker.png") }}" alt="" />
-                                        </a>
-                                    </div>
-    
-                                    <div class="price_box d-flex align-items-center justify-content-between">
-                                        
-                                        <div class="left">
-                                            <a href="#" class="price d-flex align-items-center">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-currency-rupee" viewBox="0 0 16 16">
-                                                    <path d="M4 3.06h2.726c1.22 0 2.12.575 2.325 1.724H4v1.051h5.051C8.855 7.001 8 7.558 6.788 7.558H4v1.317L8.437 14h2.11L6.095 8.884h.855c2.316-.018 3.465-1.476 3.688-3.049H12V4.784h-1.345c-.08-.778-.357-1.335-.793-1.732H12V2H4z"/>
-                                                </svg>
-                                                <del>30,000</del>
-                                                15,000
-                                            </a>
-                                        </div><!--./left-->
-    
-                                        <div class="right d-flex align-items-center">
-                                            <button class="btn like_btn d-flex align-items-center justify-content-center pb-0">
-                                                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z"/>
-                                                </svg>
-                                            </button>
-                                            <button class="btn add_cart_btn d-flex align-items-center justify-content-center">
-                                                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7h-1M8 7h-.688M13 5v4m-2-2h4"/>
-                                                </svg>                                              
-                                            </button>
-                                        </div><!--./right-->
-                                    </div>
-
-                                    <button class="btn mt-4" style="width: 100%;">
-                                        <a href="#" class="btn order_link d-flex align-items-center justify-content-center">
-                                            Order Now
-                                        </a>
-                                    </button>
-
-
-                                </div>
-                            </div><!--./items-->
-
-                            <div class="col-12 col-sm-6 col-lg-4 col-xl-3">
-                                <div class="item">
-                                    <div class="d-flex align-items-center justify-content-between">
-                                        <p class="category_name">Speaker</p>
-                                        <small style="color: #07dd07;">In Stock</small>
-                                        {{-- <small style="color: #f66f6f;">Out Of Stock</small> --}}
-                                        {{-- <small style="color: goldenrod;">Up Comming</small> --}}
-                                    </div>
-                                    <p class="product_name mt-1">
-                                        <a href="#" target="_blank">Wireless Audio System Multiroom 360 degree Full full sound speaker</a>
-                                    </p>
-    
-                                    <div class="img_box">
-                                        <a href="#" target="_blank">
-                                            <img src="{{ asset("assets/img/speaker.png") }}" alt="" />
-                                        </a>
-                                    </div>
-    
-                                    <div class="price_box d-flex align-items-center justify-content-between">
-                                        
-                                        <div class="left">
-                                            <a href="#" class="price d-flex align-items-center">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-currency-rupee" viewBox="0 0 16 16">
-                                                    <path d="M4 3.06h2.726c1.22 0 2.12.575 2.325 1.724H4v1.051h5.051C8.855 7.001 8 7.558 6.788 7.558H4v1.317L8.437 14h2.11L6.095 8.884h.855c2.316-.018 3.465-1.476 3.688-3.049H12V4.784h-1.345c-.08-.778-.357-1.335-.793-1.732H12V2H4z"/>
-                                                </svg>
-                                                <del>30,000</del>
-                                                15,000
-                                            </a>
-                                        </div><!--./left-->
-    
-                                        <div class="right d-flex align-items-center">
-                                            <button class="btn like_btn d-flex align-items-center justify-content-center pb-0">
-                                                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z"/>
-                                                </svg>
-                                            </button>
-                                            <button class="btn add_cart_btn d-flex align-items-center justify-content-center">
-                                                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7h-1M8 7h-.688M13 5v4m-2-2h4"/>
-                                                </svg>                                              
-                                            </button>
-                                        </div><!--./right-->
-                                    </div>
-
-                                    <button class="btn mt-4" style="width: 100%;">
-                                        <a href="#" class="btn order_link d-flex align-items-center justify-content-center">
-                                            Order Now
-                                        </a>
-                                    </button>
-
-
-                                </div>
-                            </div><!--./items-->
-
-                            <div class="col-12 col-sm-6 col-lg-4 col-xl-3">
-                                <div class="item">
-                                    <div class="d-flex align-items-center justify-content-between">
-                                        <p class="category_name">Speaker</p>
-                                        <small style="color: #07dd07;">In Stock</small>
-                                        {{-- <small style="color: #f66f6f;">Out Of Stock</small> --}}
-                                        {{-- <small style="color: goldenrod;">Up Comming</small> --}}
-                                    </div>
-                                    <p class="product_name mt-1">
-                                        <a href="#" target="_blank">Wireless Audio System Multiroom 360 degree Full full sound speaker</a>
-                                    </p>
-    
-                                    <div class="img_box">
-                                        <a href="#" target="_blank">
-                                            <img src="{{ asset("assets/img/speaker.png") }}" alt="" />
-                                        </a>
-                                    </div>
-    
-                                    <div class="price_box d-flex align-items-center justify-content-between">
-                                        
-                                        <div class="left">
-                                            <a href="#" class="price d-flex align-items-center">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-currency-rupee" viewBox="0 0 16 16">
-                                                    <path d="M4 3.06h2.726c1.22 0 2.12.575 2.325 1.724H4v1.051h5.051C8.855 7.001 8 7.558 6.788 7.558H4v1.317L8.437 14h2.11L6.095 8.884h.855c2.316-.018 3.465-1.476 3.688-3.049H12V4.784h-1.345c-.08-.778-.357-1.335-.793-1.732H12V2H4z"/>
-                                                </svg>
-                                                <del>30,000</del>
-                                                15,000
-                                            </a>
-                                        </div><!--./left-->
-    
-                                        <div class="right d-flex align-items-center">
-                                            <button class="btn like_btn d-flex align-items-center justify-content-center pb-0">
-                                                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z"/>
-                                                </svg>
-                                            </button>
-                                            <button class="btn add_cart_btn d-flex align-items-center justify-content-center">
-                                                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7h-1M8 7h-.688M13 5v4m-2-2h4"/>
-                                                </svg>                                              
-                                            </button>
-                                        </div><!--./right-->
-                                    </div>
-
-                                    <button class="btn mt-4" style="width: 100%;">
-                                        <a href="#" class="btn order_link d-flex align-items-center justify-content-center">
-                                            Order Now
-                                        </a>
-                                    </button>
-
-
-                                </div>
-                            </div><!--./items-->
-
-                            <div class="col-12 col-sm-6 col-lg-4 col-xl-3">
-                                <div class="item">
-                                    <div class="d-flex align-items-center justify-content-between">
-                                        <p class="category_name">Speaker</p>
-                                        <small style="color: #07dd07;">In Stock</small>
-                                        {{-- <small style="color: #f66f6f;">Out Of Stock</small> --}}
-                                        {{-- <small style="color: goldenrod;">Up Comming</small> --}}
-                                    </div>
-                                    <p class="product_name mt-1">
-                                        <a href="#" target="_blank">Wireless Audio System Multiroom 360 degree Full full sound speaker</a>
-                                    </p>
-    
-                                    <div class="img_box">
-                                        <a href="#" target="_blank">
-                                            <img src="{{ asset("assets/img/speaker.png") }}" alt="" />
-                                        </a>
-                                    </div>
-    
-                                    <div class="price_box d-flex align-items-center justify-content-between">
-                                        
-                                        <div class="left">
-                                            <a href="#" class="price d-flex align-items-center">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-currency-rupee" viewBox="0 0 16 16">
-                                                    <path d="M4 3.06h2.726c1.22 0 2.12.575 2.325 1.724H4v1.051h5.051C8.855 7.001 8 7.558 6.788 7.558H4v1.317L8.437 14h2.11L6.095 8.884h.855c2.316-.018 3.465-1.476 3.688-3.049H12V4.784h-1.345c-.08-.778-.357-1.335-.793-1.732H12V2H4z"/>
-                                                </svg>
-                                                <del>30,000</del>
-                                                15,000
-                                            </a>
-                                        </div><!--./left-->
-    
-                                        <div class="right d-flex align-items-center">
-                                            <button class="btn like_btn d-flex align-items-center justify-content-center pb-0">
-                                                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z"/>
-                                                </svg>
-                                            </button>
-                                            <button class="btn add_cart_btn d-flex align-items-center justify-content-center">
-                                                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7h-1M8 7h-.688M13 5v4m-2-2h4"/>
-                                                </svg>                                              
-                                            </button>
-                                        </div><!--./right-->
-                                    </div>
-
-                                    <button class="btn mt-4" style="width: 100%;">
-                                        <a href="#" class="btn order_link d-flex align-items-center justify-content-center">
-                                            Order Now
-                                        </a>
-                                    </button>
-
-
-                                </div>
-                            </div><!--./items-->
-
-                            <div class="col-12 col-sm-6 col-lg-4 col-xl-3">
-                                <div class="item">
-                                    <div class="d-flex align-items-center justify-content-between">
-                                        <p class="category_name">Speaker</p>
-                                        <small style="color: #07dd07;">In Stock</small>
-                                        {{-- <small style="color: #f66f6f;">Out Of Stock</small> --}}
-                                        {{-- <small style="color: goldenrod;">Up Comming</small> --}}
-                                    </div>
-                                    <p class="product_name mt-1">
-                                        <a href="#" target="_blank">Wireless Audio System Multiroom 360 degree Full full sound speaker</a>
-                                    </p>
-    
-                                    <div class="img_box">
-                                        <a href="#" target="_blank">
-                                            <img src="{{ asset("assets/img/speaker.png") }}" alt="" />
-                                        </a>
-                                    </div>
-    
-                                    <div class="price_box d-flex align-items-center justify-content-between">
-                                        
-                                        <div class="left">
-                                            <a href="#" class="price d-flex align-items-center">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-currency-rupee" viewBox="0 0 16 16">
-                                                    <path d="M4 3.06h2.726c1.22 0 2.12.575 2.325 1.724H4v1.051h5.051C8.855 7.001 8 7.558 6.788 7.558H4v1.317L8.437 14h2.11L6.095 8.884h.855c2.316-.018 3.465-1.476 3.688-3.049H12V4.784h-1.345c-.08-.778-.357-1.335-.793-1.732H12V2H4z"/>
-                                                </svg>
-                                                <del>30,000</del>
-                                                15,000
-                                            </a>
-                                        </div><!--./left-->
-    
-                                        <div class="right d-flex align-items-center">
-                                            <button class="btn like_btn d-flex align-items-center justify-content-center pb-0">
-                                                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z"/>
-                                                </svg>
-                                            </button>
-                                            <button class="btn add_cart_btn d-flex align-items-center justify-content-center">
-                                                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7h-1M8 7h-.688M13 5v4m-2-2h4"/>
-                                                </svg>                                              
-                                            </button>
-                                        </div><!--./right-->
-                                    </div>
-
-                                    <button class="btn mt-4" style="width: 100%;">
-                                        <a href="#" class="btn order_link d-flex align-items-center justify-content-center">
-                                            Order Now
-                                        </a>
-                                    </button>
-
-
-                                </div>
-                            </div><!--./items-->
-
-                            <div class="col-12 col-sm-6 col-lg-4 col-xl-3">
-                                <div class="item">
-                                    <div class="d-flex align-items-center justify-content-between">
-                                        <p class="category_name">Speaker</p>
-                                        <small style="color: #07dd07;">In Stock</small>
-                                        {{-- <small style="color: #f66f6f;">Out Of Stock</small> --}}
-                                        {{-- <small style="color: goldenrod;">Up Comming</small> --}}
-                                    </div>
-                                    <p class="product_name mt-1">
-                                        <a href="#" target="_blank">Wireless Audio System Multiroom 360 degree Full full sound speaker</a>
-                                    </p>
-    
-                                    <div class="img_box">
-                                        <a href="#" target="_blank">
-                                            <img src="{{ asset("assets/img/speaker.png") }}" alt="" />
-                                        </a>
-                                    </div>
-    
-                                    <div class="price_box d-flex align-items-center justify-content-between">
-                                        
-                                        <div class="left">
-                                            <a href="#" class="price d-flex align-items-center">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-currency-rupee" viewBox="0 0 16 16">
-                                                    <path d="M4 3.06h2.726c1.22 0 2.12.575 2.325 1.724H4v1.051h5.051C8.855 7.001 8 7.558 6.788 7.558H4v1.317L8.437 14h2.11L6.095 8.884h.855c2.316-.018 3.465-1.476 3.688-3.049H12V4.784h-1.345c-.08-.778-.357-1.335-.793-1.732H12V2H4z"/>
-                                                </svg>
-                                                <del>30,000</del>
-                                                15,000
-                                            </a>
-                                        </div><!--./left-->
-    
-                                        <div class="right d-flex align-items-center">
-                                            <button class="btn like_btn d-flex align-items-center justify-content-center pb-0">
-                                                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z"/>
-                                                </svg>
-                                            </button>
-                                            <button class="btn add_cart_btn d-flex align-items-center justify-content-center">
-                                                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7h-1M8 7h-.688M13 5v4m-2-2h4"/>
-                                                </svg>                                              
-                                            </button>
-                                        </div><!--./right-->
-                                    </div>
-
-                                    <button class="btn mt-4" style="width: 100%;">
-                                        <a href="#" class="btn order_link d-flex align-items-center justify-content-center">
-                                            Order Now
-                                        </a>
-                                    </button>
-
-
-                                </div>
-                            </div><!--./items-->
-
-                            <div class="col-12 col-sm-6 col-lg-4 col-xl-3">
-                                <div class="item">
-                                    <div class="d-flex align-items-center justify-content-between">
-                                        <p class="category_name">Speaker</p>
-                                        <small style="color: #07dd07;">In Stock</small>
-                                        {{-- <small style="color: #f66f6f;">Out Of Stock</small> --}}
-                                        {{-- <small style="color: goldenrod;">Up Comming</small> --}}
-                                    </div>
-                                    <p class="product_name mt-1">
-                                        <a href="#" target="_blank">Wireless Audio System Multiroom 360 degree Full full sound speaker</a>
-                                    </p>
-    
-                                    <div class="img_box">
-                                        <a href="#" target="_blank">
-                                            <img src="{{ asset("assets/img/speaker.png") }}" alt="" />
-                                        </a>
-                                    </div>
-    
-                                    <div class="price_box d-flex align-items-center justify-content-between">
-                                        
-                                        <div class="left">
-                                            <a href="#" class="price d-flex align-items-center">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-currency-rupee" viewBox="0 0 16 16">
-                                                    <path d="M4 3.06h2.726c1.22 0 2.12.575 2.325 1.724H4v1.051h5.051C8.855 7.001 8 7.558 6.788 7.558H4v1.317L8.437 14h2.11L6.095 8.884h.855c2.316-.018 3.465-1.476 3.688-3.049H12V4.784h-1.345c-.08-.778-.357-1.335-.793-1.732H12V2H4z"/>
-                                                </svg>
-                                                <del>30,000</del>
-                                                15,000
-                                            </a>
-                                        </div><!--./left-->
-    
-                                        <div class="right d-flex align-items-center">
-                                            <button class="btn like_btn d-flex align-items-center justify-content-center pb-0">
-                                                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z"/>
-                                                </svg>
-                                            </button>
-                                            <button class="btn add_cart_btn d-flex align-items-center justify-content-center">
-                                                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7h-1M8 7h-.688M13 5v4m-2-2h4"/>
-                                                </svg>                                              
-                                            </button>
-                                        </div><!--./right-->
-                                    </div>
-
-                                    <button class="btn mt-4" style="width: 100%;">
-                                        <a href="#" class="btn order_link d-flex align-items-center justify-content-center">
-                                            Order Now
-                                        </a>
-                                    </button>
-
-
-                                </div>
-                            </div><!--./items-->
-                            
                         </div><!--./items_box-->
 
                     </div>
                 </div>
             </section><!--./top_selling_product_section-->
             
-            <!--================ Start electronic_product section =================-->
-            <section class="products_box electronics_product_box">
+            <!--================ Start laptops_box section =================-->
+            <section class="products_box laptops_box">
                 <div class="container">
                     <div class="box">
 
                         <div class="heading d-flex align-items-center justify-content-between">
-                            <span>Electronics</span>
+                            <span>Laptops</span>
                             <button class="btn view_all_btn">
                                 <a href="#" class="d-flex align-items-center" target="_blank">  
                                     View All
@@ -873,488 +200,85 @@
                             </button>
                         </div><!--./heading-->
                         
-                        <div class="owl-carousel owl-theme mt-3">
+                        <div class="owl-carousel owl-theme laptops-box-owl-theme mt-3">
 
-                            <div class="item">
-                                <div class="d-flex align-items-center justify-content-between">
-                                    <p class="category_name">Speaker</p>
-                                        <small style="color: #07dd07;">In Stock</small>
-                                        {{-- <small style="color: #f66f6f;">Out Of Stock</small> --}}
-                                        {{-- <small style="color: goldenrod;">Up Comming</small> --}}
-                                    </div>
-                                <p class="product_name mt-1">
-                                    <a href="#" target="_blank">Wireless Audio System Multiroom 360 degree Full full sound speaker</a>
-                                </p>
-
-                                <div class="img_box">
-                                    <a href="#" target="_blank">
-                                        <img src="{{ asset("assets/img/laptop.png") }}" alt="" />
-                                    </a>
-                                </div>
-
-                                <div class="price_box d-flex align-items-center justify-content-between">
+                            @foreach ($laptop_products_data as $item)
+                            
+                                <div class="item">
                                     
-                                    <div class="left">
-                                        <a href="#" class="price d-flex align-items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-currency-rupee" viewBox="0 0 16 16">
-                                                <path d="M4 3.06h2.726c1.22 0 2.12.575 2.325 1.724H4v1.051h5.051C8.855 7.001 8 7.558 6.788 7.558H4v1.317L8.437 14h2.11L6.095 8.884h.855c2.316-.018 3.465-1.476 3.688-3.049H12V4.784h-1.345c-.08-.778-.357-1.335-.793-1.732H12V2H4z"/>
-                                            </svg>
-                                            <del>30,000</del>
-                                            15,000
-                                        </a>
-                                    </div><!--./left-->
+                                    <div class="d-flex align-items-center justify-content-between">
+                                        <p class="category_name">{{ ucwords($item->brand_name) }}</p>
 
-                                    <div class="right d-flex align-items-center">
-                                        <button class="btn like_btn d-flex align-items-center justify-content-center pb-0">
-                                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z"/>
-                                            </svg>
-                                        </button>
-                                        <button class="btn add_cart_btn d-flex align-items-center justify-content-center">
-                                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7h-1M8 7h-.688M13 5v4m-2-2h4"/>
-                                            </svg>                                              
-                                        </button>
-                                    </div><!--./right-->
-                                </div>
+                                        @if ($item->product_status == "in stock")
+                                            <small style="color: #07dd07;">In Stock</small>
+                                            
+                                        @elseif($item->product_status == "up comming")
+                                            <small style="color: #e7aa10;">Up Comming</small>
+                                        @else
+                                            <small style="color: #f66f6f;">Out Of Stock</small>
+                                        @endif
 
-                                <button class="btn mt-4" style="width: 100%;">
-                                    <a href="#" class="btn order_link d-flex align-items-center justify-content-center">
-                                        Order Now
-                                    </a>
-                                </button>
-
-
-                            </div><!--./item-->
-
-                            <div class="item">
-                                <div class="d-flex align-items-center justify-content-between">
-                                    <p class="category_name">Speaker</p>
-                                        <small style="color: #07dd07;">In Stock</small>
-                                        {{-- <small style="color: #f66f6f;">Out Of Stock</small> --}}
-                                        {{-- <small style="color: goldenrod;">Up Comming</small> --}}
                                     </div>
-                                <p class="product_name mt-1">
-                                    <a href="#" target="_blank">Wireless Audio System Multiroom 360 degree Full full sound speaker</a>
-                                </p>
 
-                                <div class="img_box">
-                                    <a href="#" target="_blank">
-                                        <img src="{{ asset("assets/img/laptop.png") }}" alt="" />
-                                    </a>
-                                </div>
+                                    <p class="product_name mt-1">
+                                        <a href="{{ $item->slug }}" target="_blank">{{ $item->name }}</a>
+                                    </p>
 
-                                <div class="price_box d-flex align-items-center justify-content-between">
-                                    
-                                    <div class="left">
-                                        <a href="#" class="price d-flex align-items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-currency-rupee" viewBox="0 0 16 16">
-                                                <path d="M4 3.06h2.726c1.22 0 2.12.575 2.325 1.724H4v1.051h5.051C8.855 7.001 8 7.558 6.788 7.558H4v1.317L8.437 14h2.11L6.095 8.884h.855c2.316-.018 3.465-1.476 3.688-3.049H12V4.784h-1.345c-.08-.778-.357-1.335-.793-1.732H12V2H4z"/>
-                                            </svg>
-                                            <del>30,000</del>
-                                            15,000
+                                    <div class="img_box">
+                                        <a href="#" target="_blank">
+                                            <img src="{{ asset("storage/".$item->thumbnail_img) }}" alt="{{ $item->name }}" />
                                         </a>
-                                    </div><!--./left-->
-
-                                    <div class="right d-flex align-items-center">
-                                        <button class="btn like_btn d-flex align-items-center justify-content-center pb-0">
-                                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z"/>
-                                            </svg>
-                                        </button>
-                                        <button class="btn add_cart_btn d-flex align-items-center justify-content-center">
-                                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7h-1M8 7h-.688M13 5v4m-2-2h4"/>
-                                            </svg>                                              
-                                        </button>
-                                    </div><!--./right-->
-                                </div>
-
-                                <button class="btn mt-4" style="width: 100%;">
-                                    <a href="#" class="btn order_link d-flex align-items-center justify-content-center">
-                                        Order Now
-                                    </a>
-                                </button>
-
-
-                            </div><!--./item-->
-
-                            <div class="item">
-                                <div class="d-flex align-items-center justify-content-between">
-                                    <p class="category_name">Speaker</p>
-                                        <small style="color: #07dd07;">In Stock</small>
-                                        {{-- <small style="color: #f66f6f;">Out Of Stock</small> --}}
-                                        {{-- <small style="color: goldenrod;">Up Comming</small> --}}
                                     </div>
-                                <p class="product_name mt-1">
-                                    <a href="#" target="_blank">Wireless Audio System Multiroom 360 degree Full full sound speaker</a>
-                                </p>
 
-                                <div class="img_box">
-                                    <a href="#" target="_blank">
-                                        <img src="{{ asset("assets/img/laptop.png") }}" alt="" />
-                                    </a>
-                                </div>
+                                    <div class="price_box d-flex align-items-center justify-content-between">
+                                        
+                                        <div class="left">
+                                            <a href="#" class="price d-flex align-items-center">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-currency-rupee" viewBox="0 0 16 16">
+                                                    <path d="M4 3.06h2.726c1.22 0 2.12.575 2.325 1.724H4v1.051h5.051C8.855 7.001 8 7.558 6.788 7.558H4v1.317L8.437 14h2.11L6.095 8.884h.855c2.316-.018 3.465-1.476 3.688-3.049H12V4.784h-1.345c-.08-.778-.357-1.335-.793-1.732H12V2H4z"/>
+                                                </svg>
+                                                <del>30,000</del>
+                                                {{ $item->selling_price }}
+                                            </a>
+                                        </div><!--./left-->
 
-                                <div class="price_box d-flex align-items-center justify-content-between">
-                                    
-                                    <div class="left">
-                                        <a href="#" class="price d-flex align-items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-currency-rupee" viewBox="0 0 16 16">
-                                                <path d="M4 3.06h2.726c1.22 0 2.12.575 2.325 1.724H4v1.051h5.051C8.855 7.001 8 7.558 6.788 7.558H4v1.317L8.437 14h2.11L6.095 8.884h.855c2.316-.018 3.465-1.476 3.688-3.049H12V4.784h-1.345c-.08-.778-.357-1.335-.793-1.732H12V2H4z"/>
-                                            </svg>
-                                            <del>30,000</del>
-                                            15,000
-                                        </a>
-                                    </div><!--./left-->
-
-                                    <div class="right d-flex align-items-center">
-                                        <button class="btn like_btn d-flex align-items-center justify-content-center pb-0">
-                                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z"/>
-                                            </svg>
-                                        </button>
-                                        <button class="btn add_cart_btn d-flex align-items-center justify-content-center">
-                                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7h-1M8 7h-.688M13 5v4m-2-2h4"/>
-                                            </svg>                                              
-                                        </button>
-                                    </div><!--./right-->
-                                </div>
-
-                                <button class="btn mt-4" style="width: 100%;">
-                                    <a href="#" class="btn order_link d-flex align-items-center justify-content-center">
-                                        Order Now
-                                    </a>
-                                </button>
-
-
-                            </div><!--./item-->
-
-                            <div class="item">
-                                <div class="d-flex align-items-center justify-content-between">
-                                    <p class="category_name">Speaker</p>
-                                        <small style="color: #07dd07;">In Stock</small>
-                                        {{-- <small style="color: #f66f6f;">Out Of Stock</small> --}}
-                                        {{-- <small style="color: goldenrod;">Up Comming</small> --}}
+                                        <div class="right d-flex align-items-center">
+                                            <button class="btn like_btn d-flex align-items-center justify-content-center pb-0">
+                                                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z"/>
+                                                </svg>
+                                            </button>
+                                            <button class="btn add_cart_btn d-flex align-items-center justify-content-center">
+                                                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7h-1M8 7h-.688M13 5v4m-2-2h4"/>
+                                                </svg>                                              
+                                            </button>
+                                        </div><!--./right-->
                                     </div>
-                                <p class="product_name mt-1">
-                                    <a href="#" target="_blank">Wireless Audio System Multiroom 360 degree Full full sound speaker</a>
-                                </p>
 
-                                <div class="img_box">
-                                    <a href="#" target="_blank">
-                                        <img src="{{ asset("assets/img/laptop.png") }}" alt="" />
-                                    </a>
-                                </div>
-
-                                <div class="price_box d-flex align-items-center justify-content-between">
-                                    
-                                    <div class="left">
-                                        <a href="#" class="price d-flex align-items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-currency-rupee" viewBox="0 0 16 16">
-                                                <path d="M4 3.06h2.726c1.22 0 2.12.575 2.325 1.724H4v1.051h5.051C8.855 7.001 8 7.558 6.788 7.558H4v1.317L8.437 14h2.11L6.095 8.884h.855c2.316-.018 3.465-1.476 3.688-3.049H12V4.784h-1.345c-.08-.778-.357-1.335-.793-1.732H12V2H4z"/>
-                                            </svg>
-                                            <del>30,000</del>
-                                            15,000
+                                    <button class="btn mt-4" style="width: 100%;">
+                                        <a href="#" class="btn order_link d-flex align-items-center justify-content-center">
+                                            Order Now
                                         </a>
-                                    </div><!--./left-->
-
-                                    <div class="right d-flex align-items-center">
-                                        <button class="btn like_btn d-flex align-items-center justify-content-center pb-0">
-                                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z"/>
-                                            </svg>
-                                        </button>
-                                        <button class="btn add_cart_btn d-flex align-items-center justify-content-center">
-                                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7h-1M8 7h-.688M13 5v4m-2-2h4"/>
-                                            </svg>                                              
-                                        </button>
-                                    </div><!--./right-->
-                                </div>
-
-                                <button class="btn mt-4" style="width: 100%;">
-                                    <a href="#" class="btn order_link d-flex align-items-center justify-content-center">
-                                        Order Now
-                                    </a>
-                                </button>
+                                    </button>
 
 
-                            </div><!--./item-->
+                                </div><!--./item-->
 
-                            <div class="item">
-                                <div class="d-flex align-items-center justify-content-between">
-                                    <p class="category_name">Speaker</p>
-                                        <small style="color: #07dd07;">In Stock</small>
-                                        {{-- <small style="color: #f66f6f;">Out Of Stock</small> --}}
-                                        {{-- <small style="color: goldenrod;">Up Comming</small> --}}
-                                    </div>
-                                <p class="product_name mt-1">
-                                    <a href="#" target="_blank">Wireless Audio System Multiroom 360 degree Full full sound speaker</a>
-                                </p>
-
-                                <div class="img_box">
-                                    <a href="#" target="_blank">
-                                        <img src="{{ asset("assets/img/laptop.png") }}" alt="" />
-                                    </a>
-                                </div>
-
-                                <div class="price_box d-flex align-items-center justify-content-between">
-                                    
-                                    <div class="left">
-                                        <a href="#" class="price d-flex align-items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-currency-rupee" viewBox="0 0 16 16">
-                                                <path d="M4 3.06h2.726c1.22 0 2.12.575 2.325 1.724H4v1.051h5.051C8.855 7.001 8 7.558 6.788 7.558H4v1.317L8.437 14h2.11L6.095 8.884h.855c2.316-.018 3.465-1.476 3.688-3.049H12V4.784h-1.345c-.08-.778-.357-1.335-.793-1.732H12V2H4z"/>
-                                            </svg>
-                                            <del>30,000</del>
-                                            15,000
-                                        </a>
-                                    </div><!--./left-->
-
-                                    <div class="right d-flex align-items-center">
-                                        <button class="btn like_btn d-flex align-items-center justify-content-center pb-0">
-                                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z"/>
-                                            </svg>
-                                        </button>
-                                        <button class="btn add_cart_btn d-flex align-items-center justify-content-center">
-                                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7h-1M8 7h-.688M13 5v4m-2-2h4"/>
-                                            </svg>                                              
-                                        </button>
-                                    </div><!--./right-->
-                                </div>
-
-                                <button class="btn mt-4" style="width: 100%;">
-                                    <a href="#" class="btn order_link d-flex align-items-center justify-content-center">
-                                        Order Now
-                                    </a>
-                                </button>
-
-
-                            </div><!--./item-->
-
-                            <div class="item">
-                                <div class="d-flex align-items-center justify-content-between">
-                                    <p class="category_name">Speaker</p>
-                                        <small style="color: #07dd07;">In Stock</small>
-                                        {{-- <small style="color: #f66f6f;">Out Of Stock</small> --}}
-                                        {{-- <small style="color: goldenrod;">Up Comming</small> --}}
-                                    </div>
-                                <p class="product_name mt-1">
-                                    <a href="#" target="_blank">Wireless Audio System Multiroom 360 degree Full full sound speaker</a>
-                                </p>
-
-                                <div class="img_box">
-                                    <a href="#" target="_blank">
-                                        <img src="{{ asset("assets/img/laptop.png") }}" alt="" />
-                                    </a>
-                                </div>
-
-                                <div class="price_box d-flex align-items-center justify-content-between">
-                                    
-                                    <div class="left">
-                                        <a href="#" class="price d-flex align-items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-currency-rupee" viewBox="0 0 16 16">
-                                                <path d="M4 3.06h2.726c1.22 0 2.12.575 2.325 1.724H4v1.051h5.051C8.855 7.001 8 7.558 6.788 7.558H4v1.317L8.437 14h2.11L6.095 8.884h.855c2.316-.018 3.465-1.476 3.688-3.049H12V4.784h-1.345c-.08-.778-.357-1.335-.793-1.732H12V2H4z"/>
-                                            </svg>
-                                            <del>30,000</del>
-                                            15,000
-                                        </a>
-                                    </div><!--./left-->
-
-                                    <div class="right d-flex align-items-center">
-                                        <button class="btn like_btn d-flex align-items-center justify-content-center pb-0">
-                                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z"/>
-                                            </svg>
-                                        </button>
-                                        <button class="btn add_cart_btn d-flex align-items-center justify-content-center">
-                                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7h-1M8 7h-.688M13 5v4m-2-2h4"/>
-                                            </svg>                                              
-                                        </button>
-                                    </div><!--./right-->
-                                </div>
-
-                                <button class="btn mt-4" style="width: 100%;">
-                                    <a href="#" class="btn order_link d-flex align-items-center justify-content-center">
-                                        Order Now
-                                    </a>
-                                </button>
-
-
-                            </div><!--./item-->
-
-                            <div class="item">
-                                <div class="d-flex align-items-center justify-content-between">
-                                    <p class="category_name">Speaker</p>
-                                        <small style="color: #07dd07;">In Stock</small>
-                                        {{-- <small style="color: #f66f6f;">Out Of Stock</small> --}}
-                                        {{-- <small style="color: goldenrod;">Up Comming</small> --}}
-                                    </div>
-                                <p class="product_name mt-1">
-                                    <a href="#" target="_blank">Wireless Audio System Multiroom 360 degree Full full sound speaker</a>
-                                </p>
-
-                                <div class="img_box">
-                                    <a href="#" target="_blank">
-                                        <img src="{{ asset("assets/img/laptop.png") }}" alt="" />
-                                    </a>
-                                </div>
-
-                                <div class="price_box d-flex align-items-center justify-content-between">
-                                    
-                                    <div class="left">
-                                        <a href="#" class="price d-flex align-items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-currency-rupee" viewBox="0 0 16 16">
-                                                <path d="M4 3.06h2.726c1.22 0 2.12.575 2.325 1.724H4v1.051h5.051C8.855 7.001 8 7.558 6.788 7.558H4v1.317L8.437 14h2.11L6.095 8.884h.855c2.316-.018 3.465-1.476 3.688-3.049H12V4.784h-1.345c-.08-.778-.357-1.335-.793-1.732H12V2H4z"/>
-                                            </svg>
-                                            <del>30,000</del>
-                                            15,000
-                                        </a>
-                                    </div><!--./left-->
-
-                                    <div class="right d-flex align-items-center">
-                                        <button class="btn like_btn d-flex align-items-center justify-content-center pb-0">
-                                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z"/>
-                                            </svg>
-                                        </button>
-                                        <button class="btn add_cart_btn d-flex align-items-center justify-content-center">
-                                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7h-1M8 7h-.688M13 5v4m-2-2h4"/>
-                                            </svg>                                              
-                                        </button>
-                                    </div><!--./right-->
-                                </div>
-
-                                <button class="btn mt-4" style="width: 100%;">
-                                    <a href="#" class="btn order_link d-flex align-items-center justify-content-center">
-                                        Order Now
-                                    </a>
-                                </button>
-
-
-                            </div><!--./item-->
-
-                            <div class="item">
-                                <div class="d-flex align-items-center justify-content-between">
-                                    <p class="category_name">Speaker</p>
-                                        <small style="color: #07dd07;">In Stock</small>
-                                        {{-- <small style="color: #f66f6f;">Out Of Stock</small> --}}
-                                        {{-- <small style="color: goldenrod;">Up Comming</small> --}}
-                                    </div>
-                                <p class="product_name mt-1">
-                                    <a href="#" target="_blank">Wireless Audio System Multiroom 360 degree Full full sound speaker</a>
-                                </p>
-
-                                <div class="img_box">
-                                    <a href="#" target="_blank">
-                                        <img src="{{ asset("assets/img/laptop.png") }}" alt="" />
-                                    </a>
-                                </div>
-
-                                <div class="price_box d-flex align-items-center justify-content-between">
-                                    
-                                    <div class="left">
-                                        <a href="#" class="price d-flex align-items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-currency-rupee" viewBox="0 0 16 16">
-                                                <path d="M4 3.06h2.726c1.22 0 2.12.575 2.325 1.724H4v1.051h5.051C8.855 7.001 8 7.558 6.788 7.558H4v1.317L8.437 14h2.11L6.095 8.884h.855c2.316-.018 3.465-1.476 3.688-3.049H12V4.784h-1.345c-.08-.778-.357-1.335-.793-1.732H12V2H4z"/>
-                                            </svg>
-                                            <del>30,000</del>
-                                            15,000
-                                        </a>
-                                    </div><!--./left-->
-
-                                    <div class="right d-flex align-items-center">
-                                        <button class="btn like_btn d-flex align-items-center justify-content-center pb-0">
-                                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z"/>
-                                            </svg>
-                                        </button>
-                                        <button class="btn add_cart_btn d-flex align-items-center justify-content-center">
-                                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7h-1M8 7h-.688M13 5v4m-2-2h4"/>
-                                            </svg>                                              
-                                        </button>
-                                    </div><!--./right-->
-                                </div>
-
-                                <button class="btn mt-4" style="width: 100%;">
-                                    <a href="#" class="btn order_link d-flex align-items-center justify-content-center">
-                                        Order Now
-                                    </a>
-                                </button>
-
-
-                            </div><!--./item-->
-
-                            <div class="item">
-                                <div class="d-flex align-items-center justify-content-between">
-                                    <p class="category_name">Speaker</p>
-                                        <small style="color: #07dd07;">In Stock</small>
-                                        {{-- <small style="color: #f66f6f;">Out Of Stock</small> --}}
-                                        {{-- <small style="color: goldenrod;">Up Comming</small> --}}
-                                    </div>
-                                <p class="product_name mt-1">
-                                    <a href="#" target="_blank">Wireless Audio System Multiroom 360 degree Full full sound speaker</a>
-                                </p>
-
-                                <div class="img_box">
-                                    <a href="#" target="_blank">
-                                        <img src="{{ asset("assets/img/laptop.png") }}" alt="" />
-                                    </a>
-                                </div>
-
-                                <div class="price_box d-flex align-items-center justify-content-between">
-                                    
-                                    <div class="left">
-                                        <a href="#" class="price d-flex align-items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-currency-rupee" viewBox="0 0 16 16">
-                                                <path d="M4 3.06h2.726c1.22 0 2.12.575 2.325 1.724H4v1.051h5.051C8.855 7.001 8 7.558 6.788 7.558H4v1.317L8.437 14h2.11L6.095 8.884h.855c2.316-.018 3.465-1.476 3.688-3.049H12V4.784h-1.345c-.08-.778-.357-1.335-.793-1.732H12V2H4z"/>
-                                            </svg>
-                                            <del>30,000</del>
-                                            15,000
-                                        </a>
-                                    </div><!--./left-->
-
-                                    <div class="right d-flex align-items-center">
-                                        <button class="btn like_btn d-flex align-items-center justify-content-center pb-0">
-                                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z"/>
-                                            </svg>
-                                        </button>
-                                        <button class="btn add_cart_btn d-flex align-items-center justify-content-center">
-                                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7h-1M8 7h-.688M13 5v4m-2-2h4"/>
-                                            </svg>                                              
-                                        </button>
-                                    </div><!--./right-->
-                                </div>
-
-                                <button class="btn mt-4" style="width: 100%;">
-                                    <a href="#" class="btn order_link d-flex align-items-center justify-content-center">
-                                        Order Now
-                                    </a>
-                                </button>
-
-
-                            </div><!--./item-->
+                            @endforeach
                             
                         </div>
                     </div><!--./box-->
                 </div>
-            </section><!--./electronic_product-->
+            </section><!--./laptops_box-->
             
-            <!--================ Start men_fashion_section section ================-->
-            <section class="products_box men_fashion_section">
+            <!--================ Start led_monitor_cpu section ================-->
+            <section class="products_box led_monitor_cpu">
                 <div class="container">
                     <div class="box">
 
                         <div class="heading d-flex align-items-center justify-content-between">
-                            <span>Men`s Fashion</span>
+                            <span>LED Monitor And CPU</span>
                             <button class="btn view_all_btn">
                                 <a href="#" class="d-flex align-items-center" target="_blank">  
                                     View All
@@ -1365,488 +289,86 @@
                             </button>
                         </div><!--./heading-->
                         
-                        <div class="owl-carousel owl-theme mt-3">
+                        <div class="owl-carousel owl-theme led-monitor-cpu-owl-theme mt-3">
 
-                            <div class="item">
-                                <div class="d-flex align-items-center justify-content-between">
-                                    <p class="category_name">Speaker</p>
-                                        <small style="color: #07dd07;">In Stock</small>
-                                        {{-- <small style="color: #f66f6f;">Out Of Stock</small> --}}
-                                        {{-- <small style="color: goldenrod;">Up Comming</small> --}}
+                            @foreach ($led_monitors_CPU as $item)
+                                
+                                <div class="item">
+                                        
+                                    <div class="d-flex align-items-center justify-content-between">
+                                        <p class="category_name">{{ ucwords($item->brand_name) }}</p>
+
+                                        @if ($item->product_status == "in stock")
+                                            <small style="color: #07dd07;">In Stock</small>
+                                            
+                                        @elseif($item->product_status == "up comming")
+                                            <small style="color: #e7aa10;">Up Comming</small>
+                                        @else
+                                            <small style="color: #f66f6f;">Out Of Stock</small>
+                                        @endif
+
                                     </div>
-                                <p class="product_name mt-1">
-                                    <a href="#" target="_blank">Wireless Audio System Multiroom 360 degree Full full sound speaker</a>
-                                </p>
 
-                                <div class="img_box">
-                                    <a href="#" target="_blank">
-                                        <img src="{{ asset("assets/img/laptop.png") }}" alt="" />
-                                    </a>
-                                </div>
+                                    <p class="product_name mt-1">
+                                        <a href="{{ $item->slug }}" target="_blank">{{ $item->name }}</a>
+                                    </p>
 
-                                <div class="price_box d-flex align-items-center justify-content-between">
-                                    
-                                    <div class="left">
-                                        <a href="#" class="price d-flex align-items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-currency-rupee" viewBox="0 0 16 16">
-                                                <path d="M4 3.06h2.726c1.22 0 2.12.575 2.325 1.724H4v1.051h5.051C8.855 7.001 8 7.558 6.788 7.558H4v1.317L8.437 14h2.11L6.095 8.884h.855c2.316-.018 3.465-1.476 3.688-3.049H12V4.784h-1.345c-.08-.778-.357-1.335-.793-1.732H12V2H4z"/>
-                                            </svg>
-                                            <del>30,000</del>
-                                            15,000
+                                    <div class="img_box">
+                                        <a href="#" target="_blank">
+                                            <img src="{{ asset("storage/".$item->thumbnail_img) }}" alt="{{ $item->name }}" />
                                         </a>
-                                    </div><!--./left-->
-
-                                    <div class="right d-flex align-items-center">
-                                        <button class="btn like_btn d-flex align-items-center justify-content-center pb-0">
-                                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z"/>
-                                            </svg>
-                                        </button>
-                                        <button class="btn add_cart_btn d-flex align-items-center justify-content-center">
-                                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7h-1M8 7h-.688M13 5v4m-2-2h4"/>
-                                            </svg>                                              
-                                        </button>
-                                    </div><!--./right-->
-                                </div>
-
-                                <button class="btn mt-4" style="width: 100%;">
-                                    <a href="#" class="btn order_link d-flex align-items-center justify-content-center">
-                                        Order Now
-                                    </a>
-                                </button>
-
-
-                            </div><!--./item-->
-
-                            <div class="item">
-                                <div class="d-flex align-items-center justify-content-between">
-                                    <p class="category_name">Speaker</p>
-                                        <small style="color: #07dd07;">In Stock</small>
-                                        {{-- <small style="color: #f66f6f;">Out Of Stock</small> --}}
-                                        {{-- <small style="color: goldenrod;">Up Comming</small> --}}
                                     </div>
-                                <p class="product_name mt-1">
-                                    <a href="#" target="_blank">Wireless Audio System Multiroom 360 degree Full full sound speaker</a>
-                                </p>
 
-                                <div class="img_box">
-                                    <a href="#" target="_blank">
-                                        <img src="{{ asset("assets/img/laptop.png") }}" alt="" />
-                                    </a>
-                                </div>
+                                    <div class="price_box d-flex align-items-center justify-content-between">
+                                        
+                                        <div class="left">
+                                            <a href="#" class="price d-flex align-items-center">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-currency-rupee" viewBox="0 0 16 16">
+                                                    <path d="M4 3.06h2.726c1.22 0 2.12.575 2.325 1.724H4v1.051h5.051C8.855 7.001 8 7.558 6.788 7.558H4v1.317L8.437 14h2.11L6.095 8.884h.855c2.316-.018 3.465-1.476 3.688-3.049H12V4.784h-1.345c-.08-.778-.357-1.335-.793-1.732H12V2H4z"/>
+                                                </svg>
+                                                <del>30,000</del>
+                                                {{ $item->selling_price }}
+                                            </a>
+                                        </div><!--./left-->
 
-                                <div class="price_box d-flex align-items-center justify-content-between">
-                                    
-                                    <div class="left">
-                                        <a href="#" class="price d-flex align-items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-currency-rupee" viewBox="0 0 16 16">
-                                                <path d="M4 3.06h2.726c1.22 0 2.12.575 2.325 1.724H4v1.051h5.051C8.855 7.001 8 7.558 6.788 7.558H4v1.317L8.437 14h2.11L6.095 8.884h.855c2.316-.018 3.465-1.476 3.688-3.049H12V4.784h-1.345c-.08-.778-.357-1.335-.793-1.732H12V2H4z"/>
-                                            </svg>
-                                            <del>30,000</del>
-                                            15,000
-                                        </a>
-                                    </div><!--./left-->
-
-                                    <div class="right d-flex align-items-center">
-                                        <button class="btn like_btn d-flex align-items-center justify-content-center pb-0">
-                                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z"/>
-                                            </svg>
-                                        </button>
-                                        <button class="btn add_cart_btn d-flex align-items-center justify-content-center">
-                                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7h-1M8 7h-.688M13 5v4m-2-2h4"/>
-                                            </svg>                                              
-                                        </button>
-                                    </div><!--./right-->
-                                </div>
-
-                                <button class="btn mt-4" style="width: 100%;">
-                                    <a href="#" class="btn order_link d-flex align-items-center justify-content-center">
-                                        Order Now
-                                    </a>
-                                </button>
-
-
-                            </div><!--./item-->
-
-                            <div class="item">
-                                <div class="d-flex align-items-center justify-content-between">
-                                    <p class="category_name">Speaker</p>
-                                        <small style="color: #07dd07;">In Stock</small>
-                                        {{-- <small style="color: #f66f6f;">Out Of Stock</small> --}}
-                                        {{-- <small style="color: goldenrod;">Up Comming</small> --}}
+                                        <div class="right d-flex align-items-center">
+                                            <button class="btn like_btn d-flex align-items-center justify-content-center pb-0">
+                                                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z"/>
+                                                </svg>
+                                            </button>
+                                            <button class="btn add_cart_btn d-flex align-items-center justify-content-center">
+                                                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7h-1M8 7h-.688M13 5v4m-2-2h4"/>
+                                                </svg>                                              
+                                            </button>
+                                        </div><!--./right-->
                                     </div>
-                                <p class="product_name mt-1">
-                                    <a href="#" target="_blank">Wireless Audio System Multiroom 360 degree Full full sound speaker</a>
-                                </p>
 
-                                <div class="img_box">
-                                    <a href="#" target="_blank">
-                                        <img src="{{ asset("assets/img/laptop.png") }}" alt="" />
-                                    </a>
-                                </div>
-
-                                <div class="price_box d-flex align-items-center justify-content-between">
-                                    
-                                    <div class="left">
-                                        <a href="#" class="price d-flex align-items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-currency-rupee" viewBox="0 0 16 16">
-                                                <path d="M4 3.06h2.726c1.22 0 2.12.575 2.325 1.724H4v1.051h5.051C8.855 7.001 8 7.558 6.788 7.558H4v1.317L8.437 14h2.11L6.095 8.884h.855c2.316-.018 3.465-1.476 3.688-3.049H12V4.784h-1.345c-.08-.778-.357-1.335-.793-1.732H12V2H4z"/>
-                                            </svg>
-                                            <del>30,000</del>
-                                            15,000
+                                    <button class="btn mt-4" style="width: 100%;">
+                                        <a href="#" class="btn order_link d-flex align-items-center justify-content-center">
+                                            Order Now
                                         </a>
-                                    </div><!--./left-->
-
-                                    <div class="right d-flex align-items-center">
-                                        <button class="btn like_btn d-flex align-items-center justify-content-center pb-0">
-                                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z"/>
-                                            </svg>
-                                        </button>
-                                        <button class="btn add_cart_btn d-flex align-items-center justify-content-center">
-                                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7h-1M8 7h-.688M13 5v4m-2-2h4"/>
-                                            </svg>                                              
-                                        </button>
-                                    </div><!--./right-->
-                                </div>
-
-                                <button class="btn mt-4" style="width: 100%;">
-                                    <a href="#" class="btn order_link d-flex align-items-center justify-content-center">
-                                        Order Now
-                                    </a>
-                                </button>
+                                    </button>
 
 
-                            </div><!--./item-->
+                                </div><!--./item-->
 
-                            <div class="item">
-                                <div class="d-flex align-items-center justify-content-between">
-                                    <p class="category_name">Speaker</p>
-                                        <small style="color: #07dd07;">In Stock</small>
-                                        {{-- <small style="color: #f66f6f;">Out Of Stock</small> --}}
-                                        {{-- <small style="color: goldenrod;">Up Comming</small> --}}
-                                    </div>
-                                <p class="product_name mt-1">
-                                    <a href="#" target="_blank">Wireless Audio System Multiroom 360 degree Full full sound speaker</a>
-                                </p>
-
-                                <div class="img_box">
-                                    <a href="#" target="_blank">
-                                        <img src="{{ asset("assets/img/laptop.png") }}" alt="" />
-                                    </a>
-                                </div>
-
-                                <div class="price_box d-flex align-items-center justify-content-between">
-                                    
-                                    <div class="left">
-                                        <a href="#" class="price d-flex align-items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-currency-rupee" viewBox="0 0 16 16">
-                                                <path d="M4 3.06h2.726c1.22 0 2.12.575 2.325 1.724H4v1.051h5.051C8.855 7.001 8 7.558 6.788 7.558H4v1.317L8.437 14h2.11L6.095 8.884h.855c2.316-.018 3.465-1.476 3.688-3.049H12V4.784h-1.345c-.08-.778-.357-1.335-.793-1.732H12V2H4z"/>
-                                            </svg>
-                                            <del>30,000</del>
-                                            15,000
-                                        </a>
-                                    </div><!--./left-->
-
-                                    <div class="right d-flex align-items-center">
-                                        <button class="btn like_btn d-flex align-items-center justify-content-center pb-0">
-                                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z"/>
-                                            </svg>
-                                        </button>
-                                        <button class="btn add_cart_btn d-flex align-items-center justify-content-center">
-                                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7h-1M8 7h-.688M13 5v4m-2-2h4"/>
-                                            </svg>                                              
-                                        </button>
-                                    </div><!--./right-->
-                                </div>
-
-                                <button class="btn mt-4" style="width: 100%;">
-                                    <a href="#" class="btn order_link d-flex align-items-center justify-content-center">
-                                        Order Now
-                                    </a>
-                                </button>
-
-
-                            </div><!--./item-->
-
-                            <div class="item">
-                                <div class="d-flex align-items-center justify-content-between">
-                                    <p class="category_name">Speaker</p>
-                                        <small style="color: #07dd07;">In Stock</small>
-                                        {{-- <small style="color: #f66f6f;">Out Of Stock</small> --}}
-                                        {{-- <small style="color: goldenrod;">Up Comming</small> --}}
-                                    </div>
-                                <p class="product_name mt-1">
-                                    <a href="#" target="_blank">Wireless Audio System Multiroom 360 degree Full full sound speaker</a>
-                                </p>
-
-                                <div class="img_box">
-                                    <a href="#" target="_blank">
-                                        <img src="{{ asset("assets/img/laptop.png") }}" alt="" />
-                                    </a>
-                                </div>
-
-                                <div class="price_box d-flex align-items-center justify-content-between">
-                                    
-                                    <div class="left">
-                                        <a href="#" class="price d-flex align-items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-currency-rupee" viewBox="0 0 16 16">
-                                                <path d="M4 3.06h2.726c1.22 0 2.12.575 2.325 1.724H4v1.051h5.051C8.855 7.001 8 7.558 6.788 7.558H4v1.317L8.437 14h2.11L6.095 8.884h.855c2.316-.018 3.465-1.476 3.688-3.049H12V4.784h-1.345c-.08-.778-.357-1.335-.793-1.732H12V2H4z"/>
-                                            </svg>
-                                            <del>30,000</del>
-                                            15,000
-                                        </a>
-                                    </div><!--./left-->
-
-                                    <div class="right d-flex align-items-center">
-                                        <button class="btn like_btn d-flex align-items-center justify-content-center pb-0">
-                                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z"/>
-                                            </svg>
-                                        </button>
-                                        <button class="btn add_cart_btn d-flex align-items-center justify-content-center">
-                                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7h-1M8 7h-.688M13 5v4m-2-2h4"/>
-                                            </svg>                                              
-                                        </button>
-                                    </div><!--./right-->
-                                </div>
-
-                                <button class="btn mt-4" style="width: 100%;">
-                                    <a href="#" class="btn order_link d-flex align-items-center justify-content-center">
-                                        Order Now
-                                    </a>
-                                </button>
-
-
-                            </div><!--./item-->
-
-                            <div class="item">
-                                <div class="d-flex align-items-center justify-content-between">
-                                    <p class="category_name">Speaker</p>
-                                        <small style="color: #07dd07;">In Stock</small>
-                                        {{-- <small style="color: #f66f6f;">Out Of Stock</small> --}}
-                                        {{-- <small style="color: goldenrod;">Up Comming</small> --}}
-                                    </div>
-                                <p class="product_name mt-1">
-                                    <a href="#" target="_blank">Wireless Audio System Multiroom 360 degree Full full sound speaker</a>
-                                </p>
-
-                                <div class="img_box">
-                                    <a href="#" target="_blank">
-                                        <img src="{{ asset("assets/img/laptop.png") }}" alt="" />
-                                    </a>
-                                </div>
-
-                                <div class="price_box d-flex align-items-center justify-content-between">
-                                    
-                                    <div class="left">
-                                        <a href="#" class="price d-flex align-items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-currency-rupee" viewBox="0 0 16 16">
-                                                <path d="M4 3.06h2.726c1.22 0 2.12.575 2.325 1.724H4v1.051h5.051C8.855 7.001 8 7.558 6.788 7.558H4v1.317L8.437 14h2.11L6.095 8.884h.855c2.316-.018 3.465-1.476 3.688-3.049H12V4.784h-1.345c-.08-.778-.357-1.335-.793-1.732H12V2H4z"/>
-                                            </svg>
-                                            <del>30,000</del>
-                                            15,000
-                                        </a>
-                                    </div><!--./left-->
-
-                                    <div class="right d-flex align-items-center">
-                                        <button class="btn like_btn d-flex align-items-center justify-content-center pb-0">
-                                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z"/>
-                                            </svg>
-                                        </button>
-                                        <button class="btn add_cart_btn d-flex align-items-center justify-content-center">
-                                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7h-1M8 7h-.688M13 5v4m-2-2h4"/>
-                                            </svg>                                              
-                                        </button>
-                                    </div><!--./right-->
-                                </div>
-
-                                <button class="btn mt-4" style="width: 100%;">
-                                    <a href="#" class="btn order_link d-flex align-items-center justify-content-center">
-                                        Order Now
-                                    </a>
-                                </button>
-
-
-                            </div><!--./item-->
-
-                            <div class="item">
-                                <div class="d-flex align-items-center justify-content-between">
-                                    <p class="category_name">Speaker</p>
-                                        <small style="color: #07dd07;">In Stock</small>
-                                        {{-- <small style="color: #f66f6f;">Out Of Stock</small> --}}
-                                        {{-- <small style="color: goldenrod;">Up Comming</small> --}}
-                                    </div>
-                                <p class="product_name mt-1">
-                                    <a href="#" target="_blank">Wireless Audio System Multiroom 360 degree Full full sound speaker</a>
-                                </p>
-
-                                <div class="img_box">
-                                    <a href="#" target="_blank">
-                                        <img src="{{ asset("assets/img/laptop.png") }}" alt="" />
-                                    </a>
-                                </div>
-
-                                <div class="price_box d-flex align-items-center justify-content-between">
-                                    
-                                    <div class="left">
-                                        <a href="#" class="price d-flex align-items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-currency-rupee" viewBox="0 0 16 16">
-                                                <path d="M4 3.06h2.726c1.22 0 2.12.575 2.325 1.724H4v1.051h5.051C8.855 7.001 8 7.558 6.788 7.558H4v1.317L8.437 14h2.11L6.095 8.884h.855c2.316-.018 3.465-1.476 3.688-3.049H12V4.784h-1.345c-.08-.778-.357-1.335-.793-1.732H12V2H4z"/>
-                                            </svg>
-                                            <del>30,000</del>
-                                            15,000
-                                        </a>
-                                    </div><!--./left-->
-
-                                    <div class="right d-flex align-items-center">
-                                        <button class="btn like_btn d-flex align-items-center justify-content-center pb-0">
-                                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z"/>
-                                            </svg>
-                                        </button>
-                                        <button class="btn add_cart_btn d-flex align-items-center justify-content-center">
-                                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7h-1M8 7h-.688M13 5v4m-2-2h4"/>
-                                            </svg>                                              
-                                        </button>
-                                    </div><!--./right-->
-                                </div>
-
-                                <button class="btn mt-4" style="width: 100%;">
-                                    <a href="#" class="btn order_link d-flex align-items-center justify-content-center">
-                                        Order Now
-                                    </a>
-                                </button>
-
-
-                            </div><!--./item-->
-
-                            <div class="item">
-                                <div class="d-flex align-items-center justify-content-between">
-                                    <p class="category_name">Speaker</p>
-                                        <small style="color: #07dd07;">In Stock</small>
-                                        {{-- <small style="color: #f66f6f;">Out Of Stock</small> --}}
-                                        {{-- <small style="color: goldenrod;">Up Comming</small> --}}
-                                    </div>
-                                <p class="product_name mt-1">
-                                    <a href="#" target="_blank">Wireless Audio System Multiroom 360 degree Full full sound speaker</a>
-                                </p>
-
-                                <div class="img_box">
-                                    <a href="#" target="_blank">
-                                        <img src="{{ asset("assets/img/laptop.png") }}" alt="" />
-                                    </a>
-                                </div>
-
-                                <div class="price_box d-flex align-items-center justify-content-between">
-                                    
-                                    <div class="left">
-                                        <a href="#" class="price d-flex align-items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-currency-rupee" viewBox="0 0 16 16">
-                                                <path d="M4 3.06h2.726c1.22 0 2.12.575 2.325 1.724H4v1.051h5.051C8.855 7.001 8 7.558 6.788 7.558H4v1.317L8.437 14h2.11L6.095 8.884h.855c2.316-.018 3.465-1.476 3.688-3.049H12V4.784h-1.345c-.08-.778-.357-1.335-.793-1.732H12V2H4z"/>
-                                            </svg>
-                                            <del>30,000</del>
-                                            15,000
-                                        </a>
-                                    </div><!--./left-->
-
-                                    <div class="right d-flex align-items-center">
-                                        <button class="btn like_btn d-flex align-items-center justify-content-center pb-0">
-                                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z"/>
-                                            </svg>
-                                        </button>
-                                        <button class="btn add_cart_btn d-flex align-items-center justify-content-center">
-                                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7h-1M8 7h-.688M13 5v4m-2-2h4"/>
-                                            </svg>                                              
-                                        </button>
-                                    </div><!--./right-->
-                                </div>
-
-                                <button class="btn mt-4" style="width: 100%;">
-                                    <a href="#" class="btn order_link d-flex align-items-center justify-content-center">
-                                        Order Now
-                                    </a>
-                                </button>
-
-
-                            </div><!--./item-->
-
-                            <div class="item">
-                                <div class="d-flex align-items-center justify-content-between">
-                                    <p class="category_name">Speaker</p>
-                                        <small style="color: #07dd07;">In Stock</small>
-                                        {{-- <small style="color: #f66f6f;">Out Of Stock</small> --}}
-                                        {{-- <small style="color: goldenrod;">Up Comming</small> --}}
-                                    </div>
-                                <p class="product_name mt-1">
-                                    <a href="#" target="_blank">Wireless Audio System Multiroom 360 degree Full full sound speaker</a>
-                                </p>
-
-                                <div class="img_box">
-                                    <a href="#" target="_blank">
-                                        <img src="{{ asset("assets/img/laptop.png") }}" alt="" />
-                                    </a>
-                                </div>
-
-                                <div class="price_box d-flex align-items-center justify-content-between">
-                                    
-                                    <div class="left">
-                                        <a href="#" class="price d-flex align-items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-currency-rupee" viewBox="0 0 16 16">
-                                                <path d="M4 3.06h2.726c1.22 0 2.12.575 2.325 1.724H4v1.051h5.051C8.855 7.001 8 7.558 6.788 7.558H4v1.317L8.437 14h2.11L6.095 8.884h.855c2.316-.018 3.465-1.476 3.688-3.049H12V4.784h-1.345c-.08-.778-.357-1.335-.793-1.732H12V2H4z"/>
-                                            </svg>
-                                            <del>30,000</del>
-                                            15,000
-                                        </a>
-                                    </div><!--./left-->
-
-                                    <div class="right d-flex align-items-center">
-                                        <button class="btn like_btn d-flex align-items-center justify-content-center pb-0">
-                                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z"/>
-                                            </svg>
-                                        </button>
-                                        <button class="btn add_cart_btn d-flex align-items-center justify-content-center">
-                                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7h-1M8 7h-.688M13 5v4m-2-2h4"/>
-                                            </svg>                                              
-                                        </button>
-                                    </div><!--./right-->
-                                </div>
-
-                                <button class="btn mt-4" style="width: 100%;">
-                                    <a href="#" class="btn order_link d-flex align-items-center justify-content-center">
-                                        Order Now
-                                    </a>
-                                </button>
-
-
-                            </div><!--./item-->
+                            @endforeach
                             
+
                         </div>
                     </div><!--./box-->
                 </div>
-            </section><!--./men_fashion_section-->
+            </section><!--./led_monitor_cpu-->
             
-            <!--=============== Start men_fashion_section section =================-->
-            <section class="products_box men_fashion_section">
+            <!--=============== Start phones_tablets section =================-->
+            <section class="products_box phones_tablets">
                 <div class="container">
                     <div class="box">
 
                         <div class="heading d-flex align-items-center justify-content-between">
-                            <span>Women`s Fashion</span>
+                            <span>Phone And Tablet</span>
                             <button class="btn view_all_btn">
                                 <a href="#" class="d-flex align-items-center" target="_blank">  
                                     View All
@@ -1857,488 +379,85 @@
                             </button>
                         </div><!--./heading-->
                         
-                        <div class="owl-carousel owl-theme mt-3">
+                        <div class="owl-carousel owl-theme phones-tablets-owl-theme mt-3">
 
-                            <div class="item">
-                                <div class="d-flex align-items-center justify-content-between">
-                                    <p class="category_name">Speaker</p>
-                                        <small style="color: #07dd07;">In Stock</small>
-                                        {{-- <small style="color: #f66f6f;">Out Of Stock</small> --}}
-                                        {{-- <small style="color: goldenrod;">Up Comming</small> --}}
+                            @foreach ($phones_tablets as $item)
+                                
+                                <div class="item">
+                                        
+                                    <div class="d-flex align-items-center justify-content-between">
+                                        <p class="category_name">{{ ucwords($item->brand_name) }}</p>
+
+                                        @if ($item->product_status == "in stock")
+                                            <small style="color: #07dd07;">In Stock</small>
+                                            
+                                        @elseif($item->product_status == "up comming")
+                                            <small style="color: #e7aa10;">Up Comming</small>
+                                        @else
+                                            <small style="color: #f66f6f;">Out Of Stock</small>
+                                        @endif
+
                                     </div>
-                                <p class="product_name mt-1">
-                                    <a href="#" target="_blank">Wireless Audio System Multiroom 360 degree Full full sound speaker</a>
-                                </p>
 
-                                <div class="img_box">
-                                    <a href="#" target="_blank">
-                                        <img src="{{ asset("assets/img/laptop.png") }}" alt="" />
-                                    </a>
-                                </div>
+                                    <p class="product_name mt-1">
+                                        <a href="{{ $item->slug }}" target="_blank">{{ $item->name }}</a>
+                                    </p>
 
-                                <div class="price_box d-flex align-items-center justify-content-between">
-                                    
-                                    <div class="left">
-                                        <a href="#" class="price d-flex align-items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-currency-rupee" viewBox="0 0 16 16">
-                                                <path d="M4 3.06h2.726c1.22 0 2.12.575 2.325 1.724H4v1.051h5.051C8.855 7.001 8 7.558 6.788 7.558H4v1.317L8.437 14h2.11L6.095 8.884h.855c2.316-.018 3.465-1.476 3.688-3.049H12V4.784h-1.345c-.08-.778-.357-1.335-.793-1.732H12V2H4z"/>
-                                            </svg>
-                                            <del>30,000</del>
-                                            15,000
+                                    <div class="img_box">
+                                        <a href="#" target="_blank">
+                                            <img src="{{ asset("storage/".$item->thumbnail_img) }}" alt="{{ $item->name }}" />
                                         </a>
-                                    </div><!--./left-->
-
-                                    <div class="right d-flex align-items-center">
-                                        <button class="btn like_btn d-flex align-items-center justify-content-center pb-0">
-                                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z"/>
-                                            </svg>
-                                        </button>
-                                        <button class="btn add_cart_btn d-flex align-items-center justify-content-center">
-                                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7h-1M8 7h-.688M13 5v4m-2-2h4"/>
-                                            </svg>                                              
-                                        </button>
-                                    </div><!--./right-->
-                                </div>
-
-                                <button class="btn mt-4" style="width: 100%;">
-                                    <a href="#" class="btn order_link d-flex align-items-center justify-content-center">
-                                        Order Now
-                                    </a>
-                                </button>
-
-
-                            </div><!--./item-->
-
-                            <div class="item">
-                                <div class="d-flex align-items-center justify-content-between">
-                                    <p class="category_name">Speaker</p>
-                                        <small style="color: #07dd07;">In Stock</small>
-                                        {{-- <small style="color: #f66f6f;">Out Of Stock</small> --}}
-                                        {{-- <small style="color: goldenrod;">Up Comming</small> --}}
                                     </div>
-                                <p class="product_name mt-1">
-                                    <a href="#" target="_blank">Wireless Audio System Multiroom 360 degree Full full sound speaker</a>
-                                </p>
 
-                                <div class="img_box">
-                                    <a href="#" target="_blank">
-                                        <img src="{{ asset("assets/img/laptop.png") }}" alt="" />
-                                    </a>
-                                </div>
+                                    <div class="price_box d-flex align-items-center justify-content-between">
+                                        
+                                        <div class="left">
+                                            <a href="#" class="price d-flex align-items-center">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-currency-rupee" viewBox="0 0 16 16">
+                                                    <path d="M4 3.06h2.726c1.22 0 2.12.575 2.325 1.724H4v1.051h5.051C8.855 7.001 8 7.558 6.788 7.558H4v1.317L8.437 14h2.11L6.095 8.884h.855c2.316-.018 3.465-1.476 3.688-3.049H12V4.784h-1.345c-.08-.778-.357-1.335-.793-1.732H12V2H4z"/>
+                                                </svg>
+                                                <del>30,000</del>
+                                                {{ $item->selling_price }}
+                                            </a>
+                                        </div><!--./left-->
 
-                                <div class="price_box d-flex align-items-center justify-content-between">
-                                    
-                                    <div class="left">
-                                        <a href="#" class="price d-flex align-items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-currency-rupee" viewBox="0 0 16 16">
-                                                <path d="M4 3.06h2.726c1.22 0 2.12.575 2.325 1.724H4v1.051h5.051C8.855 7.001 8 7.558 6.788 7.558H4v1.317L8.437 14h2.11L6.095 8.884h.855c2.316-.018 3.465-1.476 3.688-3.049H12V4.784h-1.345c-.08-.778-.357-1.335-.793-1.732H12V2H4z"/>
-                                            </svg>
-                                            <del>30,000</del>
-                                            15,000
-                                        </a>
-                                    </div><!--./left-->
-
-                                    <div class="right d-flex align-items-center">
-                                        <button class="btn like_btn d-flex align-items-center justify-content-center pb-0">
-                                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z"/>
-                                            </svg>
-                                        </button>
-                                        <button class="btn add_cart_btn d-flex align-items-center justify-content-center">
-                                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7h-1M8 7h-.688M13 5v4m-2-2h4"/>
-                                            </svg>                                              
-                                        </button>
-                                    </div><!--./right-->
-                                </div>
-
-                                <button class="btn mt-4" style="width: 100%;">
-                                    <a href="#" class="btn order_link d-flex align-items-center justify-content-center">
-                                        Order Now
-                                    </a>
-                                </button>
-
-
-                            </div><!--./item-->
-
-                            <div class="item">
-                                <div class="d-flex align-items-center justify-content-between">
-                                    <p class="category_name">Speaker</p>
-                                        <small style="color: #07dd07;">In Stock</small>
-                                        {{-- <small style="color: #f66f6f;">Out Of Stock</small> --}}
-                                        {{-- <small style="color: goldenrod;">Up Comming</small> --}}
+                                        <div class="right d-flex align-items-center">
+                                            <button class="btn like_btn d-flex align-items-center justify-content-center pb-0">
+                                                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z"/>
+                                                </svg>
+                                            </button>
+                                            <button class="btn add_cart_btn d-flex align-items-center justify-content-center">
+                                                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7h-1M8 7h-.688M13 5v4m-2-2h4"/>
+                                                </svg>                                              
+                                            </button>
+                                        </div><!--./right-->
                                     </div>
-                                <p class="product_name mt-1">
-                                    <a href="#" target="_blank">Wireless Audio System Multiroom 360 degree Full full sound speaker</a>
-                                </p>
 
-                                <div class="img_box">
-                                    <a href="#" target="_blank">
-                                        <img src="{{ asset("assets/img/laptop.png") }}" alt="" />
-                                    </a>
-                                </div>
-
-                                <div class="price_box d-flex align-items-center justify-content-between">
-                                    
-                                    <div class="left">
-                                        <a href="#" class="price d-flex align-items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-currency-rupee" viewBox="0 0 16 16">
-                                                <path d="M4 3.06h2.726c1.22 0 2.12.575 2.325 1.724H4v1.051h5.051C8.855 7.001 8 7.558 6.788 7.558H4v1.317L8.437 14h2.11L6.095 8.884h.855c2.316-.018 3.465-1.476 3.688-3.049H12V4.784h-1.345c-.08-.778-.357-1.335-.793-1.732H12V2H4z"/>
-                                            </svg>
-                                            <del>30,000</del>
-                                            15,000
+                                    <button class="btn mt-4" style="width: 100%;">
+                                        <a href="#" class="btn order_link d-flex align-items-center justify-content-center">
+                                            Order Now
                                         </a>
-                                    </div><!--./left-->
-
-                                    <div class="right d-flex align-items-center">
-                                        <button class="btn like_btn d-flex align-items-center justify-content-center pb-0">
-                                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z"/>
-                                            </svg>
-                                        </button>
-                                        <button class="btn add_cart_btn d-flex align-items-center justify-content-center">
-                                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7h-1M8 7h-.688M13 5v4m-2-2h4"/>
-                                            </svg>                                              
-                                        </button>
-                                    </div><!--./right-->
-                                </div>
-
-                                <button class="btn mt-4" style="width: 100%;">
-                                    <a href="#" class="btn order_link d-flex align-items-center justify-content-center">
-                                        Order Now
-                                    </a>
-                                </button>
+                                    </button>
 
 
-                            </div><!--./item-->
+                                </div><!--./item-->
 
-                            <div class="item">
-                                <div class="d-flex align-items-center justify-content-between">
-                                    <p class="category_name">Speaker</p>
-                                        <small style="color: #07dd07;">In Stock</small>
-                                        {{-- <small style="color: #f66f6f;">Out Of Stock</small> --}}
-                                        {{-- <small style="color: goldenrod;">Up Comming</small> --}}
-                                    </div>
-                                <p class="product_name mt-1">
-                                    <a href="#" target="_blank">Wireless Audio System Multiroom 360 degree Full full sound speaker</a>
-                                </p>
-
-                                <div class="img_box">
-                                    <a href="#" target="_blank">
-                                        <img src="{{ asset("assets/img/laptop.png") }}" alt="" />
-                                    </a>
-                                </div>
-
-                                <div class="price_box d-flex align-items-center justify-content-between">
-                                    
-                                    <div class="left">
-                                        <a href="#" class="price d-flex align-items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-currency-rupee" viewBox="0 0 16 16">
-                                                <path d="M4 3.06h2.726c1.22 0 2.12.575 2.325 1.724H4v1.051h5.051C8.855 7.001 8 7.558 6.788 7.558H4v1.317L8.437 14h2.11L6.095 8.884h.855c2.316-.018 3.465-1.476 3.688-3.049H12V4.784h-1.345c-.08-.778-.357-1.335-.793-1.732H12V2H4z"/>
-                                            </svg>
-                                            <del>30,000</del>
-                                            15,000
-                                        </a>
-                                    </div><!--./left-->
-
-                                    <div class="right d-flex align-items-center">
-                                        <button class="btn like_btn d-flex align-items-center justify-content-center pb-0">
-                                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z"/>
-                                            </svg>
-                                        </button>
-                                        <button class="btn add_cart_btn d-flex align-items-center justify-content-center">
-                                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7h-1M8 7h-.688M13 5v4m-2-2h4"/>
-                                            </svg>                                              
-                                        </button>
-                                    </div><!--./right-->
-                                </div>
-
-                                <button class="btn mt-4" style="width: 100%;">
-                                    <a href="#" class="btn order_link d-flex align-items-center justify-content-center">
-                                        Order Now
-                                    </a>
-                                </button>
-
-
-                            </div><!--./item-->
-
-                            <div class="item">
-                                <div class="d-flex align-items-center justify-content-between">
-                                    <p class="category_name">Speaker</p>
-                                        <small style="color: #07dd07;">In Stock</small>
-                                        {{-- <small style="color: #f66f6f;">Out Of Stock</small> --}}
-                                        {{-- <small style="color: goldenrod;">Up Comming</small> --}}
-                                    </div>
-                                <p class="product_name mt-1">
-                                    <a href="#" target="_blank">Wireless Audio System Multiroom 360 degree Full full sound speaker</a>
-                                </p>
-
-                                <div class="img_box">
-                                    <a href="#" target="_blank">
-                                        <img src="{{ asset("assets/img/laptop.png") }}" alt="" />
-                                    </a>
-                                </div>
-
-                                <div class="price_box d-flex align-items-center justify-content-between">
-                                    
-                                    <div class="left">
-                                        <a href="#" class="price d-flex align-items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-currency-rupee" viewBox="0 0 16 16">
-                                                <path d="M4 3.06h2.726c1.22 0 2.12.575 2.325 1.724H4v1.051h5.051C8.855 7.001 8 7.558 6.788 7.558H4v1.317L8.437 14h2.11L6.095 8.884h.855c2.316-.018 3.465-1.476 3.688-3.049H12V4.784h-1.345c-.08-.778-.357-1.335-.793-1.732H12V2H4z"/>
-                                            </svg>
-                                            <del>30,000</del>
-                                            15,000
-                                        </a>
-                                    </div><!--./left-->
-
-                                    <div class="right d-flex align-items-center">
-                                        <button class="btn like_btn d-flex align-items-center justify-content-center pb-0">
-                                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z"/>
-                                            </svg>
-                                        </button>
-                                        <button class="btn add_cart_btn d-flex align-items-center justify-content-center">
-                                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7h-1M8 7h-.688M13 5v4m-2-2h4"/>
-                                            </svg>                                              
-                                        </button>
-                                    </div><!--./right-->
-                                </div>
-
-                                <button class="btn mt-4" style="width: 100%;">
-                                    <a href="#" class="btn order_link d-flex align-items-center justify-content-center">
-                                        Order Now
-                                    </a>
-                                </button>
-
-
-                            </div><!--./item-->
-
-                            <div class="item">
-                                <div class="d-flex align-items-center justify-content-between">
-                                    <p class="category_name">Speaker</p>
-                                        <small style="color: #07dd07;">In Stock</small>
-                                        {{-- <small style="color: #f66f6f;">Out Of Stock</small> --}}
-                                        {{-- <small style="color: goldenrod;">Up Comming</small> --}}
-                                    </div>
-                                <p class="product_name mt-1">
-                                    <a href="#" target="_blank">Wireless Audio System Multiroom 360 degree Full full sound speaker</a>
-                                </p>
-
-                                <div class="img_box">
-                                    <a href="#" target="_blank">
-                                        <img src="{{ asset("assets/img/laptop.png") }}" alt="" />
-                                    </a>
-                                </div>
-
-                                <div class="price_box d-flex align-items-center justify-content-between">
-                                    
-                                    <div class="left">
-                                        <a href="#" class="price d-flex align-items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-currency-rupee" viewBox="0 0 16 16">
-                                                <path d="M4 3.06h2.726c1.22 0 2.12.575 2.325 1.724H4v1.051h5.051C8.855 7.001 8 7.558 6.788 7.558H4v1.317L8.437 14h2.11L6.095 8.884h.855c2.316-.018 3.465-1.476 3.688-3.049H12V4.784h-1.345c-.08-.778-.357-1.335-.793-1.732H12V2H4z"/>
-                                            </svg>
-                                            <del>30,000</del>
-                                            15,000
-                                        </a>
-                                    </div><!--./left-->
-
-                                    <div class="right d-flex align-items-center">
-                                        <button class="btn like_btn d-flex align-items-center justify-content-center pb-0">
-                                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z"/>
-                                            </svg>
-                                        </button>
-                                        <button class="btn add_cart_btn d-flex align-items-center justify-content-center">
-                                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7h-1M8 7h-.688M13 5v4m-2-2h4"/>
-                                            </svg>                                              
-                                        </button>
-                                    </div><!--./right-->
-                                </div>
-
-                                <button class="btn mt-4" style="width: 100%;">
-                                    <a href="#" class="btn order_link d-flex align-items-center justify-content-center">
-                                        Order Now
-                                    </a>
-                                </button>
-
-
-                            </div><!--./item-->
-
-                            <div class="item">
-                                <div class="d-flex align-items-center justify-content-between">
-                                    <p class="category_name">Speaker</p>
-                                        <small style="color: #07dd07;">In Stock</small>
-                                        {{-- <small style="color: #f66f6f;">Out Of Stock</small> --}}
-                                        {{-- <small style="color: goldenrod;">Up Comming</small> --}}
-                                    </div>
-                                <p class="product_name mt-1">
-                                    <a href="#" target="_blank">Wireless Audio System Multiroom 360 degree Full full sound speaker</a>
-                                </p>
-
-                                <div class="img_box">
-                                    <a href="#" target="_blank">
-                                        <img src="{{ asset("assets/img/laptop.png") }}" alt="" />
-                                    </a>
-                                </div>
-
-                                <div class="price_box d-flex align-items-center justify-content-between">
-                                    
-                                    <div class="left">
-                                        <a href="#" class="price d-flex align-items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-currency-rupee" viewBox="0 0 16 16">
-                                                <path d="M4 3.06h2.726c1.22 0 2.12.575 2.325 1.724H4v1.051h5.051C8.855 7.001 8 7.558 6.788 7.558H4v1.317L8.437 14h2.11L6.095 8.884h.855c2.316-.018 3.465-1.476 3.688-3.049H12V4.784h-1.345c-.08-.778-.357-1.335-.793-1.732H12V2H4z"/>
-                                            </svg>
-                                            <del>30,000</del>
-                                            15,000
-                                        </a>
-                                    </div><!--./left-->
-
-                                    <div class="right d-flex align-items-center">
-                                        <button class="btn like_btn d-flex align-items-center justify-content-center pb-0">
-                                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z"/>
-                                            </svg>
-                                        </button>
-                                        <button class="btn add_cart_btn d-flex align-items-center justify-content-center">
-                                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7h-1M8 7h-.688M13 5v4m-2-2h4"/>
-                                            </svg>                                              
-                                        </button>
-                                    </div><!--./right-->
-                                </div>
-
-                                <button class="btn mt-4" style="width: 100%;">
-                                    <a href="#" class="btn order_link d-flex align-items-center justify-content-center">
-                                        Order Now
-                                    </a>
-                                </button>
-
-
-                            </div><!--./item-->
-
-                            <div class="item">
-                                <div class="d-flex align-items-center justify-content-between">
-                                    <p class="category_name">Speaker</p>
-                                        <small style="color: #07dd07;">In Stock</small>
-                                        {{-- <small style="color: #f66f6f;">Out Of Stock</small> --}}
-                                        {{-- <small style="color: goldenrod;">Up Comming</small> --}}
-                                    </div>
-                                <p class="product_name mt-1">
-                                    <a href="#" target="_blank">Wireless Audio System Multiroom 360 degree Full full sound speaker</a>
-                                </p>
-
-                                <div class="img_box">
-                                    <a href="#" target="_blank">
-                                        <img src="{{ asset("assets/img/laptop.png") }}" alt="" />
-                                    </a>
-                                </div>
-
-                                <div class="price_box d-flex align-items-center justify-content-between">
-                                    
-                                    <div class="left">
-                                        <a href="#" class="price d-flex align-items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-currency-rupee" viewBox="0 0 16 16">
-                                                <path d="M4 3.06h2.726c1.22 0 2.12.575 2.325 1.724H4v1.051h5.051C8.855 7.001 8 7.558 6.788 7.558H4v1.317L8.437 14h2.11L6.095 8.884h.855c2.316-.018 3.465-1.476 3.688-3.049H12V4.784h-1.345c-.08-.778-.357-1.335-.793-1.732H12V2H4z"/>
-                                            </svg>
-                                            <del>30,000</del>
-                                            15,000
-                                        </a>
-                                    </div><!--./left-->
-
-                                    <div class="right d-flex align-items-center">
-                                        <button class="btn like_btn d-flex align-items-center justify-content-center pb-0">
-                                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z"/>
-                                            </svg>
-                                        </button>
-                                        <button class="btn add_cart_btn d-flex align-items-center justify-content-center">
-                                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7h-1M8 7h-.688M13 5v4m-2-2h4"/>
-                                            </svg>                                              
-                                        </button>
-                                    </div><!--./right-->
-                                </div>
-
-                                <button class="btn mt-4" style="width: 100%;">
-                                    <a href="#" class="btn order_link d-flex align-items-center justify-content-center">
-                                        Order Now
-                                    </a>
-                                </button>
-
-
-                            </div><!--./item-->
-
-                            <div class="item">
-                                <div class="d-flex align-items-center justify-content-between">
-                                    <p class="category_name">Speaker</p>
-                                        <small style="color: #07dd07;">In Stock</small>
-                                        {{-- <small style="color: #f66f6f;">Out Of Stock</small> --}}
-                                        {{-- <small style="color: goldenrod;">Up Comming</small> --}}
-                                    </div>
-                                <p class="product_name mt-1">
-                                    <a href="#" target="_blank">Wireless Audio System Multiroom 360 degree Full full sound speaker</a>
-                                </p>
-
-                                <div class="img_box">
-                                    <a href="#" target="_blank">
-                                        <img src="{{ asset("assets/img/laptop.png") }}" alt="" />
-                                    </a>
-                                </div>
-
-                                <div class="price_box d-flex align-items-center justify-content-between">
-                                    
-                                    <div class="left">
-                                        <a href="#" class="price d-flex align-items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-currency-rupee" viewBox="0 0 16 16">
-                                                <path d="M4 3.06h2.726c1.22 0 2.12.575 2.325 1.724H4v1.051h5.051C8.855 7.001 8 7.558 6.788 7.558H4v1.317L8.437 14h2.11L6.095 8.884h.855c2.316-.018 3.465-1.476 3.688-3.049H12V4.784h-1.345c-.08-.778-.357-1.335-.793-1.732H12V2H4z"/>
-                                            </svg>
-                                            <del>30,000</del>
-                                            15,000
-                                        </a>
-                                    </div><!--./left-->
-
-                                    <div class="right d-flex align-items-center">
-                                        <button class="btn like_btn d-flex align-items-center justify-content-center pb-0">
-                                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z"/>
-                                            </svg>
-                                        </button>
-                                        <button class="btn add_cart_btn d-flex align-items-center justify-content-center">
-                                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7h-1M8 7h-.688M13 5v4m-2-2h4"/>
-                                            </svg>                                              
-                                        </button>
-                                    </div><!--./right-->
-                                </div>
-
-                                <button class="btn mt-4" style="width: 100%;">
-                                    <a href="#" class="btn order_link d-flex align-items-center justify-content-center">
-                                        Order Now
-                                    </a>
-                                </button>
-
-
-                            </div><!--./item-->
+                            @endforeach
                             
                         </div>
                     </div><!--./box-->
                 </div>
-            </section><!--./men_fashion_section-->
+            </section><!--./phones_tablets-->
             
-            <!--============== Start books_stationery_section section =============-->
-            <section class="products_box books_stationery_section">
+            <!--============== Start accessories section =============-->
+            <section class="products_box accessories">
                 <div class="container">
                     <div class="box">
 
                         <div class="heading d-flex align-items-center justify-content-between">
-                            <span>Stationery</span>
+                            <span>Accessories</span>
                             <button class="btn view_all_btn">
                                 <a href="#" class="d-flex align-items-center" target="_blank">  
                                     View All
@@ -2349,480 +468,77 @@
                             </button>
                         </div><!--./heading-->
                         
-                        <div class="owl-carousel owl-theme mt-3">
+                        <div class="owl-carousel owl-theme accessories-owl-theme mt-3">
 
-                            <div class="item">
-                                <div class="d-flex align-items-center justify-content-between">
-                                    <p class="category_name">Speaker</p>
-                                        <small style="color: #07dd07;">In Stock</small>
-                                        {{-- <small style="color: #f66f6f;">Out Of Stock</small> --}}
-                                        {{-- <small style="color: goldenrod;">Up Comming</small> --}}
+                            @foreach ($accessories as $item)
+                                
+                                <div class="item">
+                                        
+                                    <div class="d-flex align-items-center justify-content-between">
+                                        <p class="category_name">{{ ucwords($item->brand_name) }}</p>
+
+                                        @if ($item->product_status == "in stock")
+                                            <small style="color: #07dd07;">In Stock</small>
+                                            
+                                        @elseif($item->product_status == "up comming")
+                                            <small style="color: #e7aa10;">Up Comming</small>
+                                        @else
+                                            <small style="color: #f66f6f;">Out Of Stock</small>
+                                        @endif
+
                                     </div>
-                                <p class="product_name mt-1">
-                                    <a href="#" target="_blank">Wireless Audio System Multiroom 360 degree Full full sound speaker</a>
-                                </p>
 
-                                <div class="img_box">
-                                    <a href="#" target="_blank">
-                                        <img src="{{ asset("assets/img/laptop.png") }}" alt="" />
-                                    </a>
-                                </div>
+                                    <p class="product_name mt-1">
+                                        <a href="{{ $item->slug }}" target="_blank">{{ $item->name }}</a>
+                                    </p>
 
-                                <div class="price_box d-flex align-items-center justify-content-between">
-                                    
-                                    <div class="left">
-                                        <a href="#" class="price d-flex align-items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-currency-rupee" viewBox="0 0 16 16">
-                                                <path d="M4 3.06h2.726c1.22 0 2.12.575 2.325 1.724H4v1.051h5.051C8.855 7.001 8 7.558 6.788 7.558H4v1.317L8.437 14h2.11L6.095 8.884h.855c2.316-.018 3.465-1.476 3.688-3.049H12V4.784h-1.345c-.08-.778-.357-1.335-.793-1.732H12V2H4z"/>
-                                            </svg>
-                                            <del>30,000</del>
-                                            15,000
+                                    <div class="img_box">
+                                        <a href="#" target="_blank">
+                                            <img src="{{ asset("storage/".$item->thumbnail_img) }}" alt="{{ $item->name }}" />
                                         </a>
-                                    </div><!--./left-->
-
-                                    <div class="right d-flex align-items-center">
-                                        <button class="btn like_btn d-flex align-items-center justify-content-center pb-0">
-                                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z"/>
-                                            </svg>
-                                        </button>
-                                        <button class="btn add_cart_btn d-flex align-items-center justify-content-center">
-                                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7h-1M8 7h-.688M13 5v4m-2-2h4"/>
-                                            </svg>                                              
-                                        </button>
-                                    </div><!--./right-->
-                                </div>
-
-                                <button class="btn mt-4" style="width: 100%;">
-                                    <a href="#" class="btn order_link d-flex align-items-center justify-content-center">
-                                        Order Now
-                                    </a>
-                                </button>
-
-
-                            </div><!--./item-->
-
-                            <div class="item">
-                                <div class="d-flex align-items-center justify-content-between">
-                                    <p class="category_name">Speaker</p>
-                                        <small style="color: #07dd07;">In Stock</small>
-                                        {{-- <small style="color: #f66f6f;">Out Of Stock</small> --}}
-                                        {{-- <small style="color: goldenrod;">Up Comming</small> --}}
                                     </div>
-                                <p class="product_name mt-1">
-                                    <a href="#" target="_blank">Wireless Audio System Multiroom 360 degree Full full sound speaker</a>
-                                </p>
 
-                                <div class="img_box">
-                                    <a href="#" target="_blank">
-                                        <img src="{{ asset("assets/img/laptop.png") }}" alt="" />
-                                    </a>
-                                </div>
+                                    <div class="price_box d-flex align-items-center justify-content-between">
+                                        
+                                        <div class="left">
+                                            <a href="#" class="price d-flex align-items-center">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-currency-rupee" viewBox="0 0 16 16">
+                                                    <path d="M4 3.06h2.726c1.22 0 2.12.575 2.325 1.724H4v1.051h5.051C8.855 7.001 8 7.558 6.788 7.558H4v1.317L8.437 14h2.11L6.095 8.884h.855c2.316-.018 3.465-1.476 3.688-3.049H12V4.784h-1.345c-.08-.778-.357-1.335-.793-1.732H12V2H4z"/>
+                                                </svg>
+                                                <del>30,000</del>
+                                                {{ $item->selling_price }}
+                                            </a>
+                                        </div><!--./left-->
 
-                                <div class="price_box d-flex align-items-center justify-content-between">
-                                    
-                                    <div class="left">
-                                        <a href="#" class="price d-flex align-items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-currency-rupee" viewBox="0 0 16 16">
-                                                <path d="M4 3.06h2.726c1.22 0 2.12.575 2.325 1.724H4v1.051h5.051C8.855 7.001 8 7.558 6.788 7.558H4v1.317L8.437 14h2.11L6.095 8.884h.855c2.316-.018 3.465-1.476 3.688-3.049H12V4.784h-1.345c-.08-.778-.357-1.335-.793-1.732H12V2H4z"/>
-                                            </svg>
-                                            <del>30,000</del>
-                                            15,000
-                                        </a>
-                                    </div><!--./left-->
-
-                                    <div class="right d-flex align-items-center">
-                                        <button class="btn like_btn d-flex align-items-center justify-content-center pb-0">
-                                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z"/>
-                                            </svg>
-                                        </button>
-                                        <button class="btn add_cart_btn d-flex align-items-center justify-content-center">
-                                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7h-1M8 7h-.688M13 5v4m-2-2h4"/>
-                                            </svg>                                              
-                                        </button>
-                                    </div><!--./right-->
-                                </div>
-
-                                <button class="btn mt-4" style="width: 100%;">
-                                    <a href="#" class="btn order_link d-flex align-items-center justify-content-center">
-                                        Order Now
-                                    </a>
-                                </button>
-
-
-                            </div><!--./item-->
-
-                            <div class="item">
-                                <div class="d-flex align-items-center justify-content-between">
-                                    <p class="category_name">Speaker</p>
-                                        <small style="color: #07dd07;">In Stock</small>
-                                        {{-- <small style="color: #f66f6f;">Out Of Stock</small> --}}
-                                        {{-- <small style="color: goldenrod;">Up Comming</small> --}}
+                                        <div class="right d-flex align-items-center">
+                                            <button class="btn like_btn d-flex align-items-center justify-content-center pb-0">
+                                                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z"/>
+                                                </svg>
+                                            </button>
+                                            <button class="btn add_cart_btn d-flex align-items-center justify-content-center">
+                                                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7h-1M8 7h-.688M13 5v4m-2-2h4"/>
+                                                </svg>                                              
+                                            </button>
+                                        </div><!--./right-->
                                     </div>
-                                <p class="product_name mt-1">
-                                    <a href="#" target="_blank">Wireless Audio System Multiroom 360 degree Full full sound speaker</a>
-                                </p>
 
-                                <div class="img_box">
-                                    <a href="#" target="_blank">
-                                        <img src="{{ asset("assets/img/laptop.png") }}" alt="" />
-                                    </a>
-                                </div>
-
-                                <div class="price_box d-flex align-items-center justify-content-between">
-                                    
-                                    <div class="left">
-                                        <a href="#" class="price d-flex align-items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-currency-rupee" viewBox="0 0 16 16">
-                                                <path d="M4 3.06h2.726c1.22 0 2.12.575 2.325 1.724H4v1.051h5.051C8.855 7.001 8 7.558 6.788 7.558H4v1.317L8.437 14h2.11L6.095 8.884h.855c2.316-.018 3.465-1.476 3.688-3.049H12V4.784h-1.345c-.08-.778-.357-1.335-.793-1.732H12V2H4z"/>
-                                            </svg>
-                                            <del>30,000</del>
-                                            15,000
+                                    <button class="btn mt-4" style="width: 100%;">
+                                        <a href="#" class="btn order_link d-flex align-items-center justify-content-center">
+                                            Order Now
                                         </a>
-                                    </div><!--./left-->
-
-                                    <div class="right d-flex align-items-center">
-                                        <button class="btn like_btn d-flex align-items-center justify-content-center pb-0">
-                                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z"/>
-                                            </svg>
-                                        </button>
-                                        <button class="btn add_cart_btn d-flex align-items-center justify-content-center">
-                                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7h-1M8 7h-.688M13 5v4m-2-2h4"/>
-                                            </svg>                                              
-                                        </button>
-                                    </div><!--./right-->
-                                </div>
-
-                                <button class="btn mt-4" style="width: 100%;">
-                                    <a href="#" class="btn order_link d-flex align-items-center justify-content-center">
-                                        Order Now
-                                    </a>
-                                </button>
+                                    </button>
 
 
-                            </div><!--./item-->
+                                </div><!--./item-->
 
-                            <div class="item">
-                                <div class="d-flex align-items-center justify-content-between">
-                                    <p class="category_name">Speaker</p>
-                                        <small style="color: #07dd07;">In Stock</small>
-                                        {{-- <small style="color: #f66f6f;">Out Of Stock</small> --}}
-                                        {{-- <small style="color: goldenrod;">Up Comming</small> --}}
-                                    </div>
-                                <p class="product_name mt-1">
-                                    <a href="#" target="_blank">Wireless Audio System Multiroom 360 degree Full full sound speaker</a>
-                                </p>
-
-                                <div class="img_box">
-                                    <a href="#" target="_blank">
-                                        <img src="{{ asset("assets/img/laptop.png") }}" alt="" />
-                                    </a>
-                                </div>
-
-                                <div class="price_box d-flex align-items-center justify-content-between">
-                                    
-                                    <div class="left">
-                                        <a href="#" class="price d-flex align-items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-currency-rupee" viewBox="0 0 16 16">
-                                                <path d="M4 3.06h2.726c1.22 0 2.12.575 2.325 1.724H4v1.051h5.051C8.855 7.001 8 7.558 6.788 7.558H4v1.317L8.437 14h2.11L6.095 8.884h.855c2.316-.018 3.465-1.476 3.688-3.049H12V4.784h-1.345c-.08-.778-.357-1.335-.793-1.732H12V2H4z"/>
-                                            </svg>
-                                            <del>30,000</del>
-                                            15,000
-                                        </a>
-                                    </div><!--./left-->
-
-                                    <div class="right d-flex align-items-center">
-                                        <button class="btn like_btn d-flex align-items-center justify-content-center pb-0">
-                                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z"/>
-                                            </svg>
-                                        </button>
-                                        <button class="btn add_cart_btn d-flex align-items-center justify-content-center">
-                                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7h-1M8 7h-.688M13 5v4m-2-2h4"/>
-                                            </svg>                                              
-                                        </button>
-                                    </div><!--./right-->
-                                </div>
-
-                                <button class="btn mt-4" style="width: 100%;">
-                                    <a href="#" class="btn order_link d-flex align-items-center justify-content-center">
-                                        Order Now
-                                    </a>
-                                </button>
-
-
-                            </div><!--./item-->
-
-                            <div class="item">
-                                <div class="d-flex align-items-center justify-content-between">
-                                    <p class="category_name">Speaker</p>
-                                        <small style="color: #07dd07;">In Stock</small>
-                                        {{-- <small style="color: #f66f6f;">Out Of Stock</small> --}}
-                                        {{-- <small style="color: goldenrod;">Up Comming</small> --}}
-                                    </div>
-                                <p class="product_name mt-1">
-                                    <a href="#" target="_blank">Wireless Audio System Multiroom 360 degree Full full sound speaker</a>
-                                </p>
-
-                                <div class="img_box">
-                                    <a href="#" target="_blank">
-                                        <img src="{{ asset("assets/img/laptop.png") }}" alt="" />
-                                    </a>
-                                </div>
-
-                                <div class="price_box d-flex align-items-center justify-content-between">
-                                    
-                                    <div class="left">
-                                        <a href="#" class="price d-flex align-items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-currency-rupee" viewBox="0 0 16 16">
-                                                <path d="M4 3.06h2.726c1.22 0 2.12.575 2.325 1.724H4v1.051h5.051C8.855 7.001 8 7.558 6.788 7.558H4v1.317L8.437 14h2.11L6.095 8.884h.855c2.316-.018 3.465-1.476 3.688-3.049H12V4.784h-1.345c-.08-.778-.357-1.335-.793-1.732H12V2H4z"/>
-                                            </svg>
-                                            <del>30,000</del>
-                                            15,000
-                                        </a>
-                                    </div><!--./left-->
-
-                                    <div class="right d-flex align-items-center">
-                                        <button class="btn like_btn d-flex align-items-center justify-content-center pb-0">
-                                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z"/>
-                                            </svg>
-                                        </button>
-                                        <button class="btn add_cart_btn d-flex align-items-center justify-content-center">
-                                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7h-1M8 7h-.688M13 5v4m-2-2h4"/>
-                                            </svg>                                              
-                                        </button>
-                                    </div><!--./right-->
-                                </div>
-
-                                <button class="btn mt-4" style="width: 100%;">
-                                    <a href="#" class="btn order_link d-flex align-items-center justify-content-center">
-                                        Order Now
-                                    </a>
-                                </button>
-
-
-                            </div><!--./item-->
-
-                            <div class="item">
-                                <div class="d-flex align-items-center justify-content-between">
-                                    <p class="category_name">Speaker</p>
-                                        <small style="color: #07dd07;">In Stock</small>
-                                        {{-- <small style="color: #f66f6f;">Out Of Stock</small> --}}
-                                        {{-- <small style="color: goldenrod;">Up Comming</small> --}}
-                                    </div>
-                                <p class="product_name mt-1">
-                                    <a href="#" target="_blank">Wireless Audio System Multiroom 360 degree Full full sound speaker</a>
-                                </p>
-
-                                <div class="img_box">
-                                    <a href="#" target="_blank">
-                                        <img src="{{ asset("assets/img/laptop.png") }}" alt="" />
-                                    </a>
-                                </div>
-
-                                <div class="price_box d-flex align-items-center justify-content-between">
-                                    
-                                    <div class="left">
-                                        <a href="#" class="price d-flex align-items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-currency-rupee" viewBox="0 0 16 16">
-                                                <path d="M4 3.06h2.726c1.22 0 2.12.575 2.325 1.724H4v1.051h5.051C8.855 7.001 8 7.558 6.788 7.558H4v1.317L8.437 14h2.11L6.095 8.884h.855c2.316-.018 3.465-1.476 3.688-3.049H12V4.784h-1.345c-.08-.778-.357-1.335-.793-1.732H12V2H4z"/>
-                                            </svg>
-                                            <del>30,000</del>
-                                            15,000
-                                        </a>
-                                    </div><!--./left-->
-
-                                    <div class="right d-flex align-items-center">
-                                        <button class="btn like_btn d-flex align-items-center justify-content-center pb-0">
-                                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z"/>
-                                            </svg>
-                                        </button>
-                                        <button class="btn add_cart_btn d-flex align-items-center justify-content-center">
-                                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7h-1M8 7h-.688M13 5v4m-2-2h4"/>
-                                            </svg>                                              
-                                        </button>
-                                    </div><!--./right-->
-                                </div>
-
-                                <button class="btn mt-4" style="width: 100%;">
-                                    <a href="#" class="btn order_link d-flex align-items-center justify-content-center">
-                                        Order Now
-                                    </a>
-                                </button>
-
-
-                            </div><!--./item-->
-
-                            <div class="item">
-                                <div class="d-flex align-items-center justify-content-between">
-                                    <p class="category_name">Speaker</p>
-                                        <small style="color: #07dd07;">In Stock</small>
-                                        {{-- <small style="color: #f66f6f;">Out Of Stock</small> --}}
-                                        {{-- <small style="color: goldenrod;">Up Comming</small> --}}
-                                    </div>
-                                <p class="product_name mt-1">
-                                    <a href="#" target="_blank">Wireless Audio System Multiroom 360 degree Full full sound speaker</a>
-                                </p>
-
-                                <div class="img_box">
-                                    <a href="#" target="_blank">
-                                        <img src="{{ asset("assets/img/laptop.png") }}" alt="" />
-                                    </a>
-                                </div>
-
-                                <div class="price_box d-flex align-items-center justify-content-between">
-                                    
-                                    <div class="left">
-                                        <a href="#" class="price d-flex align-items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-currency-rupee" viewBox="0 0 16 16">
-                                                <path d="M4 3.06h2.726c1.22 0 2.12.575 2.325 1.724H4v1.051h5.051C8.855 7.001 8 7.558 6.788 7.558H4v1.317L8.437 14h2.11L6.095 8.884h.855c2.316-.018 3.465-1.476 3.688-3.049H12V4.784h-1.345c-.08-.778-.357-1.335-.793-1.732H12V2H4z"/>
-                                            </svg>
-                                            <del>30,000</del>
-                                            15,000
-                                        </a>
-                                    </div><!--./left-->
-
-                                    <div class="right d-flex align-items-center">
-                                        <button class="btn like_btn d-flex align-items-center justify-content-center pb-0">
-                                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z"/>
-                                            </svg>
-                                        </button>
-                                        <button class="btn add_cart_btn d-flex align-items-center justify-content-center">
-                                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7h-1M8 7h-.688M13 5v4m-2-2h4"/>
-                                            </svg>                                              
-                                        </button>
-                                    </div><!--./right-->
-                                </div>
-
-                                <button class="btn mt-4" style="width: 100%;">
-                                    <a href="#" class="btn order_link d-flex align-items-center justify-content-center">
-                                        Order Now
-                                    </a>
-                                </button>
-
-
-                            </div><!--./item-->
-
-                            <div class="item">
-                                <div class="d-flex align-items-center justify-content-between">
-                                    <p class="category_name">Speaker</p>
-                                        <small style="color: #07dd07;">In Stock</small>
-                                        {{-- <small style="color: #f66f6f;">Out Of Stock</small> --}}
-                                        {{-- <small style="color: goldenrod;">Up Comming</small> --}}
-                                    </div>
-                                <p class="product_name mt-1">
-                                    <a href="#" target="_blank">Wireless Audio System Multiroom 360 degree Full full sound speaker</a>
-                                </p>
-
-                                <div class="img_box">
-                                    <a href="#" target="_blank">
-                                        <img src="{{ asset("assets/img/laptop.png") }}" alt="" />
-                                    </a>
-                                </div>
-
-                                <div class="price_box d-flex align-items-center justify-content-between">
-                                    
-                                    <div class="left">
-                                        <a href="#" class="price d-flex align-items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-currency-rupee" viewBox="0 0 16 16">
-                                                <path d="M4 3.06h2.726c1.22 0 2.12.575 2.325 1.724H4v1.051h5.051C8.855 7.001 8 7.558 6.788 7.558H4v1.317L8.437 14h2.11L6.095 8.884h.855c2.316-.018 3.465-1.476 3.688-3.049H12V4.784h-1.345c-.08-.778-.357-1.335-.793-1.732H12V2H4z"/>
-                                            </svg>
-                                            <del>30,000</del>
-                                            15,000
-                                        </a>
-                                    </div><!--./left-->
-
-                                    <div class="right d-flex align-items-center">
-                                        <button class="btn like_btn d-flex align-items-center justify-content-center pb-0">
-                                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z"/>
-                                            </svg>
-                                        </button>
-                                        <button class="btn add_cart_btn d-flex align-items-center justify-content-center">
-                                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7h-1M8 7h-.688M13 5v4m-2-2h4"/>
-                                            </svg>                                              
-                                        </button>
-                                    </div><!--./right-->
-                                </div>
-
-                                <button class="btn mt-4" style="width: 100%;">
-                                    <a href="#" class="btn order_link d-flex align-items-center justify-content-center">
-                                        Order Now
-                                    </a>
-                                </button>
-
-
-                            </div><!--./item-->
-
-                            <div class="item">
-                                <div class="d-flex align-items-center justify-content-between">
-                                    <p class="category_name">Speaker</p>
-                                        <small style="color: #07dd07;">In Stock</small>
-                                        {{-- <small style="color: #f66f6f;">Out Of Stock</small> --}}
-                                        {{-- <small style="color: goldenrod;">Up Comming</small> --}}
-                                    </div>
-                                <p class="product_name mt-1">
-                                    <a href="#" target="_blank">Wireless Audio System Multiroom 360 degree Full full sound speaker</a>
-                                </p>
-
-                                <div class="img_box">
-                                    <a href="#" target="_blank">
-                                        <img src="{{ asset("assets/img/laptop.png") }}" alt="" />
-                                    </a>
-                                </div>
-
-                                <div class="price_box d-flex align-items-center justify-content-between">
-                                    
-                                    <div class="left">
-                                        <a href="#" class="price d-flex align-items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-currency-rupee" viewBox="0 0 16 16">
-                                                <path d="M4 3.06h2.726c1.22 0 2.12.575 2.325 1.724H4v1.051h5.051C8.855 7.001 8 7.558 6.788 7.558H4v1.317L8.437 14h2.11L6.095 8.884h.855c2.316-.018 3.465-1.476 3.688-3.049H12V4.784h-1.345c-.08-.778-.357-1.335-.793-1.732H12V2H4z"/>
-                                            </svg>
-                                            <del>30,000</del>
-                                            15,000
-                                        </a>
-                                    </div><!--./left-->
-
-                                    <div class="right d-flex align-items-center">
-                                        <button class="btn like_btn d-flex align-items-center justify-content-center pb-0">
-                                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z"/>
-                                            </svg>
-                                        </button>
-                                        <button class="btn add_cart_btn d-flex align-items-center justify-content-center">
-                                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7h-1M8 7h-.688M13 5v4m-2-2h4"/>
-                                            </svg>                                              
-                                        </button>
-                                    </div><!--./right-->
-                                </div>
-
-                                <button class="btn mt-4" style="width: 100%;">
-                                    <a href="#" class="btn order_link d-flex align-items-center justify-content-center">
-                                        Order Now
-                                    </a>
-                                </button>
-
-
-                            </div><!--./item-->
+                            @endforeach
                             
                         </div>
                     </div><!--./box-->
                 </div>
-            </section><!--./books_stationery_section-->
+            </section><!--./accessories-->
             
             <!--================= Start get_update_section section ===============-->
             <section class="get_update_section">
@@ -2878,15 +594,87 @@
                     dots: false,
                 });
             });
-            $('.owl-theme').owlCarousel({
+
+            $(".laptops-box-owl-theme").owlCarousel({
+                loop:true,
+                margin:40,
+                nav:false,
+                dots: true,
+                autoplay: true,
+                smartSpeed:600,
+                autoplayTimeout:2500,
+                responsive:{
+                    0:{
+                        items:1
+                    },
+                    576:{
+                        items:2
+                    },
+                    992:{
+                        items:3
+                    },
+                    1200:{
+                        items:4
+                    }
+                }
+            })
+
+            $(".led-monitor-cpu-owl-theme").owlCarousel({
+                loop:true,
+                margin:40,
+                nav:false,
+                dots: true,
+                autoplay: true,
+                smartSpeed:600,
+                autoplayTimeout:3000,
+                responsive:{
+                    0:{
+                        items:1
+                    },
+                    576:{
+                        items:2
+                    },
+                    992:{
+                        items:3
+                    },
+                    1200:{
+                        items:4
+                    }
+                }
+            })
+
+            $(".phones-tablets-owl-theme").owlCarousel({
+                loop:true,
+                margin:40,
+                nav:false,
+                dots: true,
+                autoplay: true,
+                smartSpeed:500,
+                autoplayTimeout:2500,
+                responsive:{
+                    0:{
+                        items:1
+                    },
+                    576:{
+                        items:2
+                    },
+                    992:{
+                        items:3
+                    },
+                    1200:{
+                        items:4
+                    }
+                }
+            })
+            
+            $(".accessories-owl-theme").owlCarousel({
                 loop:true,
                 margin:40,
                 nav:true,
-                dots: false,
+                dots: true,
                 autoplay: true,
                 smartSpeed:600,
-                autoplayHoverPause: true,
-                autoplayTimeout:3000,
+                autoplayTimeout:2300,
                 responsive:{
                     0:{
                         items:1
@@ -2906,8 +694,8 @@
             // Logic to show product name in ellipsis format
             $(".products_box .product_name a").each((ind, item) => {
                 let text = $(item).text().trim();
-                if (text.length > 90) {
-                    let truncatedText = text.slice(0, 90) + "...";
+                if (text.length > 50) {
+                    let truncatedText = text.slice(0, 50) + "...";
                     $(item).text(truncatedText);
                 }
             });

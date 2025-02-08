@@ -30,21 +30,16 @@
                     </a>
                 </div>
                 <div class="search_box">
-                    <form action="#">
+                    <form action="{{ route("pages.product_filter_page") }}" method="GET">
                         <div class="input_box d-flex align-items-center">
-                            <input type="search" name="#" id="search_val" placeholder="Search by brand name ex:- Samsung, Bajaj....">
-                            <select name="#" id="cat_val">
-                                <option value="#">All Categories</option>
-                                <option value="#">Mobiles</option>
-                                <option value="#">Leptops And Coputers</option>
-                                <option value="#">Keybords and Mouse</option>
-                                <option value="#">Heade Phones</option>
-                                <option value="#">TV</option>
-                                <option value="#">Speakers</option>
-                                <option value="#">Fens</option>
-                                <option value="#">Men Fashion</option>
-                                <option value="#">Women Fashion</option>
-                                <option value="#">Shoes And Snikers</option>
+                            <input type="search" name="search" id="search_val" placeholder="Search by brand name , category or product...">
+                            <select id="cat_val">
+                                <option value="">All Categories</option>
+                                @foreach ($categories_data as $item)
+                                    <option value="{{ $item->name }}">
+                                        {{ ($item->name == "Cpu") ? "CPU" : (($item->name == "Led Monitors") ? "LED Monitors" : $item->name) }}
+                                    </option>
+                                @endforeach
                             </select>
                             <button type="submit" class="btn search_btn">
                                 <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
@@ -311,13 +306,14 @@
                 </div>
                 
                 <ul class="d-flex">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Best Sellers</a></li>
-                    <li><a href="#">Electronics</a></li>
-                    <li><a href="#">Mens Fashion</a></li>
-                    <li><a href="#">Women Fashion</a></li>
-                    <li><a href="#">Shoes And Sinakers</a></li>
-                    <li><a href="#">Books And Stationery</a></li>
+                    <li><a href="{{ route("home") }}">Home</a></li>
+                    @foreach ($categories_data as $item)
+                        <li>
+                            <a href="{{ route("pages.product_filter_page", $item->slug) }}">
+                                {{ ($item->name == "Cpu") ? "CPU" : (($item->name == "Led Monitors") ? "LED Monitors" : $item->name) }}
+                            </a>
+                        </li>
+                    @endforeach
                 </ul>
 
                 <div class="btn_box saller_link d-none">
@@ -352,8 +348,6 @@
             item.checked = false;
         });
     }
-
-    // Add click event listener to all checkboxes
     document.querySelectorAll(".activ_disactive_checkbox").forEach(item => {
         item.addEventListener("click", (event) => {
             if (!event.target.checked) {
@@ -365,4 +359,12 @@
         });
     });
 
+    document.querySelector(".search_box #cat_val").addEventListener("change", (event)=>{
+        let cat_val = event.target.value;
+        document.querySelector("#search_val").value = cat_val;
+        
+    });
+    
+    
+    
 </script>

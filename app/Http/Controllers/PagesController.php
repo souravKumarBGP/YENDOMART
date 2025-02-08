@@ -3,14 +3,28 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Product;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+
+use function PHPUnit\Framework\isEmpty;
 
 class PagesController extends Controller
 {
     // Logic to make a method to show product filter page
-    public function product_filter_page(){
-        return view("pages.product_filter");
+    public function product_filter_page(Request $request, string $search_value = "laptop"){
+        
+        // Logic to get the serch value
+        $search_value = Str::slug(addslashes(strip_tags($request->search)));
+        // Logic to check seach value is empty then set default value
+        if(empty($search_value)){
+            $search_value = "laptop";
+        }
+        // Make request to search releted data
+        $search_data = Product::whereany(["brand_name", "category_name", "slug"], "like", "%$search_value%")->select(["name", "slug", "product_status", "selling_price", "brand_name", "thumbnail_img"])->paginate(12);
+        // Return the view file with search data
+        return view("pages.product_filter", compact("search_data"));
     }
 
     // Logic to make a method to show product details page

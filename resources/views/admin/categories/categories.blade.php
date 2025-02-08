@@ -67,7 +67,7 @@
                                         <select name="name" class="@error("name") is_invalid @enderror" id="unite" required>
                                             <option value="">Select category</option>
                                             <option value="laptops" selected>Laptops</option>
-                                            <option value="computers">Computers</option>
+                                            <option value="led monitors">LED Monitors</option>
                                             <option value="tablets">Tablets</option>
                                             <option value="phones">Phones</option>
                                             <option value="cpu">CPU</option>

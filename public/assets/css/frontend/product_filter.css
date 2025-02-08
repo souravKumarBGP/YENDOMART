@@ -68,6 +68,12 @@ main{
             padding: 1.25rem;
             font-weight: 700;
         }
+        
+    }
+
+    .data_not_found{
+        width: 100%;
+        min-height: 400px;
     }
 }
 
