@@ -7,8 +7,8 @@
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.8 13.938h-.011a7 7 0 1 0-11.464.144h-.016l.14.171c.1.127.2.251.3.371L12 21l5.13-6.248c.194-.209.374-.429.54-.659l.13-.155Z"/>
             </svg>&nbsp;
         </a>
-        <a href="tel:9065608408" target="_blank">
-            Helpline Number- &nbsp; <span style="letter-spacing: 0.6px; color: var(--forth-color);">9065608408</span>
+        <a href="tel:7763999333" target="_blank">
+            Helpline Number- &nbsp; <span style="letter-spacing: 0.6px; color: var(--forth-color);">7763999333</span>
         </a>
     </button><br/>
 </aside>
@@ -23,10 +23,8 @@
             <div class="left d-flex align-items-center justify-content-between">
                 <div class="logo">
                     <a href="{{ route("home") }}" class="d-flex align-items-center" style="gap: 5px;">
-                        <svg class="w-6 h-6 text-gray-800 dark:text-white" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7H7.312"/>
-                        </svg>
-                        YENDOMART
+                        <img src="{{ asset("assets/img/logo.png") }}" alt="Logo" />
+                        <b>𝗜𝗧 𝗖𝗔𝗥𝗘 𝗟𝗔𝗣𝗣𝗬</b>
                     </a>
                 </div>
                 <div class="search_box">
@@ -364,7 +362,5 @@
         document.querySelector("#search_val").value = cat_val;
         
     });
-    
-    
     
 </script>

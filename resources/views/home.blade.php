@@ -52,19 +52,19 @@
                     <div class="owl-carousel binner">
                         
                         <div class="items"> 
-                            <img src="{{ asset("assets/img/binner1.jpg") }}" alt="binner1" />
+                            <img src="{{ asset("assets/img/binner1.png") }}" alt="binner1" style="object-fit: contain" />
                         </div><!--./items-->
 
                         <div class="items"> 
-                            <img src="{{ asset("assets/img/binner2.jpg") }}" alt="binner2" />
+                            <img src="{{ asset("assets/img/binner2.png") }}" alt="binner2"  style="object-fit: contain" />
                         </div><!--./items-->
 
                         <div class="items"> 
-                            <img src="{{ asset("assets/img/binner3.png") }}" alt="binner3" />
+                            <img src="{{ asset("assets/img/binner3.png") }}" alt="binner3" style="object-fit: contain" />
                         </div><!--./items-->
 
                         <div class="items"> 
-                            <img src="{{ asset("assets/img/binner4.jpg") }}" alt="binner4" />
+                            <img src="{{ asset("assets/img/binner4.png") }}" alt="binner4" />
                         </div><!--./items-->
 
                     </div>

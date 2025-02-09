@@ -53,18 +53,23 @@ header{
                     width: 60%;
                     
                     .logo{
-                        font-size: var(--size-16px);
-                        font-weight: 900;
-                        color: var(--secondary-color);
                         gap: 5px;
-                        & svg{
-                            transform: scaleX(-1);
-                            width: 38px;
-                            height: 38px;
+                        & b{
+                            font-size: 16px;
+                            font-weight: bolder;
                             color: var(--secondary-color);
+                            word-wrap: nowrap;
+                            white-space: nowrap;
+                            &::selection{
+                                background: var(--primary-color);
+                            }
+                        }
+                        
+                        & img{
+                            background: var(--secondary-color);
+                            width: 40px;
+                            padding: 5px;
                             border-radius: .4375rem;
-                            padding: 8px;
-                            background: var(--primary-color);
                         }
                     }
     

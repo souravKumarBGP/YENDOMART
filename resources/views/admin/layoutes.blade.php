@@ -29,11 +29,9 @@
                         <div class="left">
                             <a href="{{ route("home") }}" class="logo d-flex align-items-center">
                                 <div class="circle d-flex align-items-center justify-content-center">
-                                    <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7H7.312"/>
-                                    </svg>                                  
+                                    <img src="{{ asset("assets/img/logo.png") }}" alt="Logo" />
                                 </div>
-                                YENDOMART
+                                <b style="font-weight: bolder;">𝗜𝗧 𝗖𝗔𝗥𝗘 𝗟𝗔𝗣𝗣𝗬</b>
                             </a>
                         </div><!--End of left-->
     
@@ -154,6 +152,7 @@
                                     </a>
 
                                     <ul class="inner_mune">
+
                                         <li>
                                             <a href="{{ route("admin.units.index") }}" class="d-flex align-items-center">
                                                 <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
@@ -232,7 +231,7 @@
         
         <!--================================== Include dynamicaly header section =================-->
         <footer>
-            <p>&copy; 2009-2015 <a href="{{ route("home") }}">yendomart.com</a> All right receved.</p>
+            <p>&copy; 2009-2015 <a href="{{ route("home") }}">itcare.com</a> All right receved.</p>
         </footer><!--./footer-->
                 
         <!--================================== internal file link's ===============================-->
