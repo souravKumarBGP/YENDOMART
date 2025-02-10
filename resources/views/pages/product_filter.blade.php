@@ -250,7 +250,8 @@
                                                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z"/>
                                                                 </svg>
                                                             </button>
-                                                            <button class="btn add_cart_btn d-flex align-items-center justify-content-center">
+            
+                                                            <button class="btn add_cart_btn d-flex align-items-center justify-content-center" data-id="{{ base64_encode($item->id) }}">
                                                                 <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7h-1M8 7h-.688M13 5v4m-2-2h4"/>
                                                                 </svg>                                              
@@ -404,6 +405,67 @@
                         }
                     });
                     
+                });
+
+                // Logic to handle a ajax request for store product into my cart
+                $(".add_cart_btn").on("click", function(event){
+
+                    event.preventDefault();
+
+                    // Get the product id
+                    const id = $(this).data("id");
+
+                    // Make a request
+                    $.ajax({
+                        url: "{{ route("product.my_cart.store") }}",
+                        type: "POST",
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                            "content-type": "application/json"
+                        },
+                        data: JSON.stringify({"product_id": id}),
+                        dataType: "json",
+
+                        success: function(resp){
+
+                            if(resp.status == "success"){
+                                
+                                $(".my_cart .badges").text(function(_, currentText) {
+                                    return Number(currentText) + 1;
+                                });
+                                
+                                Swal.fire({
+                                    title: "Success",
+                                    text: "Product added successfully.",
+                                    icon: "success"
+                                });
+
+                            }else if(resp.status == "user_not_login"){
+                                
+                                window.location.href = "{{ route("pages.signup_login_page") }}"
+
+                            }else if(resp.status == "product_exist"){
+
+                                Swal.fire({
+                                    title: "Warning",
+                                    text: "This product has been already added.",
+                                    icon: "warning",
+                                });
+                            }else{
+
+                                Swal.fire({
+                                    icon: "error",
+                                    title: "Error",
+                                    text: "Unable to add product. Please try again latter !",
+                                });
+                            }
+                        },
+
+                        error: function(resp){
+                            console.log(resp);
+                        }
+
+                    });
                 });
 
                 // Logic to show product name in ellipsis format

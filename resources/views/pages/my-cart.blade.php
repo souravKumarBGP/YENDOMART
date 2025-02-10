@@ -8,6 +8,7 @@
         <meta name="discreption" content="This yendo ecommerce website" />
         <meta name="author" content="Sourav Rupani" />
         <meta name="robots" content="index, following" />
+        <meta name="csrf-token" content="{{ csrf_token() }}" />
         <!--================================== External file link's ===============================-->
         <link href="{{ asset("assets/css/frontend/bootstrap-grid.min.css") }}" rel="stylesheet" />
         <!--================================== Internal file link's ===============================-->
@@ -26,6 +27,23 @@
 
         <!--================================== Start header section ===============================-->
         <main>
+
+            @session('success_msg')
+                <x-success_msg>
+                    <x-slot name="msg">
+                        {{ session("success_msg") }}
+                    </x-slot>
+                </x-success_msg>
+            @endsession
+
+            @session('error_msg')
+                <x-error_msg>
+                    <x-slot name="msg">
+                        {{ session("error_msg") }}
+                    </x-slot>
+                </x-error_msg>
+            @endsession
+            
             <!--==================== Start my_cart_box section ===================-->
             <section class="my_cart">
                 <div class="container">
@@ -49,75 +67,48 @@
                                                 Price
                                            </div>
                                         </th>
-                                        <th>Quanitty</th>
-                                        <th>
-                                            <div class="d-flex align-items-center">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="15" fill="currentColor" class="bi bi-currency-rupee" viewBox="0 0 16 16">
-                                                    <path d="M4 3.06h2.726c1.22 0 2.12.575 2.325 1.724H4v1.051h5.051C8.855 7.001 8 7.558 6.788 7.558H4v1.317L8.437 14h2.11L6.095 8.884h.855c2.316-.018 3.465-1.476 3.688-3.049H12V4.784h-1.345c-.08-.778-.357-1.335-.793-1.732H12V2H4z"/>
-                                                </svg>
-                                                Total
-                                            </div>
-                                        </th>
+                                        
                                     </tr>
                                 </thead>
+
                                 <tbody class="pt-4">
 
-                                    <tr>
-                                        <td class="d-flex align-items-center gap-15px">
-                                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18 17.94 6M18 18 6.06 6"/>
-                                            </svg>                                              
-                                            <svg style="color: var(--secondary-color);" class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                <path stroke="currentColor" stroke-width="2" d="M21 12c0 1.2-4.03 6-9 6s-9-4.8-9-6c0-1.2 4.03-6 9-6s9 4.8 9 6Z"/>
-                                                <path stroke="currentColor" stroke-width="2" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
-                                            </svg>                                              
-                                            <img src="{{ asset("assets/img/computer.png") }}" width="100" alt="">
-                                        </td>
-                                        <td style="width: 50%;">
-                                            <p class="p_name">
-                                                Ultra Wireless S50 Headphones S50 with Bluetooth
-                                            </p>
-                                        </td>
-                                        <td>
-                                            3000
-                                        </td>
-                                        <td>
-                                            32000
-                                        </td>
-                                        <td>
-                                            400
-                                        </td>
-                                    </tr><!--./item-->
+                                    @foreach ($data as $item)
+                                        <tr>
+                                            <td class="d-flex align-items-center gap-15px">
+                                                <a href="{{ route("product.my_cart.destroy", base64_encode($item->id) ) }}" class="my_cart_del_btn btn" data-id={{ base64_encode($item->id) }}>
+                                                    <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18 17.94 6M18 18 6.06 6"/>
+                                                    </svg>
+                                                </a>  
 
-                                    <tr>
-                                        <td class="d-flex align-items-center gap-15px">
-                                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18 17.94 6M18 18 6.06 6"/>
-                                            </svg>                                              
-                                            <svg style="color: var(--secondary-color);" class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                <path stroke="currentColor" stroke-width="2" d="M21 12c0 1.2-4.03 6-9 6s-9-4.8-9-6c0-1.2 4.03-6 9-6s9 4.8 9 6Z"/>
-                                                <path stroke="currentColor" stroke-width="2" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
-                                            </svg> 
-                                            <img src="{{ asset("assets/img/computer.png") }}" width="100" alt="">
-                                        </td>
-                                        <td style="width: 50%;">
-                                            <p class="p_name">
-                                                Ultra Wireless S50 Headphones S50 with Bluetooth
-                                            </p>
-                                        </td>
-                                        <td>
-                                            3000
-                                        </td>
-                                        <td>
-                                            32000
-                                        </td>
-                                        <td>
-                                            400
-                                        </td>
-                                    </tr><!--./item-->
+                                                <a href="{{ route("pages.product_details_page", $item->slug) }}">
+                                                    <svg style="color: var(--secondary-color);" class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                                        <path stroke="currentColor" stroke-width="2" d="M21 12c0 1.2-4.03 6-9 6s-9-4.8-9-6c0-1.2 4.03-6 9-6s9 4.8 9 6Z"/>
+                                                        <path stroke="currentColor" stroke-width="2" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
+                                                    </svg>
+                                                </a> 
 
+                                                <img src="{{ asset("storage/".$item->thumbnail_img) }}" width="100" alt="{{ $item->name }}">
+                                            </td>
+                                            <td style="width: 50%;">
+                                                <p class="p_name">
+                                                    {{ $item->name }}
+                                                </p>
+                                            </td>
+                                            <td>
+                                                {{ $item->selling_price }}
+                                            </td>
+
+                                        </tr><!--./item-->
+                                    @endforeach
+                                   
                                 </tbody>
                             </table>
+
+                            <small class="d-block paginate mt-5">
+                                {{ $data->links("pagination::bootstrap-5") }}
+                            </small>
                         </div>
 
                         <div class="coupan_section col-12 col-lg-9 mx-auto d-flex flex-wrap flex-sm-nowrap justify-content-center justify-content-sm-between gap-15px">
@@ -146,19 +137,15 @@
                                 </li><br/>
                                 <li>
                                     <span>Subtotle</span>
-                                    <span>30000</span>
+                                    <span>Rs: {{ $sub_total }}</span>
                                 </li>
                                 <li>
-                                    <span>GST</span>
-                                    <span>12%</span>
-                                </li>
-                                <li>
-                                    <span>Delivery Charges</span>
-                                    <span>40 Rs</span>
+                                    <span>Booking Charges</span>
+                                    <span>Rs: 999</span>
                                 </li>
                                 <li>
                                     <span>Total</span>
-                                    <span>40000</span>
+                                    <span>RS: {{ $sub_total + 999 }}</span>
                                 </li>
                             </ul>
                         </div>
@@ -200,38 +187,142 @@
         @include("layoutes.footer")
         <!--./footer-->
 
-        <!--================================== internal file link's ===============================-->
-        {{-- <script src="{{ asset("assets/js/jquery.min.js") }}"></script> --}}
-        <!--================================== internal script writing ============================-->
+        <!--================================== External script writing ============================-->
+        <script src="{{ asset("assets/js/jquery.min.js") }}"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <!--================================== Internal script writing ============================-->
         <script>
+            $(document).ready(function(){
 
-            // Logic to perform active and disactive my_cart_list_box and my_account_setting_boxs
-            function unchecked() {
-                document.querySelectorAll(".activ_disactive_checkbox").forEach((item) => {
-                    item.checked = false;
+                // Logic to handle a ajax request for store my favorites product
+                $(".like_btn").on("click", function(event){
+                    event.preventDefault();
+                    
+                    let id = $(this).data("id");
+                    
+                    // Make a request
+                    $.ajax({
+                        url: "{{ route("product.my_wishlist.store") }}",
+                        type: "POST",
+                        dataType: "json",
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                            "content-type": "application/json"
+                        },
+                        data: JSON.stringify({"product_id": id}),
+
+                        success: function(resp){
+                            
+                            if(resp.status == "success"){
+                                
+                                $(".favorite .badges").text(function(_, currentText) {
+                                    return Number(currentText) + 1;
+                                });
+                                
+                                Swal.fire({
+                                    title: "Success",
+                                    text: "Product added successfully.",
+                                    icon: "success"
+                                });
+                            }else if(resp.status == "user_not_login"){
+                                
+                                window.location.href = "{{ route("pages.signup_login_page") }}"
+                            }else if(resp.status == "product_exist"){
+
+                                Swal.fire({
+                                    title: "Warning",
+                                    text: "This product has been already added.",
+                                    icon: "warning",
+                                });
+                            }else{
+
+                                Swal.fire({
+                                    icon: "error",
+                                    title: "Error",
+                                    text: "Unable to add product. Please try again latter !",
+                                });
+                            }
+                        },
+                        
+                        error: function(resp){
+                            console.log(resp);
+                            Swal.fire({
+                                icon: "error",
+                                title: "Error",
+                                text: "Something went wrong. Please try again latter !",
+                            });
+                        }
+                    });
+                    
                 });
-            }
-            document.querySelectorAll(".activ_disactive_checkbox").forEach((checkbox) => {
-                checkbox.addEventListener("click", (event) => {
-                    if (!event.target.checked) {
-                        event.target.checked = false;
-                    } else {
-                        unchecked();
-                        event.target.checked = true;
-                    }
+                
+                // Logic to handle a ajax request for store product into my cart
+                $(".add_cart_btn").on("click", function(event){
+
+                    event.preventDefault();
+
+                    // Get the product id
+                    const id = $(this).data("id");
+
+                    // Make a request
+                    $.ajax({
+                        url: "{{ route("product.my_cart.store") }}",
+                        type: "POST",
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                            "content-type": "application/json"
+                        },
+                        data: JSON.stringify({"product_id": id}),
+                        dataType: "json",
+
+                        success: function(resp){
+
+                            if(resp.status == "success"){
+                                
+                                $(".my_cart .badges").text(function(_, currentText) {
+                                    return Number(currentText) + 1;
+                                });
+                                
+                                Swal.fire({
+                                    title: "Success",
+                                    text: "Product added successfully.",
+                                    icon: "success"
+                                });
+
+                            }else if(resp.status == "user_not_login"){
+                                
+                                window.location.href = "{{ route("pages.signup_login_page") }}"
+
+                            }else if(resp.status == "product_exist"){
+
+                                Swal.fire({
+                                    title: "Warning",
+                                    text: "This product has been already added.",
+                                    icon: "warning",
+                                });
+                            }else{
+
+                                Swal.fire({
+                                    icon: "error",
+                                    title: "Error",
+                                    text: "Unable to add product. Please try again latter !",
+                                });
+                            }
+                        },
+
+                        error: function(resp){
+                            Swal.fire({
+                                icon: "error",
+                                title: "Error",
+                                text: "Something went wrong. Please try again latter !",
+                            });
+                        }
+
+                    });
                 });
+                
             });
-
-            // Logic to show product name in ellipsis format
-            document.querySelectorAll(".p_name").forEach((item, ind) => {
-                let text = item.textContent.trim();
-                if (text.length > 60) {
-                    let truncatedText = text.slice(0, 60) + "...";
-                    item.textContent = truncatedText;
-                }
-            });
-
-
         </script>
+        
     </body>
 </html>

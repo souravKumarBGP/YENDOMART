@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Models\Brand;
 use App\Models\Product;
 use App\Models\Categories;
+use App\Models\MyCart;
 use App\Models\MyWishlist;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
@@ -45,8 +46,14 @@ class AppServiceProvider extends ServiceProvider
         */
         View::composer('*', function ($view) {
             if (Auth::check()) {
+
+                // Get the my wishlist data
                 $my_favorites_product_data = MyWishlist::where("user_id", Auth::id())->get();
                 $view->with("my_favorites_product_data", $my_favorites_product_data);
+
+                // Get the my cart data
+                $my_cart_data = MyCart::where("user_id", Auth::id())->get();
+                $view->with("my_cart_data", $my_cart_data);
             }
         });
         

@@ -66,124 +66,28 @@
                 </button><!--./btn-->
                 
                 <button class="btn my_cart">
-                    <input type="checkbox" class="activ_disactive_checkbox activ_disactive_myCart" />
-                    <div class="d-flex align-items-center">
-                        <div class="icon_box">
-                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7H7.312"/>
-                            </svg>
-                            <div class="badges d-flex align-items-center justify-content-center">2</div>
+                    <a href="{{ route("pages.my_cart") }}" class="btn_see_cart">
+                        <div class="d-flex align-items-center">
+                            <div class="icon_box">
+                                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7H7.312"/>
+                                </svg>
+    
+                                @if (!empty($my_cart_data))
+                                    <div class="badges d-flex align-items-center justify-content-center">{{ (count($my_cart_data) > 9) ? "9+" : count($my_cart_data) }}</div>
+                                    @else
+                                    <div class="badges d-flex align-items-center justify-content-center">0</div>
+                                @endif
+                                
+                            </div>
+                            <span class="ms-2 d-flex align-items-center">
+                                My Cart
+                                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m8 10 4 4 4-4"/>
+                                </svg>
+                            </span>
                         </div>
-                        <span class="ms-2 d-flex align-items-center">
-                            My Cart
-                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m8 10 4 4 4-4"/>
-                            </svg>
-                        </span>
-                    </div>
-
-                    <div class="active_box my_cart_list_box">
-                        <p>Your shopping cart</p>
-
-                        <ul>
-
-                            <li class="items d-flex align-items-center justify-content-between">
-
-                                <div class="item_left d-flex align-items-center">
-                                    <div class="img_box">
-                                        <img src="{{ asset("assets/img/phoone.png") }}" alt="phone" />
-                                    </div>
-                                    <div class="text_box align-self-start">
-                                        <a href="#">Apple iPhone 15</a>
-                                        <p class="price d-flex align-items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-currency-rupee" viewBox="0 0 16 16">
-                                                <path d="M4 3.06h2.726c1.22 0 2.12.575 2.325 1.724H4v1.051h5.051C8.855 7.001 8 7.558 6.788 7.558H4v1.317L8.437 14h2.11L6.095 8.884h.855c2.316-.018 3.465-1.476 3.688-3.049H12V4.784h-1.345c-.08-.778-.357-1.335-.793-1.732H12V2H4z"/>
-                                            </svg>
-                                            40,000
-                                        </p>
-                                    </div>
-                                </div><!--./left-->
-
-                                <div class="item_right d-flex align-items-center justify-content-between">
-
-                                    <a href="" class="btn minus_btn d-flex justify-content-center align-items-center">
-                                        <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14"/>
-                                        </svg>
-                                    </a>
-                                    
-                                    <span class="value">5</span>
-                                    
-                                    <a href="" class="btn plus_btn">
-                                        <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7 7V5"/>
-                                        </svg>
-                                    </a>
-
-                                    <a href="" class="btn del_btn">
-                                        <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z"/>
-                                        </svg>
-                                    </a>
-
-                                </div><!--./right-->
-
-                            </li><!--./list_items-->
-
-                            <li class="items d-flex align-items-center justify-content-between">
-
-                                <div class="item_left d-flex align-items-center">
-                                    <div class="img_box">
-                                        <img src="{{ asset("assets/img/phoone.png") }}" alt="phone" />
-                                    </div>
-                                    <div class="text_box align-self-start">
-                                        <a href="#">Apple iPhone 15</a>
-                                        <p class="price d-flex align-items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-currency-rupee" viewBox="0 0 16 16">
-                                                <path d="M4 3.06h2.726c1.22 0 2.12.575 2.325 1.724H4v1.051h5.051C8.855 7.001 8 7.558 6.788 7.558H4v1.317L8.437 14h2.11L6.095 8.884h.855c2.316-.018 3.465-1.476 3.688-3.049H12V4.784h-1.345c-.08-.778-.357-1.335-.793-1.732H12V2H4z"/>
-                                            </svg>
-                                            40,000
-                                        </p>
-                                    </div>
-                                </div><!--./left-->
-
-                                <div class="item_right d-flex align-items-center justify-content-between">
-
-                                    <a href="" class="btn minus_btn d-flex justify-content-center align-items-center">
-                                        <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14"/>
-                                        </svg>
-                                    </a>
-                                    
-                                    <span class="value">5</span>
-                                    
-                                    <a href="" class="btn plus_btn">
-                                        <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14m-7 7V5"/>
-                                        </svg>
-                                    </a>
-
-                                    <a href="" class="btn del_btn">
-                                        <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z"/>
-                                        </svg>
-                                    </a>
-
-                                </div><!--./right-->
-
-                            </li><!--./list_items-->
-
-                        </ul>
-                        <p class="total_pay_text">Total payment</p>
-                        <b class="amount d-flex align-content-center justify-content-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-currency-rupee" viewBox="0 0 16 16">
-                                <path d="M4 3.06h2.726c1.22 0 2.12.575 2.325 1.724H4v1.051h5.051C8.855 7.001 8 7.558 6.788 7.558H4v1.317L8.437 14h2.11L6.095 8.884h.855c2.316-.018 3.465-1.476 3.688-3.049H12V4.784h-1.345c-.08-.778-.357-1.335-.793-1.732H12V2H4z"/>
-                            </svg>
-                            3,000
-                        </b>
-
-                        <a href="{{ route("pages.my_cart") }}" class="btn_see_cart">See your cart</a>
-                    </div>
+                    </a>
                 </button><!--./btn-->
 
                 <button class="btn my_account pe-0">

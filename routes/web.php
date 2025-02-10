@@ -26,7 +26,7 @@ Route::prefix("/pages")->controller(PagesController::class)->group(function(){
     Route::get("/product-filter/{search?}", "product_filter_page")->name("pages.product_filter_page");
     Route::get("/product-details/search={slug}", "product_details_page")->name("pages.product_details_page");
     Route::get("/view-profile/{id}", "view_profile")->name("pages.view-profile")->middleware(IsUserLoginMiddleware::class);
-    Route::get("/my-cart", "my_cart")->name("pages.my_cart");
+    Route::get("/my-cart", "my_cart")->name("pages.my_cart")->middleware(IsUserLoginMiddleware::class);
     Route::get("/my-wishlist", "my_wishlist")->name("pages.my_wishlist")->middleware(IsUserLoginMiddleware::class);
     Route::get("/checkout", "checkout_page")->name("pages.checkout-page");
     Route::get("/signup-login", "signup_login_page")->name("pages.signup_login_page")->middleware(IsUserGuestMiddleware::class);
@@ -49,6 +49,11 @@ Route::prefix("/product")->controller(ProductController::class)->group(function(
     Route::prefix("/my-wishlist")->group(function(){
         Route::post("/store","myWishlist_store")->name("product.my_wishlist.store");
         Route::post("/destroy", "myWishlist_destroy")->name("product.myWishlist.destroy");
+    });
+
+    Route::prefix("/my-cart")->group(function(){
+        Route::post("/store", "my_cart_store")->name("product.my_cart.store");
+        Route::get("/destroy/{id}", "my_cart_destroy")->name("product.my_cart.destroy");
     });
     
 });

@@ -411,7 +411,73 @@
                     });
                     
                 });
+
+                // Logic to handle a ajax request for store product into my cart
+                $(".add_cart_btn").on("click", function(event){
+
+                    event.preventDefault();
+
+                    // Get the product id
+                    const id = $(this).data("id");
+
+                    // Make a request
+                    $.ajax({
+                        url: "{{ route("product.my_cart.store") }}",
+                        type: "POST",
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                            "content-type": "application/json"
+                        },
+                        data: JSON.stringify({"product_id": id}),
+                        dataType: "json",
+
+                        success: function(resp){
+
+                            if(resp.status == "success"){
+                                
+                                $(".my_cart .badges").text(function(_, currentText) {
+                                    return Number(currentText) + 1;
+                                });
+                                
+                                Swal.fire({
+                                    title: "Success",
+                                    text: "Product added successfully.",
+                                    icon: "success"
+                                });
+
+                            }else if(resp.status == "user_not_login"){
+                                
+                                window.location.href = "{{ route("pages.signup_login_page") }}"
+
+                            }else if(resp.status == "product_exist"){
+
+                                Swal.fire({
+                                    title: "Warning",
+                                    text: "This product has been already added.",
+                                    icon: "warning",
+                                });
+                            }else{
+
+                                Swal.fire({
+                                    icon: "error",
+                                    title: "Error",
+                                    text: "Unable to add product. Please try again latter !",
+                                });
+                            }
+                        },
+
+                        error: function(resp){
+                            Swal.fire({
+                                icon: "error",
+                                title: "Error",
+                                text: "Something went wrong. Please try again latter !",
+                            });
+                        }
+
+                    });
+                });
             });
+            
             $(function(){
                 $(".b_img").imagezoomsl();
             });

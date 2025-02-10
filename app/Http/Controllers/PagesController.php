@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Brand;
+use App\Models\MyCart;
 use App\Models\Product;
 use App\Models\MyWishlist;
 use Illuminate\Support\Str;
@@ -65,7 +66,20 @@ class PagesController extends Controller
 
     // Logic to create a methods to show my cart page
     public function my_cart(){
-        return view("pages.my-cart");
+
+        // Logic to get the product id
+        $my_cart_data = MyCart::where("user_id", Auth::id())->get("product_id");
+        $product_id_arr = [];
+        foreach($my_cart_data as $val){
+            array_push($product_id_arr, intval($val["product_id"]));
+        }
+
+        // Logic to find the products data
+        $data = Product::whereIn("id", $product_id_arr)->select(["id", "thumbnail_img", "name", "selling_price", "slug"])->paginate(5);
+
+        $sub_total = Product::whereIn("id", $product_id_arr)->sum("selling_price");
+
+        return view("pages.my-cart", compact("data", "sub_total"));
     }
 
     // Logic to create a methods to show my cart page

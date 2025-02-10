@@ -8,6 +8,7 @@
         <meta name="discreption" content="This yendo ecommerce website" />
         <meta name="author" content="Sourav Rupani" />
         <meta name="robots" content="index, following" />
+        <meta name="csrf-token" content="{{ csrf_token() }}" />
         <!--================================== External file link's ===============================-->
         <link href="{{ asset("assets/css/frontend/bootstrap-grid.min.css") }}" rel="stylesheet" />
         <!--================================== Internal file link's ===============================-->
@@ -304,38 +305,142 @@
         @include("layoutes.footer")
         <!--./footer-->
 
-        <!--================================== internal file link's ===============================-->
-        {{-- <script src="{{ asset("assets/js/jquery.min.js") }}"></script> --}}
-        <!--================================== internal script writing ============================-->
+        <!--================================== External script writing ============================-->
+        <script src="{{ asset("assets/js/jquery.min.js") }}"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <!--================================== Internal script writing ============================-->
         <script>
 
-            // Logic to perform active and disactive my_cart_list_box and my_account_setting_boxs
-            function unchecked() {
-                document.querySelectorAll(".activ_disactive_checkbox").forEach((item) => {
-                    item.checked = false;
+            $(document).ready(function(){
+
+                // Logic to handle a ajax request for store my favorites product
+                $(".like_btn").on("click", function(event){
+                    event.preventDefault();
+                    
+                    let id = $(this).data("id");
+                    
+                    // Make a request
+                    $.ajax({
+                        url: "{{ route("product.my_wishlist.store") }}",
+                        type: "POST",
+                        dataType: "json",
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                            "content-type": "application/json"
+                        },
+                        data: JSON.stringify({"product_id": id}),
+
+                        success: function(resp){
+                            
+                            if(resp.status == "success"){
+                                
+                                $(".favorite .badges").text(function(_, currentText) {
+                                    return Number(currentText) + 1;
+                                });
+                                
+                                Swal.fire({
+                                    title: "Success",
+                                    text: "Product added successfully.",
+                                    icon: "success"
+                                });
+                            }else if(resp.status == "user_not_login"){
+                                
+                                window.location.href = "{{ route("pages.signup_login_page") }}"
+                            }else if(resp.status == "product_exist"){
+
+                                Swal.fire({
+                                    title: "Warning",
+                                    text: "This product has been already added.",
+                                    icon: "warning",
+                                });
+                            }else{
+
+                                Swal.fire({
+                                    icon: "error",
+                                    title: "Error",
+                                    text: "Unable to add product. Please try again latter !",
+                                });
+                            }
+                        },
+                        
+                        error: function(resp){
+                            console.log(resp);
+                            Swal.fire({
+                                icon: "error",
+                                title: "Error",
+                                text: "Something went wrong. Please try again latter !",
+                            });
+                        }
+                    });
+                    
                 });
-            }
-            document.querySelectorAll(".activ_disactive_checkbox").forEach((checkbox) => {
-                checkbox.addEventListener("click", (event) => {
-                    if (!event.target.checked) {
-                        event.target.checked = false;
-                    } else {
-                        unchecked();
-                        event.target.checked = true;
-                    }
+                
+                // Logic to handle a ajax request for store product into my cart
+                $(".add_cart_btn").on("click", function(event){
+
+                    event.preventDefault();
+
+                    // Get the product id
+                    const id = $(this).data("id");
+
+                    // Make a request
+                    $.ajax({
+                        url: "{{ route("product.my_cart.store") }}",
+                        type: "POST",
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                            "content-type": "application/json"
+                        },
+                        data: JSON.stringify({"product_id": id}),
+                        dataType: "json",
+
+                        success: function(resp){
+
+                            if(resp.status == "success"){
+                                
+                                $(".my_cart .badges").text(function(_, currentText) {
+                                    return Number(currentText) + 1;
+                                });
+                                
+                                Swal.fire({
+                                    title: "Success",
+                                    text: "Product added successfully.",
+                                    icon: "success"
+                                });
+
+                            }else if(resp.status == "user_not_login"){
+                                
+                                window.location.href = "{{ route("pages.signup_login_page") }}"
+
+                            }else if(resp.status == "product_exist"){
+
+                                Swal.fire({
+                                    title: "Warning",
+                                    text: "This product has been already added.",
+                                    icon: "warning",
+                                });
+                            }else{
+
+                                Swal.fire({
+                                    icon: "error",
+                                    title: "Error",
+                                    text: "Unable to add product. Please try again latter !",
+                                });
+                            }
+                        },
+
+                        error: function(resp){
+                            Swal.fire({
+                                icon: "error",
+                                title: "Error",
+                                text: "Something went wrong. Please try again latter !",
+                            });
+                        }
+
+                    });
                 });
+                
             });
-
-            // Logic to show product name in ellipsis format
-            document.querySelectorAll(".p_name").forEach((item, ind) => {
-                let text = item.textContent.trim();
-                if (text.length > 60) {
-                    let truncatedText = text.slice(0, 60) + "...";
-                    item.textContent = truncatedText;
-                }
-            });
-
-
         </script>
     </body>
 </html>
