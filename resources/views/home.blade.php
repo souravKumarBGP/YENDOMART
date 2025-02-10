@@ -8,6 +8,7 @@
         <meta name="discreption" content="This yendo ecommerce website" />
         <meta name="author" content="Sourav Rupani" />
         <meta name="robots" content="index, following" />
+        <meta name="csrf-token" content="{{ csrf_token() }}" />
         <!--================================== External file link's ===============================-->
         <link href="{{ asset("assets/css/frontend/bootstrap-grid.min.css") }}" rel="stylesheet" />
         <link rel="stylesheet" href="{{ asset("assets/css/frontend/owl.carousel.min.css") }}" />
@@ -95,6 +96,7 @@
 
         <!--================================== Start Main section =================================-->
         <main>
+            
             <!--============ Start top_selling_product_section sectio =============-->
             <section class="products_box top_selling_product_section ">
                 <div class="container">
@@ -154,7 +156,7 @@
                                             </div><!--./left-->
         
                                             <div class="right d-flex align-items-center">
-                                                <button class="btn like_btn d-flex align-items-center justify-content-center pb-0">
+                                                <button class="btn like_btn d-flex align-items-center justify-content-center pb-0" data-id="{{ base64_encode($item->id) }}">
                                                     <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z"/>
                                                     </svg>
@@ -243,7 +245,7 @@
                                         </div><!--./left-->
 
                                         <div class="right d-flex align-items-center">
-                                            <button class="btn like_btn d-flex align-items-center justify-content-center pb-0">
+                                            <button class="btn like_btn d-flex align-items-center justify-content-center pb-0" data-id="{{ base64_encode($item->id) }}">
                                                 <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z"/>
                                                 </svg>
@@ -332,7 +334,7 @@
                                         </div><!--./left-->
 
                                         <div class="right d-flex align-items-center">
-                                            <button class="btn like_btn d-flex align-items-center justify-content-center pb-0">
+                                            <button class="btn like_btn d-flex align-items-center justify-content-center pb-0" data-id="{{ base64_encode($item->id) }}">
                                                 <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z"/>
                                                 </svg>
@@ -422,7 +424,7 @@
                                         </div><!--./left-->
 
                                         <div class="right d-flex align-items-center">
-                                            <button class="btn like_btn d-flex align-items-center justify-content-center pb-0">
+                                            <button class="btn like_btn d-flex align-items-center justify-content-center pb-0" data-id="{{ base64_encode($item->id) }}">
                                                 <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z"/>
                                                 </svg>
@@ -511,7 +513,7 @@
                                         </div><!--./left-->
 
                                         <div class="right d-flex align-items-center">
-                                            <button class="btn like_btn d-flex align-items-center justify-content-center pb-0">
+                                            <button class="btn like_btn d-flex align-items-center justify-content-center pb-0" data-id="{{ base64_encode($item->id) }}">
                                                 <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z"/>
                                                 </svg>
@@ -576,11 +578,16 @@
         <!--================================== internal file link's ===============================-->
         <script src="{{ asset("assets/js/jquery.min.js") }}"></script>
         <script src="{{ asset("assets/js/owl.carousel.min.js") }}"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
         <!--================================== internal script writing ============================-->
+        <script src="{{ asset("assets/js/script.js") }}"></script>
+
         <script>
 
-            // Logic to initlize owl binner
             $(document).ready(function(){
+
+                // Logic to initlize owl binner
                 $('.binner').owlCarousel({
                     animateOut: 'fadeOut',
                     items:1,
@@ -593,112 +600,176 @@
                     mergeFit:true,
                     dots: false,
                 });
+
+                // Logic to handle a ajax request for store my favorites product
+                $(".like_btn").on("click", function(event){
+                    event.preventDefault();
+                    // console.log($(this).data("id"));
+                    let id = $(this).data("id");
+                    
+                    // Make a request
+                    $.ajax({
+                        url: "{{ route("product.my_wishlist.store") }}",
+                        type: "POST",
+                        dataType: "json",
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                            "content-type": "application/json"
+                        },
+                        data: JSON.stringify({"product_id": id}),
+
+                        success: function(resp){
+                            
+                            if(resp.status == "success"){
+                                
+                                $(".favorite .badges").text(function(_, currentText) {
+                                    return Number(currentText) + 1;
+                                });
+                                
+                                Swal.fire({
+                                    title: "Success",
+                                    text: "Product added successfully.",
+                                    icon: "success"
+                                });
+                            }else if(resp.status == "user_not_login"){
+                                
+                                window.location.href = "{{ route("pages.signup_login_page") }}"
+                            }else if(resp.status == "product_exist"){
+
+                                Swal.fire({
+                                    title: "Warning",
+                                    text: "This product has been already added.",
+                                    icon: "warning",
+                                });
+                            }else{
+
+                                Swal.fire({
+                                    icon: "error",
+                                    title: "Error",
+                                    text: "Unable to add product. Please try again latter !",
+                                });
+                            }
+                        },
+                        
+                        error: function(resp){
+                            console.log(resp);
+                            Swal.fire({
+                                icon: "error",
+                                title: "Error",
+                                text: "Something went wrong. Please try again latter !",
+                            });
+                        }
+                    });
+                    
+                });
+
+                // Oul crouser properties
+                $(".laptops-box-owl-theme").owlCarousel({
+                    loop:true,
+                    margin:40,
+                    nav:false,
+                    dots: true,
+                    autoplay: true,
+                    smartSpeed:600,
+                    autoplayTimeout:2500,
+                    responsive:{
+                        0:{
+                            items:1
+                        },
+                        576:{
+                            items:2
+                        },
+                        992:{
+                            items:3
+                        },
+                        1200:{
+                            items:4
+                        }
+                    }
+                })
+    
+                $(".led-monitor-cpu-owl-theme").owlCarousel({
+                    loop:true,
+                    margin:40,
+                    nav:false,
+                    dots: true,
+                    autoplay: true,
+                    smartSpeed:600,
+                    autoplayTimeout:3000,
+                    responsive:{
+                        0:{
+                            items:1
+                        },
+                        576:{
+                            items:2
+                        },
+                        992:{
+                            items:3
+                        },
+                        1200:{
+                            items:4
+                        }
+                    }
+                })
+    
+                $(".phones-tablets-owl-theme").owlCarousel({
+                    loop:true,
+                    margin:40,
+                    nav:false,
+                    dots: true,
+                    autoplay: true,
+                    smartSpeed:500,
+                    autoplayTimeout:2500,
+                    responsive:{
+                        0:{
+                            items:1
+                        },
+                        576:{
+                            items:2
+                        },
+                        992:{
+                            items:3
+                        },
+                        1200:{
+                            items:4
+                        }
+                    }
+                })
+                
+                $(".accessories-owl-theme").owlCarousel({
+                    loop:true,
+                    margin:40,
+                    nav:true,
+                    dots: true,
+                    autoplay: true,
+                    smartSpeed:600,
+                    autoplayTimeout:2300,
+                    responsive:{
+                        0:{
+                            items:1
+                        },
+                        576:{
+                            items:2
+                        },
+                        992:{
+                            items:3
+                        },
+                        1200:{
+                            items:4
+                        }
+                    }
+                })
+                
+                // Logic to show product name in ellipsis format
+                $(".products_box .product_name a").each((ind, item) => {
+                    let text = $(item).text().trim();
+                    if (text.length > 30) {
+                        let truncatedText = text.slice(0, 30) + "...";
+                        $(item).text(truncatedText);
+                    }
+                });
             });
 
-            $(".laptops-box-owl-theme").owlCarousel({
-                loop:true,
-                margin:40,
-                nav:false,
-                dots: true,
-                autoplay: true,
-                smartSpeed:600,
-                autoplayTimeout:2500,
-                responsive:{
-                    0:{
-                        items:1
-                    },
-                    576:{
-                        items:2
-                    },
-                    992:{
-                        items:3
-                    },
-                    1200:{
-                        items:4
-                    }
-                }
-            })
-
-            $(".led-monitor-cpu-owl-theme").owlCarousel({
-                loop:true,
-                margin:40,
-                nav:false,
-                dots: true,
-                autoplay: true,
-                smartSpeed:600,
-                autoplayTimeout:3000,
-                responsive:{
-                    0:{
-                        items:1
-                    },
-                    576:{
-                        items:2
-                    },
-                    992:{
-                        items:3
-                    },
-                    1200:{
-                        items:4
-                    }
-                }
-            })
-
-            $(".phones-tablets-owl-theme").owlCarousel({
-                loop:true,
-                margin:40,
-                nav:false,
-                dots: true,
-                autoplay: true,
-                smartSpeed:500,
-                autoplayTimeout:2500,
-                responsive:{
-                    0:{
-                        items:1
-                    },
-                    576:{
-                        items:2
-                    },
-                    992:{
-                        items:3
-                    },
-                    1200:{
-                        items:4
-                    }
-                }
-            })
-            
-            $(".accessories-owl-theme").owlCarousel({
-                loop:true,
-                margin:40,
-                nav:true,
-                dots: true,
-                autoplay: true,
-                smartSpeed:600,
-                autoplayTimeout:2300,
-                responsive:{
-                    0:{
-                        items:1
-                    },
-                    576:{
-                        items:2
-                    },
-                    992:{
-                        items:3
-                    },
-                    1200:{
-                        items:4
-                    }
-                }
-            })
-            
-            // Logic to show product name in ellipsis format
-            $(".products_box .product_name a").each((ind, item) => {
-                let text = $(item).text().trim();
-                if (text.length > 30) {
-                    let truncatedText = text.slice(0, 30) + "...";
-                    $(item).text(truncatedText);
-                }
-            });
 
         </script>
         

@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Brand;
 use App\Models\User;
+use App\Models\Brand;
 use App\Models\Product;
+use App\Models\MyWishlist;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
+use Illuminate\Support\Facades\Auth;
 use function PHPUnit\Framework\isEmpty;
 
 class PagesController extends Controller
@@ -23,7 +24,7 @@ class PagesController extends Controller
             $search_value = "laptop";
         }
         // Make request to search releted data
-        $search_data = Product::whereany(["brand_name", "category_name", "slug"], "like", "%$search_value%")->select(["name", "slug", "product_status", "selling_price", "brand_name", "thumbnail_img"])->paginate(12);
+        $search_data = Product::whereany(["brand_name", "category_name", "slug"], "like", "%$search_value%")->select(["id", "name", "slug", "product_status", "selling_price", "brand_name", "thumbnail_img"])->paginate(12);
         // Return the view file with search data
         return view("pages.product_filter", compact("search_data"));
     }
@@ -40,7 +41,7 @@ class PagesController extends Controller
             // Logic to search brand image
             $brands_img = Brand::where("name", "like", "%$product_data->brand_name%")->first("brand_img");
             // Logic to search similar products
-            $similar_products_data = Product::where("brand_name", "like", "%$product_data->brand_name%")->limit(20)->inRandomOrder()->get(["name", "slug", "product_status", "selling_price", "brand_name", "thumbnail_img"]);
+            $similar_products_data = Product::where("brand_name", "like", "%$product_data->brand_name%")->limit(20)->inRandomOrder()->get(["id", "name", "slug", "product_status", "selling_price", "brand_name", "thumbnail_img"]);
 
             return view("pages.product_details", compact("product_data", "brands_img", "similar_products_data"));
         }else{
@@ -69,7 +70,18 @@ class PagesController extends Controller
 
     // Logic to create a methods to show my cart page
     public function my_wishlist(){
-        return view("pages.my-wishlist");
+
+        // Logic to get the product id
+        $my_favorites_product_data = MyWishlist::where("user_id", Auth::id())->get("product_id");
+        $product_id_arr = [];
+        foreach($my_favorites_product_data as $val){
+            array_push($product_id_arr, intval($val["product_id"]));
+        }
+
+        // Logic to find the products data
+        $data = Product::whereIn("id", $product_id_arr)->select(["id", "thumbnail_img", "name", "selling_price", "slug"])->paginate(5);
+
+        return view("pages.my-wishlist", compact("data"));
     }
 
     // Logic to create a methods to show my cart page

@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PagesController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\IsAdminLoginMiddleware;
 use App\Http\Middleware\IsUserGuestMiddleware;
@@ -26,7 +27,7 @@ Route::prefix("/pages")->controller(PagesController::class)->group(function(){
     Route::get("/product-details/search={slug}", "product_details_page")->name("pages.product_details_page");
     Route::get("/view-profile/{id}", "view_profile")->name("pages.view-profile")->middleware(IsUserLoginMiddleware::class);
     Route::get("/my-cart", "my_cart")->name("pages.my_cart");
-    Route::get("/my-wishlist", "my_wishlist")->name("pages.my_wishlist");
+    Route::get("/my-wishlist", "my_wishlist")->name("pages.my_wishlist")->middleware(IsUserLoginMiddleware::class);
     Route::get("/checkout", "checkout_page")->name("pages.checkout-page");
     Route::get("/signup-login", "signup_login_page")->name("pages.signup_login_page")->middleware(IsUserGuestMiddleware::class);
     Route::get("/contact-us", "contact_us_page")->name("pages.contact_us");
@@ -41,6 +42,15 @@ Route::middleware(IsUserGuestMiddleware::class)->prefix("/user")->controller(Use
     Route::post("/update-profile-info-request", "update_profile_info_request")->name("user.update_profile_info_request")->withoutMiddleware(IsUserGuestMiddleware::class)->middleware(IsUserLoginMiddleware::class);
     Route::post("/update-profile-image-request", "update_profile_image_request")->name("user.update_profile_image_request")->withoutMiddleware(IsUserGuestMiddleware::class)->middleware(IsUserLoginMiddleware::class);
     Route::post("/update-password-request", "update_password_request")->name("user.update_password_request")->withoutMiddleware(IsUserGuestMiddleware::class)->middleware(IsUserLoginMiddleware::class);
+});
+
+// Route for handle product action
+Route::prefix("/product")->controller(ProductController::class)->group(function(){
+    Route::prefix("/my-wishlist")->group(function(){
+        Route::post("/store","myWishlist_store")->name("product.my_wishlist.store");
+        Route::post("/destroy", "myWishlist_destroy")->name("product.myWishlist.destroy");
+    });
+    
 });
 
 //====================== Logic to create some following routes for handle backends logic

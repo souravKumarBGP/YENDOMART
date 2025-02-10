@@ -3,11 +3,12 @@
     <head>
         <meta charset="UTF-8" /> 
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Yendo Ecommerce |My-Cart| Online electronic shop</title>
+        <title>Yendo Ecommerce |My-Wishlist| Online electronic shop</title>
         <meta name="keywords" content="Yendo Ecommerce, Ecommerce" />
         <meta name="discreption" content="This yendo ecommerce website" />
         <meta name="author" content="Sourav Rupani" />
         <meta name="robots" content="index, following" />
+        <meta name="csrf-token" content="{{ csrf_token() }}" />
         <!--================================== External file link's ===============================-->
         <link href="{{ asset("assets/css/frontend/bootstrap-grid.min.css") }}" rel="stylesheet" />
         <!--================================== Internal file link's ===============================-->
@@ -56,68 +57,50 @@
                                 </thead>
                                 <tbody class="pt-4">
 
-                                    <tr>
-                                        <td class="d-flex align-items-center gap-15px">
-                                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18 17.94 6M18 18 6.06 6"/>
-                                            </svg>                                              
-                                            <svg style="color: var(--secondary-color);" class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                <path stroke="currentColor" stroke-width="2" d="M21 12c0 1.2-4.03 6-9 6s-9-4.8-9-6c0-1.2 4.03-6 9-6s9 4.8 9 6Z"/>
-                                                <path stroke="currentColor" stroke-width="2" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
-                                            </svg>                                              
-                                            <img src="{{ asset("assets/img/computer.png") }}" width="100" alt="">
-                                        </td>
-                                        <td style="width: 50%;">
-                                            <p class="p_name">
-                                                Ultra Wireless S50 Headphones S50 with Bluetooth
-                                            </p>
-                                        </td>
-                                        <td>
-                                            3000
-                                        </td>
+                                    @foreach ($data as $item)
+                                        <tr>
+                                            <td class="d-flex align-items-center gap-15px">
+                                                <button class="my_wishlist_del_btn btn" data-id={{ base64_encode($item->id) }}>
+                                                    <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18 17.94 6M18 18 6.06 6"/>
+                                                    </svg>
+                                                </button>  
 
-                                        <td>
-                                            <button class="btn add_to_cart_btn p-3">
-                                                <svg style="color: #09c809;" class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7h-1M8 7h-.688M13 5v4m-2-2h4"/>
-                                                </svg>                                                  
-                                            </button>
-                                        </td>
-                                        
-                                    </tr><!--./item-->
+                                                <a href="{{ route("pages.product_details_page", $item->slug) }}">
+                                                    <svg style="color: var(--secondary-color);" class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                                        <path stroke="currentColor" stroke-width="2" d="M21 12c0 1.2-4.03 6-9 6s-9-4.8-9-6c0-1.2 4.03-6 9-6s9 4.8 9 6Z"/>
+                                                        <path stroke="currentColor" stroke-width="2" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
+                                                    </svg>
+                                                </a> 
 
-                                    <tr>
-                                        <td class="d-flex align-items-center gap-15px">
-                                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18 17.94 6M18 18 6.06 6"/>
-                                            </svg>                                              
-                                            <svg style="color: var(--secondary-color);" class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                <path stroke="currentColor" stroke-width="2" d="M21 12c0 1.2-4.03 6-9 6s-9-4.8-9-6c0-1.2 4.03-6 9-6s9 4.8 9 6Z"/>
-                                                <path stroke="currentColor" stroke-width="2" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
-                                            </svg> 
-                                            <img src="{{ asset("assets/img/computer.png") }}" width="100" alt="">
-                                        </td>
-                                        <td style="width: 50%;">
-                                            <p class="p_name">
-                                                Ultra Wireless S50 Headphones S50 with Bluetooth
-                                            </p>
-                                        </td>
-                                        <td>
-                                            3000
-                                        </td>
+                                                <img src="{{ asset("storage/".$item->thumbnail_img) }}" width="100" alt="">
+                                            </td>
+                                            <td style="width: 50%;">
+                                                <p class="p_name">
+                                                    {{ $item->name }}
+                                                </p>
+                                            </td>
+                                            <td>
+                                                {{ $item->selling_price }}
+                                            </td>
 
-                                        <td>
-                                            <button class="btn add_to_cart_btn p-3">
-                                                <svg style="color: #09c809;" class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7h-1M8 7h-.688M13 5v4m-2-2h4"/>
-                                                </svg>                                                  
-                                            </button>
-                                        </td>
-                                        
-                                    </tr><!--./item-->
+                                            <td>
+                                                <button class="btn add_to_cart_btn p-3">
+                                                    <svg style="color: #09c809;" class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7h-1M8 7h-.688M13 5v4m-2-2h4"/>
+                                                    </svg>                                                  
+                                                </button>
+                                            </td>
+                                            
+                                        </tr><!--./item-->
+                                    @endforeach
 
                                 </tbody>
                             </table>
+
+                            <small class="d-block paginate mt-5">
+                                {{ $data->links("pagination::bootstrap-5") }}
+                            </small>
                         </div>
                         
                     </div>
@@ -159,19 +142,138 @@
         <!--./footer-->
 
         <!--================================== internal file link's ===============================-->
-        {{-- <script src="{{ asset("assets/js/jquery.min.js") }}"></script> --}}
+        <script src="{{ asset("assets/js/jquery.min.js") }}"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <!--================================== internal script writing ============================-->
         <script>
 
-            // Logic to show product name in ellipsis format
-            document.querySelectorAll(".p_name").forEach((item, ind) => {
-                let text = item.textContent.trim();
-                if (text.length > 60) {
-                    let truncatedText = text.slice(0, 60) + "...";
-                    item.textContent = truncatedText;
-                }
-            });
+            $(document).ready(function(){
 
+                // Logic to show product name in ellipsis format
+                $(".p_name").each(function () {
+                    let text = $(this).text().trim();
+                    if (text.length > 40) {
+                        $(this).text(text.slice(0, 40) + "...");
+                    }
+                });
+
+                // Logic to make a ajax request for delete my wishlist product
+                $(".my_wishlist_del_btn").on("click", function(event){
+
+                    const del_id = $(this).data("id");
+
+                    $.ajax({
+                        url: "{{ route("product.myWishlist.destroy") }}",
+                        type: "POST",
+                        dataType: "json",
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                            "contentType": "application/json"
+                        },
+                        data: {"del_id": del_id},
+
+                        success: function(resp){
+                            // console.log(resp);
+
+                            if(resp.status == "success"){
+
+                                event.target.parentElement.parentElement.style.display = "none";
+                                
+                                $(".favorite .badges").text(function(_, currentText) {
+                                    return Number(currentText) - 1;
+                                });
+                            }else if(resp.status == "product_not_exist"){
+
+                                Swal.fire({
+                                    icon: "error",
+                                    title: "Error",
+                                    text: "Product not exist. Please try again latter !",
+                                });
+                            }else{
+
+                                Swal.fire({
+                                    icon: "error",
+                                    title: "Error",
+                                    text: "Unable to add product. Please try again latter !",
+                                });
+                            }
+
+                        },
+
+                        error: function(resp){
+                            // console.log(resp);
+                            Swal.fire({
+                                icon: "error",
+                                title: "Error",
+                                text: "Something went wrong. Please try again latter !",
+                            });
+                        }
+                    });
+                });
+
+                // Logic to handle a ajax request for store my favorites product
+                $(".like_btn").on("click", function(event){
+                    event.preventDefault();
+                    let id = $(this).data("id");
+                    
+                    // Make a request
+                    $.ajax({
+                        url: "{{ route("product.my_wishlist.store") }}",
+                        type: "POST",
+                        dataType: "json",
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                            "content-type": "application/json"
+                        },
+                        data: JSON.stringify({"product_id": id}),
+
+                        success: function(resp){
+                            
+                            if(resp.status == "success"){
+                                
+                                $(".favorite .badges").text(function(_, currentText) {
+                                    return Number(currentText) + 1;
+                                });
+                                
+                                Swal.fire({
+                                    title: "Success",
+                                    text: "Product added successfully.",
+                                    icon: "success"
+                                });
+                            }else if(resp.status == "user_not_login"){
+                                
+                                window.location.href = "{{ route("pages.signup_login_page") }}"
+                            }else if(resp.status == "product_exist"){
+
+                                Swal.fire({
+                                    title: "Warning",
+                                    text: "This product has been already added.",
+                                    icon: "warning",
+                                });
+                            }else{
+
+                                Swal.fire({
+                                    icon: "error",
+                                    title: "Error",
+                                    text: "Unable to add product. Please try again latter !",
+                                });
+                            }
+                        },
+                        
+                        error: function(resp){
+                            console.log(resp);
+                            Swal.fire({
+                                icon: "error",
+                                title: "Error",
+                                text: "Something went wrong. Please try again latter !",
+                            });
+                        }
+                    });
+                    
+                });
+
+                
+            });
 
         </script>
     </body>

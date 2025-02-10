@@ -8,6 +8,7 @@
         <meta name="discreption" content="This yendo ecommerce website" />
         <meta name="author" content="Sourav Rupani" />
         <meta name="robots" content="index, following" />
+        <meta name="csrf-token" content="{{ csrf_token() }}" />
         <!--================================== External file link's ===============================-->
         <link href="{{ asset("assets/css/frontend/bootstrap-grid.min.css") }}" rel="stylesheet" />
         <link rel="stylesheet" href="{{ asset("assets/css/frontend/owl.carousel.min.css") }}" />
@@ -207,10 +208,10 @@
                                         @foreach ($search_data as $item)
                                             <div class="col-12 col-sm-6 col-lg-4 col-xl-3">
                                                 <div class="item">
-    
+
                                                     <div class="d-flex align-items-center justify-content-between">
                                                         <p class="category_name">{{ ucwords($item->brand_name) }}</p>
-    
+            
                                                         @if ($item->product_status == "in stock")
                                                             <small style="color: #07dd07;">In Stock</small>
                                                             
@@ -220,21 +221,21 @@
                                                             <small style="color: #f66f6f;">Out Of Stock</small>
                                                         @endif
                                                     </div>
-    
+            
                                                     <p class="product_name mt-2">
-                                                        <a href="#" target="_blank">{{ $item->name }}</a>
+                                                        <a href="{{ route('pages.product_details_page', $item->slug) }}" >{{ $item->name }}</a>
                                                     </p>
                     
                                                     <div class="img_box">
-                                                        <a href="#" target="_blank">
-                                                            <img src="{{ asset("storage/".$item->thumbnail_img) }}" alt="" />
+                                                        <a href="{{ route('pages.product_details_page', $item->slug) }}">
+                                                            <img src="{{ asset("storage/".$item->thumbnail_img) }}" alt="{{ $item->name }}" />
                                                         </a>
                                                     </div>
                     
                                                     <div class="price_box d-flex align-items-center justify-content-between">
                                                         
                                                         <div class="left">
-                                                            <a href="#" class="price d-flex align-items-center">
+                                                            <a href="{{ route('pages.product_details_page', $item->slug) }}" class="price d-flex align-items-center">
                                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-currency-rupee" viewBox="0 0 16 16">
                                                                     <path d="M4 3.06h2.726c1.22 0 2.12.575 2.325 1.724H4v1.051h5.051C8.855 7.001 8 7.558 6.788 7.558H4v1.317L8.437 14h2.11L6.095 8.884h.855c2.316-.018 3.465-1.476 3.688-3.049H12V4.784h-1.345c-.08-.778-.357-1.335-.793-1.732H12V2H4z"/>
                                                                 </svg>
@@ -244,7 +245,7 @@
                                                         </div><!--./left-->
                     
                                                         <div class="right d-flex align-items-center">
-                                                            <button class="btn like_btn d-flex align-items-center justify-content-center pb-0">
+                                                            <button class="btn like_btn d-flex align-items-center justify-content-center pb-0" data-id="{{ base64_encode($item->id) }}">
                                                                 <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z"/>
                                                                 </svg>
@@ -256,13 +257,13 @@
                                                             </button>
                                                         </div><!--./right-->
                                                     </div>
-    
+            
                                                     <button class="btn mt-4" style="width: 100%;">
                                                         <a href="#" class="btn order_link d-flex align-items-center justify-content-center">
                                                             Order Now
                                                         </a>
                                                     </button>
-    
+            
                                                 </div>
                                             </div><!--./items-->
                                         @endforeach
@@ -326,46 +327,95 @@
         @include("layoutes.footer")
         <!--./footer-->
 
+        <!--================================== External script writing ============================-->
+        <script src="{{ asset("assets/js/jquery.min.js") }}"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <!--================================== internal script writing ============================-->
         <script>
 
-            // Logic to open filter option when user click on filter btn
-            document.querySelector("#filter_btn_checkbox").addEventListener("click", (event)=>{
+            $(document).ready(function(){
 
-                if(event.target.checked){
-                    document.querySelector("section:has(.filter_box)").style.right = 0;
-                    unchecked();
-                }else{
-                    document.querySelector("section:has(.filter_box)").style.right = "-100%";
-                }
-            })
-            
-            // Logic to perform active and disactive my_cart_list_box and my_account_setting_boxs
-            function unchecked() {
-                document.querySelectorAll(".activ_disactive_checkbox").forEach((item) => {
-                    item.checked = false;
-                });
-            }
-            document.querySelectorAll(".activ_disactive_checkbox").forEach((checkbox) => {
-                checkbox.addEventListener("click", (event) => {
-                    if (!event.target.checked) {
-                        event.target.checked = false;
-                    } else {
+                // Logic to open filter option when user click on filter btn
+                $("#filter_btn_checkbox").on("click", function () {
+                    if ($(this).prop("checked")) {
+                        $("section:has(.filter_box)").css("right", "0");
                         unchecked();
-                        document.querySelector("#filter_btn_checkbox").checked = false;
-                        document.querySelector("section:has(.filter_box)").style.right = "-100%";
-                        event.target.checked = true;
+                    } else {
+                        $("section:has(.filter_box)").css("right", "-100%");
+                    }
+                });
+
+                // Logic to handle a ajax request for store my favorites product
+                $(".like_btn").on("click", function(event){
+                    event.preventDefault();
+                    let id = $(this).data("id");
+                    
+                    // Make a request
+                    $.ajax({
+                        url: "{{ route("product.my_wishlist.store") }}",
+                        type: "POST",
+                        dataType: "json",
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                            "content-type": "application/json"
+                        },
+                        data: JSON.stringify({"product_id": id}),
+
+                        success: function(resp){
+                            
+                            if(resp.status == "success"){
+                                
+                                $(".favorite .badges").text(function(_, currentText) {
+                                    return Number(currentText) + 1;
+                                });
+                                
+                                Swal.fire({
+                                    title: "Success",
+                                    text: "Product added successfully.",
+                                    icon: "success"
+                                });
+                            }else if(resp.status == "user_not_login"){
+                                
+                                window.location.href = "{{ route("pages.signup_login_page") }}"
+                            }else if(resp.status == "product_exist"){
+
+                                Swal.fire({
+                                    title: "Warning",
+                                    text: "This product has been already added.",
+                                    icon: "warning",
+                                });
+                            }else{
+
+                                Swal.fire({
+                                    icon: "error",
+                                    title: "Error",
+                                    text: "Unable to add product. Please try again latter !",
+                                });
+                            }
+                        },
+                        
+                        error: function(resp){
+                            console.log(resp);
+                            Swal.fire({
+                                icon: "error",
+                                title: "Error",
+                                text: "Something went wrong. Please try again latter !",
+                            });
+                        }
+                    });
+                    
+                });
+
+                // Logic to show product name in ellipsis format
+                $(".products_box .product_name a").each((ind, item) => {
+                    let text = $(item).text().trim();
+                    if (text.length > 30) {
+                        let truncatedText = text.slice(0, 30) + "...";
+                        $(item).text(truncatedText);
                     }
                 });
             });
-
-            document.querySelectorAll(".products_box .product_name a").forEach(item => {
-                let text = item.textContent.trim();
-                if (text.length > 25) {
-                    item.textContent = text.slice(0, 25) + "...";
-                }
-            });
-
+           
         </script>
     </body>
 </html>

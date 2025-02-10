@@ -8,6 +8,7 @@
         <meta name="discreption" content="This yendo ecommerce website" />
         <meta name="author" content="Sourav Rupani" />
         <meta name="robots" content="index, following" />
+        <meta name="csrf-token" content="{{ csrf_token() }}" />
         <!--================================== External file link's ===============================-->
         <link href="{{ asset("assets/css/frontend/bootstrap-grid.min.css") }}" rel="stylesheet" />
         <link rel="stylesheet" href="{{ asset("assets/css/frontend/owl.carousel.min.css") }}" />
@@ -308,6 +309,7 @@
         <script src="{{ asset("assets/js/jquery.min.js") }}"></script>
         <script src="{{ asset("assets/js/owl.carousel.min.js") }}"></script>
         <script src="{{ asset("assets/js/zoomsl.min.js") }}"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <!--================================== internal script writing ============================-->
         <script>
 
@@ -346,6 +348,68 @@
                         let truncatedText = text.slice(0, 25) + "...";
                         $(item).text(truncatedText);
                     }
+                });
+
+                // Logic to handle a ajax request for store my favorites product
+                $(".like_btn").on("click", function(event){
+                    event.preventDefault();
+                    // console.log($(this).data("id"));
+                    let id = $(this).data("id");
+                    
+                    // Make a request
+                    $.ajax({
+                        url: "{{ route("product.my_wishlist.store") }}",
+                        type: "POST",
+                        dataType: "json",
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                            "content-type": "application/json"
+                        },
+                        data: JSON.stringify({"product_id": id}),
+
+                        success: function(resp){
+                            
+                            if(resp.status == "success"){
+                                
+                                $(".favorite .badges").text(function(_, currentText) {
+                                    return Number(currentText) + 1;
+                                });
+                                
+                                Swal.fire({
+                                    title: "Success",
+                                    text: "Product added successfully.",
+                                    icon: "success"
+                                });
+                            }else if(resp.status == "user_not_login"){
+                                
+                                window.location.href = "{{ route("pages.signup_login_page") }}"
+                            }else if(resp.status == "product_exist"){
+
+                                Swal.fire({
+                                    title: "Warning",
+                                    text: "This product has been already added.",
+                                    icon: "warning",
+                                });
+                            }else{
+
+                                Swal.fire({
+                                    icon: "error",
+                                    title: "Error",
+                                    text: "Unable to add product. Please try again latter !",
+                                });
+                            }
+                        },
+                        
+                        error: function(resp){
+                            console.log(resp);
+                            Swal.fire({
+                                icon: "error",
+                                title: "Error",
+                                text: "Something went wrong. Please try again latter !",
+                            });
+                        }
+                    });
+                    
                 });
             });
             $(function(){
