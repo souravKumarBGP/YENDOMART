@@ -111,13 +111,13 @@
                                 </ul>
                                 <br/>
                                 <div class="btn_box d-flex">
-                                    <button class="buy_now_btn btn d-flex align-items-center">
+                                    <button class="buy_now_btn btn d-flex align-items-center" data-id="{{ base64_encode($product_data->id) }}">
                                         <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h6l2 4m-8-4v8m0-8V6a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v9h2m8 0H9m4 0h2m4 0h2v-4m0 0h-5m3.5 5.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0Zm-10 0a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0Z"/>
                                         </svg>                                      
                                         Buy Now
                                     </button>
-                                    <button class="add_to_cart_btn btn d-flex align-items-center">
+                                    <button class="add_to_cart_btn add_cart_btn btn d-flex align-items-center" data-id="{{ base64_encode($product_data->id) }}">
                                         <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7h-1M8 7h-.688M13 5v4m-2-2h4"/>
                                         </svg>                                      
@@ -206,7 +206,7 @@
                             @foreach ($similar_products_data as $item)
                             
                                 <div class="item">
-                                            
+
                                     <div class="d-flex align-items-center justify-content-between">
                                         <p class="category_name">{{ ucwords($item->brand_name) }}</p>
 
@@ -218,15 +218,14 @@
                                         @else
                                             <small style="color: #f66f6f;">Out Of Stock</small>
                                         @endif
-
                                     </div>
 
-                                    <p class="product_name mt-1">
+                                    <p class="product_name mt-2">
                                         <a href="{{ route('pages.product_details_page', $item->slug) }}" >{{ $item->name }}</a>
                                     </p>
 
                                     <div class="img_box">
-                                        <a href="{{ route('pages.product_details_page', $item->slug) }}" >
+                                        <a href="{{ route('pages.product_details_page', $item->slug) }}">
                                             <img src="{{ asset("storage/".$item->thumbnail_img) }}" alt="{{ $item->name }}" />
                                         </a>
                                     </div>
@@ -244,12 +243,13 @@
                                         </div><!--./left-->
 
                                         <div class="right d-flex align-items-center">
-                                            <button class="btn like_btn d-flex align-items-center justify-content-center pb-0">
+                                            <button class="btn like_btn d-flex align-items-center justify-content-center pb-0" data-id="{{ base64_encode($item->id) }}">
                                                 <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z"/>
                                                 </svg>
                                             </button>
-                                            <button class="btn add_cart_btn d-flex align-items-center justify-content-center">
+
+                                            <button class="btn add_cart_btn d-flex align-items-center justify-content-center" data-id="{{ base64_encode($item->id) }}">
                                                 <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7h-1M8 7h-.688M13 5v4m-2-2h4"/>
                                                 </svg>                                              
@@ -258,12 +258,12 @@
                                     </div>
 
                                     <button class="btn mt-4" style="width: 100%;">
-                                        <a href="#" class="btn order_link d-flex align-items-center justify-content-center">
+                                        <a href="{{ route('pages.product_details_page', $item->slug) }}" class="btn order_link d-flex align-items-center justify-content-center">
                                             Order Now
                                         </a>
                                     </button>
 
-                                </div><!--./item-->
+                                </div>
 
                             @endforeach
 
@@ -413,7 +413,7 @@
                 });
 
                 // Logic to handle a ajax request for store product into my cart
-                $(".add_cart_btn").on("click", function(event){
+                $(".add_cart_btn, .buy_now_btn").on("click", function(event){
 
                     event.preventDefault();
 
@@ -438,16 +438,18 @@
                                 $(".my_cart .badges").text(function(_, currentText) {
                                     return Number(currentText) + 1;
                                 });
+
+                                window.location.href= "{{ route("pages.my_cart") }}";
                                 
-                                Swal.fire({
-                                    title: "Success",
-                                    text: "Product added successfully.",
-                                    icon: "success"
-                                });
+                                // Swal.fire({
+                                //     title: "Success",
+                                //     text: "Product added successfully.",
+                                //     icon: "success"
+                                // });
 
                             }else if(resp.status == "user_not_login"){
                                 
-                                window.location.href = "{{ route("pages.signup_login_page") }}"
+                                window.location.href = "{{ route("pages.signup_login_page") }}";
 
                             }else if(resp.status == "product_exist"){
 
@@ -476,6 +478,7 @@
 
                     });
                 });
+
             });
             
             $(function(){

@@ -169,12 +169,44 @@
                                             <div class="col-12 col-lg-6 ps-0 mx-0">
                                                 <div class="input_box">
                                                     <label for="state">State</label>
+
                                                     <select name="state" id="state">
-                                                        <option readonly value="">Select your state</option>
-                                                        <option value="bihar" {{ (Auth::user()->state == "bihar") ? "selected" : "" }} >Bihar</option>
-                                                        <option value="jharkhand" {{ (Auth::user()->state == "jharkhand") ? "selected" : "" }} >Jharkhand</option>
-                                                        <option value="bangal" {{ (Auth::user()->state == "bangal") ? "selected" : "" }} >Bangal</option>
-                                                    </select>                                    
+                                                        @php
+                                                            $userState = Auth::user()->state ?? ''; // Get user's state or set default as empty
+                                                        @endphp
+                                                    
+                                                        <option value="bihar" {{ $userState == "bihar" ? "selected" : "" }}>Bihar</option>
+                                                        <option value="jharkhand" {{ $userState == "jharkhand" ? "selected" : "" }}>Jharkhand</option>
+                                                        <option value="andhra_pradesh" {{ $userState == "andhra_pradesh" ? "selected" : "" }}>Andhra Pradesh</option>
+                                                        <option value="arunachal_pradesh" {{ $userState == "arunachal_pradesh" ? "selected" : "" }}>Arunachal Pradesh</option>
+                                                        <option value="assam" {{ $userState == "assam" ? "selected" : "" }}>Assam</option>
+                                                        <option value="chhattisgarh" {{ $userState == "chhattisgarh" ? "selected" : "" }}>Chhattisgarh</option>
+                                                        <option value="goa" {{ $userState == "goa" ? "selected" : "" }}>Goa</option>
+                                                        <option value="gujarat" {{ $userState == "gujarat" ? "selected" : "" }}>Gujarat</option>
+                                                        <option value="haryana" {{ $userState == "haryana" ? "selected" : "" }}>Haryana</option>
+                                                        <option value="himachal_pradesh" {{ $userState == "himachal_pradesh" ? "selected" : "" }}>Himachal Pradesh</option>
+                                                        <option value="karnataka" {{ $userState == "karnataka" ? "selected" : "" }}>Karnataka</option>
+                                                        <option value="kerala" {{ $userState == "kerala" ? "selected" : "" }}>Kerala</option>
+                                                        <option value="madhya_pradesh" {{ $userState == "madhya_pradesh" ? "selected" : "" }}>Madhya Pradesh</option>
+                                                        <option value="maharashtra" {{ $userState == "maharashtra" ? "selected" : "" }}>Maharashtra</option>
+                                                        <option value="manipur" {{ $userState == "manipur" ? "selected" : "" }}>Manipur</option>
+                                                        <option value="meghalaya" {{ $userState == "meghalaya" ? "selected" : "" }}>Meghalaya</option>
+                                                        <option value="mizoram" {{ $userState == "mizoram" ? "selected" : "" }}>Mizoram</option>
+                                                        <option value="nagaland" {{ $userState == "nagaland" ? "selected" : "" }}>Nagaland</option>
+                                                        <option value="odisha" {{ $userState == "odisha" ? "selected" : "" }}>Odisha</option>
+                                                        <option value="punjab" {{ $userState == "punjab" ? "selected" : "" }}>Punjab</option>
+                                                        <option value="rajasthan" {{ $userState == "rajasthan" ? "selected" : "" }}>Rajasthan</option>
+                                                        <option value="sikkim" {{ $userState == "sikkim" ? "selected" : "" }}>Sikkim</option>
+                                                        <option value="tamil_nadu" {{ $userState == "tamil_nadu" ? "selected" : "" }}>Tamil Nadu</option>
+                                                        <option value="telangana" {{ $userState == "telangana" ? "selected" : "" }}>Telangana</option>
+                                                        <option value="tripura" {{ $userState == "tripura" ? "selected" : "" }}>Tripura</option>
+                                                        <option value="uttar_pradesh" {{ $userState == "uttar_pradesh" ? "selected" : "" }}>Uttar Pradesh</option>
+                                                        <option value="uttarakhand" {{ $userState == "uttarakhand" ? "selected" : "" }}>Uttarakhand</option>
+                                                        <option value="west_bengal" {{ $userState == "west_bengal" ? "selected" : "" }}>West Bengal</option>
+                                                        <option value="chandigarh" {{ $userState == "chandigarh" ? "selected" : "" }}>Chandigarh</option>
+                                                        <option value="delhi" {{ $userState == "delhi" ? "selected" : "" }}>Delhi</option>
+                                                        <option value="jammu_kashmir" {{ $userState == "jammu_kashmir" ? "selected" : "" }}>Jammu and Kashmir</option>
+                                                    </select>                                
                                                     
                                                     <small class="error">
                                                         Please select your state !
@@ -448,12 +480,12 @@
                         pincode.nextElementSibling.style.display = "block";
                         pincode.nextElementSibling.innerText = "pincode is required. Please select your pincode.";
                         return;
-                    }else if(pincode.value.length > 100 ){
+                    }else if(pincode.value.length > 6 || pincode.value.length < 6){
 
                         pincode.focus();
                         pincode.style.borderColor = "#f8020f";
                         pincode.nextElementSibling.style.display = "block";
-                        pincode.nextElementSibling.innerText = "pincode must be less then 100 characters.";
+                        pincode.nextElementSibling.innerText = "Please enter your valid 6 digits pin code.";
                         return;
                     }else{
 

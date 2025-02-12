@@ -29,84 +29,93 @@
         <main>
             <!--==================== Start my_cart_box section ===================-->
             <section class="my_cart">
-                <div class="container">
 
-                    <div class="heading">
-                        <p>My-Wishlist</p>
-                    </div>
-                    
-                    <div class="row">
-                        <div class="item item1 col-12 col-lg-9 mx-auto">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>Products</th>
-                                        <th style="width: 50%;">Name</th>
-                                        <th>
-                                           <div class="d-flex align-items-center">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="15" fill="currentColor" class="bi bi-currency-rupee" viewBox="0 0 16 16">
-                                                    <path d="M4 3.06h2.726c1.22 0 2.12.575 2.325 1.724H4v1.051h5.051C8.855 7.001 8 7.558 6.788 7.558H4v1.317L8.437 14h2.11L6.095 8.884h.855c2.316-.018 3.465-1.476 3.688-3.049H12V4.784h-1.345c-.08-.778-.357-1.335-.793-1.732H12V2H4z"/>
-                                                </svg>
-                                                Price
-                                           </div>
-                                        </th>
+                @if(count($data) > 0)
+                    <div class="container">
 
-                                        <th>Add To Cart</th>
-                                        
-                                    </tr>
-                                </thead>
-                                <tbody class="pt-4">
-
-                                    @foreach ($data as $item)
-                                        <tr>
-                                            <td class="d-flex align-items-center gap-15px">
-                                                <button class="my_wishlist_del_btn btn" data-id={{ base64_encode($item->id) }}>
-                                                    <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18 17.94 6M18 18 6.06 6"/>
-                                                    </svg>
-                                                </button>  
-
-                                                <a href="{{ route("pages.product_details_page", $item->slug) }}">
-                                                    <svg style="color: var(--secondary-color);" class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                        <path stroke="currentColor" stroke-width="2" d="M21 12c0 1.2-4.03 6-9 6s-9-4.8-9-6c0-1.2 4.03-6 9-6s9 4.8 9 6Z"/>
-                                                        <path stroke="currentColor" stroke-width="2" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
-                                                    </svg>
-                                                </a> 
-
-                                                <img src="{{ asset("storage/".$item->thumbnail_img) }}" width="100" alt="">
-                                            </td>
-                                            <td style="width: 50%;">
-                                                <p class="p_name">
-                                                    {{ $item->name }}
-                                                </p>
-                                            </td>
-                                            <td>
-                                                {{ $item->selling_price }}
-                                            </td>
-
-                                            <td>
-                                                <button class="btn add_cart_btn p-3" data-id="{{ base64_encode($item->id) }}">
-                                                    <svg style="color: #09c809;" class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7h-1M8 7h-.688M13 5v4m-2-2h4"/>
-                                                    </svg>                                                  
-                                                </button>
-                                            </td>
-                                            
-                                        </tr><!--./item-->
-                                    @endforeach
-
-                                </tbody>
-                            </table>
-
-                            <small class="d-block paginate mt-5">
-                                {{ $data->links("pagination::bootstrap-5") }}
-                            </small>
+                        <div class="heading">
+                            <p>My-Wishlist</p>
                         </div>
                         
-                    </div>
-                </div>
-            </section><!--./my_cart-->
+                        <div class="row">
+                            <div class="item item1 col-12 col-lg-9 mx-auto">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Products</th>
+                                            <th style="width: 50%;">Name</th>
+                                            <th>
+                                            <div class="d-flex align-items-center">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="15" fill="currentColor" class="bi bi-currency-rupee" viewBox="0 0 16 16">
+                                                        <path d="M4 3.06h2.726c1.22 0 2.12.575 2.325 1.724H4v1.051h5.051C8.855 7.001 8 7.558 6.788 7.558H4v1.317L8.437 14h2.11L6.095 8.884h.855c2.316-.018 3.465-1.476 3.688-3.049H12V4.784h-1.345c-.08-.778-.357-1.335-.793-1.732H12V2H4z"/>
+                                                    </svg>
+                                                    Price
+                                            </div>
+                                            </th>
 
+                                            <th>Add To Cart</th>
+                                            
+                                        </tr>
+                                    </thead>
+                                    <tbody class="pt-4">
+
+                                        @foreach ($data as $item)
+                                            <tr>
+                                                <td class="d-flex align-items-center gap-15px">
+                                                    <button class="my_wishlist_del_btn btn" data-id={{ base64_encode($item->id) }}>
+                                                        <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18 17.94 6M18 18 6.06 6"/>
+                                                        </svg>
+                                                    </button>  
+
+                                                    <a href="{{ route("pages.product_details_page", $item->slug) }}">
+                                                        <svg style="color: var(--secondary-color);" class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                                            <path stroke="currentColor" stroke-width="2" d="M21 12c0 1.2-4.03 6-9 6s-9-4.8-9-6c0-1.2 4.03-6 9-6s9 4.8 9 6Z"/>
+                                                            <path stroke="currentColor" stroke-width="2" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
+                                                        </svg>
+                                                    </a> 
+
+                                                    <img src="{{ asset("storage/".$item->thumbnail_img) }}" width="100" alt="">
+                                                </td>
+                                                <td style="width: 50%;">
+                                                    <p class="p_name">
+                                                        {{ $item->name }}
+                                                    </p>
+                                                </td>
+                                                <td>
+                                                    {{ $item->selling_price }}
+                                                </td>
+
+                                                <td>
+                                                    <button class="btn add_cart_btn p-3" data-id="{{ base64_encode($item->id) }}">
+                                                        <svg style="color: #09c809;" class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7h-1M8 7h-.688M13 5v4m-2-2h4"/>
+                                                        </svg>                                                  
+                                                    </button>
+                                                </td>
+                                                
+                                            </tr><!--./item-->
+                                        @endforeach
+
+                                    </tbody>
+                                </table>
+
+                                <small class="d-block paginate mt-5">
+                                    {{ $data->links("pagination::bootstrap-5") }}
+                                </small>
+                            </div>
+                            
+                        </div>
+                    </div>
+                @else
+                    <section class="data_not_found d-flex align-items-center justify-content-center flex-column">
+                        <img src="{{ asset("assets/img/no_result_found.png") }}" style="width: 250px;" alt="No result found" />                  
+                        <h2 class="my-2"><b>Sorry, no results found!</b></h2>
+                        <small><small>Get Help- +91 7763999333</small></small>
+                    </section><!--./data_not_found-->
+                @endif
+
+            </section><!--./my_cart-->
             
             <!--================= Start get_update_section section ===============-->
             <section class="get_update_section">

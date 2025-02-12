@@ -16,6 +16,12 @@
         <link rel="stylesheet" href="{{ asset("assets/css/frontend/navbar.css") }}" />
         <link rel="stylesheet" href="{{ asset("assets/css/frontend/footer.css") }}" />
         <link rel="stylesheet" href="{{ asset("assets/css/frontend/my-cart.css") }}" />
+        <style>
+            td,th{
+                border-left: 0.2px solid #d0d0d050;
+                padding-left: 10px
+            }
+        </style>
     </head>
     <body>
         <!--================================== Start header section ===============================-->
@@ -47,109 +53,62 @@
             <!--==================== Start my_cart_box section ===================-->
             <section class="my_cart">
 
-                @if (count($data) > 0)
+                
+                @if(count($my_order_list) > 0)
                     <div class="container">
 
                         <div class="heading">
-                            <p>My-Cart</p>
+                            <p>My-Orders</p>
                         </div>
-                        
+
                         <div class="row">
                             <div class="item item1 col-12 col-lg-9 mx-auto">
                                 <table>
                                     <thead>
                                         <tr>
-                                            <th>Products</th>
-                                            <th style="width: 50%;">Name</th>
-                                            <th>
-                                            <div class="d-flex align-items-center">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="15" fill="currentColor" class="bi bi-currency-rupee" viewBox="0 0 16 16">
-                                                        <path d="M4 3.06h2.726c1.22 0 2.12.575 2.325 1.724H4v1.051h5.051C8.855 7.001 8 7.558 6.788 7.558H4v1.317L8.437 14h2.11L6.095 8.884h.855c2.316-.018 3.465-1.476 3.688-3.049H12V4.784h-1.345c-.08-.778-.357-1.335-.793-1.732H12V2H4z"/>
-                                                    </svg>
-                                                    Price
-                                            </div>
-                                            </th>
-                                            
+                                            <th>Sr</th>
+                                            <th>Product Image</th>
+                                            <th>Product Name</th>
+                                            <th>Product Price</th>
+                                            <th>Pay Amount</th>
+                                            <th>Due Amount</th>
+                                            <th>Total Amount</th>
+                                            <th>Order Status</th>
                                         </tr>
                                     </thead>
+                                    <tbody>
 
-                                    <tbody class="pt-4">
-
-                                        @foreach ($data as $item)
+                                        @foreach ($my_order_list as $item)
                                             <tr>
-                                                <td class="d-flex align-items-center gap-15px">
-                                                    <a href="{{ route("product.my_cart.destroy", base64_encode($item->id) ) }}" class="my_cart_del_btn btn" data-id={{ base64_encode($item->id) }}>
-                                                        <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18 17.94 6M18 18 6.06 6"/>
-                                                        </svg>
-                                                    </a>  
-
-                                                    <a href="{{ route("pages.product_details_page", $item->slug) }}">
-                                                        <svg style="color: var(--secondary-color);" class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                            <path stroke="currentColor" stroke-width="2" d="M21 12c0 1.2-4.03 6-9 6s-9-4.8-9-6c0-1.2 4.03-6 9-6s9 4.8 9 6Z"/>
-                                                            <path stroke="currentColor" stroke-width="2" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
-                                                        </svg>
-                                                    </a> 
-
-                                                    <img src="{{ asset("storage/".$item->thumbnail_img) }}" width="100" alt="{{ $item->name }}">
-                                                </td>
-                                                <td style="width: 50%;">
-                                                    <p class="p_name">
-                                                        {{ $item->name }}
-                                                    </p>
-                                                </td>
+                                                <td>{{ $loop->iteration }}</td>
                                                 <td>
-                                                    {{ $item->selling_price }}
-                                                </td>
 
-                                            </tr><!--./item-->
+                                                    {{-- Logic to generate slug --}}
+                                                    @php
+                                                        $slug = Str::slug($item->product_name);
+                                                    @endphp
+                                                    
+                                                    <a href="{{ route('pages.product_details_page', $slug) }}" target="_blank">
+                                                        <img src="{{ asset("storage/".$item->thumbnail_img) }}" alt="">
+                                                    </a>
+                                                </td>
+                                                <td><a href="{{ route('pages.product_details_page', $slug) }}" target="_blank">{{ $item->product_name }}</a></td>
+                                                <td>{{ $item->total_amount }}</td>
+                                                <td>{{ $item->current_payment }}</td>
+                                                <td>{{ $item->payable_amount }}</td>
+                                                <td>{{ $item->total_amount }}</td>
+                                                <td>
+                                                    @if($item->is_order_cancle == "no")
+                                                        <a href="{{ route('product.orders.cancle_my_orders', base64_encode($item->order_id)) }}" style="color: #05c505;"><b>Cancel Your Order</b></a>
+                                                    @elseif($item->is_order_cancle == "yes")
+                                                        <b style="color: #e20505;">Your Order Has Been Canceled</b>
+                                                    @endif
+                                                </td>
+                                            </tr>
                                         @endforeach
-                                    
+        
                                     </tbody>
                                 </table>
-
-                                <small class="d-block paginate mt-5">
-                                    {{ $data->links("pagination::bootstrap-5") }}
-                                </small>
-                            </div>
-
-                            <div class="coupan_section col-12 col-lg-9 mx-auto d-flex flex-wrap flex-sm-nowrap justify-content-center justify-content-sm-between gap-15px">
-                                
-                                <form action="#" class="coupan_code_form" method="POST">
-                                    <div class="input_box d-flex">
-                                        <input type="text" placeholder="Enter Coupne Number...">
-                                        <button type="button" class="btn">Apply Coupne</button>
-                                    </div>
-                                </form>
-
-                                <div class="checkout_box">
-                                    <a href="{{ route("pages.checkout-page") }}" class="checout_btn btn d-flex align-items-center">
-                                        <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                            <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M8 7V6a1 1 0 0 1 1-1h11a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1h-1M3 18v-7a1 1 0 0 1 1-1h11a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1Zm8-3.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z"/>
-                                        </svg>                                      
-                                        Pay Now
-                                    </a>
-                                </div>
-                            </div>
-
-                            <div class="col-12 col-lg-9 mx-auto d-flex justify-content-md-end">
-                                <ul class="cart_total col-12 col-md-5">
-                                    <li>
-                                        <b class="title">Cart Totals</b>
-                                    </li><br/>
-                                    <li>
-                                        <span>Subtotle</span>
-                                        <span>Rs: {{ $sub_total }}</span>
-                                    </li>
-                                    <li>
-                                        <span>Booking Charges</span>
-                                        <span>Rs: 999</span>
-                                    </li>
-                                    <li>
-                                        <span>Total</span>
-                                        <span>RS: {{ $sub_total + 999 }}</span>
-                                    </li>
-                                </ul>
                             </div>
                         </div>
                         

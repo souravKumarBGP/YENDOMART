@@ -28,6 +28,7 @@ Route::prefix("/pages")->controller(PagesController::class)->group(function(){
     Route::get("/view-profile/{id}", "view_profile")->name("pages.view-profile")->middleware(IsUserLoginMiddleware::class);
     Route::get("/my-cart", "my_cart")->name("pages.my_cart")->middleware(IsUserLoginMiddleware::class);
     Route::get("/my-wishlist", "my_wishlist")->name("pages.my_wishlist")->middleware(IsUserLoginMiddleware::class);
+    Route::get("/my-orders", "my_orders")->name("pages.my-orders")->middleware(IsUserLoginMiddleware::class);
     Route::get("/checkout", "checkout_page")->name("pages.checkout-page");
     Route::get("/signup-login", "signup_login_page")->name("pages.signup_login_page")->middleware(IsUserGuestMiddleware::class);
     Route::get("/contact-us", "contact_us_page")->name("pages.contact_us");
@@ -44,7 +45,7 @@ Route::middleware(IsUserGuestMiddleware::class)->prefix("/user")->controller(Use
     Route::post("/update-password-request", "update_password_request")->name("user.update_password_request")->withoutMiddleware(IsUserGuestMiddleware::class)->middleware(IsUserLoginMiddleware::class);
 });
 
-// Route for handle product action
+// Route for handle product action like: wishlist, my cart, my orders and more
 Route::prefix("/product")->controller(ProductController::class)->group(function(){
     Route::prefix("/my-wishlist")->group(function(){
         Route::post("/store","myWishlist_store")->name("product.my_wishlist.store");
@@ -54,6 +55,12 @@ Route::prefix("/product")->controller(ProductController::class)->group(function(
     Route::prefix("/my-cart")->group(function(){
         Route::post("/store", "my_cart_store")->name("product.my_cart.store");
         Route::get("/destroy/{id}", "my_cart_destroy")->name("product.my_cart.destroy");
+    });
+
+    Route::prefix("/orders")->group(function(){
+       Route::post("/order-request", "order_request")->name("product.orders.order_request");
+       Route::post("payment-callback", "payment_callback")->name("product.orders.payment_callback");
+       Route::get("/cancle-my-orders/{orderid}", "orders_cancle_my_order")->name("product.orders.cancle_my_orders");
     });
     
 });
@@ -90,4 +97,17 @@ Route::middleware(IsAdminLoginMiddleware::class)->prefix("/admin")->controller(A
         Route::put("/update", "product_update")->name("admin.product.update");
         Route::delete("/delete/{id}", "product_destroy")->name("admin.product.delete");
     });
+
+    Route::prefix("/orders")->group(function(){
+        Route::get("/index", "orders_index")->name("admin.orders.index");
+        Route::post("/update", "orders_status_update")->name("admin.orders-status.update");
+        Route::get("orders/destroy/{id}", "orders_destroy")->name("admin.orders.destroy");
+    });
+
+    Route::prefix("/users")->group(function(){
+        Route::get("/index", "users_index")->name("admin.users.index");
+        Route::Post("/update", "users_update")->name("admin.users.update");
+        Route::get("/destroy/{id}", "user_destroy")->name("admin.user.destroy");
+    });
+
 });

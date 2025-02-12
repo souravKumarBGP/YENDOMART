@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 
 class UserController extends Controller
@@ -175,22 +176,36 @@ class UserController extends Controller
 
     // Logic to create a methods to handle ajax request for update user profile
     public function update_profile_info_request(Request $request){
-        
-        // Logic to apply server side validation
-        $credentials = $request->validate([
-            "full_name" => "required|max:100|string",
-            "phone"=> "required|max:10|min:10",
-            "state"=> "required|max:100",
-            "pincode"=> "required|max:100",
-            "district"=> "required|max:100",
-            "famous_place"=> "required|max:255",
-            "delivery_address"=> "required|max:500"
-        ]);
-        
-        // Logic to perform update operations
-        $result = User::findorfail(Auth::id())->update($credentials);
 
-        return json_encode(["status"=> "success"]);
+        try{
+
+            // Logic to apply server side validation
+            $credentials = $request->validate([
+                "full_name" => "required|max:100|string",
+                "phone"=> "required|max:10|min:10",
+                "state"=> "required|max:100",
+                "pincode"=> "required|max:100",
+                "district"=> "required|max:100",
+                "famous_place"=> "required|max:255",
+                "delivery_address"=> "required|max:500"
+            ]);
+            
+            // Logic to perform update operations
+            $result = User::findorfail(Auth::id())->update($credentials);
+
+            if($result){
+                return json_encode(["status"=> "success"]);
+            }else{
+                return json_encode(["status"=> "error"]);
+            }
+
+        }catch(\Exception $e){
+            
+            Log::alert("Something went wrong please try again latter.");
+            return json_encode(["status" => $e->getMessage()]);
+        }
+        
+        
     }
 
     // Logic to create a methods to handle ajax request for update profile image

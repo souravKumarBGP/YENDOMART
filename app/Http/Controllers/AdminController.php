@@ -6,16 +6,35 @@ use App\Models\Unit;
 use App\Models\Brand;
 use App\Models\Product;
 use App\Models\Categories;
+use App\Models\Orders;
+use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\Log;
+use Psy\CodeCleaner\ReturnTypePass;
+use Psy\Command\WhereamiCommand;
+use Razorpay\Api\Order;
 
 class AdminController extends Controller
 {
     // Logic to create a methods to show admin dashbord page
     public function dashbord(){
-        return view("admin.dashbord");
+
+        // Get the order records
+        $today_orders = Orders::where("created_at", "like", "%".date("Y-m-d")."%")->paginate(35);
+        // Get the users records
+        $users_data = User::where("role", "customer")->paginate(30);
+        // Get the panding order
+        $panding_order = Orders::where("payment_status", "like", "%panding%")->get("id");
+        // Get the canciled order
+        $canciled_order = Orders::where("payment_status", "like", "%canciled%")->get("id");
+        // total product
+        $products_data = Product::get("id");
+        // For total unites
+        $unites_data = Unit::get("id");
+        
+        return view("admin.dashbord", compact("today_orders", "users_data", "panding_order", "canciled_order", "products_data", "unites_data"));
     }
 
     // Logic to create a methods to show unites page
@@ -440,4 +459,105 @@ class AdminController extends Controller
             return redirect()->back()->with("error_msg", "Unable to delete product. Please try again later.");
         }
     }
+
+    // Logic to create a methods to show orders list page
+    public function orders_index(){
+        // Get the order records
+        $orders_data = Orders::get();
+
+        return view("admin.orders.orders", compact("orders_data"));
+    }
+
+    // Logic to create a methods to change order status
+    public function orders_status_update(Request $request){
+        
+        try{
+
+            // Get data
+            $order_status_val = $request->order_status_val;
+            $order_id = $request->order_id;
+
+            // Logic to check order is exist or not
+            $data = Orders::where("order_id", $order_id)->get("id");
+            if(count($data) == 0){
+                return json_encode(["status"=> "error"]);
+            }
+
+            $result = Orders::where("order_id", $order_id)->update([
+                "order_status"=> $order_status_val
+            ]);
+
+            if($result){
+                return json_encode(["status"=> "success"]);
+            }else{
+                return json_encode(["status"=> "error"]);
+            }
+            
+        }catch(\Exception $e){
+            return json_encode(["status"=> $e->getMessage()]);
+        }
+        
+
+
+        
+    }
+    
+    // Logic to create a methods to destroy user 
+    public function orders_destroy(string $id){
+        $id = base64_decode($id);
+
+        Orders::findorfail($id)->delete();
+        return redirect()->route("admin.dashbord");
+    }
+
+    // Logic to create a methods to show user list page
+    public function users_index(){
+
+        // Get the users records
+        $users_data = User::where("role", "customer")->paginate(30);
+
+        return view("admin.users.users", compact("users_data"));
+    }
+    
+    // Logic to create a methods to change order status
+    public function users_update(Request $request){
+        
+        try{
+
+            // Get data
+            $status_val = $request->status_val;
+            $user_id = $request->user_id;
+
+            // Logic to check order is exist or not
+            $data = User::where("id", $user_id)->get("id");
+            if(count($data) == 0){
+                return json_encode(["status"=> "error"]);
+            }
+
+            $result = User::where("id", $user_id)->update([
+                "status"=> $status_val
+            ]);
+
+            if($result){
+                return json_encode(["status"=> "success"]);
+            }else{
+                return json_encode(["status"=> "error"]);
+            }
+            
+        }catch(\Exception $e){
+            return json_encode(["status"=> $e->getMessage()]);
+        }
+        
+
+
+        
+    }
+    
+    // Logic to create a methods to destroy user 
+    public function user_destroy(string $id){
+        $id = base64_decode($id);
+        User::findorfail($id)->delete();
+        return redirect()->route("admin.dashbord");
+    }
+
 }

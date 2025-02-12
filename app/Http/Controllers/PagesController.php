@@ -7,6 +7,7 @@ use App\Models\Brand;
 use App\Models\MyCart;
 use App\Models\Product;
 use App\Models\MyWishlist;
+use App\Models\Orders;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
@@ -98,9 +99,37 @@ class PagesController extends Controller
         return view("pages.my-wishlist", compact("data"));
     }
 
+    // Logic to create a methods for show my order page
+    public function my_orders(){
+
+        // Logic to get my order data list
+        $user_id = Auth::id();
+        $my_order_list = Orders::where("user_id", $user_id)->where("payment_status", "success")->get();
+        
+        return view("pages.my-orders", compact("my_order_list"));
+    }
+
     // Logic to create a methods to show my cart page
     public function checkout_page(){
-        return view("pages.checkout");
+
+        // Logic to get the product id
+        $my_cart_data = MyCart::where("user_id", Auth::id())->get("product_id");
+        $product_id_arr = [];
+        foreach($my_cart_data as $val){
+            array_push($product_id_arr, intval($val["product_id"]));
+        }
+
+        // Logic to find the products data
+        $cart_data = Product::whereIn("id", $product_id_arr)->select(["id", "thumbnail_img", "name", "selling_price", "slug"])->paginate(5);
+
+        $sub_total = Product::whereIn("id", $product_id_arr)->sum("selling_price");
+        
+        // Logic to check any product in cart exist or not
+        if(count($cart_data) > 0){
+            return view("pages.checkout", compact("cart_data", "sub_total"));
+        }else{
+            return redirect()->route("pages.my_cart");
+        }
     }
 
     // Logic to create a methods to show signup_login page
