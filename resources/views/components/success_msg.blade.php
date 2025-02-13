@@ -23,12 +23,12 @@
             }
         }
         & span{
-            color: var(--ternory-color);
+            color: #f4f8fd;
             font-size: .8125rem;
         }
         & svg{
             width: 1.25rem;
-            color: var(--forth-color);
+            color: #fefcfb;
             margin-right: .625rem;
         }
     }
@@ -55,13 +55,13 @@
 <script>
     
     const timer = document.querySelector(".timer span");
-    let time = 5;    
+    let time = 10;    
     let success_msg = document.querySelector(".success_msg");
     setInterval(() => {
         time = time -1;
         timer.innerText = time+"s";
         if(time == 0){
-            time = 5;
+            time = 10;
             success_msg.style.display = "none";
         }
     }, 1000);

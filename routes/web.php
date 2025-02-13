@@ -32,7 +32,14 @@ Route::prefix("/pages")->controller(PagesController::class)->group(function(){
     Route::get("/checkout", "checkout_page")->name("pages.checkout-page");
     Route::get("/signup-login", "signup_login_page")->name("pages.signup_login_page")->middleware(IsUserGuestMiddleware::class);
     Route::get("/contact-us", "contact_us_page")->name("pages.contact_us");
-    Route::get("/otp-verify", "otp_verify_page")->name("pages.otp_verify")->middleware(IsUserGuestMiddleware::class);;
+    Route::get("/otp-verify", "otp_verify_page")->name("pages.otp_verify")->middleware(IsUserGuestMiddleware::class);
+
+    Route::middleware(IsUserGuestMiddleware::class)->prefix("/reset-password")->group(function(){
+        Route::get("email-verifycation", "email_verifycation_page")->name("pages.email-verifycation-page");
+        Route::post("email-verifycation-request", "email_verifycation_request")->name("page.email_veryfication_request");
+        Route::get("reset-password-page/{email}", "reset_password_page")->name("pages.reset_password_page");
+        Route::post("reset-password-request", "reset_password_request")->name("pages.reset_password_request");
+    });
 });
 // Route for handle user request 
 Route::middleware(IsUserGuestMiddleware::class)->prefix("/user")->controller(UserController::class)->group(function(){

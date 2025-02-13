@@ -29,6 +29,23 @@
         <main>
             <div class="container pb-5">
                 
+                
+            @session('success_msg')
+                <x-success_msg>
+                    <x-slot name="msg">
+                        {{ session("success_msg") }}
+                    </x-slot>
+                </x-success_msg>
+            @endsession
+
+            @session('error_msg')
+                <x-error_msg>
+                    <x-slot name="msg">
+                        {{ session("error_msg") }}
+                    </x-slot>
+                </x-error_msg>
+            @endsession
+                
                 <!--====================== Start form_box section =====================-->
                 <section class="form_box">
                     
@@ -53,7 +70,7 @@
 
                                 <div class="input_box">
                                     <label for="login_email">Email Address <span style="color: #ff022c;">*</span></label>
-                                    <input type="email" name="email" value="{{ old("email", "souravrupani@gmail.com") }}" id="login_email" autocomplete="on" placeholder="Email address" />
+                                    <input type="email" name="email" value="{{ old("email") }}" id="login_email" autocomplete="on" placeholder="Email address" />
 
                                     @error("email")
                                         <small class="error d-block">
@@ -64,7 +81,7 @@
 
                                 <div class="input_box">
                                     <label for="login_password">Password <span style="color: #ff022c;">*</span></label>
-                                    <input type="password" value="souravrupani@gmail.com" name="password" autocomplete="off" id="login_password" placeholder="Password" />
+                                    <input type="password" name="password" autocomplete="off" id="login_password" placeholder="Password" />
 
                                     @error("password")
                                         <small class="error d-block">{{ $message }}</small>
@@ -75,7 +92,7 @@
                                     Login
                                 </button><!--./submit_btn--><br/>
 
-                                <a href="#" class="sub_link" target="_blank" onclick="return confirm('Are you sure you wnat to reset your password?')">Reset your password?</a>
+                                <a href="{{ route("pages.email-verifycation-page") }}" class="sub_link" target="_blank" onclick="return confirm('Are you sure you wnat to reset your password?')">Reset your password?</a>
                             </form>
                         </div><!--./left-->
 

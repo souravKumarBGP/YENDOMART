@@ -1,12 +1,12 @@
 <style>
     .error_msg{
-        border: .0625rem solid var(--color-danger);
+        border: .0625rem solid #de012a;
         position: fixed;
         top: 30%;
         left: 50%;
         transform: translateX(-50%);
-        z-index: 20;
-        background: var(--color-danger);
+        z-index: 200;
+        background: #de012a;
         padding: .8125rem;
         padding-right: 1.875rem;
         border-radius: .1875rem;
@@ -23,12 +23,12 @@
             }
         }
         & span{
-            color: var(--ternory-color);
+            color: #f4f8fd;
             font-size: .8125rem;
         }
         & svg{
             width: 1.25rem;
-            color: var(--forth-color);
+            color: #fefcfb;
             margin-right: .625rem;
         }
     }

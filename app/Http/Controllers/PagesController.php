@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\Reset_password_link;
 use App\Models\User;
 use App\Models\Brand;
 use App\Models\MyCart;
@@ -12,6 +13,9 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use PhpParser\Node\Expr\FuncCall;
+
 use function PHPUnit\Framework\isEmpty;
 
 class PagesController extends Controller
@@ -152,5 +156,80 @@ class PagesController extends Controller
         }else{
             return redirect()->route("pages.signup_login_page");
         }
+    }
+
+    // Logic to create a methods to show email verifycation page for reset password
+    public function email_verifycation_page(){
+        return view("pages.reset_password.email-verification");
+    }
+
+    // Logic to create a methods to handle email verifycation request
+    public function email_verifycation_request(Request $request){
+        
+        // Logic to apply server side validation
+        $request->validate([
+            "email"=> "required|max:100|email|exists:users,email"
+        ], [
+            "email.required"=> "Email id is required. Please enter your email id !",
+            "email.max"=> "Email id must be lass then 100 charectors !",
+            "email.exists"=> "This email is not registred. Please enter a registred email id !"
+        ]);
+
+        // Get the data
+        $data = User::where("email", $request->email)->first(["full_name", "email"]);
+
+        $resust = Mail::to($request->email)->send(new Reset_password_link($data->full_name, $data->email));
+
+        if($resust){
+            return redirect()->back()->with("success_msg", "A reset password link send to your email id: (". $request->email. ") Please Check your email and reset your password.");
+        }else{
+            return redirect()->back()->with("error_msg", "Unable to reset your password. Please try again latter !");
+        }
+
+    }
+
+    // Logic to create a methods to show reset password page
+    public function reset_password_page(string $email){
+        return view("pages.reset_password.reset_password", compact("email"));
+    }
+
+    // Logic to create a methods to reset password request
+    public function reset_password_request(Request $request){
+
+        try{
+
+            // Logic to check email is exist or not
+            $email = strip_tags(base64_decode($request->email));
+            $is_email_exist = User::where("email", $email)->get("id");
+        
+            if(count($is_email_exist) != 1){
+                return redirect()->back()->with("error_msg", "Email is not exist. Please try again latter !");
+            }
+            
+            // Logic to apply server side validation
+            $request->validate([
+                "new_pass"=> "required|max:100",
+                "conf_pass"=> "required|same:new_pass"
+            ], [
+                "new_pass.required"=> "New password is required. Please enter the new password !",
+                "new_pass.max"=> "New password must be lass then 100 charectors !",
+                "conf_pass.required"=> "Confirm password is required. Please enter same password !",
+                "conf_pass"=> "New password and Confirm password must be same !"
+            ]);
+    
+            // Logic to perform reset password operation
+            $result = User::where("email", $email)->update([
+                "password"=> strip_tags(bcrypt($request->new_pass))
+            ]);
+    
+            if($result){
+                return redirect()->route("pages.signup_login_page")->with("success_msg", "Password reset successfully. Plese login now.");
+            }else{
+                return redirect()->back()->with("error_msg", "Unable to reset password. Please try again latter !");   
+            }
+        }catch(\Exception $e){
+            return redirect()->back()->with("error_msg", "Something went wrong. Please try again latter ! ". $e->getMessage());   
+        }
+        
     }
 }
