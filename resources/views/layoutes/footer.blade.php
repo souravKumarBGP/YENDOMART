@@ -47,7 +47,7 @@
                                                     </button>
 
                                                     <button class="btn">
-                                                        <a href="#" class="add_cart_btn btn p-2" data-id="{{ base64_encode($item->id) }}">
+                                                        <a href="#" class="{{ ($item->product_status == "in stock") ? "add_cart_btn" : "" }} btn p-2" data-id="{{ base64_encode($item->id) }}">
                                                             <svg style="color: var(--primary-color);" class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7h-1M8 7h-.688M13 5v4m-2-2h4"/>
                                                             </svg>                                                          
@@ -56,7 +56,14 @@
                                                 </div><!--./left-->
                                                 <div class="right">
 
-                                                    <b><small style="color: #07dd07;">In Stock</small></b>
+                                                    @if ($item->product_status == "in stock")
+                                                        <b><small style="color: #07dd07;">In Stock</small></b>
+                                                        
+                                                    @elseif($item->product_status == "up comming")
+                                                        <b><small style="color: #e7aa10;">Up Comming</small></b>
+                                                    @else
+                                                        <b><small style="color: #f66f6f;">Out Of Stock</small></b>
+                                                    @endif
                                                 </div>
                                             </div>
                                             
@@ -112,7 +119,7 @@
                                                     </button>
 
                                                     <button class="btn">
-                                                        <a href="#" class="add_cart_btn btn p-2"  data-id="{{ base64_encode($item->id) }}">
+                                                        <a href="#" class="{{ ($item->product_status == "in stock") ? "add_cart_btn" : "" }} btn p-2"  data-id="{{ base64_encode($item->id) }}">
                                                             <svg style="color: var(--primary-color);" class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7h-1M8 7h-.688M13 5v4m-2-2h4"/>
                                                             </svg>                                                          
@@ -121,7 +128,14 @@
                                                 </div><!--./left-->
                                                 <div class="right">
 
-                                                    <b><small style="color: #07dd07;">In Stock</small></b>
+                                                    @if ($item->product_status == "in stock")
+                                                        <b><small style="color: #07dd07;">In Stock</small></b>
+                                                        
+                                                    @elseif($item->product_status == "up comming")
+                                                        <b><small style="color: #e7aa10;">Up Comming</small></b>
+                                                    @else
+                                                        <b><small style="color: #f66f6f;">Out Of Stock</small></b>
+                                                    @endif
                                                 </div>
                                             </div>
                                             
@@ -177,7 +191,7 @@
                                                     </button>
 
                                                     <button class="btn">
-                                                        <a href="#" class="add_cart_btn btn p-2"  data-id="{{ base64_encode($item->id) }}">
+                                                        <a href="#" class="{{ ($item->product_status == "in stock") ? "add_cart_btn" : "" }} btn p-2"  data-id="{{ base64_encode($item->id) }}">
                                                             <svg style="color: var(--primary-color);" class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 4h1.5L9 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-8.5-3h9.25L19 7h-1M8 7h-.688M13 5v4m-2-2h4"/>
                                                             </svg>                                                          
@@ -186,7 +200,14 @@
                                                 </div><!--./left-->
                                                 <div class="right">
 
-                                                    <b><small style="color: #07dd07;">In Stock</small></b>
+                                                    @if ($item->product_status == "in stock")
+                                                        <b><small style="color: #07dd07;">In Stock</small></b>
+                                                        
+                                                    @elseif($item->product_status == "up comming")
+                                                        <b><small style="color: #e7aa10;">Up Comming</small></b>
+                                                    @else
+                                                        <b><small style="color: #f66f6f;">Out Of Stock</small></b>
+                                                    @endif
                                                 </div>
                                             </div>
                                             
@@ -226,21 +247,21 @@
                                         <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.0225 4 14 8.98132m0 0 3.03.00002M14 8.98132V5.99998m4.2327 8.51492-1.1431-1.1439c-1.143-1.1439-1.9758-.3696-2.8382.4565-.3159.3161-.7443.4936-1.1911.4936-.4467 0-.8751-.1775-1.191-.4936L9.998 11.9549c-.65643-.6564-.92477-1.4591 0-2.38383.8488-.86837 1.6837-1.61177.4926-2.8037L9.2995 5.57544c-.90492-.90556-1.99137-.383-2.61843.23625-3.13257 3.1118-1.72021 6.77001 1.41066 9.90141s6.78747 4.5465 9.90477 1.4254c.1744-.1461.551-.565.6473-.7712.0962-.2062.1461-.4311.1461-.6587 0-.2277-.0499-.4525-.1461-.6588-.0963-.2062-.2366-.3888-.4111-.5349Z"/>
                                         </svg>
-                                        +91 7763999333
+                                        +91 7763999333, +91 8792492507
                                     </a>
 
                                     <small>
-                                        <a href="#"><b>Address1 :</b> Nathngar karela chowck gramin bank manali</a>
+                                        <a target="_blank" href="https://maps.app.goo.gl/eTYxbnAY83hiExFA6"><b>Address1 :</b> NA, Tatarpur Road, Tatarpur, Bhagalpur - 812002 (Near Petrol Pump)</a>
                                     </small>
                                     <small>
-                                        <a href="#"><b>Address2 :</b> Nathngar karela chowck gramin bank manali</a>
+                                        <a target="_blank" href="https://maps.app.goo.gl/eTYxbnAY83hiExFA6"><b>Address2 :</b> NA, Tatarpur Road, Tatarpur, Bhagalpur - 812002 (Near Petrol Pump)</a>
                                     </small>
     
                                     <div class="socal_links_box d-flex">
     
                                         <button class="btn">
-                                            <a href="https://maps.app.goo.gl/jbYBZDXkAcTsEbH6A">
-                                                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                            <a target="_blank" href="https://maps.app.goo.gl/eTYxbnAY83hiExFA6">
+                                                <svg style="color: #99061e;" class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 13a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/>
                                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.8 13.938h-.011a7 7 0 1 0-11.464.144h-.016l.14.171c.1.127.2.251.3.371L12 21l5.13-6.248c.194-.209.374-.429.54-.659l.13-.155Z"/>
                                                 </svg>                                                                                            
@@ -248,32 +269,31 @@
                                         </button>
                                         
                                         <button class="btn">
-                                            <a href="#">
-                                                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                    <path fill="currentColor" fill-rule="evenodd" d="M12 4a8 8 0 0 0-6.895 12.06l.569.718-.697 2.359 2.32-.648.379.243A8 8 0 1 0 12 4ZM2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10a9.96 9.96 0 0 1-5.016-1.347l-4.948 1.382 1.426-4.829-.006-.007-.033-.055A9.958 9.958 0 0 1 2 12Z" clip-rule="evenodd"/>
-                                                    <path fill="currentColor" d="M16.735 13.492c-.038-.018-1.497-.736-1.756-.83a1.008 1.008 0 0 0-.34-.075c-.196 0-.362.098-.49.291-.146.217-.587.732-.723.886-.018.02-.042.045-.057.045-.013 0-.239-.093-.307-.123-1.564-.68-2.751-2.313-2.914-2.589-.023-.04-.024-.057-.024-.057.005-.021.058-.074.085-.101.08-.079.166-.182.249-.283l.117-.14c.121-.14.175-.25.237-.375l.033-.066a.68.68 0 0 0-.02-.64c-.034-.069-.65-1.555-.715-1.711-.158-.377-.366-.552-.655-.552-.027 0 0 0-.112.005-.137.005-.883.104-1.213.311-.35.22-.94.924-.94 2.16 0 1.112.705 2.162 1.008 2.561l.041.06c1.161 1.695 2.608 2.951 4.074 3.537 1.412.564 2.081.63 2.461.63.16 0 .288-.013.4-.024l.072-.007c.488-.043 1.56-.599 1.804-1.276.192-.534.243-1.117.115-1.329-.088-.144-.239-.216-.43-.308Z"/>
+                                            <a target="_blank" href="https://www.youtube.com/@itcarelappywala" class="d-flex align-items-center">
+                                                <svg style="color: #ff022c;" class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                                                    <path fill-rule="evenodd" d="M21.7 8.037a4.26 4.26 0 0 0-.789-1.964 2.84 2.84 0 0 0-1.984-.839c-2.767-.2-6.926-.2-6.926-.2s-4.157 0-6.928.2a2.836 2.836 0 0 0-1.983.839 4.225 4.225 0 0 0-.79 1.965 30.146 30.146 0 0 0-.2 3.206v1.5a30.12 30.12 0 0 0 .2 3.206c.094.712.364 1.39.784 1.972.604.536 1.38.837 2.187.848 1.583.151 6.731.2 6.731.2s4.161 0 6.928-.2a2.844 2.844 0 0 0 1.985-.84 4.27 4.27 0 0 0 .787-1.965 30.12 30.12 0 0 0 .2-3.206v-1.516a30.672 30.672 0 0 0-.202-3.206Zm-11.692 6.554v-5.62l5.4 2.819-5.4 2.801Z" clip-rule="evenodd"/>
                                                 </svg> 
-                                            </a>                                         
+                                            </a>                                        
                                         </button>
     
                                         <button class="btn">
-                                            <a href="#">
-                                                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                                            <a target="_blank" href="https://www.facebook.com/people/IT-Care-Lappywala/61561053075831/?mibextid=JRoKGi">
+                                                <svg style="color: #4070ff;" class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                                                     <path fill-rule="evenodd" d="M13.135 6H15V3h-1.865a4.147 4.147 0 0 0-4.142 4.142V9H7v3h2v9.938h3V12h2.021l.592-3H12V6.591A.6.6 0 0 1 12.592 6h.543Z" clip-rule="evenodd"/>
                                                 </svg>                                          
                                             </a>
                                         </button>
     
                                         <button class="btn">
-                                            <a href="#">
-                                                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                            <a target="_blank" href="https://www.instagram.com/itcarelappywala/#">
+                                                <svg style="color: #ff1b49;" class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                                     <path fill="currentColor" fill-rule="evenodd" d="M3 8a5 5 0 0 1 5-5h8a5 5 0 0 1 5 5v8a5 5 0 0 1-5 5H8a5 5 0 0 1-5-5V8Zm5-3a3 3 0 0 0-3 3v8a3 3 0 0 0 3 3h8a3 3 0 0 0 3-3V8a3 3 0 0 0-3-3H8Zm7.597 2.214a1 1 0 0 1 1-1h.01a1 1 0 1 1 0 2h-.01a1 1 0 0 1-1-1ZM12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm-5 3a5 5 0 1 1 10 0 5 5 0 0 1-10 0Z" clip-rule="evenodd"/>
                                                 </svg>                                          
                                             </a>
                                         </button>
     
                                         <button class="btn">
-                                            <a href="#">
+                                            <a target="_blank" href="mailto:muzaffarmustafa26@gmail.com">
                                                 <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                                     <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="m3.5 5.5 7.893 6.036a1 1 0 0 0 1.214 0L20.5 5.5M4 19h16a1 1 0 0 0 1-1V6a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1Z"/>
                                                 </svg>                                          
@@ -283,14 +303,13 @@
                                     </div>
     
                                     <div class="img_location mb-2">
-                                        <a href="https://maps.app.goo.gl/jbYBZDXkAcTsEbH6A">
+                                        <a target="_blank" href="https://maps.app.goo.gl/eTYxbnAY83hiExFA6">
                                             <img src="{{ asset("assets/img/shop.jpg") }}" alt="">
                                         </a>
                                     </div>
     
                                 </div>
                                 
-    
                             </div><!--./item-->
     
                             <div class="item item2 col-12 col-sm-4 col-md-4 col-lg-4">
@@ -299,12 +318,12 @@
                                 </div>
     
                                 <ul>
-                                    <li><a href="#">Home</a></li>
-                                    <li><a href="#">My Profile</a></li>
-                                    <li><a href="#">My Orders</a></li>
-                                    <li><a href="#">My Cart</a></li>
-                                    <li><a href="#">My Wishlist</a></li>
-                                    <li><a href="#">My Delivery Address</a></li>
+                                    <li><a href="{{ route("home") }}">Home</a></li>
+                                    <li><a href="{{ route("pages.view-profile", base64_encode(Auth::id())) }}">My Profile</a></li>
+                                    <li><a href="{{ route("pages.my-orders") }}">My Orders</a></li>
+                                    <li><a href="{{ route("pages.my_cart") }}">My Cart</a></li>
+                                    <li><a href="{{ route("pages.my_wishlist") }}">My Wishlist</a></li>
+                                    <li><a href="{{ route("pages.view-profile", base64_encode(Auth::id())) }}">My Delivery Address</a></li>
                                 </ul>
     
                             </div><!--./item-->

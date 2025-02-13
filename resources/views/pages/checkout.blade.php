@@ -941,11 +941,15 @@
                                         success: function(respon){
                                             
                                             if(respon.status == "success"){
+
                                                 Swal.fire({
                                                     title: "Success",
                                                     text: "Payment successfull",
                                                     icon: "success",
                                                 });
+
+                                                window.location.href = "{{ route("pages.my-orders") }}";
+                                                
                                             }else if(respon.status == "error"){
                                                 Swal.fire({
                                                     title: "Payment request failed !",
