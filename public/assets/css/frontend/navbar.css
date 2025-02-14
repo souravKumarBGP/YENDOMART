@@ -548,7 +548,17 @@ header{
 
 @media all and (max-width: 768px){ /** Responsive for mini tablets **/
     header nav .nav_top {
+
+        
+        
         .search_bar {
+
+            .left{
+                .logo b{
+                    font-size: .8125rem;
+                }
+            }
+            
             .right {
                 gap: 2.1875rem;
                 .favorite span, .my_cart span{
