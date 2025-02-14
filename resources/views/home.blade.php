@@ -3,9 +3,9 @@
     <head>
         <meta charset="UTF-8" /> 
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Yendo Ecommerce | Online electronic shop</title>
-        <meta name="keywords" content="Yendo Ecommerce, Ecommerce" />
-        <meta name="discreption" content="This yendo ecommerce website" />
+        <title>IT CARE LAPPY WALA | Online electronic shop</title>
+        <meta name="keywords" content="IT CARE LAPPY WALA, Ecommerce" />
+        <meta name="discreption" content="This IT CARE LAPPY WALA website" />
         <meta name="author" content="Sourav Rupani" />
         <meta name="robots" content="index, following" />
         <meta name="csrf-token" content="{{ csrf_token() }}" />
@@ -51,6 +51,10 @@
             <section class="crousel_section d-none d-md-block">
                 <div class="container">
                     <div class="owl-carousel binner">
+                        
+                        <div class="items"> 
+                            <img src="{{ asset("assets/img/c2.jpg") }}" alt="binner1" style="object-fit: contain" />
+                        </div><!--./items-->
                         
                         <div class="items"> 
                             <img src="{{ asset("assets/img/binner1.png") }}" alt="binner1" style="object-fit: contain" />

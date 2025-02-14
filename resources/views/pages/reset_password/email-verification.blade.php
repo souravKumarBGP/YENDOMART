@@ -4,8 +4,8 @@
         <meta charset="UTF-8" /> 
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Verify Your Email| Online electronic shop</title>
-        <meta name="keywords" content="Yendo Ecommerce, Ecommerce" />
-        <meta name="discreption" content="This yendo ecommerce website" />
+        <meta name="keywords" content="IT CARE LAPPY WALA, Ecommerce" />
+        <meta name="discreption" content="This IT CARE LAPPY WALA website" />
         <meta name="author" content="Sourav Rupani" />
         <meta name="robots" content="index, following" />
         <meta name="csrf-token" content="{{ csrf_token() }}" />

@@ -55,7 +55,7 @@ header{
                     .logo{
                         gap: 5px;
                         & b{
-                            font-size: 16px;
+                            font-size: 18px;
                             font-weight: bolder;
                             color: var(--secondary-color);
                             word-wrap: nowrap;
@@ -66,15 +66,13 @@ header{
                         }
                         
                         & img{
-                            background: var(--secondary-color);
-                            width: 40px;
-                            padding: 5px;
+                            width: 35px;
                             border-radius: .4375rem;
                         }
                     }
     
                     .search_box{
-                        width: 73%;
+                        width: 68%;
                         border-radius: .4375rem;
                         overflow: hidden;
                         border: 0.5px solid var(--primary-color);

@@ -3,9 +3,9 @@
     <head>
         <meta charset="UTF-8" /> 
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>@yield("title", "Admin | Yendo Ecommerce")</title>
-        <meta name="keywords" content="Yendo Ecommerce, Ecommerce" />
-        <meta name="discreption" content="This yendo ecommerce website" />
+        <title>@yield("title", "Admin | IT CARE LAPPY WALA")</title>
+        <meta name="keywords" content="IT CARE LAPPY WALA, Ecommerce" />
+        <meta name="discreption" content="This IT CARE LAPPY WALA website" />
         <meta name="author" content="Sourav Rupani" />
         <meta name="robotes" content="index, following" />
         <!--================================== External file link's ===============================-->
@@ -29,9 +29,9 @@
                         <div class="left">
                             <a href="{{ route("home") }}" class="logo d-flex align-items-center">
                                 <div class="circle d-flex align-items-center justify-content-center">
-                                    <img src="{{ asset("assets/img/logo.png") }}" alt="Logo" />
+                                    <img src="{{ asset("assets/img/l1.png") }}" alt="Logo" />
                                 </div>
-                                <b style="font-weight: bolder;">𝗜𝗧 𝗖𝗔𝗥𝗘 𝗟𝗔𝗣𝗣𝗬</b>
+                                <b style="font-weight: bolder;">𝗜𝗧 𝗖𝗔𝗥𝗘 𝗟𝗔𝗣𝗣𝗬 𝐖𝐀𝐋𝐀</b>
                             </a>
                         </div><!--End of left-->
     

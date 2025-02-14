@@ -3,9 +3,9 @@
     <head>
         <meta charset="UTF-8" /> 
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Yendo Ecommerce |Product-filter| Online electronic shop</title>
-        <meta name="keywords" content="Yendo Ecommerce, Ecommerce" />
-        <meta name="discreption" content="This yendo ecommerce website" />
+        <title>IT CARE LAPPY WALA |Product-filter| Online electronic shop</title>
+        <meta name="keywords" content="IT CARE LAPPY WALA, Ecommerce" />
+        <meta name="discreption" content="This IT CARE LAPPY WALA website" />
         <meta name="author" content="Sourav Rupani" />
         <meta name="robots" content="index, following" />
         <meta name="csrf-token" content="{{ csrf_token() }}" />
