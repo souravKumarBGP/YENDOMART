@@ -49,7 +49,7 @@ main{
                     }
                 }
                 .big_img{
-                    height: 100%;
+                    /* height: 100%; */
                     padding-left: 20px;
                     & img{
                         width: 100%;
@@ -225,21 +225,21 @@ main{
 }
 
 @media all and (max-width: 576px){
-    @media all and (max-width: 1200px){
-        .product_showcase{
-            
-            .right .box3 .btn_box{
-                flex-wrap: wrap;
+    .product_showcase{
+        .left .img_box .big_img img{
+            height: auto !important;
+        }
+        .right .box3 .btn_box{
+            flex-wrap: wrap;
+            justify-content: center;
+            button{
+                font-size: 12px;
+                margin-bottom: 10px;
+                border-radius: 5px;
+                width: 45%;
+                display: flex; 
                 justify-content: center;
-                button{
-                    font-size: 12px;
-                    margin-bottom: 10px;
-                    border-radius: 5px;
-                    width: 45%;
-                    display: flex; 
-                    justify-content: center;
-                    align-items: center;
-                }
+                align-items: center;
             }
         }
     }

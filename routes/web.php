@@ -68,6 +68,7 @@ Route::prefix("/product")->controller(ProductController::class)->group(function(
        Route::post("/order-request", "order_request")->name("product.orders.order_request");
        Route::post("payment-callback", "payment_callback")->name("product.orders.payment_callback");
        Route::get("/cancle-my-orders/{orderid}", "orders_cancle_my_order")->name("product.orders.cancle_my_orders");
+       Route::post("/delete/cancle-my-order", "delete_cancle_my_order")->name("product.orders.delete_cancle_my_order");
     });
     
 });

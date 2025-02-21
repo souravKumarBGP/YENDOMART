@@ -78,11 +78,11 @@
                         <div class="left col-12 col-lg-7 col-xl-6">
                             <div class="img_box">
                                 <div class="row justify-content-between" style="height: 100%;">
-                                    <div class="aside_img col-12 col-lg-2 order-last order-lg-1">
+                                    <div class="aside_img col-12 col-lg-2 order-last order-lg-1 mt-1 mt-sm-5 mt-lg-0">
                                         <div class="row flex-nowrap flex-lg-wrap">
                                             @foreach ($product_data->gallary_img as $val)
                                                 <div class="item col-2 {{ ($loop->iteration == 1) ? "active_img" : "" }}">
-                                                    <img src="{{ asset("storage/".$val) }}" alt="{{ $product_data->name }}">
+                                                    <img src="{{ asset("storage/".$val) }}" alt="{{ $product_data->name }}" />
                                                 </div>
                                             @endforeach
                                         </div>
@@ -383,15 +383,21 @@
                     }
                 })
 
-                // Logic to show product name in ellipsis format
-                $(".products_box .product_name a").each((ind, item) => {
-                    let text = $(item).text().trim();
-                    if (text.length > 25) {
-                        let truncatedText = text.slice(0, 25) + "...";
-                        $(item).text(truncatedText);
-                    }
-                });
+                // Logic to show current product image when user click on gallary image
+                $(".aside_img .item").on("click", function(event){
 
+                    // Logic to get the current src
+                    let src = this.querySelector("img").src;
+                    
+                    // Remove "active_img" class from all items and add it to the clicked one
+                    $(".aside_img .item").removeClass("active_img");
+                    $(this).addClass("active_img");
+                    
+                    // Logic to set this src in big image
+                    $(".b_img").prop("src", src);
+
+                });
+                
                 // Logic to handle a ajax request for store my favorites product
                 $(".like_btn").on("click", function(event){
                     event.preventDefault();
@@ -519,6 +525,15 @@
                         }
 
                     });
+                });
+
+                // Logic to show product name in ellipsis format
+                $(".products_box .product_name a").each((ind, item) => {
+                    let text = $(item).text().trim();
+                    if (text.length > 25) {
+                        let truncatedText = text.slice(0, 25) + "...";
+                        $(item).text(truncatedText);
+                    }
                 });
 
             });

@@ -54,7 +54,7 @@ header{
                     
                     .logo{
                         gap: 5px;
-                        & b{
+                        & h1{
                             font-size: 18px;
                             font-weight: bolder;
                             color: var(--secondary-color);
@@ -554,8 +554,9 @@ header{
         .search_bar {
 
             .left{
-                .logo b{
+                .logo h1{
                     font-size: .8125rem;
+                    white-space: nowrap;
                 }
             }
             

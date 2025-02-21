@@ -130,8 +130,9 @@
                                     @enderror
                                 </div><!--./input_box-->
 
-                                <button type="submit" class="submit_btn login_submit_btn btn">
+                                <button type="submit" class="submit_btn login_submit_btn btn d-flex align-items-center" onclick="document.querySelector('.spinner').style.display='block'">
                                     Login
+                                    <div class="spinner ms-2"></div>
                                 </button><!--./submit_btn--><br/>
 
                                 <a href="{{ route("pages.email-verifycation-page") }}" class="sub_link" target="_blank" onclick="return confirm('Are you sure you wnat to reset your password?')">Reset your password?</a>

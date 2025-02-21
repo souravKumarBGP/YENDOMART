@@ -94,7 +94,6 @@
             
             <!--==================== Start my_cart_box section ===================-->
             <section class="my_cart">
-
                 
                 @if(count($my_order_list) > 0)
                     <div class="container">
@@ -143,7 +142,14 @@
                                                     @if($item->is_order_cancle == "no")
                                                         <a href="{{ route('product.orders.cancle_my_orders', base64_encode($item->order_id)) }}" style="color: #05c505;"><b>Cancel Your Order</b></a>
                                                     @elseif($item->is_order_cancle == "yes")
-                                                        <b style="color: #e20505;">Your Order Has Been Canceled</b>
+                                                        <div class="d-flex align-items-center">
+                                                            <b style="color: #e20505;">Your Order Has Been Canceled</b>
+                                                            <button class="btn ms-4 delete_cancle_order_btn" data-id="{{ base64_encode($item->id) }}">
+                                                                <svg style="color: #e20505;" class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z"/>
+                                                                </svg>                                                              
+                                                            </button>
+                                                        </div>
                                                     @endif
                                                 </td>
                                             </tr>
@@ -331,6 +337,66 @@
                         }
 
                     });
+                });
+
+                // Logic to make a ajax request for delete cancle order 
+                $(".delete_cancle_order_btn").on("click", function(){
+                    
+                    // Logic to get id
+                    const id = $(this).data("id");
+                    // Logic to check id is exist or not
+                    if(!id){
+                        Swal.fire({
+                            icon: "error",
+                            title: "Error",
+                            text: "Something went wrong. Please try again latter!",
+                        });
+                        return;
+                    }
+
+                    // Logic to make a request
+                    $.ajax({
+                        url: "{{ route("product.orders.delete_cancle_my_order") }}",
+                        type: "POST",
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                            "content-type": "application/json"
+                        },
+                        data: JSON.stringify({"id": id}),
+                        dataType: "json",
+
+                        success: function(resp){
+
+                            console.log(resp);
+                            // return;
+
+                            if(resp.status == "success"){
+
+                                $(this).parent().parent().parent().css("display", "none");
+                                Swal.fire({
+                                    icon: "success",
+                                    title: "Success",
+                                    text: "Order Deleted Successfully.",
+                                });
+                                
+                            }else if(resp.status == "error"){
+                                Swal.fire({
+                                    icon: "error",
+                                    title: "Error",
+                                    text: "Unable to delete order. Please try again latter!",
+                                });
+                            }
+                        },
+
+                        error: function(resp){
+                            Swal.fire({
+                                icon: "error",
+                                title: "Error",
+                                text: "Something went wrong. Please try again latter!",
+                            });
+                        }
+                    });
+                    
                 });
                 
             });

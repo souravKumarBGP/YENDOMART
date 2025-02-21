@@ -24,7 +24,7 @@
                 <div class="logo">
                     <a href="{{ route("home") }}" class="d-flex align-items-center" style="gap: 5px;">
                         <img src="{{ asset("assets/img/l1.png") }}" alt="Logo" />
-                        <b>𝗜𝗧 𝗖𝗔𝗥𝗘 𝗟𝗔𝗣𝗣𝗬 𝐖𝐀𝐋𝐀</b>
+                        <h1>𝗜𝗧 𝗖𝗔𝗥𝗘 𝗟𝗔𝗣𝗣𝗬 𝗪𝗔𝗟𝗔</h1>
                     </a>
                 </div>
                 <div class="search_box">

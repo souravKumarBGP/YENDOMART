@@ -155,8 +155,6 @@
                                     @guest
                                         <button class="login_btn btn" type="submit">Signup</button>
                                     @endguest
-
-
                                     
                                     <br/>
                                     
@@ -478,8 +476,9 @@
                                                 </div>
                                             </div>
 
-                                            <button type="submit" id="place_order" class="btn place_oder_btn py-3" @if($sub_total == 0) {{ "disabled" }} @endif >
+                                            <button type="submit" id="place_order" class="btn place_oder_btn py-3 d-flex align-items-center justify-content-center" @if($sub_total == 0) {{ "disabled" }} @endif >
                                                 Place Order
+                                                <div class="spinner ms-2"></div>
                                             </button>
                                             <br/><br/>
                                             <small style="color: #0280f6;"><a href="tel:7763999333" target="_blank">Get Help +91 7763999333</a></small>
@@ -913,6 +912,9 @@
 
                     event.preventDefault();
 
+                    $(".spinner").css("display", "block");
+                    // return;
+
                     // Logic to check delivery details is enter or not
                     if($("#checkbox4").val().trim().toLowerCase() == "compleated"){
                         
@@ -941,9 +943,13 @@
                         processData: false,
 
                         success: function(resp){
-                            
+
+                            $(".spinner").css("display", "none");
+
                             // Logic to check payment request is success or not if payment request is unsuccess then show error and return  back
                             if(resp.status == "error"){
+                                
+                                $(".spinner").css("display", "none");
                                 Swal.fire({
                                     title: "Error !",
                                     text: "Unable to payment. Please try again latter.",
@@ -981,6 +987,8 @@
                                         },
 
                                         success: function(respon){
+
+                                            $(".spinner").css("display", "none");
                                             
                                             if(respon.status == "success"){
 
@@ -1012,6 +1020,8 @@
                                             
                                             // console.log("err22"+respon);
                                             // return;
+
+                                            $(".spinner").css("display", "none");
                                             
                                             Swal.fire({
                                                 title: "Payment request failed !",
@@ -1043,6 +1053,7 @@
 
                         error: function(resp){
                             
+                            $(".spinner").css("display", "none");
                             Swal.fire({
                                 title: "Payment request failed !",
                                 text: "Something went wrong. Please try again latter. 1",

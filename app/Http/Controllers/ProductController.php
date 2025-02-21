@@ -174,6 +174,48 @@ class ProductController extends Controller
         
     }
 
+    // Logic to create a methods to cancle my order
+    public function orders_cancle_my_order(string $orderid){
+        try{
+            $order_id = base64_decode($orderid);
+            $result = Orders::where("order_id", $order_id)->update([
+                "is_order_cancle"=> "yes"
+            ]);
+
+            if($result){
+                return redirect()->back()->with("success_msg", "Order Cancel Successfully");
+            }else{
+                return redirect()->back()->with("error_msg", "Unable to cancle order. Please try again latter !");
+            }
+        }catch(\Exception $e){
+            return redirect()->back()->with("error_msg", "Unable to cancle order. Please try again latter !");
+            // return redirect()->back()->with("error_msg", "Unable to cancle order. ".$e->getMessage());
+        }
+    }
+
+    // Logic to create a methods to handle ajax request for destroy cancle order
+    public function delete_cancle_my_order(Request $request){
+        
+        try{
+            // Get the id and decode it
+            $id = base64_decode($request->id);
+            // Logic to apply validation
+            if(!$id){
+                return json_encode(["status"=> "error"]);
+            }
+            // Logic to get the order data
+            $result = Orders::findorfail($id)->delete();
+            if($result){
+                return json_encode(["status"=> "success"]);
+            }else{
+                return json_encode(["status"=> "error"]);
+            }
+            
+        }catch(\Exception $e){
+            return json_encode(["status"=> $e->getMessage()]);
+        }
+    }
+
     // Logic to create a methods to handle ajax request for processing user orders
     public function order_request(Request $request){
 
@@ -287,25 +329,6 @@ class ProductController extends Controller
             return json_encode(["status"=> $e->getMessage()]);
         }
 
-    }
-
-    // Logic to create a methods to cancle my order
-    public function orders_cancle_my_order(string $orderid){
-        try{
-            $order_id = base64_decode($orderid);
-            $result = Orders::where("order_id", $order_id)->update([
-                "is_order_cancle"=> "yes"
-            ]);
-
-            if($result){
-                return redirect()->back()->with("success_msg", "Order Cancel Successfully");
-            }else{
-                return redirect()->back()->with("error_msg", "Unable to cancle order. Please try again latter !");
-            }
-        }catch(\Exception $e){
-            return redirect()->back()->with("error_msg", "Unable to cancle order. Please try again latter !");
-            // return redirect()->back()->with("error_msg", "Unable to cancle order. ".$e->getMessage());
-        }
     }
 
     // Logic to create a methods to handle ajax request for payment callback
