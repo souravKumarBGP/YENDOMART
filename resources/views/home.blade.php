@@ -109,12 +109,14 @@
                         <div class="heading d-flex align-items-center justify-content-between">
                             <span>Top Selling Products</span>
                             <button class="btn view_all_btn">
+
                                 <a href="#" class="d-flex align-items-center" target="_blank">  
                                     View All
                                     <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 12H5m14 0-4 4m4-4-4-4"/>
                                     </svg>
                                 </a>
+                                
                             </button>
                         </div><!--./heading-->
 
@@ -198,12 +200,16 @@
                         <div class="heading d-flex align-items-center justify-content-between">
                             <span>Laptops</span>
                             <button class="btn view_all_btn">
-                                <a href="{{ route("pages.product_filter_page", $laptop_products_data[0]->category_name) }}" class="d-flex align-items-center" >  
-                                    View All
-                                    <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 12H5m14 0-4 4m4-4-4-4"/>
-                                    </svg>
-                                </a>
+
+                                @isset($laptop_products_data[0]->category_name)
+                                    <a href="{{ route("pages.product_filter_page", $laptop_products_data[0]->category_name) }}" class="d-flex align-items-center" >  
+                                        View All
+                                        <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 12H5m14 0-4 4m4-4-4-4"/>
+                                        </svg>
+                                    </a>
+                                @endisset
+                                
                             </button>
                         </div><!--./heading-->
                         
@@ -286,12 +292,16 @@
                         <div class="heading d-flex align-items-center justify-content-between">
                             <span>LED Monitor And CPU</span>
                             <button class="btn view_all_btn">
-                                <a href="{{ route("pages.product_filter_page", $led_monitors_CPU[0]->category_name) }}" class="d-flex align-items-center">  
-                                    View All
-                                    <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 12H5m14 0-4 4m4-4-4-4"/>
-                                    </svg>
-                                </a>
+
+                                @isset($led_monitors_CPU[0]->category_name)
+                                    <a href="{{ route("pages.product_filter_page", $led_monitors_CPU[0]->category_name) }}" class="d-flex align-items-center">  
+                                        View All
+                                        <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 12H5m14 0-4 4m4-4-4-4"/>
+                                        </svg>
+                                    </a>
+                                @endisset
+                                
                             </button>
                         </div><!--./heading-->
                         
@@ -375,12 +385,16 @@
                         <div class="heading d-flex align-items-center justify-content-between">
                             <span>Phone And Tablet</span>
                             <button class="btn view_all_btn">
-                                <a href="{{ route("pages.product_filter_page", $phones_tablets[0]->category_name) }}" class="d-flex align-items-center">  
-                                    View All
-                                    <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 12H5m14 0-4 4m4-4-4-4"/>
-                                    </svg>
-                                </a>
+
+                                @isset($phones_tablets[0]->category_name)
+                                    <a href="{{ route("pages.product_filter_page", $phones_tablets[0]->category_name) }}" class="d-flex align-items-center">  
+                                        View All
+                                        <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 12H5m14 0-4 4m4-4-4-4"/>
+                                        </svg>
+                                    </a>
+                                @endisset
+                                
                             </button>
                         </div><!--./heading-->
                         
@@ -463,12 +477,16 @@
                         <div class="heading d-flex align-items-center justify-content-between">
                             <span>Accessories</span>
                             <button class="btn view_all_btn">
-                                <a href="{{ route("pages.product_filter_page", $accessories[0]->category_name) }}" class="d-flex align-items-center">  
-                                    View All
-                                    <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 12H5m14 0-4 4m4-4-4-4"/>
-                                    </svg>
-                                </a>
+
+                                @isset($accessories[0]->category_name)
+                                    <a href="{{ route("pages.product_filter_page", $accessories[0]->category_name) }}" class="d-flex align-items-center">  
+                                        View All
+                                        <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 12H5m14 0-4 4m4-4-4-4"/>
+                                        </svg>
+                                    </a>
+                                @endisset
+                                
                             </button>
                         </div><!--./heading-->
                         

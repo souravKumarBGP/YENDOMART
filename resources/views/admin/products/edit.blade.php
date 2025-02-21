@@ -327,7 +327,7 @@
             });
             
             
-            // Logic to make a ajax request for stored new product 
+            // Logic to make a ajax request for update form 
             $(".product_update_form").on("submit", function(event){
                 
                 event.preventDefault();

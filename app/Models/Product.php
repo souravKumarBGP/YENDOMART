@@ -50,10 +50,10 @@ class Product extends Model
         $this->attributes["product_status"] = strip_tags(strtolower(trim($value)));
     }
     public function setThumbnailImgAttribute($value){
-        $this->attributes["thumbnail_img"] = strip_tags(strtolower(trim($value)));
+        $this->attributes["thumbnail_img"] = strip_tags($value);
     }
     public function setGallaryImgAttribute($value){
-        $this->attributes["gallary_img"] = strip_tags(strtolower(trim($value)));
+        $this->attributes["gallary_img"] = strip_tags($value);
     }
     public function setProductDiscreptionAttribute($value){
         $this->attributes["product_discreption"] = strip_tags(strtolower(trim($value)));

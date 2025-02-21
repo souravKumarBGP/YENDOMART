@@ -355,8 +355,6 @@ class AdminController extends Controller
                 "product_discreption"=> "required",
             ]);
 
-            return $request;
-            
             // Logic to get edit id
             $edit_id = base64_decode($request->edit_id);
             
