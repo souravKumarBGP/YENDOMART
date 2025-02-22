@@ -334,10 +334,12 @@
                                 </div>
     
                                 <ul>
-                                    <li><a href="#">Condition And Returns</a></li>
-                                    <li><a href="#">Refund Policy</a></li>
-                                    <li><a href="#">Terms of use</a></li>
-                                    <li><a href="#">Privacy</a></li>
+                                    <li><a href="{{ route("terms") }}">Terms</a></li>
+                                    <li><a href="{{ route("privacypolicy") }}">Privacy Policy</a></li>
+                                    <li><a href="{{ route("sellerpolicy") }}">Seller Policy</a></li>
+                                    <li><a href="{{ route("returnpolicy") }}">Return Policy</a></li>
+                                    <li><a href="{{ route("supportpolicy") }}">Support Policy</a></li>
+                                    <li><a href="{{ route("shipping-policy") }}">Shipping Policy</a></li>
                                 </ul>
     
                             </div><!--./item-->

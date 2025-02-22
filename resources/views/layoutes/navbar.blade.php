@@ -13,6 +13,12 @@
     </button><br/>
 </aside>
 
+<div class="whatsapp_btn">
+    <a href="https://wa.me/7763999333" target="_blank">
+        <img src="{{ asset("assets/img/whatsapp.png") }}" alt="whatsapp" />
+    </a>
+</div>
+
 <!--=============================== Start navbar section ===================================-->
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
 

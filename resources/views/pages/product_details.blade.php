@@ -314,8 +314,47 @@
                 </div>
             </section><!--./electronic_product-->
 
+            <!--================ Start customer_policy section ====================-->
+            <section class="customer_policy mt-5 py-4">
+                <div class="container">
+                    <div class="row" style="row-gap: 17px;">
+                        <div class="col-6 col-sm-3">
+                            <div class="item item1">
+                                <a href="{{ route("sellerpolicy") }}">
+                                    Seller Policy
+                                </a>
+                            </div>
+                        </div><!--./item-->
+
+                        <div class="col-6 col-sm-3">
+                            <div class="item item2">
+                                <a href="{{ route("returnpolicy") }}">
+                                    Return policy
+                                </a>
+                            </div>
+                        </div><!--./item-->
+
+                        <div class="col-6 col-sm-3">
+                            <div class="item item3">
+                                <a href="{{ route("supportpolicy") }}">
+                                    Support policy
+                                </a>
+                            </div>
+                        </div><!--./item-->
+
+                        <div class="col-6 col-sm-3">
+                            <div class="item item4">
+                                <a href="{{ route("shipping-policy") }}">
+                                    Shipping policy
+                                </a>
+                            </div>
+                        </div><!--./item-->
+                    </div>
+                </div>
+            </section>
+            
             <!--================= Start get_update_section section ===============-->
-            <section class="get_update_section">
+            <section class="get_update_section mt-0">
                 <div class="container">
                     <div class="row justify-content-center align-items-center" style="row-gap: var(--gap-20px);">
                         <div class="left col-12 col-lg-6">

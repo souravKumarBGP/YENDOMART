@@ -37,4 +37,34 @@ class HomeController extends Controller
         
         return view("home", compact("top_selling_products", "laptop_products_data", "led_monitors_CPU", "phones_tablets", "accessories"));
     }
+
+    // Logic to create a methods for show terms page
+    public function terms(){
+        return view("pages.customer_policy.terms");
+    }
+
+    // Logic to create a methods for show privacy policy page
+    public function privacypolicy(){
+        return view("pages.customer_policy.privacy_policy");
+    }
+
+    // Logic to create a methods for show seller policy page
+    public function sellerpolicy(){
+        return view("pages.customer_policy.seller_policy");
+    }
+
+    // Logic to create a methods for show return policy page
+    public function returnpolicy(){
+        return view("pages.customer_policy.return_policy");
+    }
+
+    // Logic to create a methods for show support policy page
+    public function supportpolicy(){
+        return view("pages.customer_policy.support_policy");
+    }
+
+    // Logic to create a methods for show shipping policy page
+    public function shippingpolicy(){
+        return view("pages.customer_policy.shipping_policy");
+    }
 }

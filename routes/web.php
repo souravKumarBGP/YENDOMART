@@ -20,6 +20,14 @@ Route::get("/logout", function(){
 
 //====================== Logic to create some following routes for handle frontend logic
 Route::get("/", [HomeController::class, "index"])->name("home");
+Route::get("/terms", [HomeController::class, "terms"])->name("terms");
+Route::get("/privacypolicy", [HomeController::class, "privacypolicy"])->name("privacypolicy");
+Route::get("/sellerpolicy", [HomeController::class, "sellerpolicy"])->name("sellerpolicy");
+Route::get("/sellerpolicy", [HomeController::class, "sellerpolicy"])->name("sellerpolicy");
+Route::get("/returnpolicy", [HomeController::class, "returnpolicy"])->name("returnpolicy");
+Route::get("/supportpolicy", [HomeController::class, "supportpolicy"])->name("supportpolicy");
+Route::get("/shipping-policy", [HomeController::class, "shippingpolicy"])->name("shipping-policy");
+
 
 // Route for handle frontend pages
 Route::prefix("/pages")->controller(PagesController::class)->group(function(){
