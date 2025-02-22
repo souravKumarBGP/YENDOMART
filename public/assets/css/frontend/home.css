@@ -1,3 +1,36 @@
+.how_to_place_order{
+    width: 40%;
+    height: 100px;
+    background: #9cf09c;
+    border-left: 12px solid #4CAF50;
+    position: fixed;
+    top: -100%;
+    right: 50%;
+    z-index: 1000;
+    transform: translateX(50%);
+    padding: .4375rem;
+    font-size: 30px;
+    border-radius: 0 7px 7px 0;
+    box-shadow: 0px 0px 10px #7df57d inset;
+    transition: all 2.5s;
+    & iframe{
+        width: 150px;
+        height: 100%;
+    }
+    & div{
+        & img{
+            width: 40px;
+        }
+        margin-left: 15px;
+    }
+    .place_order_colse_btn{
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        padding: 10px;
+    }
+}
+
 /*******************************************************************************************************
 * Start heder section styling
 ***************************************************************************************************** */
@@ -133,6 +166,10 @@ main{
 }
 
 @media all and (max-width: 992px){ /** Responsive for large tablets **/
+    .how_to_place_order{
+        width: 90%;
+        font-size: 14px;
+    }
     #category_box{
         margin-top: 200px;
     }

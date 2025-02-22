@@ -106,6 +106,22 @@
     </head>
     <body>
         
+        <!--================================== Start newsletter section ===========================-->
+        <section class="how_to_place_order d-flex align-items-center">
+            <iframe src="https://www.youtube.com/embed/mKM-Bf2Y7L8?si=07_RFSB5JS9PGms8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            <div>
+                <a href="#" target="_blank" class="d-flex flex-column justify-content-center align-content-center text-center">
+                    <img src="{{ asset("assets/img/deliveryboy.png") }}" class="mx-auto" alt="It Care Lappy Wala Delivery Boy" />
+                    How to place order?
+                </a>
+            </div>
+            <button class="btn place_order_colse_btn">
+                <svg style="color: #d40505;" class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                    <path fill-rule="evenodd" d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm7.707-3.707a1 1 0 0 0-1.414 1.414L10.586 12l-2.293 2.293a1 1 0 1 0 1.414 1.414L12 13.414l2.293 2.293a1 1 0 0 0 1.414-1.414L13.414 12l2.293-2.293a1 1 0 0 0-1.414-1.414L12 10.586 9.707 8.293Z" clip-rule="evenodd"/>
+                </svg>                  
+            </button>
+        </section>
+        
         <!--================================== Start header section ===============================-->
         <header>
             <!--=================== Start navbar section ==================-->
@@ -932,6 +948,17 @@
                 });
             });
 
+            // Logic to show and hide how to place order news latter section after 2 minuts
+            setTimeout(() => {
+                document.querySelector(".how_to_place_order").style.top = "30%";
+                setTimeout(() => {
+                    document.querySelector(".how_to_place_order").style.top = "-100%";
+                }, 90000);
+            }, 40000);
+            // Logic to hide news latter wher user click on close btn
+            document.querySelector(".place_order_colse_btn").addEventListener("click", ()=>{
+                document.querySelector(".how_to_place_order").style.top = "-100%";
+            });
 
         </script>
         

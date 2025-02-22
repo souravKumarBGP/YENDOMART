@@ -17,7 +17,7 @@ main{
         min-height: 500px;
         color: var(--secondary-color);
         padding: 10px;
-        background: var(--primary-color);
+        background: var(--forth-color);
         border-radius: .4375rem;
 
         .heading{
@@ -28,24 +28,20 @@ main{
             border-bottom: 0.2px solid var(--forth-color);
             margin-bottom: .625rem;
             & svg{
-                width: var(--size-15px);
+                width: 1.375rem;
             }
 
             .clr_filter_btn{
-                color: red;
-                padding: .125rem;
-                & svg{
-                    color: red;
-                    width: .8125rem;
-                }
+                padding: .125rem;                
             }
         }
 
         .option_box .box{
-            border-bottom: 0.2px solid var(--forth-color);
             padding-bottom: 10px;
+            border-bottom: 1px solid #7c7b791c;            
+            margin: 20px 0;
             & p{
-                font-size: var(--size-15px);
+                font-size: .8438rem;
                 margin-bottom: 10px;
             }
             & label{
@@ -53,6 +49,45 @@ main{
             }
             & li{
                 margin-bottom: .3125rem;
+                font-size: 11px !important;
+            }
+        }
+
+        .option_box{
+            .box{
+                .input[type="radio"], .input[type="checkbox"] {
+                    display: none;
+                }
+                
+                /* Style for the custom checkbox */
+                .custom-checkbox {
+                    display: inline-block;
+                    width: 17px;
+                    height: 17px;
+                    border: 2px solid var(--primary-color);
+                    border-radius: 50%;
+                    position: relative;
+                    cursor: pointer;
+                }
+                
+                /* Style for the custom checkmark */
+                .custom-checkbox::after {
+                    content: "";
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    width: 9px;
+                    height: 9px;
+                    background-color: var(--primary-color);
+                    border-radius: 50%;
+                    opacity: 0;
+                }
+                
+                /* Show the checkmark when checkbox is checked */
+                .input[type="radio"]:checked + .custom-checkbox::after, .input[type="checkbox"]:checked + .custom-checkbox::after {
+                    opacity: 1;
+                }
             }
         }
         

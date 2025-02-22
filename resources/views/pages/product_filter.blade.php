@@ -84,129 +84,239 @@
     
                                 <div class="heading d-flex align-items-center justify-content-between">
                                     <p class="d-flex">
-                                        Filter
                                         <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                             <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M18.796 4H5.204a1 1 0 0 0-.753 1.659l5.302 6.058a1 1 0 0 1 .247.659v4.874a.5.5 0 0 0 .2.4l3 2.25a.5.5 0 0 0 .8-.4v-7.124a1 1 0 0 1 .247-.659l5.302-6.059c.566-.646.106-1.658-.753-1.658Z"/>
                                         </svg>                                  
+                                        Filter
                                     </p>
         
                                     <button class="btn clr_filter_btn d-flex align-items-center">
                                         Clear Filters
-                                        <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z"/>
-                                        </svg>                                  
                                     </button>
                                 </div><!--./heading-->
-    
+
                                 <div class="option_box">
                                     <form action="#">
     
-                                        <div class="box box1">
+                                        <div class="box price_box">
                                             <p><b>Price</b></p>
                                             <ul>
-                                                <li class="d-flex align-items-center" style="gap: 5px;">
-                                                    <input type="radio" name="price" id="lth">
-                                                    <label for="lth">Low to High</label>
+
+                                                <li style="gap: 5px;">
+                                                    <label class="d-flex align-items-center" style="gap: 7px;">
+                                                        <input class="input" checked type="radio" name="price" />
+                                                        <span class="custom-checkbox"></span>
+                                                        Random
+                                                    </label>
                                                 </li>
-                                                <li class="d-flex align-items-center" style="gap: 5px;">
-                                                    <input type="radio" name="price" id="htl">
-                                                    <label for="htl">High to Low</label>
+                                                
+                                                <li style="gap: 5px;">
+                                                    <label class="d-flex align-items-center" style="gap: 7px;">
+                                                        <input class="input" type="radio" name="price" />
+                                                        <span class="custom-checkbox"></span>
+                                                        Low to High
+                                                    </label>
+                                                </li>
+
+                                                <li style="gap: 5px;">
+                                                    <label class="d-flex align-items-center" style="gap: 7px;">
+                                                        <input class="input" type="radio" name="price" />
+                                                        <span class="custom-checkbox"></span>
+                                                        High to Low
+                                                    </label>
+                                                </li>
+                                                
+                                            </ul>
+                                        </div><!--./box-->
+
+                                        <div class="box" style="border-bottom: none;">
+                                            <p><b>Brands</b></p>
+                                            <ul>
+                                                <li style="gap: 5px;">
+                                                    <label class="d-flex align-items-center" style="gap: 7px;">
+                                                        <input class="input" type="checkbox" checked name="brand" />
+                                                        <span class="custom-checkbox"></span>
+                                                        Random
+                                                    </label>
+                                                </li>
+                                                <li style="gap: 5px;">
+                                                    <label class="d-flex align-items-center" style="gap: 7px;">
+                                                        <input class="input" type="checkbox" name="brand" />
+                                                        <span class="custom-checkbox"></span>
+                                                        Apple
+                                                    </label>
+                                                </li>
+                                                <li style="gap: 5px;">
+                                                    <label class="d-flex align-items-center" style="gap: 7px;">
+                                                        <input class="input" type="checkbox" name="brand" />
+                                                        <span class="custom-checkbox"></span>
+                                                        HP
+                                                    </label>
+                                                </li>
+                                                <li style="gap: 5px;">
+                                                    <label class="d-flex align-items-center" style="gap: 7px;">
+                                                        <input class="input" type="checkbox" name="brand" />
+                                                        <span class="custom-checkbox"></span>
+                                                        Dell
+                                                    </label>
+                                                </li>
+                                                <li style="gap: 5px;">
+                                                    <label class="d-flex align-items-center" style="gap: 7px;">
+                                                        <input class="input" type="checkbox" name="brand" />
+                                                        <span class="custom-checkbox"></span>
+                                                        ACER
+                                                    </label>
+                                                </li>
+                                                <li style="gap: 5px;">
+                                                    <label class="d-flex align-items-center" style="gap: 7px;">
+                                                        <input class="input" type="checkbox" name="brand" />
+                                                        <span class="custom-checkbox"></span>
+                                                        Lenvo
+                                                    </label>
                                                 </li>
                                             </ul>
                                         </div><!--./box-->
-    
-                                        <div class="box box2">
+                                        
+                                        <div class="box">
                                             <p><b>Colors</b></p>
                                             <ul>
-                                                <li class="d-flex align-items-center" style="gap: 5px;">
-                                                    <input type="checkbox" name="colors" id="gold">
-                                                    <label for="gold">Gold</label>
+                                                <li style="gap: 5px;">
+                                                    <label class="d-flex align-items-center" style="gap: 7px;">
+                                                        <input class="input" type="checkbox" checked name="color" />
+                                                        <span class="custom-checkbox"></span>
+                                                        All
+                                                    </label>
                                                 </li>
-                                                <li class="d-flex align-items-center" style="gap: 5px;">
-                                                    <input type="checkbox" name="colors" id="sliver">
-                                                    <label for="sliver">Sliver</label>
+                                                <li style="gap: 5px;">
+                                                    <label class="d-flex align-items-center" style="gap: 7px;">
+                                                        <input class="input" type="checkbox" name="color" />
+                                                        <span class="custom-checkbox"></span>
+                                                        Silver
+                                                    </label>
                                                 </li>
-                                                <li class="d-flex align-items-center" style="gap: 5px;">
-                                                    <input type="checkbox" name="colors" id="block">
-                                                    <label for="block">Black</label>
+                                                <li style="gap: 5px;">
+                                                    <label class="d-flex align-items-center" style="gap: 7px;">
+                                                        <input class="input" type="checkbox" name="color" />
+                                                        <span class="custom-checkbox"></span>
+                                                        Gold
+                                                    </label>
+                                                </li>
+                                                <li style="gap: 5px;">
+                                                    <label class="d-flex align-items-center" style="gap: 7px;">
+                                                        <input class="input" type="checkbox" name="color" />
+                                                        <span class="custom-checkbox"></span>
+                                                        Black
+                                                    </label>
                                                 </li>
                                             </ul>
                                         </div><!--./box-->
     
-                                        <div class="box box3">
+                                        <div class="box">
                                             <p><b>RAM</b></p>
                                             <ul>
-                                                <li class="d-flex align-items-center" style="gap: 5px;">
-                                                    <input type="checkbox" name="ram" id="2gb">
-                                                    <label for="2gb">2GB</label>
+                                                <li style="gap: 5px;">
+                                                    <label class="d-flex align-items-center" style="gap: 7px;">
+                                                        <input class="input" type="checkbox" checked name="ram" />
+                                                        <span class="custom-checkbox"></span>
+                                                        All
+                                                    </label>
                                                 </li>
-                                                <li class="d-flex align-items-center" style="gap: 5px;">
-                                                    <input type="checkbox" name="ram" id="4gb">
-                                                    <label for="4gb">4GB</label>
+                                                <li style="gap: 5px;">
+                                                    <label class="d-flex align-items-center" style="gap: 7px;">
+                                                        <input class="input" type="checkbox" name="ram" />
+                                                        <span class="custom-checkbox"></span>
+                                                        2GB
+                                                    </label>
                                                 </li>
-                                                <li class="d-flex align-items-center" style="gap: 5px;">
-                                                    <input type="checkbox" name="ram" id="8gb">
-                                                    <label for="8gb">8GB</label>
+                                                <li style="gap: 5px;">
+                                                    <label class="d-flex align-items-center" style="gap: 7px;">
+                                                        <input class="input" type="checkbox" name="ram" />
+                                                        <span class="custom-checkbox"></span>
+                                                        4GB
+                                                    </label>
                                                 </li>
-                                                <li class="d-flex align-items-center" style="gap: 5px;">
-                                                    <input type="checkbox" name="ram" id="16gb">
-                                                    <label for="16gb">16GB</label>
+                                                <li style="gap: 5px;">
+                                                    <label class="d-flex align-items-center" style="gap: 7px;">
+                                                        <input class="input" type="checkbox" name="ram" />
+                                                        <span class="custom-checkbox"></span>
+                                                        8GB
+                                                    </label>
                                                 </li>
-                                                <li class="d-flex align-items-center" style="gap: 5px;">
-                                                    <input type="checkbox" name="ram" id="32gb">
-                                                    <label for="32gb">32GB</label>
+                                                <li style="gap: 5px;">
+                                                    <label class="d-flex align-items-center" style="gap: 7px;">
+                                                        <input class="input" type="checkbox" name="ram" />
+                                                        <span class="custom-checkbox"></span>
+                                                        16GB
+                                                    </label>
+                                                </li>
+                                                <li style="gap: 5px;">
+                                                    <label class="d-flex align-items-center" style="gap: 7px;">
+                                                        <input class="input" type="checkbox" name="ram" />
+                                                        <span class="custom-checkbox"></span>
+                                                        32GB
+                                                    </label>
                                                 </li>
                                             </ul>
                                         </div><!--./box-->
     
-                                        <div class="box box4">
+                                        <div class="box">
                                             <p><b>Storage</b></p>
                                             <ul>
-                                                <li class="d-flex align-items-center" style="gap: 5px;">
-                                                    <input type="checkbox" name="storage" id="16gbssd">
-                                                    <label for="16gbssd">16GB SSD</label>
+                                                <li style="gap: 5px;">
+                                                    <label class="d-flex align-items-center" style="gap: 7px;">
+                                                        <input class="input" type="checkbox" checked name="ssd" />
+                                                        <span class="custom-checkbox"></span>
+                                                        All
+                                                    </label>
                                                 </li>
-                                                <li class="d-flex align-items-center" style="gap: 5px;">
-                                                    <input type="checkbox" name="storage" id="128gbssd">
-                                                    <label for="128gbssd">128GB SSD</label>
+                                                <li style="gap: 5px;">
+                                                    <label class="d-flex align-items-center" style="gap: 7px;">
+                                                        <input class="input" type="checkbox" name="ssd" />
+                                                        <span class="custom-checkbox"></span>
+                                                        16GB SSD
+                                                    </label>
                                                 </li>
-                                                <li class="d-flex align-items-center" style="gap: 5px;">
-                                                    <input type="checkbox" name="storage" id="256gbssd">
-                                                    <label for="256gbssd">256GB SSD</label>
+                                                <li style="gap: 5px;">
+                                                    <label class="d-flex align-items-center" style="gap: 7px;">
+                                                        <input class="input" type="checkbox" name="ssd" />
+                                                        <span class="custom-checkbox"></span>
+                                                        128GB SSD
+                                                    </label>
                                                 </li>
-                                                <li class="d-flex align-items-center" style="gap: 5px;">
-                                                    <input type="checkbox" name="storage" id="512gbssd">
-                                                    <label for="512gbssd">512GB SSD</label>
+                                                <li style="gap: 5px;">
+                                                    <label class="d-flex align-items-center" style="gap: 7px;">
+                                                        <input class="input" type="checkbox" name="ssd" />
+                                                        <span class="custom-checkbox"></span>
+                                                        256GB SSD
+                                                    </label>
                                                 </li>
-                                                <li class="d-flex align-items-center" style="gap: 5px;">
-                                                    <input type="checkbox" name="storage" id="1tbssd">
-                                                    <label for="1tbssd">1TB SSD</label>
+                                                <li style="gap: 5px;">
+                                                    <label class="d-flex align-items-center" style="gap: 7px;">
+                                                        <input class="input" type="checkbox" name="ssd" />
+                                                        <span class="custom-checkbox"></span>
+                                                        512GB SSD
+                                                    </label>
                                                 </li>
-                                                <li class="d-flex align-items-center" style="gap: 5px;">
-                                                    <input type="checkbox" name="storage" id="512gbhd">
-                                                    <label for="512gbhd">512GB Hard Disk</label>
+                                                <li style="gap: 5px;">
+                                                    <label class="d-flex align-items-center" style="gap: 7px;">
+                                                        <input class="input" type="checkbox" name="ssd" />
+                                                        <span class="custom-checkbox"></span>
+                                                        1TB SSD
+                                                    </label>
                                                 </li>
-                                                <li class="d-flex align-items-center" style="gap: 5px;">
-                                                    <input type="checkbox" name="storage" id="1tbhd">
-                                                    <label for="1tbhd">1TBGB Hard Disk</label>
+                                                <li style="gap: 5px;">
+                                                    <label class="d-flex align-items-center" style="gap: 7px;">
+                                                        <input class="input" type="checkbox" name="ssd" />
+                                                        <span class="custom-checkbox"></span>
+                                                        512GB HDD
+                                                    </label>
                                                 </li>
-                                            </ul>
-                                        </div><!--./box-->
-    
-                                        <div class="box box5" style="border-bottom: none;">
-                                            <p><b>Size</b></p>
-                                            <ul>
-                                                <li class="d-flex align-items-center" style="gap: 5px;">
-                                                    <input type="checkbox" name="size" id="12inch">
-                                                    <label for="12inch">12 Inch</label>
-                                                </li>
-                                                <li class="d-flex align-items-center" style="gap: 5px;">
-                                                    <input type="checkbox" name="size" id="14inch">
-                                                    <label for="14inch">14 Inch</label>
-                                                </li>
-                                                <li class="d-flex align-items-center" style="gap: 5px;">
-                                                    <input type="checkbox" name="size" id="16inch">
-                                                    <label for="16inch">16 Inch</label>
+                                                <li style="gap: 5px;">
+                                                    <label class="d-flex align-items-center" style="gap: 7px;">
+                                                        <input class="input" type="checkbox" name="ssd" />
+                                                        <span class="custom-checkbox"></span>
+                                                        1TB HDD
+                                                    </label>
                                                 </li>
                                             </ul>
                                         </div><!--./box-->
