@@ -129,7 +129,7 @@
             <!--./nav-->
 
             <!--================ Start category_box section ===============-->
-            <section class="category_box" id="category_box" />
+            <section class="category_box" id="category_box">
                 <div class="container">
                     <ul class="d-flex flex-wrap justify-content-center justify-content-md-between" style="gap: 10px;">
 

@@ -30,13 +30,13 @@
                 <div class="logo">
                     <a href="{{ route("home") }}" class="d-flex align-items-center" style="gap: 5px;">
                         <img src="{{ asset("assets/img/l1.png") }}" alt="Logo" />
-                        <h1>𝗜𝗧 𝗖𝗔𝗥𝗘 𝗟𝗔𝗣𝗣𝗬 𝗪𝗔𝗟𝗔</h1>
+                        <h1><strong>𝗜𝗧 𝗖𝗔𝗥𝗘 𝗟𝗔𝗣𝗣𝗬 𝗪𝗔𝗟𝗔</strong></h1>
                     </a>
                 </div>
                 <div class="search_box">
-                    <form action="{{ route("pages.product_filter_page") }}" method="GET">
+                    <form action="{{ route("pages.product_filter_page") }}" method="GET" id="search_form">
                         <div class="input_box d-flex align-items-center">
-                            <input type="search" name="search" id="search_val" placeholder="Search by brand name , category or product...">
+                            <input type="search" id="search_val" placeholder="Search by brand name , category or product...">
                             <select id="cat_val">
                                 <option value="">All Categories</option>
                                 @foreach ($categories_data as $item)
@@ -275,6 +275,12 @@
         let cat_val = event.target.value;
         document.querySelector("#search_val").value = cat_val;
         
+    });
+
+    document.querySelector("#search_form").addEventListener("submit", (event)=>{
+        event.preventDefault();
+        const search_val = document.querySelector("#search_val").value;
+        window.location.href = "{{ route('home') }}"+"/pages/product-filter/"+search_val;
     });
     
 </script>

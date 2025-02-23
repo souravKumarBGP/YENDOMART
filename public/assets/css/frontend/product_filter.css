@@ -56,6 +56,7 @@ main{
         .option_box{
             .box{
                 .input[type="radio"], .input[type="checkbox"] {
+                    /* opacity: 0; */
                     display: none;
                 }
                 

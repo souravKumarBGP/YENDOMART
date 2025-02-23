@@ -31,7 +31,8 @@ Route::get("/shipping-policy", [HomeController::class, "shippingpolicy"])->name(
 
 // Route for handle frontend pages
 Route::prefix("/pages")->controller(PagesController::class)->group(function(){
-    Route::get("/product-filter/{search?}", "product_filter_page")->name("pages.product_filter_page");
+    Route::get("/product-filter/{search?}/{price_filter?}", "product_filter_page")->name("pages.product_filter_page");
+    Route::get("/product-filter/apply/", "product_filter_apply")->name("pages.product_filter_apply");
     Route::get("/product-details/search={slug}", "product_details_page")->name("pages.product_details_page");
     Route::get("/view-profile/{id}", "view_profile")->name("pages.view-profile")->middleware(IsUserLoginMiddleware::class);
     Route::get("/my-cart", "my_cart")->name("pages.my_cart")->middleware(IsUserLoginMiddleware::class);

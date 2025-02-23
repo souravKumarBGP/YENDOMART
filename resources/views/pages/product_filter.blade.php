@@ -103,114 +103,49 @@
                                             <ul>
 
                                                 <li style="gap: 5px;">
-                                                    <label class="d-flex align-items-center" style="gap: 7px;">
-                                                        <input class="input" checked type="radio" name="price" />
-                                                        <span class="custom-checkbox"></span>
-                                                        Random
-                                                    </label>
-                                                </li>
-                                                
-                                                <li style="gap: 5px;">
-                                                    <label class="d-flex align-items-center" style="gap: 7px;">
-                                                        <input class="input" type="radio" name="price" />
-                                                        <span class="custom-checkbox"></span>
-                                                        Low to High
-                                                    </label>
+                                                    <a href="{{ route("pages.product_filter_page",["$search_value","lth"]) }}">
+                                                        <span class="d-flex align-items-center" style="gap: 7px; font-size: 13.5px;">
+                                                            <input class="input" type="checkbox" value="lth" {{ ($price_filter == "lth") ? "checked" : "" }} name="price" />
+                                                            <span class="custom-checkbox"></span>
+                                                            {{-- {{ $search_value }} --}}
+                                                            Low to High
+                                                        </span>
+                                                    </a>
                                                 </li>
 
                                                 <li style="gap: 5px;">
-                                                    <label class="d-flex align-items-center" style="gap: 7px;">
-                                                        <input class="input" type="radio" name="price" />
-                                                        <span class="custom-checkbox"></span>
-                                                        High to Low
-                                                    </label>
+                                                    <a href="{{ route("pages.product_filter_page", ["$search_value","htl"]) }}">
+                                                        <span class="d-flex align-items-center" style="gap: 7px; font-size: 13.5px;">
+                                                            <input class="input" type="checkbox" value="htl" {{ ($price_filter == "htl") ? "checked" : "" }}  name="price" />
+                                                            <span class="custom-checkbox"></span>
+                                                            High to Low
+                                                        </span>
+                                                    </a>
                                                 </li>
                                                 
                                             </ul>
                                         </div><!--./box-->
 
                                         <div class="box" style="border-bottom: none;">
+
                                             <p><b>Brands</b></p>
                                             <ul>
-                                                <li style="gap: 5px;">
-                                                    <label class="d-flex align-items-center" style="gap: 7px;">
-                                                        <input class="input" type="checkbox" checked name="brand" />
-                                                        <span class="custom-checkbox"></span>
-                                                        Random
-                                                    </label>
-                                                </li>
-                                                <li style="gap: 5px;">
-                                                    <label class="d-flex align-items-center" style="gap: 7px;">
-                                                        <input class="input" type="checkbox" name="brand" />
-                                                        <span class="custom-checkbox"></span>
-                                                        Apple
-                                                    </label>
-                                                </li>
-                                                <li style="gap: 5px;">
-                                                    <label class="d-flex align-items-center" style="gap: 7px;">
-                                                        <input class="input" type="checkbox" name="brand" />
-                                                        <span class="custom-checkbox"></span>
-                                                        HP
-                                                    </label>
-                                                </li>
-                                                <li style="gap: 5px;">
-                                                    <label class="d-flex align-items-center" style="gap: 7px;">
-                                                        <input class="input" type="checkbox" name="brand" />
-                                                        <span class="custom-checkbox"></span>
-                                                        Dell
-                                                    </label>
-                                                </li>
-                                                <li style="gap: 5px;">
-                                                    <label class="d-flex align-items-center" style="gap: 7px;">
-                                                        <input class="input" type="checkbox" name="brand" />
-                                                        <span class="custom-checkbox"></span>
-                                                        ACER
-                                                    </label>
-                                                </li>
-                                                <li style="gap: 5px;">
-                                                    <label class="d-flex align-items-center" style="gap: 7px;">
-                                                        <input class="input" type="checkbox" name="brand" />
-                                                        <span class="custom-checkbox"></span>
-                                                        Lenvo
-                                                    </label>
-                                                </li>
+
+                                                @foreach($brands_data as $item)
+                                                    <li style="gap: 5px;">
+                                                        <a href="{{ route("pages.product_filter_page", $item->slug) }}">
+                                                            <span class="d-flex align-items-center" style="gap: 7px; font-size: 13.5px;">
+                                                                <input class="input" type="checkbox" value="{{ $item->name }}" {{ (strtolower($search_value) == strtolower($item->name)) ? "checked" : "" }} name="brand" />
+                                                                <span class="custom-checkbox"></span>
+                                                                {{ $item->name }}
+                                                            </span>
+                                                        </a>
+                                                    </li>
+                                                @endforeach
+                                                
                                             </ul>
                                         </div><!--./box-->
                                         
-                                        <div class="box">
-                                            <p><b>Colors</b></p>
-                                            <ul>
-                                                <li style="gap: 5px;">
-                                                    <label class="d-flex align-items-center" style="gap: 7px;">
-                                                        <input class="input" type="checkbox" checked name="color" />
-                                                        <span class="custom-checkbox"></span>
-                                                        All
-                                                    </label>
-                                                </li>
-                                                <li style="gap: 5px;">
-                                                    <label class="d-flex align-items-center" style="gap: 7px;">
-                                                        <input class="input" type="checkbox" name="color" />
-                                                        <span class="custom-checkbox"></span>
-                                                        Silver
-                                                    </label>
-                                                </li>
-                                                <li style="gap: 5px;">
-                                                    <label class="d-flex align-items-center" style="gap: 7px;">
-                                                        <input class="input" type="checkbox" name="color" />
-                                                        <span class="custom-checkbox"></span>
-                                                        Gold
-                                                    </label>
-                                                </li>
-                                                <li style="gap: 5px;">
-                                                    <label class="d-flex align-items-center" style="gap: 7px;">
-                                                        <input class="input" type="checkbox" name="color" />
-                                                        <span class="custom-checkbox"></span>
-                                                        Black
-                                                    </label>
-                                                </li>
-                                            </ul>
-                                        </div><!--./box-->
-    
                                         <div class="box">
                                             <p><b>RAM</b></p>
                                             <ul>
@@ -316,6 +251,40 @@
                                                         <input class="input" type="checkbox" name="ssd" />
                                                         <span class="custom-checkbox"></span>
                                                         1TB HDD
+                                                    </label>
+                                                </li>
+                                            </ul>
+                                        </div><!--./box-->
+
+                                        <div class="box">
+                                            <p><b>Colors</b></p>
+                                            <ul>
+                                                <li style="gap: 5px;">
+                                                    <label class="d-flex align-items-center" style="gap: 7px;">
+                                                        <input class="input" type="checkbox" checked name="color" />
+                                                        <span class="custom-checkbox"></span>
+                                                        All
+                                                    </label>
+                                                </li>
+                                                <li style="gap: 5px;">
+                                                    <label class="d-flex align-items-center" style="gap: 7px;">
+                                                        <input class="input" type="checkbox" name="color" />
+                                                        <span class="custom-checkbox"></span>
+                                                        Silver
+                                                    </label>
+                                                </li>
+                                                <li style="gap: 5px;">
+                                                    <label class="d-flex align-items-center" style="gap: 7px;">
+                                                        <input class="input" type="checkbox" name="color" />
+                                                        <span class="custom-checkbox"></span>
+                                                        Gold
+                                                    </label>
+                                                </li>
+                                                <li style="gap: 5px;">
+                                                    <label class="d-flex align-items-center" style="gap: 7px;">
+                                                        <input class="input" type="checkbox" name="color" />
+                                                        <span class="custom-checkbox"></span>
+                                                        Black
                                                     </label>
                                                 </li>
                                             </ul>
@@ -500,6 +469,8 @@
                     }
                 });
 
+                // Logic to make a ajax request for filtering products
+                
                 // Logic to handle a ajax request for store my favorites product
                 $(".like_btn").on("click", function(event){
                     event.preventDefault();

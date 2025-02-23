@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string("total_amount");
             $table->enum("payment_methods", ["cod", "online"]);
             $table->string("payment_id")->nullable();
-            $table->string("order_id");
+            $table->string("order_id")->unique();
             $table->enum("payment_status", ["panding", "success", "failed", "canciled"])->default("panding");
             $table->enum("is_order_cancle", ["yes", "no"])->default("no");
             $table->enum("order_status", ["panding", "delivered"])->default("panding");

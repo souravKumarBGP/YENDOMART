@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string("name")->unique();
             $table->string("category_name");
-            $table->string("slug");
+            $table->string("slug")->unique();
             $table->string("brand_img");
 
             // Logic to create relationship between brand and category table
