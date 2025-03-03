@@ -122,6 +122,7 @@
                                         @foreach ($my_order_list as $item)
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
+                                                <td>{{ $item->order_id }}</td>
                                                 <td>
 
                                                     {{-- Logic to generate slug --}}
@@ -133,7 +134,7 @@
                                                         <img src="{{ asset("storage/".$item->thumbnail_img) }}" alt="">
                                                     </a>
                                                 </td>
-                                                <td><a href="{{ route('pages.product_details_page', $slug) }}" target="_blank">{{ $item->product_name }}</a></td>
+                                                <td><a style="color: #2959e9;"  href="{{ route('pages.product_details_page', $slug) }}" target="_blank">{{ $item->product_name }}</a></td>
                                                 <td>{{ $item->total_amount }}</td>
                                                 <td>{{ $item->current_payment }}</td>
                                                 <td>{{ $item->payable_amount }}</td>

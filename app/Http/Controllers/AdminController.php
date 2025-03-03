@@ -8,10 +8,12 @@ use App\Models\Product;
 use App\Models\Categories;
 use App\Models\Orders;
 use App\Models\User;
+use Exception;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\Log;
+use PHPUnit\Framework\MockObject\ReturnValueGenerator;
 use Psy\CodeCleaner\ReturnTypePass;
 use Psy\Command\WhereamiCommand;
 use Razorpay\Api\Order;
@@ -273,6 +275,7 @@ class AdminController extends Controller
 
             // Generate the slug
             $slug = Str::slug($request->name);
+            $category_name = Str::slug($request->category_name);
             // Generate sku
             $sku = substr($slug, 0, 5)."_".rand(111, 999);
 
@@ -286,7 +289,7 @@ class AdminController extends Controller
                 "total_quentity"  => $request->total_quentity,
                 "available_quentity" => $request->total_quentity,
                 "unit"            => $request->unit,
-                "category_name"   => $request->category_name,
+                "category_name"   => $category_name,
                 "brand_name"      => $request->brand_name,
                 "product_status"  => $request->product_status,
                 "thumbnail_img"   => $thumb_path,
@@ -387,6 +390,7 @@ class AdminController extends Controller
 
             // Generate the slug
             $slug = Str::slug($request->name);
+            $category_name = Str::slug($request->category_name);
             // Generate sku
             $sku = substr($slug, 0, 5)."_".rand(111, 999);
 
@@ -400,7 +404,7 @@ class AdminController extends Controller
                 "total_quentity"  => $request->total_quentity,
                 "available_quentity" => $request->total_quentity,
                 "unit"            => $request->unit,
-                "category_name"   => $request->category_name,
+                "category_name"   => $category_name,
                 "brand_name"      => $request->brand_name,
                 "product_status"  => $request->product_status,
                 "thumbnail_img"   => $thumb_path,
@@ -495,9 +499,37 @@ class AdminController extends Controller
             return json_encode(["status"=> $e->getMessage()]);
         }
         
+    }
+    
+    // Lobic to create a methods for searching customer by order id
+    public function order_search(string $order_id){
+        try{
+            
+            $order_id = base64_decode($order_id);
+    
+            // Lobic to search order
+            $orders_data = Orders::where("order_id", $order_id)->get();
+    
+            return view("admin.orders.orders", compact("orders_data"));        
+        }catch(Exception $e){
+            return redirect()->back()->withErrors(["order_id"=> $e->getMessage()]);
+        }
+    }
 
+    // Logic to create a methods to handle post request for order by order id
+    public function order_search_by_order_id(Request $request){
 
-        
+        try{
+
+            $order_id = $request->order_id;
+    
+            // Lobic to search order
+            $orders_data = Orders::where("order_id", $order_id)->get();
+    
+            return view("admin.orders.orders", compact("orders_data"));        
+        }catch(Exception $e){
+            return redirect()->back()->withErrors(["order_id"=> $e->getMessage()]);
+        }
     }
     
     // Logic to create a methods to destroy user 
@@ -549,6 +581,16 @@ class AdminController extends Controller
 
 
         
+    }
+
+    // Lobic to create a methods for searching specific users
+    public function user_search(string $id){
+        $user_id = base64_decode($id);
+
+        // Logic to find user
+        $users_data = User::where("id", $user_id)->paginate(1);
+
+        return view("admin.users.users", compact("users_data"));
     }
     
     // Logic to create a methods to destroy user 

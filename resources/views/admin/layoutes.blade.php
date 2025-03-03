@@ -157,6 +157,15 @@
                             </div>
                             
                             <ul class="bottom_mune d-lg-flex align-items-center col-gap-10px">
+
+                                <li>
+                                    <a href="{{ route("home") }}" class="d-flex align-items-center ps-0" target="_blank">
+                                        <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m4 12 8-8 8 8M6 10.5V19a1 1 0 0 0 1 1h3v-3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3h3a1 1 0 0 0 1-1v-8.5"/>
+                                        </svg>                                      
+                                        Home
+                                    </a>
+                                </li><!--./link-->
     
                                 <li>
                                     <a href="{{ route("admin.dashbord") }}" class="d-flex align-items-center ps-0">
@@ -234,11 +243,9 @@
                                         </li><!--./link-->
                                         
                                         <li>
-                                            <a href="#" class="d-flex align-items-center">
-                                                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 9H5a1 1 0 0 0-1 1v4a1 1 0 0 0 1 1h6m0-6v6m0-6 5.419-3.87A1 1 0 0 1 18 5.942v12.114a1 1 0 0 1-1.581.814L11 15m7 0a3 3 0 0 0 0-6M6 15h3v5H6v-5Z"/>
-                                                </svg>                                                                                                                    
-                                                Reviews
+                                            <a href="{{ route("admin.product-dicreption-generator") }}" target="_blank" class="d-flex align-items-center">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M10 19q-.425 0-.712-.288T9 18t.288-.712T10 17h10q.425 0 .713.288T21 18t-.288.713T20 19zm0-6q-.425 0-.712-.288T9 12t.288-.712T10 11h10q.425 0 .713.288T21 12t-.288.713T20 13zm0-6q-.425 0-.712-.288T9 6t.288-.712T10 5h10q.425 0 .713.288T21 6t-.288.713T20 7zM5 20q-.825 0-1.412-.587T3 18t.588-1.412T5 16t1.413.588T7 18t-.587 1.413T5 20m0-6q-.825 0-1.412-.587T3 12t.588-1.412T5 10t1.413.588T7 12t-.587 1.413T5 14m0-6q-.825 0-1.412-.587T3 6t.588-1.412T5 4t1.413.588T7 6t-.587 1.413T5 8"/></svg>                                                                                                                   
+                                                Discreption Generator
                                             </a>
                                         </li><!--./link-->
                                         
@@ -251,8 +258,11 @@
                         
                         
                         <div class="right">
-                            <form action="#" class="d-flex" method="post">
-                                <input type="search" name="search_val" id="search_inp" placeholder="Search by user email..." />
+                            <form action="{{ route('admin.orders.order_search_by_order_id') }}" class="d-flex" method="POST">
+                                @method("POST")
+                                @csrf
+                                
+                                <input type="search" name="order_id" required id="search_inp" placeholder="Search by user order id." />
                                 <button class="submit_btn d-flex align-items-center">
                                     <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                         <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z"/>

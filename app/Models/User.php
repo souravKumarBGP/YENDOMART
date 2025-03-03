@@ -42,7 +42,7 @@ class User extends Authenticatable
         $this->attributes["delevery_address"] = strtolower(trim(strip_tags($value)));
     }
     function setProfileImgAttribute($value){
-        $this->attributes["profile_img"] = strtolower($value);
+        $this->attributes["profile_img"] = $value;
     }
     function setPasswordAttribute($value){
         $this->attributes["password"] = bcrypt($value);

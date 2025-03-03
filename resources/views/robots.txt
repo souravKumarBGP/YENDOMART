@@ -1,0 +1,11 @@
+# START YOAST BLOCK
+# ------------------------------
+User-agent: *
+Disallow:/
+Disallow: https://itcarelappywala.in/terms	
+Disallow: https://itcarelappywala.in/admin
+
+Sitemap: https://itcarelappywala.in/
+
+# -------------------------------
+# END OF YOAST BLOCK

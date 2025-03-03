@@ -58,7 +58,7 @@
                                                 {{ $loop->iteration }}
                                             </td>
                                             <td>
-                                                {{ $item->user_id }}
+                                                <a href="{{ route("admin.user.search", base64_encode($item->user_id)) }}">{{ $item->user_id }}</a>
                                             </td>
                                             <td>
                                                 {{ $item->product_id }}
@@ -96,7 +96,7 @@
                                                 {{ $item->payment_id }}
                                             </td>
                                             <td>
-                                                {{ $item->order_id }}
+                                                <a style="color: #2758ec;" href="{{ route("admin.orders.search", base64_encode($item->order_id)) }}">{{ $item->order_id }}</a>
                                             </td>
                                             <td>
                                                 {{ $item->created_at }}

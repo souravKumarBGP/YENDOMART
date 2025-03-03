@@ -87,6 +87,11 @@ Route::middleware(IsAdminLoginMiddleware::class)->prefix("/admin")->controller(A
     Route::get("/", "dashbord");
     Route::get("/dashbord", "dashbord")->name("admin.dashbord");
 
+    Route::get("/product-discreption-grnerator", function(){
+        return view("admin.prouct_discreption_generator");
+    })->name("admin.product-dicreption-generator");
+
+
     Route::prefix("/units")->group(function(){
         Route::get("/", "units_index");
         Route::get("/index", "units_index")->name("admin.units.index");
@@ -118,12 +123,15 @@ Route::middleware(IsAdminLoginMiddleware::class)->prefix("/admin")->controller(A
     Route::prefix("/orders")->group(function(){
         Route::get("/index", "orders_index")->name("admin.orders.index");
         Route::post("/update", "orders_status_update")->name("admin.orders-status.update");
+        Route::get("/search/{id}", "order_search")->name("admin.orders.search");
+        Route::post("/search-by-order-id", "order_search_by_order_id")->name("admin.orders.order_search_by_order_id");
         Route::get("orders/destroy/{id}", "orders_destroy")->name("admin.orders.destroy");
     });
 
     Route::prefix("/users")->group(function(){
         Route::get("/index", "users_index")->name("admin.users.index");
         Route::Post("/update", "users_update")->name("admin.users.update");
+        Route::get("/search/{id}", "user_search")->name("admin.user.search");
         Route::get("/destroy/{id}", "user_destroy")->name("admin.user.destroy");
     });
 

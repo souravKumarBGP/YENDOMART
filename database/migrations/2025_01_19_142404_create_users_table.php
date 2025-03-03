@@ -26,7 +26,7 @@ return new class extends Migration
             $table->text("delivery_address")->nullable();
             $table->enum("status", ["active", "disactive"])->default("active");
             $table->string("password", 100);
-            $table->string("profile_img");
+            $table->string("profile_img")->nullable();
             $table->enum("role", ["admin", "customer"])->default("customer");
             $table->timestamps();
         });
