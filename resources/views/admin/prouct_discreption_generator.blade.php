@@ -110,13 +110,8 @@
                     </div>
             
                     <div class="input-group">
-                        <label for="model_year">Model Year</label>
-                        <input type="number" id="model_year" name="model_year" value="2017" />
-                    </div>
-            
-                    <div class="input-group">
                         <label for="processor">Processor</label>
-                        <input type="text" id="processor" name="processor" value="Intel i5 Processor" />
+                        <input type="text" id="processor" name="processor" value="Intel Core i5 Processor" />
                     </div>
             
                     <div class="input-group">
@@ -131,7 +126,7 @@
 
                     <div class="input-group">
                         <label for="graphics">Graphics</label>
-                        <input type="text" id="graphics" name="graphics" value="Intel HD Graphics" />
+                        <input type="text" id="graphics" name="graphics" value="Intel 2GB HD Graphics" />
                     </div>
             
                     <div class="input-group">
@@ -139,14 +134,14 @@
                         <select name="os-supported" id="os-supported">
                             <option value="Mac OS">Mac OS</option>
                             <option value="Windows 11">Windows 11</option>
-                            <option value="Windows 12">Windows 11</option>
-                            <option value="Windows 10" selected>Windows 11</option>
+                            <option value="Windows 12">Windows 12</option>
+                            <option value="Windows 10" selected>Windows 10</option>
                         </select>
                     </div>
             
                     <div class="input-group">
                         <label for="display">Display</label>
-                        <input type="text" id="display" name="display" value="13.3' HD Anti-glare" />
+                        <input type="text" id="display" name="display" value="13.3' HD " />
                     </div>
             
                     <div class="input-group">
@@ -173,6 +168,65 @@
                     <div class="input-group">
                         <label for="vga-ports">VGA Ports</label>
                         <select name="vga-ports" id="vga-ports">
+                            <option value="No" selected>NO</option>
+                            <option value="Yes">YES</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="hdmi-ports">HDMI Ports</label>
+                        <select name="hdmi-ports" id="hdmi-ports">
+                            <option value="No" selected>NO</option>
+                            <option value="Yes">YES</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="memory-cart-slot">Memory Cart Slot</label>
+                        <select name="memory-cart-slot" id="memory-cart-slot">
+                            <option value="No" selected>NO</option>
+                            <option value="Yes">YES</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="comunication">Comunication</label>
+                        <select name="comunication" id="comunication">
+                            <option value="Bluetooth and Wi-fi" selected>Bluetooth and Wi-fi</option>
+                            <option value="Bluetooth" >Bluetooth</option>
+                            <option value="wi-fi" >Wi-fi</option>
+                            <option value="all" >All</option>
+                            <option value="No">No</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="type-c-port">Type C Port</label>
+                        <select name="type-c-port" id="type-c-port">
+                            <option value="No" selected>NO</option>
+                            <option value="Yes">YES</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="lan-port">Lan Port</label>
+                        <select name="lan-port" id="lan-port">
+                            <option value="No" selected>NO</option>
+                            <option value="Yes">YES</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="sim-slot">Sim Slot</label>
+                        <select name="sim-slot" id="sim-slot">
+                            <option value="No" selected>NO</option>
+                            <option value="Yes">YES</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="memory-cart-slot">Memory Cart Slot</label>
+                        <select name="memory-cart-slot" id="memory-cart-slot">
                             <option value="No" selected>NO</option>
                             <option value="Yes">YES</option>
                         </select>
@@ -209,12 +263,17 @@
             
                     <div class="input-group">
                         <label for="battery-backup">Battery Backup</label>
-                        <input type="text" id="battery-backup" name="battery-backup" value="2Hr-4Hr Battery Backup" />
+                        <input type="text" id="battery-backup" name="battery-backup" value="2Hr-3Hr Battery Backup" />
                     </div>
             
                     <div class="input-group">
                         <label for="body">Body</label>
                         <input type="text" id="body" name="body" value="Metal" />
+                    </div>
+
+                    <div class="input-group">
+                        <label for="color">Color</label>
+                        <input type="text" id="color" name="color" value="Silver" />
                     </div>
             
                     <div class="input-group">
@@ -228,7 +287,7 @@
                         </select>
                     </div>
             
-                    <button type="submit">Submit</button>
+                    <button type="submit">Generate</button>
         
                 </form>
             </div>
@@ -248,6 +307,7 @@
         </ul>
     </footer>
     
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
 
         // Logic to generate Json date of all inputs feild
@@ -268,6 +328,11 @@
             // Logic to set input value inot textarea
             document.querySelector(".json_data").value = input_val;
 
+            Swal.fire({
+                title: "Success",
+                text: "Discreption generate successfully.",
+                icon: "success"
+            });
         });
     </script>
     

@@ -13,7 +13,7 @@
         <div class="container">
             <section class="create_new_products">
                 <div class="row">
-                    <dic class="col-12 col-md-8 col-lg-8 col-xl-5 mx-auto">
+                    <div class="col-12 col-md-8 col-lg-8 col-xl-5 mx-auto">
                         <div class="form_box">
                             <form action="{{ route("admin.product.store") }}" method="POST" enctype="multipart/form-data" class="new_product_form">
 
@@ -47,7 +47,18 @@
                                 <div class="input_lavel">
                                     <div class="row">
 
-                                        <div class="col-12 col-lg-6">
+                                        <div class="col-12 col-lg-4">
+                                            <div class="input_box pb-3">
+                                                <label for="new_price">NEW PRICE</label>
+                                                <input type="number" name="new_price" id="new_price" />
+                                                
+                                                <small class="error">
+                                                    <big>Please enter your product name </big>   
+                                                </small>
+                                            </div><!--./input_box-->
+                                        </div>
+
+                                        <div class="col-12 col-lg-4">
                                             <div class="input_box pb-3">
                                                 <label for="selling_price">SELLING PRICE</label>
                                                 <input type="number" name="selling_price" id="selling_price" />
@@ -58,7 +69,7 @@
                                             </div><!--./input_box-->
                                         </div>
 
-                                        <div class="col-12 col-lg-6">
+                                        <div class="col-12 col-lg-4">
                                             <div class="input_box pb-3">
                                                 <label for="discount_price">DISCOUNT PRICE</label>
                                                 <input type="number" name="discount_price" id="discount_price" />
@@ -237,7 +248,7 @@
                                 </button>
                             </form>
                         </div>
-                    </dic>
+                    </div>
                 </div>
             </section><!--./create_new_products-->
         </div><!--./container-->
@@ -277,7 +288,7 @@
 
                     for(let item of gallary_img_file){
                         if(["image/jpg", "image/jpeg", "image/png", "image/svg", "image/webp", "image/svg+xml"].includes(item.type)){
-                            if(item.size > 10000000){
+                            if(item.size > 50000000){
                                 
                                 this.style.borderColor="red";
                                 $(".gallary_img").css({"border-color":"red"})
@@ -334,6 +345,27 @@
 
                     product_name.style.borderColor="var(--shadow-color)";
                     product_name.nextElementSibling.style.display = "none";   
+                }
+
+                // Validation for New price
+                if(new_price.value.trim() == ""){
+
+                    new_price.focus();
+                    new_price.style.borderColor="var(--color-danger)";
+                    new_price.nextElementSibling.style.display = "block";
+                    new_price.nextElementSibling.innerText = "Please enter New price."
+                    return false;
+                }else if(new_price.value.trim() > 500000){
+
+                    new_price.focus();
+                    new_price.style.borderColor="var(--color-danger)";
+                    new_price.nextElementSibling.style.display = "block";
+                    new_price.nextElementSibling.innerText = "New price must be less then Rs 500000."
+                    return false;
+                }else{
+
+                    new_price.style.borderColor="var(--shadow-color)";
+                    new_price.nextElementSibling.style.display = "none";   
                 }
 
                 // Validation for selling price
@@ -525,7 +557,7 @@
                     thumbnail_img.parentElement.parentElement.lastElementChild.style.display = "block";
                     thumbnail_img.parentElement.parentElement.lastElementChild.innerText = "Invalid image formate. Please upload a JPG, JPEG, PNG, SVG, or WEBP formate.";
                     return false;
-                }else if(thumb_img_file.size > 10000000){
+                }else if(thumb_img_file.size > 50000000){
 
                     $(".thumbnail_img")[0].borderColor = "var(--color-danger)";
                     thumbnail_img.parentElement.parentElement.lastElementChild.style.display = "block";
@@ -543,7 +575,7 @@
 
                     for(let item of gallary_img_file){
                         if(["image/jpg", "image/jpeg", "image/png", "image/svg", "image/webp", "image/svg+xml"].includes(item.type)){
-                            if(item.size > 10000000){
+                            if(item.size > 50000000){
                                 
                                 $(".gallary_img")[0].style.borderColor="var(--color-danger)";
                                 gallary_img.parentElement.parentElement.lastElementChild.style.display = "block";
@@ -595,7 +627,7 @@
 
                     success: function(resp){
                         
-                        // console.log(resp);
+                        console.log(resp);
                         // return;
                         
                         $(".spinner").css("display", "none");

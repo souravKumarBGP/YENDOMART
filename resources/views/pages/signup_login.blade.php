@@ -197,7 +197,7 @@
                                 </div><!--./input_box-->
 
                                 <div class="input_box">
-                                    <label for="#confirm_pass">Profile Image (PNG, JPG) <span style="color: #ff022c;">*</span></label>
+                                    <label for="#confirm_pass">Profile Image (PNG, JPG)</label>
                                     <input type="file" name="profile_img" id="profile_img" />
 
                                     <small class="error">
@@ -370,29 +370,6 @@
                     }else{
                         conf_password.style.borderColor = "var(--shadow-color)";
                         conf_password.nextElementSibling.style.display = "none";
-                    }
-
-                    // validation for profile image
-                    const profile_img = document.querySelector("#profile_img");
-                    const file = profile_img.files[0];
-                    if(!file){
-                        profile_img.style.borderColor = "#ff022c";
-                        profile_img.nextElementSibling.style.display = "block";
-                        profile_img.nextElementSibling.innerText = "A profile image is required. Please upload your profile image."
-                        return false;
-                    }else if(file.size > 1000000){
-                        profile_img.style.borderColor = "#ff022c";
-                        profile_img.nextElementSibling.style.display = "block";
-                        profile_img.nextElementSibling.innerText = "The profile image size cannot exceed 1MB. Please upload a smaller image.";
-                        return false;
-                    }else if(file.type != "image/jpeg" && file.type != "image/png" && file.type != "jpg"){
-                        profile_img.style.borderColor = "#ff022c";
-                        profile_img.nextElementSibling.style.display = "block";
-                        profile_img.nextElementSibling.innerText = "The profile image must be in JPG, JPEG, or PNG format.";
-                        return false;
-                    }else{
-                        profile_img.style.borderColor = "var(--shadow-color)";
-                        profile_img.nextElementSibling.style.display = "none";
                     }
 
                     // Show the loader

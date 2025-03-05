@@ -34,11 +34,11 @@ class AppServiceProvider extends ServiceProvider
         // Get the brand data
         $brands_data = Brand::get(["id", "name", "slug", "brand_img"]);
         // Get the prium serise laptop
-        $prium_series_laptops = Product::where("category_name", "like", "%laptop%")->where("selling_price", ">", "15000")->limit(5)->get(["id", "name", "slug", "product_status", "selling_price", "brand_name", "thumbnail_img"]);
+        $prium_series_laptops = Product::where("category_name", "like", "%laptop%")->where("selling_price", ">", "15000")->limit(5)->get(["id", "name", "slug", "product_status", "new_price", "selling_price", "brand_name", "thumbnail_img"]);
         // Get the laptop for business purpus
-        $for_business_purpus = Product::where("category_name", "like", "%laptop%")->where("selling_price", ">=", "15000")->inRandomOrder()->limit(5)->get(["id", "name", "slug", "product_status", "selling_price", "brand_name", "thumbnail_img"]);
+        $for_business_purpus = Product::where("category_name", "like", "%laptop%")->where("selling_price", ">=", "15000")->inRandomOrder()->limit(5)->get(["id", "name", "slug", "product_status", "new_price", "selling_price", "brand_name", "thumbnail_img"]);
         // Get the laptop for study purpus and small work
-        $for_studey_purpus_office_work = Product::where("category_name", "like", "%laptop%")->where("selling_price", "<", "15000")->inRandomOrder()->limit(5)->get(["id", "name", "slug", "product_status", "selling_price", "brand_name", "thumbnail_img"]);
+        $for_studey_purpus_office_work = Product::where("category_name", "like", "%laptop%")->where("selling_price", "<", "15000")->inRandomOrder()->limit(5)->get(["id", "name", "slug", "product_status", "new_price", "selling_price", "brand_name", "thumbnail_img"]);
         View::share(compact("categories_data", "brands_data", "prium_series_laptops", "for_business_purpus", "for_studey_purpus_office_work"));
 
         /*

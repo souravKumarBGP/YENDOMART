@@ -9,7 +9,7 @@ class Product extends Model
     // Attribute casting
     public $timestamps = false;
     protected $guarded = ["id", "remember_token"];
-    protected $fillable = ["name", "slug", "selling_price", "discount_price", "total_quentity", "available_quentity", "live_link", "unit", "category_name", "brand_name", "product_status", "sku", "top_selling_position", "thumbnail_img", "gallary_img", "product_discreption"];
+    protected $fillable = ["name", "slug","new_price", "selling_price", "discount_price", "total_quentity", "available_quentity", "live_link", "unit", "category_name", "brand_name", "product_status", "sku", "top_selling_position", "thumbnail_img", "gallary_img", "product_discreption"];
     protected $casts = [
         "gallary_img"=> "json",
         "product_discreption" => "json"

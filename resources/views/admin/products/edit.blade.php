@@ -49,7 +49,18 @@
                                 <div class="input_lavel">
                                     <div class="row">
 
-                                        <div class="col-12 col-lg-6">
+                                        <div class="col-12 col-lg-4">
+                                            <div class="input_box pb-3">
+                                                <label for="new_price">NEW PRICE</label>
+                                                <input type="number"  value="{{ $product_data->new_price }}" name="new_price" id="new_price" />
+                                                
+                                                <small class="error">
+                                                    <big>Please enter your product name </big>   
+                                                </small>
+                                            </div><!--./input_box-->
+                                        </div>
+
+                                        <div class="col-12 col-lg-4">
                                             <div class="input_box pb-3">
                                                 <label for="selling_price">SELLING PRICE</label>
                                                 <input type="number" value="{{ $product_data->selling_price }}" name="selling_price" id="selling_price" />
@@ -60,7 +71,7 @@
                                             </div><!--./input_box-->
                                         </div>
 
-                                        <div class="col-12 col-lg-6">
+                                        <div class="col-12 col-lg-4">
                                             <div class="input_box pb-3">
                                                 <label for="discount_price">DISCOUNT PRICE</label>
                                                 <input type="number" value="{{ $product_data->discount_price }}" name="discount_price" id="discount_price" />
@@ -200,7 +211,7 @@
                                                     <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h3a3 3 0 0 0 0-6h-.025a5.56 5.56 0 0 0 .025-.5A5.5 5.5 0 0 0 7.207 9.021C7.137 9.017 7.071 9 7 9a4 4 0 1 0 0 8h2.167M12 19v-9m0 0-2 2m2-2 2 2"/>
                                                     </svg>                                                        
-                                                    Uploads a thumbnail image
+                                                    Uploads a thumbnail image ( Optional )
                                                     <small style="font-size: 12px; margin-top: 5px;">(SVG, JPG, JPEG, PNG, WEBP) And (< 1MB)</small>
                                                 </label>
                                                 <input type="file" name="thumbnail_img" id="thumbnail_img">
@@ -221,7 +232,7 @@
                                                     <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h3a3 3 0 0 0 0-6h-.025a5.56 5.56 0 0 0 .025-.5A5.5 5.5 0 0 0 7.207 9.021C7.137 9.017 7.071 9 7 9a4 4 0 1 0 0 8h2.167M12 19v-9m0 0-2 2m2-2 2 2"/>
                                                     </svg>                                                          
-                                                    Uploads 5 Gallary Images
+                                                    Uploads 5 Gallary Images ( Optional )
                                                     <small style="font-size: 12px; margin-top: 5px;">(SVG, JPG, JPEG, PNG, WEBP) And (< 1MB)</small>
                                                 </label>
                                                 <input type="file" multiple name="gallary_img[]" id="gallary_img">
@@ -295,7 +306,7 @@
 
                     for(let item of gallary_img_file){
                         if(["image/jpg", "image/jpeg", "image/png", "image/svg", "image/webp", "image/svg+xml"].includes(item.type)){
-                            if(item.size > 10000000){
+                            if(item.size > 50000000){
                                 
                                 this.style.borderColor="red";
                                 $(".gallary_img").css({"border-color":"red"})
@@ -374,6 +385,27 @@
 
                     top_selling_position.style.borderColor="var(--shadow-color)";
                     top_selling_position.nextElementSibling.style.display = "none";   
+                }
+
+                // Validation for New price
+                if(new_price.value.trim() == ""){
+
+                    new_price.focus();
+                    new_price.style.borderColor="var(--color-danger)";
+                    new_price.nextElementSibling.style.display = "block";
+                    new_price.nextElementSibling.innerText = "Please enter New price."
+                    return false;
+                }else if(new_price.value.trim() > 500000){
+
+                    new_price.focus();
+                    new_price.style.borderColor="var(--color-danger)";
+                    new_price.nextElementSibling.style.display = "block";
+                    new_price.nextElementSibling.innerText = "New price must be less then Rs 500000."
+                    return false;
+                }else{
+
+                    new_price.style.borderColor="var(--shadow-color)";
+                    new_price.nextElementSibling.style.display = "none";   
                 }
 
                 // Validation for selling price
@@ -553,28 +585,25 @@
 
                 // Validation for thumbnail image
                 let thumb_img_file = thumbnail_img.files[0];
-                if(!thumb_img_file){
+                if(thumb_img_file){
 
-                    $(".thumbnail_img")[0].style.borderColor="var(--color-danger)";
-                    thumbnail_img.parentElement.parentElement.lastElementChild.style.display = "block";
-                    thumbnail_img.parentElement.parentElement.lastElementChild.innerText = "Please select 1 thumbnail image.";
-                    return false;
-                }else if(!(["image/jpg", "image/jpeg", "image/png", "image/svg", "image/webp", "image/svg+xml"].includes(thumb_img_file.type))){
+                    if(!(["image/jpg", "image/jpeg", "image/png", "image/svg", "image/webp", "image/svg+xml"].includes(thumb_img_file.type))){
 
-                    $(".thumbnail_img")[0].style.borderColor = "var(--color-danger)";
-                    thumbnail_img.parentElement.parentElement.lastElementChild.style.display = "block";
-                    thumbnail_img.parentElement.parentElement.lastElementChild.innerText = "Invalid image formate. Please upload a JPG, JPEG, PNG, SVG, or WEBP formate.";
-                    return false;
-                }else if(thumb_img_file.size > 10000000){
+                        $(".thumbnail_img")[0].style.borderColor = "var(--color-danger)";
+                        thumbnail_img.parentElement.parentElement.lastElementChild.style.display = "block";
+                        thumbnail_img.parentElement.parentElement.lastElementChild.innerText = "Invalid image formate. Please upload a JPG, JPEG, PNG, SVG, or WEBP formate.";
+                        return false;
+                    }else if(thumb_img_file.size > 50000000){
 
                     $(".thumbnail_img")[0].borderColor = "var(--color-danger)";
-                    thumbnail_img.parentElement.parentElement.lastElementChild.style.display = "block";
-                    thumbnail_img.parentElement.parentElement.lastElementChild.innerText = "Invalid image size. Image size can not be greater then 1MB.";
-                    return false;
-                }else{
+                        thumbnail_img.parentElement.parentElement.lastElementChild.style.display = "block";
+                        thumbnail_img.parentElement.parentElement.lastElementChild.innerText = "Invalid image size. Image size can not be greater then 1MB.";
+                        return false;
+                    }else{
 
-                    $(".thumbnail_img")[0].style.borderColor="var(--shadow-color)";
-                    thumbnail_img.parentElement.parentElement.lastElementChild.style.display = "none";
+                        $(".thumbnail_img")[0].style.borderColor="var(--shadow-color)";
+                        thumbnail_img.parentElement.parentElement.lastElementChild.style.display = "none";
+                    }
                 }
 
                 // Validation for gallary image
@@ -583,7 +612,7 @@
 
                     for(let item of gallary_img_file){
                         if(["image/jpg", "image/jpeg", "image/png", "image/svg", "image/webp", "image/svg+xml"].includes(item.type)){
-                            if(item.size > 10000000){
+                            if(item.size > 50000000){
                                 
                                 $(".gallary_img")[0].style.borderColor="var(--color-danger)";
                                 gallary_img.parentElement.parentElement.lastElementChild.style.display = "block";
@@ -600,12 +629,6 @@
                             return false; 
                         }
                     }
-                }else{
-                    
-                    $(".gallary_img")[0].style.borderColor="var(--color-danger)";
-                    gallary_img.parentElement.parentElement.lastElementChild.style.display = "block";
-                    gallary_img.parentElement.parentElement.lastElementChild.innerText = "Please select 5 gallary images.";
-                    return false;
                 }
     
                 // Validation for product discreption

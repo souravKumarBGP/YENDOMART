@@ -74,14 +74,14 @@ main{
                 border-bottom: 1px solid #80808049;
                 padding-bottom: 20px;
                 .name{
-                    font-size: var(--size-18px);
+                    font-size: 16px;
                     font-weight: 600;
                 }
                 .bornd_logo{
                     & img{
-                        width: 2.5rem !important;
+                        width: 30px !important;
                     }
-                    
+                    font-size: 14px !important;
                 }
 
                 ul> li{
@@ -89,11 +89,14 @@ main{
                     font-size: var(--size-16px);
                     column-gap: 50px;
                     & span{
-                        color: #a7a6a6;
+                        color: black;
+                        font-size: 13px;
+                        width: 25%;
                     }
                     & button, input{
                         padding: 10px;
-                        border: 1px solid var(--primary-color);
+                        border: 0.4px solid var(--primary-color);
+                        font-size: 13px;
                     }
                     & input{
                         width: 10%;
@@ -118,6 +121,7 @@ main{
                 }
                 &.live_demo_btn{
                     background: goldenrod;
+                    width: 100%;
                 }
             }
 
@@ -136,18 +140,25 @@ main{
             }
             .box5{
                 & p{
-                    color: royalblue;
-                    font-weight: 700;
-
+                    font-weight: 600;
+                    font-size: 12px;
                 }
                 & li{
                     display: flex;
-                    color: #a7a6a6;
-                    font-size: .75rem !important;
+                    color: black;
+                    font-size: 10px !important;
                     & strong{
                         color: var(--secondary-color);
-                        width: 20%;
+                        width: 30%;
                     }
+                }
+
+            }
+            .term{
+                color: black;
+                font-size: 11px;
+                & li{
+                    margin-bottom: 15px;
                 }
             }
         }

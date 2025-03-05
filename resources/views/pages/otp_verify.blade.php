@@ -91,7 +91,9 @@
 
                                     <h4><b>OTP Verification</b></h4>
                                     <p>Enter the 6-digit OTP sent to your email:  
-                                        <a href="mailto:s@gmail.com" style="color: #3769fe; text-decoration: underline;">s@gmail.com</a>
+                                        @if(session("e"))
+                                            <a href="https://mail.google.com/mail/u/0/" target="_blank" style="color: #3769fe; text-decoration: underline; font-width: 600;">{{ base64_decode(session("e")) }}</a>
+                                        @endif
                                     </p>                     
                                     <div id="timer">Time remaining: <span>3:00</span></div>
                                     <br/>
@@ -111,6 +113,8 @@
                                     <br/><br/>
                                     
                                     <button class="btn verify_btn" onclick="verifyOTP()">Verify</button>
+                                    <br><br>
+                                    <small><a href="tel:7763999333" target="_blank">+91 7763999333</a></small>
                                 </div><!--./box-->
                             </div>
                             
@@ -268,11 +272,11 @@
 
                                     if(resp.status == "veryfied"){
                                         
-                                        // Swal.fire({
-                                        //     title: "Success",
-                                        //     text: "OTP Veryfication successfully.",
-                                        //     icon: "success"
-                                        // });
+                                        Swal.fire({
+                                            title: "Success",
+                                            text: "OTP Veryfication successfully.",
+                                            icon: "success"
+                                        });
 
                                         if(resp.user == "admin_login"){
                                             window.location.href = "{{ route("admin.dashbord") }}";

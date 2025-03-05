@@ -33,7 +33,7 @@
 
                                             <div class="price_box d-flex align-items-center" style="gap: 10px;">
                                                 <span style="font-size: 15px;">₹{{ $item->selling_price }}</span>
-                                                <del style="color: gray;"><small>90000</small></del>
+                                                <del style="color: gray;"><small>{{ $item->new_price }}</small></del>
                                             </div>
 
                                             <div class="cart_box d-flex align-items-center justify-content-between">
@@ -105,7 +105,7 @@
 
                                             <div class="price_box d-flex align-items-center" style="gap: 10px;">
                                                 <span style="font-size: 15px;">₹{{ $item->selling_price }}</span>
-                                                <del style="color: gray;"><small>90000</small></del>
+                                                <del style="color: gray;"><small>{{ $item->new_price }}</small></del>
                                             </div>
 
                                             <div class="cart_box d-flex align-items-center justify-content-between">
@@ -177,7 +177,7 @@
 
                                             <div class="price_box d-flex align-items-center" style="gap: 10px;">
                                                 <span style="font-size: 15px;">₹{{ $item->selling_price }}</span>
-                                                <del style="color: gray;"><small>90000</small></del>
+                                                <del style="color: gray;"><small>{{ $item->new_price }}</small></del>
                                             </div>
 
                                             <div class="cart_box d-flex align-items-center justify-content-between">

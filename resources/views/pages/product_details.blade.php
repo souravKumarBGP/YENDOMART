@@ -135,23 +135,31 @@
                                         <button class="btn">{{ strtoupper(json_decode($product_data->product_discreption)->ram) }}</button>
                                     </li>
                                     <li class="d-flex align-items-center">
-                                        <span>Size: </span>
-                                        {{-- <button class="btn">{{ json_decode($product_data->product_discreption)->size }}</button> --}}
+                                        <span>Display: </span>
+                                        <p style="font-size: 14px;">{{ ucwords(json_decode($product_data->product_discreption)->display) }}</p>
                                     </li>
                                     <li class="d-flex align-items-center">
-                                        <span>Quantity: </span>
-                                        <input type="number" value="1" style="width: 20%;">
+                                        <span>Body: </span>
+                                        <p style="font-size: 14px;">{{ ucwords(json_decode($product_data->product_discreption)->body) }}</p>
                                     </li>
+                                    
                                 </ul>
                             </div>
                             <div class="box box3">
                                 <ul>
                                     <li class="d-flex align-items-center justify-content-start gap-15px">
-                                        <span>Total Price: </span>
+                                        <span>New Price: </span>
+                                        <b><del style="color: red;">₹ {{ $product_data->new_price }}</del></b>
+                                    </li>
+
+                                    <li class="d-flex align-items-center justify-content-start gap-15px">
+                                        <span>Price: </span>
                                         <b>₹ {{ $product_data->selling_price }}</b>
                                     </li>
+                                    
                                 </ul>
                                 <br/>
+                                <hr><br/>
                                 <div class="btn_box d-flex">
                                     <button class="buy_now_btn {{ ($product_data->product_status == "in stock") ? "add_cart_btn" : "" }} btn d-flex align-items-center" data-id="{{ base64_encode($product_data->id) }}">
                                         <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
@@ -229,6 +237,34 @@
                                 </ul>
                                   
                             </div>
+                            <br/><br/>
+
+                            <div class="term" style="color: black;">
+                                <p><b>-Terms & Condition</b></p><br/>
+
+                                <ul>
+                                    <li>
+                                        ✅ 10 days Replacement Guarantee , If hardware problem can replace with same Model. 
+                                    </li>
+                                    <li>
+                                        ✅ 10 days testing warranty, If hardware problem can replace with same Model. 
+                                    </li>
+                                    <li>
+                                        ✅ 1 Hr+ backup Guarantee
+                                    </li>
+                                    <li>
+                                        ✅ Corporate used products.
+                                    </li>
+                                    <li>
+                                        ✅  More details kindly  check online policy.
+                                    </li>
+
+                                    <li>
+                                        ✅  <a href="tel:7763999333" target="_blank">Help? +91 7763999333</a>.
+                                    </li>
+                                </ul>
+                            </div>
+                            
                         </div><!--./right-->
                     </div>
                 </div>
@@ -279,7 +315,7 @@
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bi bi-currency-rupee" viewBox="0 0 16 16">
                                                     <path d="M4 3.06h2.726c1.22 0 2.12.575 2.325 1.724H4v1.051h5.051C8.855 7.001 8 7.558 6.788 7.558H4v1.317L8.437 14h2.11L6.095 8.884h.855c2.316-.018 3.465-1.476 3.688-3.049H12V4.784h-1.345c-.08-.778-.357-1.335-.793-1.732H12V2H4z"/>
                                                 </svg>
-                                                <del>30,000</del>
+                                                <del>{{ $item->new_price }}</del>
                                                 {{ $item->selling_price }}
                                             </a>
                                         </div><!--./left-->

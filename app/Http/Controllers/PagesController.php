@@ -30,12 +30,12 @@ class PagesController extends Controller
         if(empty($search_value)){
             $search_value = "laptop";
         }
-        if($price_filter == "lth"){
+        if($price_filter == "lth"){ // lth = low to high
             // Make request to search releted data
-            $search_data = Product::whereany(["brand_name", "category_name", "slug"], "like", "%$search_value%")->select(["id", "name", "slug", "product_status", "selling_price", "brand_name", "thumbnail_img"])->orderby("selling_price", "asc")->paginate(12);
+            $search_data = Product::whereany(["brand_name", "category_name", "slug"], "like", "%$search_value%")->select(["id", "name", "slug", "product_status", "new_price", "selling_price", "brand_name", "thumbnail_img"])->orderby("selling_price", "asc")->paginate(12);
         }else{
             // Make request to search releted data
-            $search_data = Product::whereany(["brand_name", "category_name", "slug"], "like", "%$search_value%")->select(["id", "name", "slug", "product_status", "selling_price", "brand_name", "thumbnail_img"])->orderby("selling_price", "desc")->paginate(12);
+            $search_data = Product::whereany(["brand_name", "category_name", "slug"], "like", "%$search_value%")->select(["id", "name", "slug", "product_status", "new_price", "selling_price", "brand_name", "thumbnail_img"])->orderby("selling_price", "desc")->paginate(12);
         }
         
         // Return the view file with search data
@@ -55,7 +55,7 @@ class PagesController extends Controller
             // Logic to search brand image
             $brands_img = Brand::where("name", "like", "%$product_data->brand_name%")->first("brand_img");
             // Logic to search similar products
-            $similar_products_data = Product::where("brand_name", "like", "%$product_data->brand_name%")->limit(20)->inRandomOrder()->get(["id", "name", "slug", "product_status", "selling_price", "brand_name", "thumbnail_img"]);
+            $similar_products_data = Product::where("brand_name", "like", "%$product_data->brand_name%")->limit(20)->inRandomOrder()->get(["id", "name", "slug", "product_status", "new_price", "selling_price", "brand_name", "thumbnail_img"]);
 
             return view("pages.product_details", compact("product_data", "brands_img", "similar_products_data"));
         }else{

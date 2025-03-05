@@ -248,6 +248,7 @@ class AdminController extends Controller
             // Logic to apply server side validation
             $request->validate([
                 "name"   => "required|max:255",
+                "new_price"  => "required|numeric|min:1|max:500000",
                 "selling_price"  => "required|numeric|min:1|max:500000",
                 "discount_price" => "required|numeric|min:0|max:500000",
                 "live_link"      => "required|string|max:500",
@@ -256,9 +257,9 @@ class AdminController extends Controller
                 "category_name"  => "required|string|max:255|exists:categories,name",
                 "brand_name"     => "required|string|max:255|exists:brands,name",
                 "product_status" => "required|string|max:255",
-                "thumbnail_img"  => "required|mimes:jpg,png,jpeg,svg,webp|max:10240",
+                "thumbnail_img"  => "required|mimes:jpg,png,jpeg,svg,webp|max:51200",
                 "gallary_img"    => "required|array|size:5",
-                "gallary_img.*"  => "mimes:jpg,png,jpeg,svg,webp|max:10240",
+                "gallary_img.*"  => "mimes:jpg,png,jpeg,svg,webp|max:51200",
                 "product_discreption"=> "required",
             ]);
             
@@ -283,6 +284,7 @@ class AdminController extends Controller
             $result = Product::create([
                 "name"            => $request->name,
                 "slug"            => $slug,
+                "new_price"   => $request->new_price,
                 "selling_price"   => $request->selling_price,
                 "discount_price"  => $request->discount_price,
                 "live_link"       => $request->live_link,
@@ -305,8 +307,8 @@ class AdminController extends Controller
         } catch(\Exception $e){
 
             Log::error("Unable to create product". $e->getMessage());
-            // return json_encode(["status"=> $e->getMessage()]); // Only for developer view this error 
-            return json_encode(["status"=> "error"]);
+            return json_encode(["status"=> $e->getMessage()]); // Only for developer view this error 
+            // return json_encode(["status"=> "error"]);
         }
                 
     }
@@ -322,7 +324,7 @@ class AdminController extends Controller
             $unit_data = Unit::get("name");
             $category_data = Categories::get("name");
             $brand_data = Brand::get("name");
-            $product_data = Product::select(["id", "name", "slug", "selling_price", "discount_price", "total_quentity", "available_quentity", "live_link", "unit", "category_name", "brand_name", "product_status", "sku", "top_selling_position", "product_discreption"])->findorfail($id);
+            $product_data = Product::select(["id", "name", "slug","new_price", "selling_price", "discount_price", "total_quentity", "available_quentity", "live_link", "unit", "category_name", "brand_name", "product_status", "sku", "top_selling_position", "product_discreption"])->findorfail($id);
             // return $product_data;
             
             return view("admin.products.edit", compact("product_data", "category_data", "brand_data", "unit_data"));
@@ -343,6 +345,7 @@ class AdminController extends Controller
             // Logic to apply server side validation
             $request->validate([
                 "name"   => "required|max:255",
+                "new_price"  => "required|numeric|min:1|max:500000",
                 "selling_price"  => "required|numeric|min:1|max:500000",
                 "discount_price" => "required|numeric|min:0|max:500000",
                 "live_link"      => "required|string|max:500",
@@ -352,72 +355,98 @@ class AdminController extends Controller
                 "brand_name"     => "required|string|max:255|exists:brands,name",
                 "product_status" => "required|string|max:255",
                 "top_selling_position"=> "required|numeric|max:500",
-                "thumbnail_img"  => "required|mimes:jpg,png,jpeg,svg,webp|max:10240",
-                "gallary_img"    => "required|array|size:5",
-                "gallary_img.*"  => "mimes:jpg,png,jpeg,svg,webp|max:10240",
+                "thumbnail_img"  => "mimes:jpg,png,jpeg,svg,webp|max:51200",
+                "gallary_img"    => "array|size:5",
+                "gallary_img.*"  => "mimes:jpg,png,jpeg,svg,webp|max:51200",
                 "product_discreption"=> "required",
             ]);
 
             // Logic to get edit id
             $edit_id = base64_decode($request->edit_id);
             
-            // Logic to unlink the file
-            $img_path = Product::where("id", $edit_id)->get(["thumbnail_img", "gallary_img"]);
-
-            if(count($img_path)){
-                // Remove the thumbnail image
-                $thumb_path = $img_path[0]->thumbnail_img;
-                unlink(public_path("storage/".$thumb_path));
-
-                // Remove the gallary image
-                $gallary_imgs = $img_path[0]->gallary_img;
-                foreach($gallary_imgs as $item){
-                    unlink(public_path("storage/".$item));
-                }
-            }
-
-
-            // Logic store thumbnail image 
-            $thumb_path = $request->file("thumbnail_img")->store("/image/products_img/thumbnail_img", "public");
-            
-            // Logic store gallary image 
-            $gallary_img_arr = [];
-            $iteration = 1;
-            foreach($request->file("gallary_img") as $key=> $item){
-                $gallary_img_arr["img".$iteration] = $item->store("/image/products_img/gallary_img", "public");
-                $iteration = $iteration+1;
-            }
-
             // Generate the slug
             $slug = Str::slug($request->name);
             $category_name = Str::slug($request->category_name);
             // Generate sku
             $sku = substr($slug, 0, 5)."_".rand(111, 999);
+            
 
-            // Logic to store data into database
-            $result = Product::findorfail($edit_id)->update([
-                "name"            => $request->name,
-                "slug"            => $slug,
-                "selling_price"   => $request->selling_price,
-                "discount_price"  => $request->discount_price,
-                "live_link"       => $request->live_link,
-                "total_quentity"  => $request->total_quentity,
-                "available_quentity" => $request->total_quentity,
-                "unit"            => $request->unit,
-                "category_name"   => $category_name,
-                "brand_name"      => $request->brand_name,
-                "product_status"  => $request->product_status,
-                "thumbnail_img"   => $thumb_path,
-                "gallary_img"     => json_encode($gallary_img_arr),
-                "sku"             => $sku, 
-                "top_selling_position"=> $request->top_selling_position,
-                "product_discreption"=> json_encode($request->product_discreption)
-            ]);
+            // Logic to check Edit image is selected or not if update image is selected then execute if conditional black
+            if($request->file("thumbnail_img") && $request->file("gallary_img")){
+
+                // Logic to unlink the file
+                $img_path = Product::where("id", $edit_id)->get(["thumbnail_img", "gallary_img"]);
+
+                if(count($img_path)){
+                    // Remove the thumbnail image
+                    $thumb_path = $img_path[0]->thumbnail_img;
+                    unlink(public_path("storage/".$thumb_path));
+
+                    // Remove the gallary image
+                    $gallary_imgs = $img_path[0]->gallary_img;
+                    foreach($gallary_imgs as $item){
+                        unlink(public_path("storage/".$item));
+                    }
+                }
+
+                // Logic store thumbnail image 
+                $thumb_path = $request->file("thumbnail_img")->store("/image/products_img/thumbnail_img", "public");
+                
+                // Logic store gallary image 
+                $gallary_img_arr = [];
+                $iteration = 1;
+                foreach($request->file("gallary_img") as $key=> $item){
+                    $gallary_img_arr["img".$iteration] = $item->store("/image/products_img/gallary_img", "public");
+                    $iteration = $iteration+1;
+                }
+
+                
+                // Logic to store data into database
+                $result = Product::findorfail($edit_id)->update([
+                    "name"            => $request->name,
+                    "slug"            => $slug,
+                    "new_price"   => $request->new_price,
+                    "selling_price"   => $request->selling_price,
+                    "discount_price"  => $request->discount_price,
+                    "live_link"       => $request->live_link,
+                    "total_quentity"  => $request->total_quentity,
+                    "available_quentity" => $request->total_quentity,
+                    "unit"            => $request->unit,
+                    "category_name"   => $category_name,
+                    "brand_name"      => $request->brand_name,
+                    "product_status"  => $request->product_status,
+                    "thumbnail_img"   => $thumb_path,
+                    "gallary_img"     => json_encode($gallary_img_arr),
+                    "sku"             => $sku, 
+                    "top_selling_position"=> $request->top_selling_position,
+                    "product_discreption"=> json_encode($request->product_discreption)
+                ]);
+
+            }else{
+
+                // Logic to store data into database
+                $result = Product::findorfail($edit_id)->update([
+                    "name"            => $request->name,
+                    "slug"            => $slug,
+                    "new_price"   => $request->new_price,
+                    "selling_price"   => $request->selling_price,
+                    "discount_price"  => $request->discount_price,
+                    "live_link"       => $request->live_link,
+                    "total_quentity"  => $request->total_quentity,
+                    "available_quentity" => $request->total_quentity,
+                    "unit"            => $request->unit,
+                    "category_name"   => $category_name,
+                    "brand_name"      => $request->brand_name,
+                    "product_status"  => $request->product_status,
+                    "sku"             => $sku, 
+                    "top_selling_position"=> $request->top_selling_position,
+                    "product_discreption"=> json_encode($request->product_discreption)
+                ]);
+            }
 
             if($result){
                 return json_encode(["status"=> "success"]);
             }
-            
             
         } catch(\Exception $e){
             Log::error("Unable to update product.". $e->getMessage());

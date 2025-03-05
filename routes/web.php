@@ -28,7 +28,6 @@ Route::get("/returnpolicy", [HomeController::class, "returnpolicy"])->name("retu
 Route::get("/supportpolicy", [HomeController::class, "supportpolicy"])->name("supportpolicy");
 Route::get("/shipping-policy", [HomeController::class, "shippingpolicy"])->name("shipping-policy");
 
-
 // Route for handle frontend pages
 Route::prefix("/pages")->controller(PagesController::class)->group(function(){
     Route::get("/product-filter/{search?}/{price_filter?}", "product_filter_page")->name("pages.product_filter_page");

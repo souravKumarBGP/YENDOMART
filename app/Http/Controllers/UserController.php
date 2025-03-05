@@ -28,7 +28,7 @@ class UserController extends Controller
                 "email" => "required|email|unique:users,email|max:100",
                 "password" => "required|max:100|min:8",
                 "conf_password"=> "required|same:password",
-                "profile_img" => "required|mimetypes:image/jpeg,image/png,image/jpg|max:1024"
+                "profile_img" => "mimetypes:image/jpeg,image/png,image/jpg"
             ], [
                 "full_name.required" => "Full name is required. Please provide your full name.",
                 "full_name.max" => "Your full name cannot exceed 100 characters. Please use a shorter name.",
@@ -39,21 +39,32 @@ class UserController extends Controller
                 "password.max" => "Password must be between 8 and 100 characters long.",
                 "conf_password.required"=> "Confirm passwrod is required. Please enter same password",
                 "conf_password.same"=> "Enter same password.",
-                "profile_img.required" => "A profile image is required. Please upload your profile image.",
                 "profile_img.mimetypes" => "The profile image must be in JPG, JPEG, or PNG format.",
-                "profile_img.max" => "The profile image size cannot exceed 1MB. Please upload a smaller image."
             ]);
     
             // Save profile image into server file
-            $path = $request->file("profile_img")->store("image/profile_img", "public");
+            // Logic to check profile image is inserting or not if image is user not selected then insert default profile image
+            if($request->file("profile_img")){
+                $path = $request->file("profile_img")->store("image/profile_img", "public");
+
+                // stroe data into database
+                $result = User::create([
+                    "full_name"=> $request->full_name,
+                    "email"=> $request->email,
+                    "password"=> $request->password,
+                    "profile_img"=> $path
+                ]);
+            }else{
+                
+                // stroe data into database
+                $result = User::create([
+                    "full_name"=> $request->full_name,
+                    "email"=> $request->email,
+                    "password"=> $request->password,
+                    "profile_img"=> "image/profile_img/GNWfbpdA2WMSnXbPETxPUZ8cPTWDoYjU2g3lVz5q.png",
+                ]);
+            }
             
-            // stroe data into database
-            $result = User::create([
-                "full_name"=> $request->full_name,
-                "email"=> $request->email,
-                "password"=> $request->password,
-                "profile_img"=> $path
-            ]);
     
             if($result){
                 return json_encode(["status"=> "success"]);
